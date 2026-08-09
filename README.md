@@ -55,7 +55,8 @@ graph LR
         B --> T[Tools]
         B --> ME[Memory]
         B --> SM[Star Map]
-        B --> MCP[MCP & Plugins]
+        B --> MCP[MCP]
+        B --> PL[Plugins]
     end
     subgraph Work
         W[Work] --> A[Artifacts]
@@ -94,13 +95,13 @@ graph LR
 | **Dashboard** | 6 | 12 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
 | **Chat** | 7 | 33 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, composer tools |
 | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
-| **Brain** | 6 | 14 | Models, skills, tools, memory, Star Map, MCP & plugins |
+| **Brain** | 7 | 14 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | **Work** | 3 | 7 | Artifacts browser, cron jobs, kanban board |
 | **Connect** | 3 | 3 | Channels, webhooks, pairing |
 | **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
 | **Settings** | 4 | 7 | Servers, connection, appearance, profile |
 
-**Total: 8 surfaces · 39 segments · 101 features**
+**Total: 8 surfaces · 40 segments · 101 features**
 
 > Full interactive map: [app-map.html](app-map.html)
 
@@ -175,7 +176,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Toolsets with environment configuration
 - Memory block viewer/editor
 - **Star Map** — interactive learning graph: constellation, clusters, timeline, node editor, curator
-- MCP server connections and plugin toggles
+- MCP server connections
+- Plugin toggles
 
 ### 📋 Work
 - Artifacts browser (images, audio, files)
@@ -262,6 +264,8 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## Roadmap
 
+- [ ] **Android widget** — quick actions (new chat, voice, starred) from the home screen
+- [ ] **Share to Hermes** — send text, images, and PDFs from other apps into a chat
 - [ ] Google Play Store release
 - [ ] iOS build
 - [ ] More channel integrations
@@ -270,6 +274,6 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## License
 
-**Closed source.** All rights reserved. The APK is provided for personal use. Redistribution, reverse engineering, or modification of the binary is not permitted without written consent.
+**This repository (the website) is open source.** The Hermes Go application itself is **closed source** — distributed as a signed APK with a published SHA-256 for verification. The APK is provided for personal use; redistribution or modification of the binary is not permitted without written consent.
 
 © 2026 Hermes AI Ecosystem

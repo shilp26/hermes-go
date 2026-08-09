@@ -176,7 +176,8 @@ const SEGMENT_ICONS = {
   'Tools': LUCIDE.wrench,
   'Memory': LUCIDE.database,
   'Star Map': LUCIDE.orbit,
-  'MCP & plugins': LUCIDE.plug,
+  'MCP': LUCIDE.plug,
+  'Plugins': LUCIDE.puzzle,
 
   // Work
   'Artifacts': LUCIDE.package,
@@ -598,9 +599,14 @@ const HUB_MAP = [
         ],
       },
       {
-        label: 'MCP & plugins', desc: 'Connect servers · toggle plugins',
+        label: 'MCP', desc: 'Connect Model Context Protocol servers',
         features: [
           { name: 'MCP servers', desc: 'Connect and manage Model Context Protocol servers', where: 'Brain · MCP' },
+        ],
+      },
+      {
+        label: 'Plugins', desc: 'Enable or disable runtime plugins',
+        features: [
           { name: 'Plugins', desc: 'Enable or disable runtime plugins', where: 'Brain · Plugins' },
         ],
       },

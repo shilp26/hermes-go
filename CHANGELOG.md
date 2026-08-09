@@ -81,11 +81,10 @@ First public release. The complete Hermes agent, in your pocket.
 - Active profile
 
 #### Platform
-- Android widget: HermesQuickActions (4×2) — new chat, voice, starred sessions
-- Share intent: text, images, PDFs from other apps
 - EAS Build (APK) + OTA updates via expo-updates
 - Local-first SQLite persistence with background sync
 - WebSocket JSON-RPC gateway client
+- Android widget (HermesQuickActions) and share-intent (text/images/PDF) **native scaffolding configured** — UI/UX implementation planned (see Roadmap)
 
 ---
 
