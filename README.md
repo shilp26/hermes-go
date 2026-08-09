@@ -110,7 +110,7 @@ graph LR
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.0](HermesGo.apk) (170 MB)
+[Download Hermes Go v1.0.0](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (170 MB)
 
 **Verify the download** — the SHA-256 of the official APK is:
 
