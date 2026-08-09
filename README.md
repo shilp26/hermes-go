@@ -43,50 +43,14 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ## App Map
 
-```mermaid
-graph LR
-    subgraph Core
-        D[Dashboard] --> C[Chat]
-        D --> S[Sessions]
-    end
-    subgraph Intelligence
-        B[Brain] --> M[Models]
-        B --> SK[Skills]
-        B --> T[Tools]
-        B --> ME[Memory]
-        B --> SM[Star Map]
-        B --> MCP[MCP]
-        B --> PL[Plugins]
-    end
-    subgraph Work
-        W[Work] --> A[Artifacts]
-        W --> CR[Cron Jobs]
-        W --> K[Kanban]
-    end
-    subgraph Connectivity
-        CO[Connect] --> CH[Channels]
-        CO --> WH[Webhooks]
-        CO --> PA[Pairing]
-    end
-    subgraph Control
-        SY[System] --> H[Health]
-        SY --> AN[Analytics]
-        SY --> OP[Ops]
-        SY --> LO[Logs]
-        SY --> SE[Setup]
-    end
-    C --> B
-    C --> W
-    C --> CO
-    C --> SY
-    S --> B
-    S --> W
-    B --> SY
-    W --> SY
-    W --> CO
-    CO --> SY
-    SY --> ST[Settings]
-```
+<div align="center">
+
+| | | | |
+|---|---|---|---|
+| <div align="center"><img src="assets/icons/dashboard.svg" width="28" height="28"><br><b>Dashboard</b><br><sub>6 segments · 12 features</sub></div> | <div align="center"><img src="assets/icons/chat.svg" width="28" height="28"><br><b>Chat</b><br><sub>7 segments · 33 features</sub></div> | <div align="center"><img src="assets/icons/sessions.svg" width="28" height="28"><br><b>Sessions</b><br><sub>4 segments · 9 features</sub></div> | <div align="center"><img src="assets/icons/brain.svg" width="28" height="28"><br><b>Brain</b><br><sub>7 segments · 14 features</sub></div> |
+| <div align="center"><img src="assets/icons/work.svg" width="28" height="28"><br><b>Work</b><br><sub>3 segments · 7 features</sub></div> | <div align="center"><img src="assets/icons/connect.svg" width="28" height="28"><br><b>Connect</b><br><sub>3 segments · 3 features</sub></div> | <div align="center"><img src="assets/icons/system.svg" width="28" height="28"><br><b>System</b><br><sub>6 segments · 16 features</sub></div> | <div align="center"><img src="assets/icons/settings.svg" width="28" height="28"><br><b>Settings</b><br><sub>4 segments · 7 features</sub></div> |
+
+</div>
 
 ### Surfaces
 
