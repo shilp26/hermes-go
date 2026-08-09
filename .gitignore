@@ -1,0 +1,7 @@
+# Hermes Go — site repo (private until launch)
+# The APK is NOT committed — it ships as a GitHub Release asset (163MB > 100MB limit).
+HermesGo.apk
+
+# Local server artifacts
+*.log
+.DS_Store

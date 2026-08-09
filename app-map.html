@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Hermes Go App Map — the complete, precise reference for every surface, segment, and feature of the app.">
+<meta name="theme-color" content="#FAFAFA">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hermes Go — App Map">
+<meta property="og:description" content="Every surface, segment, and feature in Hermes Go — 8 surfaces, 39 segments, 101 features, what it does and exactly where to find it.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:site_name" content="Hermes Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hermes Go — App Map">
+<meta name="twitter:description" content="Every surface, segment, and feature in Hermes Go — 8 surfaces, 39 segments, 101 features, what it does and exactly where to find it.">
+<meta name="twitter:image" content="og-image.png">
+<title>App Map — Hermes Go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── Light tokens (default) ── */
+:root, :root[data-theme="light"] {
+  --bg: #FAFAFA;
+  --bg-soft: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-soft: #F9F9FB;
+  --surface-muted: #F2F2F7;
+  --fg: #0A0A0F;
+  --muted: #4A4A55;
+  --subtle: #6E6E7A;
+  --faint: #A0A0AB;
+  --border: #EAEAEE;
+  --border-strong: #D6D6DC;
+  --border-hair: rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  --accent: #2DD4BF;
+  --accent-fg: #FFFFFF;
+  --accent-soft: rgba(45, 212, 191, 0.10);
+  --accent-strong: #14B8A6;
+  --accent-ink: #0F766E;
+  --node: #FFFFFF;
+  --edge: #D6D6DC;
+  --edge-strong: #A0A0AB;
+  --nav-bg: rgba(250, 250, 250, 0.86);
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+:root[data-theme="dark"] {
+  --bg: #0A0A0F;
+  --bg-soft: #111118;
+  --surface: #16161F;
+  --surface-soft: #1A1A24;
+  --surface-muted: #1F1F2A;
+  --fg: #F5F5F7;
+  --muted: #B8B8C0;
+  --subtle: #8E8E98;
+  --faint: #4A4A55;
+  --border: #2A2A35;
+  --border-strong: #3A3A45;
+  --border-hair: rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --accent: #2DD4BF;
+  --accent-soft: rgba(45, 212, 191, 0.10);
+  --accent-strong: #5EEAD4;
+  --accent-ink: #5EEAD4;
+  --node: #16161F;
+  --edge: #2A2A35;
+  --edge-strong: #4A4A55;
+  --nav-bg: rgba(10, 10, 15, 0.86);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: clip; }
+body {
+  font-family: "Albert Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01";
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+::selection { background: var(--accent-soft); }
+
+/* ── Header ── */
+.header {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  padding-top: env(safe-area-inset-top);
+}
+.header-inner { display: flex; align-items: center; gap: 16px; height: 58px; padding-inline: 24px; max-width: 1240px; margin-inline: auto; }
+.header-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; letter-spacing: -0.025em; flex-shrink: 0; }
+.header-logo img { width: 28px; height: 28px; object-fit: contain; }
+.header-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent-soft); padding: 4px 10px; border-radius: 100px; flex-shrink: 0; }
+.header-spacer { flex: 1; }
+.header-link { font-size: 13.5px; font-weight: 600; color: var(--muted); transition: color 0.15s; padding: 8px 10px; border-radius: 6px; min-height: 44px; display: inline-flex; align-items: center; }
+.header-link:hover { color: var(--fg); }
+.theme-toggle { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color 0.2s, border-color 0.2s; flex-shrink: 0; }
+.mobile-menu-btn { display: none; padding: 10px; line-height: 1; border-radius: 6px; min-width: 44px; min-height: 44px; color: var(--fg); }
+.app-map-menu { display: none; flex-direction: column; padding: 0 16px 16px; border-top: 1px solid var(--border); background: var(--bg); }
+.app-map-menu a { font-size: 15px; font-weight: 600; color: var(--muted); padding: 14px 4px; border-bottom: 1px solid var(--border); min-height: 44px; display: flex; align-items: center; }
+.app-map-menu a:last-child { border-bottom: none; }
+.app-map-menu a:hover { color: var(--fg); }
+.app-map-menu.open { display: flex; }
+.theme-toggle:hover { color: var(--accent-strong); border-color: var(--accent); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .moon { display: none; }
+
+/* ── Layout ── */
+.layout { display: grid; grid-template-columns: 240px 1fr; max-width: 1240px; margin-inline: auto; gap: 40px; padding-top: 58px; }
+.main { padding: 40px 0 96px; min-width: 0; }
+.main { padding-left: 16px; padding-right: 16px; }
+@media (min-width: 901px) { .main { padding-left: 0; padding-right: 0; } }
+.sidebar {
+  position: sticky; top: 72px; align-self: start;
+  padding: 28px 12px 40px;
+  max-height: calc(100vh - 90px); overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
+}
+.sidebar-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); padding: 0 10px 10px; }
+.side-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 9px 10px; border-radius: 8px;
+  font-size: 13.5px; font-weight: 600; color: var(--muted);
+  background: transparent; border: 1px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  text-align: left; min-height: 40px;
+}
+.side-nav-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+.side-nav-item:hover { background: var(--bg-soft); color: var(--fg); }
+.side-nav-item.active { background: var(--accent-soft); color: var(--accent-ink); }
+.side-nav-item .count { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--faint); font-variant-numeric: tabular-nums; }
+.side-nav-item.active .count { color: var(--accent-strong); }
+
+/* ── Main ── */
+
+/* ── Hero ── */
+.hero { padding: 8px 0 24px; }
+.hero .caption { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 12px; }
+.hero h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
+.hero p { margin-top: 10px; font-size: 15px; color: var(--muted); max-width: 60ch; line-height: 1.6; }
+.stats { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+.stat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); font-size: 12.5px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stat-pill b { color: var(--fg); font-weight: 700; }
+
+/* ── Search ── */
+.search-wrap { position: relative; margin: 20px 0 28px; }
+.search-wrap svg.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--subtle); pointer-events: none; }
+.search-wrap kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 10.5px; color: var(--faint); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; background: var(--surface-soft); pointer-events: none; }
+#docSearch {
+  width: 100%; padding: 12px 44px 12px 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  font-family: inherit; font-size: 14px; font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#docSearch::placeholder { color: var(--subtle); }
+#docSearch:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+#searchStatus { padding: 0 4px 12px; font-size: 12.5px; color: var(--subtle); min-height: 0; }
+
+/* ── Graph canvas ── */
+.graph {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+.graph::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.35;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+/* ── Surface detail ── */
+.surface-detail { scroll-margin-top: 76px; margin-bottom: 22px; }
+.detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
+.detail-head { display: flex; align-items: center; gap: 14px; padding: 20px 22px; border-bottom: 1px solid var(--border); }
+.detail-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.detail-icon svg { width: 22px; height: 22px; }
+.detail-title { flex: 1; min-width: 0; }
+.detail-title h2 { font-size: 19px; font-weight: 800; letter-spacing: -0.015em; line-height: 1.25; }
+.detail-title .tag { font-size: 12.5px; color: var(--subtle); margin-top: 2px; }
+.detail-counts { display: flex; gap: 14px; flex-shrink: 0; }
+.detail-count { display: flex; flex-direction: column; align-items: flex-end; }
+.detail-count b { font-size: 18px; font-weight: 800; color: var(--fg); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+.detail-count span { font-size: 10.5px; color: var(--subtle); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 3px; font-weight: 600; }
+
+.detail-body { padding: 4px 0 6px; }
+
+/* Segment */
+.segment { padding: 18px 22px; border-top: 1px solid var(--border); }
+.segment:first-child { border-top: none; }
+.segment-head { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.segment-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.segment-icon svg { width: 13px; height: 13px; }
+.segment-name { font-size: 13px; font-weight: 700; color: var(--fg); letter-spacing: -0.005em; }
+.segment-desc { font-size: 12.5px; color: var(--subtle); margin-left: 4px; }
+.feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 28px; }
+.feature-row {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 8px 0;
+}
+.feature-info { min-width: 0; flex: 1; display: flex; align-items: flex-start; gap: 8px; }
+.feature-icon { width: 18px; height: 18px; border-radius: 5px; color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.feature-icon svg { width: 14px; height: 14px; }
+.feature-name { font-size: 13px; font-weight: 600; color: var(--fg); }
+.feature-desc { font-size: 12px; color: var(--subtle); margin-top: 1px; line-height: 1.5; }
+.feature-where {
+  font-family: var(--mono); font-size: 10.5px; color: var(--faint);
+  background: var(--bg-soft); border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 5px;
+  white-space: nowrap; flex-shrink: 0; margin-top: 3px;
+  font-weight: 500;
+}
+.feature-row.match { background: var(--accent-soft); border-radius: 6px; margin-inline: -8px; padding-inline: 8px; }
+.feature-row .hl { color: var(--accent-ink); font-weight: 700; background: rgba(45, 212, 191, 0.18); border-radius: 3px; padding: 0 2px; }
+.segment.hidden, .surface-detail.hidden, .feature-row.hidden { display: none; }
+.surface-detail.search-open .detail-body { display: block; animation: none; }
+
+/* ── Footer ── */
+.doc-footer { border-top: 1px solid var(--border); padding: 24px 0 0; margin-top: 48px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.doc-footer .note { font-size: 12px; color: var(--subtle); }
+.doc-footer code { font-family: var(--mono); font-size: 11px; color: var(--muted); background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; }
+
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .layout { display: block; padding-top: 52px; }
+  .sidebar {
+    position: sticky; top: 52px; z-index: 90;
+    max-height: none; padding: 10px 16px;
+    display: flex; flex-direction: row; align-items: center;
+    gap: 6px; overflow-x: auto; scrollbar-width: none;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+  .sidebar-label { display: none; }
+  #sideNav { display: contents; }
+  .side-nav-item {
+    width: auto; flex: 0 0 auto; white-space: nowrap;
+    padding: 6px 12px; font-size: 12.5px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 8px;
+  }
+  .side-nav-item svg { width: 13px; height: 13px; }
+  .side-nav-item .count { display: none; }
+  .main { padding: 20px 16px 80px; }
+  .header-inner { padding-inline: 16px; gap: 10px; }
+  .header-link { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .app-map-menu.open { display: flex; }
+  .feature-list { grid-template-columns: 1fr; gap: 0; }
+  .feature-row { padding: 7px 0; }
+  .feature-where { font-size: 10px; }
+  .detail-head { padding: 16px 18px; gap: 12px; }
+  .detail-icon { width: 38px; height: 38px; }
+  .detail-icon svg { width: 19px; height: 19px; }
+  .detail-title h2 { font-size: 17px; }
+  .detail-counts { gap: 10px; }
+  .detail-count b { font-size: 16px; }
+  .segment { padding: 14px 18px; }
+}
+@media (max-width: 480px) {
+  .header-badge { display: none; }
+  .stat-pill { font-size: 11.5px; padding: 6px 11px; }
+  .hero h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="hermes-go.html" class="header-logo" aria-label="Back to Hermes Go">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:-4px"><polyline points="15 18 9 12 15 6"/></svg>
+      <img src="splash-icon.png" alt="">
+      Hermes Go
+    </a>
+    <span class="header-badge">App Map</span>
+    <div class="header-spacer"></div>
+    <a href="hermes-go.html#screenshots" class="header-link">Screenshots</a>
+    <a href="hermes-go.html#download" class="header-link">Download</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+    </button>
+    <button class="mobile-menu-btn" id="appMapMenuBtn" aria-label="Menu" title="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="app-map-menu" id="appMapMenu">
+    <a href="hermes-go.html">← Back to Hermes Go</a>
+    <a href="hermes-go.html#screenshots">Screenshots</a>
+    <a href="hermes-go.html#download">Download APK</a>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-label">Surfaces</div>
+    <nav id="sideNav" aria-label="App surfaces"></nav>
+  </aside>
+
+  <main class="main">
+    <section class="hero">
+      <p class="caption">Reference</p>
+      <h1>App Map</h1>
+      <p>Every surface, segment, and feature in Hermes Go — what it does and exactly where to find it.</p>
+      <div class="stats" id="docStats"></div>
+    </section>
+
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="docSearch" type="text" placeholder="Search features, surfaces, paths…" autocomplete="off" aria-label="Search the app map">
+      <kbd>/</kbd>
+    </div>
+    <div id="searchStatus"></div>
+
+    <!-- Detail cards -->
+    <div id="surfaces"></div>
+
+    <footer class="doc-footer">
+      <div class="note">Generated from <code>app-map.js</code> — the single source of truth.</div>
+      <div class="note" id="genNote"></div>
+    </footer>
+  </main>
+</div>
+
+<script src="app-map.js"></script>
+<script>
+/* ── Theme (default light) ── */
+const themeToggle = document.getElementById('themeToggle');
+const saved = (() => { try { return localStorage.getItem('hermes-doc-theme'); } catch (e) { return null; } })();
+if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+themeToggle.addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('hermes-doc-theme', next); } catch (e) {}
+});
+
+/* ── Mobile menu ── */
+const appMapMenuBtn = document.getElementById('appMapMenuBtn');
+const appMapMenu = document.getElementById('appMapMenu');
+if (appMapMenuBtn && appMapMenu) {
+  function setAppMapMenuOpen(open) {
+    appMapMenu.classList.toggle('open', open);
+    appMapMenuBtn.setAttribute('aria-expanded', String(open));
+  }
+  appMapMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setAppMapMenuOpen(!appMapMenu.classList.contains('open'));
+  });
+  appMapMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setAppMapMenuOpen(false));
+  });
+  document.addEventListener('click', (e) => {
+    if (!appMapMenu.classList.contains('open')) return;
+    if (appMapMenu.contains(e.target) || appMapMenuBtn.contains(e.target)) return;
+    setAppMapMenuOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && appMapMenu.classList.contains('open')) setAppMapMenuOpen(false);
+  });
+}
+
+/* ── Sidebar ── */
+const sideNav = document.getElementById('sideNav');
+sideNav.innerHTML = HUB_MAP.map((h, i) => {
+  const segCount = h.segments.length;
+  return `<button class="side-nav-item" data-target="${i}" aria-label="${h.label}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg>
+    ${h.label}
+    <span class="count">${segCount}</span>
+  </button>`;
+}).join('');
+
+/* ── Detail cards ── */
+const surfacesEl = document.getElementById('surfaces');
+const iconSvgAttrs = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"';
+function renderIcon(svgPath, size) {
+  return `<svg width="${size}" height="${size}" ${iconSvgAttrs}>${svgPath}</svg>`;
+}
+function pickSegmentIcon(seg) {
+  // Try exact label first
+  if (SEGMENT_ICONS[seg.label]) return SEGMENT_ICONS[seg.label];
+  // Try lowercased match
+  const key = seg.label.toLowerCase();
+  for (const k of Object.keys(SEGMENT_ICONS)) {
+    if (k.toLowerCase() === key) return SEGMENT_ICONS[k];
+  }
+  return LUCIDE.dot;
+}
+function pickFeatureIcon(feat) {
+  // Try exact name
+  if (FEATURE_ICONS[feat.name]) return FEATURE_ICONS[feat.name];
+  // Fall back to default dot
+  return DEFAULT_FEATURE_ICON;
+}
+surfacesEl.innerHTML = HUB_MAP.map((h, i) => {
+  const segCount = h.segments.length;
+  const featCount = h.segments.reduce((n, s) => n + s.features.length, 0);
+  const segments = h.segments.map(s => `
+    <div class="segment" data-segment="${s.label.toLowerCase()}">
+      <div class="segment-head">
+        <span class="segment-icon">${renderIcon(pickSegmentIcon(s), 13)}</span>
+        <span class="segment-name">${s.label}</span>
+        <span class="segment-desc">${s.desc}</span>
+      </div>
+      <ul class="feature-list">
+        ${s.features.map(f => `
+          <li class="feature-row" data-name="${(f.name + ' ' + f.desc + ' ' + f.where + ' ' + h.label + ' ' + s.label).toLowerCase()}">
+            <div class="feature-info">
+              <span class="feature-icon">${renderIcon(pickFeatureIcon(f), 14)}</span>
+              <div>
+                <div class="feature-name">${f.name}</div>
+                <div class="feature-desc">${f.desc}</div>
+              </div>
+            </div>
+            <div class="feature-where">${f.where}</div>
+          </li>`).join('')}
+      </ul>
+    </div>`).join('');
+
+  return `
+    <section class="surface-detail" id="surface-${i}" data-surface="${h.label.toLowerCase()}">
+      <div class="detail-card">
+        <div class="detail-head">
+          <div class="detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg></div>
+          <div class="detail-title">
+            <h2>${h.label}</h2>
+            <div class="tag">${h.tag}</div>
+          </div>
+          <div class="detail-counts">
+            <div class="detail-count"><b>${segCount}</b><span>segments</span></div>
+            <div class="detail-count"><b>${featCount}</b><span>features</span></div>
+          </div>
+        </div>
+        <div class="detail-body">${segments}</div>
+      </div>
+    </section>`;
+}).join('');
+
+/* ── Stats ── */
+const totalSegs = HUB_MAP.reduce((n, h) => n + h.segments.length, 0);
+const totalFeats = HUB_MAP.reduce((n, h) => n + h.segments.reduce((m, s) => m + s.features.length, 0), 0);
+document.getElementById('docStats').innerHTML = `
+  <span class="stat-pill"><b>${HUB_MAP.length}</b> surfaces</span>
+  <span class="stat-pill"><b>${totalSegs}</b> segments</span>
+  <span class="stat-pill"><b>${totalFeats}</b> features</span>`;
+const genNote = document.getElementById('genNote');
+genNote.textContent = 'Last verified against hermes-mobile source · ' + new Date().toISOString().slice(0, 10);
+
+/* ── Click nav → scroll + highlight ── */
+const detailEls = [...document.querySelectorAll('.surface-detail')];
+const navItems = [...document.querySelectorAll('.side-nav-item')];
+let currentActiveIdx = 0;
+
+function activateNode(i) {
+  navItems.forEach((n, j) => n.classList.toggle('active', j === i));
+  detailEls[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+navItems.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const i = parseInt(btn.getAttribute('data-target'), 10);
+    activateNode(i);
+  });
+});
+
+/* ── Scroll-spy ── */
+function updateSpy() {
+  const threshold = window.innerHeight * 0.38;
+  let current = 0;
+  detailEls.forEach((el, i) => {
+    if (el.getBoundingClientRect().top <= threshold) current = i;
+  });
+  if (current === currentActiveIdx) return;
+  currentActiveIdx = current;
+  navItems.forEach((n, j) => n.classList.toggle('active', j === current));
+}
+window.addEventListener('scroll', updateSpy, { passive: true });
+
+/* ── Search ── */
+const searchInput = document.getElementById('docSearch');
+const searchStatus = document.getElementById('searchStatus');
+const segmentEls = [...document.querySelectorAll('.segment')];
+
+function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function highlight(text, q) {
+  const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+  return escapeHtml(text).replace(re, '<span class="hl">$1</span>');
+}
+
+function runSearch(q) {
+  const query = q.trim().toLowerCase().replace(/\s+/g, '');
+
+  const featureEls = [...document.querySelectorAll('.feature-row')];
+  featureEls.forEach(f => {
+    f.classList.remove('hidden', 'match');
+    f.querySelector('.feature-name').innerHTML = escapeHtml(f.querySelector('.feature-name').textContent);
+    f.querySelector('.feature-desc').innerHTML = escapeHtml(f.querySelector('.feature-desc').textContent);
+    f.querySelector('.feature-where').innerHTML = escapeHtml(f.querySelector('.feature-where').textContent);
+  });
+  segmentEls.forEach(seg => seg.classList.remove('hidden'));
+  detailEls.forEach(sec => sec.classList.remove('hidden', 'search-open'));
+
+  if (!query) {
+    searchStatus.textContent = '';
+    return;
+  }
+
+  let matchCount = 0;
+  featureEls.forEach(f => {
+    const nameEl = f.querySelector('.feature-name');
+    const descEl = f.querySelector('.feature-desc');
+    const whereEl = f.querySelector('.feature-where');
+    const name = nameEl.textContent;
+    const desc = descEl.textContent;
+    const where = whereEl.textContent;
+    const hay = (name + ' ' + desc + ' ' + where).toLowerCase().replace(/\s+/g, '');
+    const isMatch = hay.includes(query);
+    f.classList.toggle('hidden', !isMatch);
+    f.classList.toggle('match', isMatch);
+    if (isMatch) {
+      matchCount++;
+      nameEl.innerHTML = highlight(name, q.trim());
+      descEl.innerHTML = highlight(desc, q.trim());
+      whereEl.innerHTML = highlight(where, q.trim());
+    }
+  });
+
+  segmentEls.forEach(seg => {
+    const visible = [...seg.querySelectorAll('.feature-row')].some(f => !f.classList.contains('hidden'));
+    seg.classList.toggle('hidden', !visible);
+  });
+  detailEls.forEach(sec => {
+    const visible = [...sec.querySelectorAll('.segment')].some(s => !s.classList.contains('hidden'));
+    sec.classList.toggle('hidden', !visible);
+    sec.classList.toggle('search-open', visible);
+  });
+
+  searchStatus.textContent = matchCount === 0
+    ? 'No matches for "' + q.trim() + '"'
+    : matchCount + (matchCount === 1 ? ' result' : ' results') + ' for "' + q.trim() + '"';
+}
+
+searchInput.addEventListener('input', () => runSearch(searchInput.value));
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && document.activeElement !== searchInput) {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === searchInput) {
+    searchInput.value = '';
+    runSearch('');
+    searchInput.blur();
+  }
+});
+
+/* ── Initial draw after layout settles ── */
+requestAnimationFrame(() => updateSpy());
+</script>
+</body>
+</html>

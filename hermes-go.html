@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Hermes Go — the official mobile client for your remote self-hosted Hermes AI agent. Connect via local network or Tailscale to port 9119.">
+<meta name="theme-color" content="#FAFAFA">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hermes Go — Your AI agent, in your pocket">
+<meta property="og:description" content="The official native mobile client for your self-hosted Hermes agent. One prompt setup, live streaming, voice, artifacts, and full agent control.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:site_name" content="Hermes Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hermes Go — Your AI agent, in your pocket">
+<meta name="twitter:description" content="The official native mobile client for your self-hosted Hermes agent. One prompt setup, live streaming, voice, artifacts, and full agent control.">
+<meta name="twitter:image" content="og-image.png">
+<title>Hermes Go — Remote Mobile Client for Hermes AI Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── Dual-theme tokens (light-first, Linear-grade) ── */
+:root,
+:root[data-theme="light"] {
+  --bg: #FAFAFA;
+  --bg-soft: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-muted: #F2F2F7;
+  --surface-elevated: #FFFFFF;
+  --surface-glass: rgba(255, 255, 255, 0.86);
+  --fg: #0A0A0F;
+  --muted: #4A4A55;
+  --subtle: #6E6E7A;
+  --faint: #A0A0AB;
+  --border: #EAEAEE;
+  --border-strong: #D6D6DC;
+  --border-hair: rgba(15, 23, 42, 0.07);
+  --accent: #14B8A6;
+  --accent-muted: #2DD4BF;
+  --accent-strong: #0D9488;
+  --accent-soft: rgba(20, 184, 166, 0.10);
+  --accent-subtle: #CCFBF1;
+  --accent-contrast: #FFFFFF;
+  --success: #16A34A;
+  --success-soft: rgba(22, 163, 74, 0.10);
+  --warning: #D97706;
+  --warning-soft: rgba(217, 119, 6, 0.10);
+  --danger: #DC2626;
+  --danger-soft: rgba(220, 38, 38, 0.10);
+  --info: #2563EB;
+  --info-soft: rgba(37, 99, 235, 0.10);
+  --user-bubble: #F2F2F7;
+  --user-bubble-text: #0A0A0F;
+  --assistant-bubble: #FFFFFF;
+  --assistant-bubble-text: #0A0A0F;
+  --code-bg: #F2F2F7;
+  --code-text: #0A0A0F;
+  --shadow-phone: 0 24px 60px rgba(15, 23, 42, 0.10), 0 6px 16px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --nav-bg: rgba(250, 250, 250, 0.84);
+  --section-alt: #F5F5F7;
+  --feature-card-hover: #F9F9FB;
+  --phone-bezel: #1A1F2E;
+  --phone-bezel-ring: #0A0A0F;
+  --phone-chrome: #05070C;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0A0A0F;
+  --bg-soft: #111118;
+  --surface: #16161F;
+  --surface-muted: #1F1F2A;
+  --surface-elevated: #1A1A24;
+  --surface-glass: rgba(22, 22, 31, 0.78);
+  --fg: #F5F5F7;
+  --muted: #B8B8C0;
+  --subtle: #8E8E98;
+  --faint: #4A4A55;
+  --border: #2A2A35;
+  --border-strong: #3A3A45;
+  --border-hair: rgba(255, 255, 255, 0.06);
+  --accent: #2DD4BF;
+  --accent-muted: #5EEAD4;
+  --accent-strong: #5EEAD4;
+  --accent-soft: rgba(45, 212, 191, 0.10);
+  --accent-subtle: #134E4A;
+  --accent-contrast: #0A0A0F;
+  --success: #4ADE80;
+  --success-soft: rgba(74, 222, 128, 0.10);
+  --warning: #FBBF24;
+  --warning-soft: rgba(251, 191, 36, 0.10);
+  --danger: #F87171;
+  --danger-soft: rgba(248, 113, 113, 0.10);
+  --info: #60A5FA;
+  --info-soft: rgba(96, 165, 250, 0.10);
+  --user-bubble: #1E293B;
+  --user-bubble-text: #F5F5F7;
+  --assistant-bubble: #1F1F2A;
+  --assistant-bubble-text: #F5F5F7;
+  --code-bg: #111118;
+  --code-text: #E2E8F0;
+  --shadow-phone: 0 24px 60px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --nav-bg: rgba(10, 10, 15, 0.84);
+  --section-alt: #111118;
+  --feature-card-hover: #1A1A24;
+  --phone-bezel: #2D3748;
+  --phone-bezel-ring: #151B26;
+  --phone-chrome: #05070C;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: clip; }
+body {
+  font-family: "Albert Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* ── Typography scale ── */
+.display { font-size: clamp(38px, 5.5vw, 68px); font-weight: 800; line-height: 1.05; letter-spacing: -0.035em; }
+.h1 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; }
+.h2 { font-size: clamp(22px, 2.8vw, 30px); font-weight: 700; line-height: 1.18; letter-spacing: -0.015em; }
+.h3 { font-size: clamp(17px, 2vw, 21px); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
+.body { font-size: 16px; font-weight: 400; line-height: 1.65; color: var(--muted); }
+.small { font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--subtle); }
+.caption { font-size: 11px; font-weight: 700; line-height: 1.4; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12px; }
+
+/* ── Layout ── */
+.container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 32px; }
+.section { padding-block: 100px; }
+@media (max-width: 768px) { .section { padding-block: 60px; } .container { padding-inline: 20px; } }
+
+/* ── Skip link ── */
+.skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--accent-contrast); padding: 8px 16px; font-weight: 600; font-size: 14px; border-radius: 0 0 6px 0; z-index: 200; transition: top 0.2s; }
+.skip-link:focus { top: 0; }
+
+/* ── Navigation ── */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.025em; color: var(--fg); }
+.nav-logo-img { width: 34px; height: 34px; object-fit: contain; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--fg); }
+.nav-cta { background: var(--accent); color: var(--accent-contrast); padding: 11px 20px; border-radius: 8px; font-size: 13.5px; font-weight: 700; letter-spacing: 0.005em; transition: transform 0.15s, box-shadow 0.2s; min-height: 40px; display: inline-flex; align-items: center; gap: 7px; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--accent-soft); }
+.nav-cta svg { width: 15px; height: 15px; }
+.theme-toggle { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="light"] .theme-toggle .sun { display: block; }
+:root[data-theme="light"] .theme-toggle .moon { display: none; }
+.mobile-menu-btn { display: none; padding: 10px; line-height: 1; border-radius: 6px; min-width: 44px; min-height: 44px; color: var(--fg); order: 10; }
+.theme-toggle { order: 11; }
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; gap: 14px; position: absolute; top: 62px; left: 0; right: 0; background: var(--bg); padding: 20px 24px; border-bottom: 1px solid var(--border); }
+  .nav-links.open { display: flex; }
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+}
+
+/* ── Hero Section ── */
+.hero { min-height: auto; display: flex; align-items: center; position: relative; padding-top: 72px; padding-bottom: 40px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border-hair); background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse-dot 2s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
+.hero h1 { margin-bottom: 20px; }
+.hero p { max-width: 54ch; margin-bottom: 28px; }
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 26px; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.01em; transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s, background-color 0.15s; touch-action: manipulation; }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn-primary { background: var(--accent); color: var(--accent-contrast); }
+.btn-primary:hover { box-shadow: 0 8px 24px var(--accent-soft); }
+.btn-secondary { background: var(--surface-elevated); color: var(--fg); border: 1px solid var(--border-strong); }
+.btn-secondary:hover { border-color: var(--accent); }
+.btn svg { width: 18px; height: 18px; }
+
+/* Hero visual — real chat screenshot */
+.hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+.hero-shot {
+  width: min(340px, 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-phone);
+  background: var(--surface);
+}
+.hero-shot img { width: 100%; height: auto; display: block; object-fit: contain; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+  .hero p { margin-inline: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-shot { width: min(300px, 100%); }
+}
+
+/* ── Metrics Counter Strip ── */
+.metrics-strip { background: var(--surface); border-y: 1px solid var(--border); padding-block: 28px; }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+@media (max-width: 768px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+.metric-val { font-size: 32px; font-weight: 800; color: var(--accent); line-height: 1.1; letter-spacing: -0.02em; }
+.metric-lbl { font-size: 12px; font-weight: 600; color: var(--subtle); margin-top: 4px; }
+
+/* ── iPhone Frame Component (Shared) ── */
+.phone {
+  width: 282px; height: 576px; border-radius: 42px;
+  background: var(--phone-chrome);
+  border: 2.5px solid var(--phone-bezel);
+  box-shadow:
+    0 0 0 1.5px var(--phone-bezel-ring),
+    inset 0 0 0 1px rgba(255,255,255,0.08),
+    var(--shadow-phone);
+  overflow: visible; position: relative;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+  cursor: zoom-in;
+}
+.phone:hover {
+  box-shadow:
+    0 0 0 1.5px var(--phone-bezel-ring),
+    0 0 0 2px var(--accent-soft),
+    0 48px 100px rgba(0,0,0,0.65);
+}
+.phone > .phone-screen { border-radius: 38px; overflow: hidden; }
+.phone-notch {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  width: 90px; height: 26px; background: #000; border-radius: 20px; z-index: 10;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.phone-notch::after {
+  content: ""; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #1a3a4a 0%, #0a1018 70%);
+}
+.phone-reflection {
+  position: absolute; inset: 0; border-radius: 42px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, transparent 38%, transparent 62%, rgba(255,255,255,0.02) 100%);
+  pointer-events: none; z-index: 9;
+}
+.phone-status {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px 0 16px; height: 16px; flex-shrink: 0;
+  font-family: "Albert Sans", -apple-system, sans-serif; font-size: 10px; font-weight: 700;
+  color: var(--fg); letter-spacing: 0.02em; line-height: 1;
+}
+.phone-status-right { display: flex; align-items: center; gap: 5px; }
+.phone-status .batt {
+  width: 20px; height: 10px; border: 1px solid currentColor; border-radius: 2.5px;
+  position: relative; padding: 1px; opacity: 0.7;
+}
+.phone-status .batt::before {
+  content: ""; position: absolute; right: -3px; top: 2px; width: 1.5px; height: 4px;
+  background: currentColor; border-radius: 0 1px 1px 0; opacity: 0.6;
+}
+.phone-status .batt i { display: block; height: 100%; width: 75%; border-radius: 1px; background: var(--success); }
+
+/* Phone interior palette scoping */
+.phone-screen {
+  width: 100%; height: 100%; padding: 8px 10px 14px;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 120% 80% at 50% -20%, var(--accent-soft), transparent 60%);
+  display: flex; flex-direction: column; gap: 6px; font-size: 11px; overflow: hidden;
+  position: relative; color: var(--fg);
+}
+.phone-status { margin-top: 28px; margin-bottom: 2px; }
+.phone-screen > * { position: relative; z-index: 2; }
+
+/* ── App Header ── */
+.app-header { display: flex; align-items: center; gap: 8px; padding: 6px 4px 4px; flex-shrink: 0; }
+.app-header-burger { width: 28px; height: 28px; display: flex; flex-direction: column; justify-content: center; gap: 3.5px; flex-shrink: 0; padding: 0 4px; cursor: pointer; }
+.app-header-burger span { display: block; height: 2px; background: var(--fg); border-radius: 1px; opacity: 0.8; }
+.app-header-burger span:nth-child(1) { width: 16px; }
+.app-header-burger span:nth-child(2) { width: 11px; }
+.app-header-burger span:nth-child(3) { width: 16px; }
+.app-header-title-block { flex: 1; min-width: 0; }
+.app-header-caption { font-size: 9px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--subtle); line-height: 1; }
+.app-header-title { font-size: 14px; font-weight: 700; line-height: 1.2; margin-top: 2px; letter-spacing: -0.15px; display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Connect/Login UI Mockup components */
+.login-screen-ui { display: flex; flex-direction: column; height: 100%; padding: 4px 6px; }
+.login-logo-row { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 10px; margin-bottom: 14px; text-align: center; }
+.login-logo-img { width: 62px; height: 62px; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45)); object-fit: contain; }
+.login-title { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+.login-subtitle { font-size: 10.5px; color: var(--subtle); margin-top: 1px; }
+.login-step-indicator { display: flex; gap: 6px; width: 100%; margin-bottom: 12px; }
+.login-step-bar { flex: 1; height: 3px; border-radius: 2px; background: var(--border-strong); }
+.login-step-bar.active { background: var(--accent); }
+
+.login-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+.login-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--subtle); }
+.login-toggle-row { display: flex; background: var(--surface-muted); padding: 2px; border-radius: 8px; border: 0.5px solid var(--border); }
+.login-toggle-btn { flex: 1; padding: 4px 0; text-align: center; font-size: 10px; font-weight: 700; border-radius: 6px; color: var(--subtle); }
+.login-toggle-btn.active { background: var(--surface-elevated); color: var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+.login-input { background: var(--surface); border: 0.5px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 11px; color: var(--fg); display: flex; align-items: center; gap: 6px; }
+.login-input-text { flex: 1; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 10.5px; color: var(--fg); }
+
+.login-ts-banner { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 8px; background: var(--accent-soft); border: 0.5px solid var(--accent); margin-bottom: 8px; }
+.login-ts-banner svg { width: 12px; height: 12px; color: var(--accent); flex-shrink: 0; }
+.login-ts-text { font-size: 9.5px; font-weight: 600; color: var(--accent); flex: 1; }
+
+.login-submit-btn { background: var(--accent); color: var(--accent-contrast); border-radius: 8px; padding: 9px; text-align: center; font-size: 11.5px; font-weight: 800; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+/* ── AgentStatusHero ── */
+.status-hero { display: flex; align-items: center; padding: 8px 10px; background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; }
+.status-half { flex: 1; }
+.status-half-top { display: flex; align-items: center; gap: 5px; }
+.status-half-label { font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--subtle); }
+.status-half-row { display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.status-half-value { font-size: 13px; font-weight: 700; }
+.status-half-caption { font-size: 10px; color: var(--subtle); margin-top: 1px; }
+.status-divider { width: 1px; align-self: stretch; background: var(--border); margin: 0 10px; }
+
+/* ── Collapsible Section Card ── */
+.collapsible { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; }
+.collapsible-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; }
+.collapsible-title { font-size: 13px; font-weight: 700; letter-spacing: -0.1px; }
+.collapsible-sub { font-size: 10px; color: var(--subtle); margin-top: 1px; }
+.collapsible-body { padding: 0 10px 10px; }
+
+/* ── Performance 2x2 Grid ── */
+.perf-grid { display: flex; flex-wrap: wrap; }
+.perf-cell { width: 50%; padding: 6px; border-top: 0.5px solid var(--border); }
+.perf-cell:nth-child(even) { border-left: 0.5px solid var(--border); }
+.perf-cell-top { display: flex; align-items: center; gap: 4px; }
+.perf-cell-label { font-size: 9px; font-weight: 600; letter-spacing: 0.3px; color: var(--subtle); }
+.perf-cell-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 4px; gap: 4px; }
+.perf-cell-value { font-size: 18px; font-weight: 700; line-height: 20px; letter-spacing: -0.3px; }
+.spark { display: flex; align-items: flex-end; gap: 1.5px; height: 18px; }
+.spark span { width: 2.5px; background: var(--accent); border-radius: 1px; opacity: 0.85; }
+
+/* ── Capabilities Chips ── */
+.cap-row { display: flex; gap: 5px; flex-wrap: wrap; }
+.cap-chip { padding: 4px 8px; border-radius: 8px; background: var(--surface-muted); border: 0.5px solid var(--border); font-size: 10px; font-weight: 600; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+
+/* ── Glass Composer ── */
+.composer { margin-top: auto; }
+.composer-pill { display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 1px 2px rgba(15,23,42,0.04); }
+.composer-plus { width: 24px; height: 24px; border-radius: 12px; background: var(--surface-muted); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; font-size: 15px; font-weight: 600; }
+.composer-input { flex: 1; font-size: 12px; color: var(--subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.composer-send { width: 24px; height: 24px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; color: var(--accent-contrast); flex-shrink: 0; }
+.composer-send svg { width: 12px; height: 12px; }
+.composer-meta-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 0; }
+.composer-meta-left { display: flex; align-items: center; gap: 6px; }
+.composer-meta-right { display: flex; align-items: center; gap: 8px; }
+.composer-model { display: flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 600; color: var(--muted); }
+.composer-effort { display: flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 600; color: var(--muted); }
+
+/* ── Context Usage Ring ── */
+.ctx-ring { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--success); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+.ctx-ring-track { position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--border); }
+.ctx-ring-num { font-size: 7.5px; font-weight: 800; color: var(--success); }
+
+/* ── Buttons ── */
+.yolo-btn { width: 22px; height: 22px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.yolo-btn.on { background: rgba(255, 149, 0, 0.18); border-color: transparent; }
+.yolo-btn svg { width: 12px; height: 12px; color: var(--muted); }
+.yolo-btn.on svg { color: var(--warning); }
+.improve-btn { width: 22px; height: 22px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.improve-btn.ready { background: rgba(168, 85, 247, 0.18); border-color: transparent; }
+.improve-btn svg { width: 12px; height: 12px; color: var(--muted); }
+.improve-btn.ready svg { color: #A855F7; }
+
+/* ── Chat Messages ── */
+.chat-area { flex: 1; display: flex; flex-direction: column; gap: 6px; overflow: hidden; padding: 4px 4px; }
+.bubble { padding: 8px 12px; border-radius: 12px; font-size: 11px; line-height: 1.5; max-width: 82%; }
+.bubble.user { align-self: flex-end; background: var(--user-bubble); color: var(--user-bubble-text); border-radius: 12px 12px 2px 12px; }
+.bubble.assistant { align-self: flex-start; background: var(--assistant-bubble); color: var(--assistant-bubble-text); border: 0.5px solid var(--border); border-radius: 12px 12px 12px 2px; }
+
+/* Reasoning & Tool Rows */
+.reasoning-row { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: var(--surface-muted); border: 0.5px solid var(--border); }
+.reasoning-row svg { width: 12px; height: 12px; color: var(--subtle); }
+.reasoning-row span { font-size: 10.5px; font-weight: 500; color: var(--subtle); flex: 1; }
+.tool-row { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: var(--surface); border: 0.5px solid var(--border); }
+.tool-row svg { width: 12px; height: 12px; color: var(--subtle); }
+.tool-row .tool-name { font-size: 11px; font-weight: 600; color: var(--fg); flex: 1; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+.tool-row .tool-time { font-size: 10px; color: var(--subtle); }
+.tool-row .tool-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+/* Code Block & Table */
+.code-block { margin: 4px 0; border-radius: 8px; border: 0.5px solid var(--border); overflow: hidden; }
+.code-block-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 8px; background: var(--surface-muted); border-bottom: 0.5px solid var(--border); }
+.code-block-lang { font-size: 9px; font-weight: 700; color: var(--subtle); text-transform: uppercase; }
+.code-block-copy { font-size: 9.5px; font-weight: 600; color: var(--subtle); display: flex; align-items: center; gap: 3px; cursor: pointer; }
+.code-block-copy svg { width: 9px; height: 9px; }
+.code-block-body { background: var(--code-bg); color: var(--code-text); padding: 6px 8px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 9.5px; line-height: 1.4; overflow-x: auto; }
+.md-table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 10px; }
+.md-table th { text-align: left; padding: 5px 6px; font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--border-strong); }
+.md-table td { padding: 4px 6px; border-bottom: 0.5px solid var(--border); color: var(--fg); }
+.inline-code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 10px; padding: 1px 5px; border-radius: 4px; background: var(--surface-muted); border: 0.5px solid var(--border); color: var(--accent); }
+
+/* Floating Pickers */
+.picker-float { position: absolute; bottom: 58px; left: 8px; right: 8px; background: var(--surface-elevated); border: 0.5px solid var(--border-strong); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 12; overflow: hidden; }
+.picker-head { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-bottom: 0.5px solid var(--border); background: var(--surface-muted); }
+.picker-head svg { width: 12px; height: 12px; color: var(--accent); }
+.picker-head span { font-size: 9.5px; font-weight: 700; color: var(--subtle); letter-spacing: 0.5px; text-transform: uppercase; }
+.picker-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 0.5px solid var(--border); }
+.picker-item:last-child { border-bottom: none; }
+.picker-item-name { font-size: 11.5px; font-weight: 700; color: var(--fg); }
+.picker-item-desc { font-size: 9.5px; color: var(--subtle); }
+
+/* Hub Segment Rails */
+.hub-chips { display: flex; gap: 6px; padding: 2px 0 6px; overflow-x: auto; scrollbar-width: none; }
+.hub-chips::-webkit-scrollbar { display: none; }
+.hub-chip { display: flex; align-items: center; gap: 5px; padding: 0 10px; height: 26px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+.hub-chip.active { background: var(--accent); color: var(--accent-contrast); border: none; }
+.hub-chip:not(.active) { color: var(--muted); background: transparent; border: 0.5px solid var(--border); }
+
+/* Session Rows */
+.session-row { display: flex; align-items: center; gap: 8px; padding: 10px 10px; border-bottom: 0.5px solid var(--border); }
+.session-row:last-child { border-bottom: none; }
+.session-pin { width: 12px; height: 12px; color: var(--accent); flex-shrink: 0; }
+.session-title { font-size: 12px; font-weight: 700; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.session-meta { display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.session-source { padding: 1px 5px; border-radius: 4px; font-size: 9px; font-weight: 700; }
+.session-meta-text { font-size: 10px; color: var(--subtle); }
+.session-time { font-size: 10px; color: var(--subtle); flex-shrink: 0; font-weight: 500; }
+
+/* ── App Structure Explorer ── */
+.features-intro { text-align: center; margin-bottom: 48px; }
+.features-intro .caption { color: var(--accent); margin-bottom: 14px; }
+.app-explorer {
+  display: grid; grid-template-columns: 224px 1fr;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  min-height: 440px;
+}
+.hub-rail { display: flex; flex-direction: column; gap: 4px; padding: 14px 10px; border-right: 1px solid var(--border-hair); background: var(--surface-muted); }
+.hub-rail-btn {
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 12px; border-radius: 10px;
+  font-size: 13.5px; font-weight: 600; color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+  text-align: left; min-height: 44px;
+}
+.hub-rail-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+.hub-rail-btn:hover { background: var(--feature-card-hover); color: var(--fg); }
+.hub-rail-btn.active { background: var(--accent-soft); color: var(--accent); }
+.hub-panel { padding: 30px 34px; overflow-y: auto; max-height: 560px; }
+.hub-panel-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.hub-panel-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hub-panel-icon svg { width: 22px; height: 22px; }
+.hub-panel-head h3 { margin-bottom: 2px; }
+.hub-segments { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.seg-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border-hair); border-radius: 12px; background: var(--bg-soft); transition: border-color 0.15s, background 0.15s; min-height: 52px; }
+.seg-item:hover { border-color: var(--border-strong); background: var(--surface-elevated); }
+.seg-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); opacity: 0.85; flex-shrink: 0; }
+.seg-text { min-width: 0; }
+.seg-label { font-size: 13.5px; font-weight: 700; color: var(--fg); line-height: 1.3; }
+.seg-desc { font-size: 12px; color: var(--subtle); margin-top: 1px; line-height: 1.4; }
+
+/* Segment entrance animation (staggered) */
+@keyframes seg-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.hub-segments .seg-item { animation: seg-in 0.3s cubic-bezier(0.16,1,0.3,1) both; }
+.hub-segments .seg-item:nth-child(2) { animation-delay: 0.03s; }
+.hub-segments .seg-item:nth-child(3) { animation-delay: 0.06s; }
+.hub-segments .seg-item:nth-child(4) { animation-delay: 0.09s; }
+.hub-segments .seg-item:nth-child(5) { animation-delay: 0.12s; }
+.hub-segments .seg-item:nth-child(6) { animation-delay: 0.15s; }
+.hub-segments .seg-item:nth-child(7) { animation-delay: 0.18s; }
+@media (prefers-reduced-motion: reduce) { .hub-segments .seg-item { animation: none; } }
+
+.explorer-link { text-align: center; margin-top: 18px; }
+.explorer-link a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13.5px; font-weight: 600; color: var(--accent);
+  padding: 10px 16px; border-radius: 8px;
+  transition: background 0.15s;
+  min-height: 44px;
+}
+.explorer-link a:hover { background: var(--accent-soft); }
+.explorer-link svg { width: 15px; height: 15px; }
+
+/* ── Why Hermes Go — Pillars + Face-off ── */
+.why-section { background: var(--surface); border-y: 1px solid var(--border); }
+.why-intro { text-align: center; margin-bottom: 56px; }
+.why-intro .caption { color: var(--accent); margin-bottom: 14px; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 64px; }
+.pillar {
+  padding: 28px 26px; border-radius: 16px;
+  background: var(--bg-soft); border: 1px solid var(--border-hair);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.2s, background 0.2s;
+}
+.pillar:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-elevated); }
+.pillar-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.pillar-icon svg { width: 21px; height: 21px; }
+.pillar h3 { margin-bottom: 6px; }
+.pillar p { font-size: 13.5px; color: var(--subtle); line-height: 1.55; }
+
+/* Scroll-reveal */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ── Screenshots Carousel ── */
+.screenshots { background: var(--section-alt); }
+.screenshots-intro { text-align: center; margin-bottom: 36px; }
+.screenshots-intro .caption { color: var(--accent); margin-bottom: 14px; }
+
+/* Real screenshot gallery — clean cards, mobile-first */
+.shot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+.shot-card { display: block; width: 100%; text-align: left; font: inherit; color: inherit; padding: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; cursor: zoom-in; }
+.shot-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.shot-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.shot-frame { position: relative; aspect-ratio: 4 / 3; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.shot-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; object-fit: contain; }
+.shot-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-top: 1px solid var(--border); }
+.shot-label { font-size: 13px; font-weight: 700; color: var(--fg); letter-spacing: -0.005em; }
+.shot-where { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; color: var(--subtle); background: var(--bg-soft); border: 1px solid var(--border); padding: 2px 8px; border-radius: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
+
+/* Lightbox */
+.shot-lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(10,10,15,0.92); display: none; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.shot-lightbox.open { display: flex; animation: lb-fade 0.18s ease both; }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+.shot-lightbox img { max-width: 95vw; max-height: 92vh; object-fit: contain; border-radius: 10px; box-shadow: 0 24px 80px rgba(0,0,0,0.5); }
+.shot-lightbox-close { position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; color: var(--fg); cursor: pointer; transition: border-color 0.15s, transform 0.15s, background 0.15s; min-width: 48px; min-height: 48px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); z-index: 2; }
+.shot-lightbox-close:hover { border-color: var(--accent); transform: scale(1.05); }
+.shot-lightbox-close svg { width: 22px; height: 22px; }
+.shot-lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--fg); cursor: pointer; transition: border-color 0.15s; min-width: 44px; min-height: 44px; }
+.shot-lightbox-nav:hover { border-color: var(--accent); }
+.shot-lightbox-nav svg { width: 20px; height: 20px; }
+.shot-lightbox-nav#shotLightboxPrev { left: 16px; }
+.shot-lightbox-nav#shotLightboxNext { right: 16px; }
+@media (max-width: 600px) {
+  .shot-lightbox-nav { width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
+  .shot-lightbox-nav#shotLightboxPrev { left: 8px; }
+  .shot-lightbox-nav#shotLightboxNext { right: 8px; }
+  .shot-lightbox-close { top: 12px; right: 12px; }
+}
+@media (max-width: 900px) {
+  .shot-grid { grid-template-columns: 1fr; gap: 12px; }
+  .shot-frame { aspect-ratio: 16 / 10; }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  .shot-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Micro-animations */
+@keyframes live-pulse { 0%,100%{ opacity:1; transform:scale(1) } 50%{ opacity:0.45; transform:scale(0.85) } }
+@keyframes typing-dot { 0%,60%,100%{ opacity:0.25; transform:translateY(0) } 30%{ opacity:1; transform:translateY(-2px) } }
+@keyframes cursor-blink { 0%,100%{ opacity:1 } 50%{ opacity:0 } }
+.status-dot.live, .session-pulse { animation: live-pulse 1.8s ease-in-out infinite; }
+.typing-dots { display: inline-flex; gap: 3px; align-items: center; }
+.typing-dots i { width: 3.5px; height: 3.5px; border-radius: 50%; background: var(--muted); animation: typing-dot 1.2s ease-in-out infinite; }
+.typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots i:nth-child(3) { animation-delay: 0.3s; }
+.caret { display: inline-block; width: 1.5px; height: 0.95em; background: var(--accent); vertical-align: text-bottom; margin-left: 1px; animation: cursor-blink 1s step-end infinite; }
+.tool-dot.running { background: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-soft); animation: live-pulse 1s ease-in-out infinite; }
+
+/* ── Sticky Mobile Bottom CTA Bar ── */
+.mobile-sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--surface); border-top: 1px solid var(--border); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; transform: translateY(100%); transition: transform 0.3s ease; }
+.mobile-sticky-bar.visible { transform: translateY(0); }
+@media (min-width: 769px) { .mobile-sticky-bar { display: none !important; } }
+
+/* How to Connect & Onboarding Prompt Box */
+.connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) { .connect-grid { grid-template-columns: 1fr; } }
+.connect-steps { display: flex; flex-direction: column; gap: 24px; }
+.step { display: flex; gap: 18px; }
+.step-num { width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 15px; }
+.step h3 { margin-bottom: 4px; }
+.step p { font-size: 14px; color: var(--subtle); line-height: 1.6; }
+
+.prompt-box-card { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 16px; padding: 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.prompt-box-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.prompt-box-title { font-size: 14px; font-weight: 700; color: var(--fg); display: flex; align-items: center; gap: 8px; }
+.prompt-box-title svg { width: 16px; height: 16px; color: var(--accent); }
+.copy-prompt-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 6px; background: var(--accent); color: var(--accent-contrast); font-size: 12px; font-weight: 700; transition: transform 0.15s, background 0.15s; }
+.copy-prompt-btn:hover { transform: translateY(-1px); }
+.prompt-code-body { background: var(--code-bg); color: var(--code-text); padding: 14px; border-radius: 10px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 11px; line-height: 1.55; border: 0.5px solid var(--border); max-height: 280px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
+
+/* Trust / Download */
+.trust { background: var(--section-alt); text-align: center; }
+.trust-badges { display: flex; justify-content: center; gap: 36px; margin-bottom: 36px; flex-wrap: wrap; }
+.trust-badge { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.trust-badge svg { width: 28px; height: 28px; color: var(--accent); }
+.trust-badge span { font-size: 13px; font-weight: 700; color: var(--fg); }
+.trust-badge small { font-size: 11px; color: var(--subtle); }
+.trust-hash { margin-top: 22px; padding: 10px 18px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12px; color: var(--subtle); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+.trust-hash code { color: var(--muted); }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border-hair); padding-block: 44px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; }
+.footer-logo-img { width: 28px; height: 28px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); object-fit: contain; }
+.footer-links { display: flex; gap: 26px; }
+.footer-links a { font-size: 14px; color: var(--subtle); transition: color 0.2s; }
+.footer-links a:hover { color: var(--fg); }
+
+/* ══ Mobile Responsive Overrides ══ */
+@media (max-width: 768px) {
+  .nav { padding-top: env(safe-area-inset-top); }
+  .nav-inner { height: 58px; }
+  .nav-links { top: calc(58px + env(safe-area-inset-top)); }
+  .nav-links a { font-size: 16px; padding: 10px 0; min-height: 44px; display: flex; align-items: center; }
+  .nav-cta { text-align: center; justify-content: center; }
+  .hero { min-height: auto; padding-top: calc(72px + env(safe-area-inset-top)); }
+  .display { font-size: clamp(34px, 9vw, 44px); }
+  .h1 { font-size: clamp(24px, 7vw, 32px); }
+  .section { padding-block: 56px; }
+  .features-intro { margin-bottom: 36px; }
+  .app-explorer { grid-template-columns: 1fr; min-height: 0; }
+  .hub-rail { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border-hair); padding: 10px 12px; gap: 6px; scrollbar-width: none; }
+  .hub-rail::-webkit-scrollbar { display: none; }
+  .hub-rail-btn { white-space: nowrap; padding: 10px 14px; font-size: 13px; }
+  .hub-rail-btn svg { display: none; }
+  .hub-panel { padding: 22px 20px; max-height: none; overflow-y: visible; }
+  .hub-segments { grid-template-columns: 1fr; }
+  .seg-item { min-height: 48px; }
+  .btn { padding: 12px 20px; min-height: 48px; }
+  .copy-prompt-btn { padding: 10px 16px; min-height: 44px; }
+  .prompt-box-card { padding: 18px 16px; }
+  .prompt-code-body { font-size: 10.5px; max-height: 320px; }
+  .trust-badges { gap: 24px; }
+  .trust-hash { max-width: 100%; padding: 12px 14px; font-size: 11px; word-break: break-all; white-space: normal; text-align: left; }
+  .footer-inner { flex-direction: column; text-align: center; gap: 14px; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 18px; }
+  .mobile-sticky-bar { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .step { gap: 14px; }
+  .step-num { width: 34px; height: 34px; font-size: 14px; }
+  .metric-val { font-size: 26px; }
+}
+
+@media (max-width: 600px) {
+  .container { padding-inline: 16px; }
+  .hero-grid { gap: 28px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { justify-content: center; width: 100%; }
+  .metrics-grid { gap: 18px; }
+  .metric-val { font-size: 24px; }
+  .pillars { grid-template-columns: 1fr; gap: 12px; margin-bottom: 44px; }
+  .pillar { padding: 22px 20px; }
+  .connect-grid { gap: 36px; }
+  .connect-steps { gap: 20px; }
+  .trust-badges { gap: 20px; }
+  .trust-badge svg { width: 24px; height: 24px; }
+  .footer { padding-block: 32px; }
+  .mobile-sticky-bar { padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
+  .mobile-sticky-bar .btn { min-height: 44px; }
+}
+
+@media (max-width: 400px) {
+  .container { padding-inline: 12px; }
+  .display { font-size: 30px; }
+  .hero-badge { font-size: 10px; padding: 5px 10px; }
+  .metric-val { font-size: 21px; }
+  .metric-lbl { font-size: 11px; }
+  .trust-badges { gap: 16px; }
+  .trust-badge span { font-size: 12px; }
+  .trust-badge small { font-size: 10px; }
+}
+
+/* Landscape phones: top-align, never vertically center */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero { min-height: auto; align-items: flex-start; padding-top: calc(64px + env(safe-area-inset-top)); }
+  .hero-grid { gap: 20px; }
+  .hero-visual { order: 2; }
+  .section { padding-block: 40px; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Navigation -->
+<nav class="nav" id="siteNav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="splash-icon.png" alt="Hermes Go App Icon" class="nav-logo-img">
+      Hermes Go
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#screenshots">Screenshots</a>
+      <a href="#features">App Map</a>
+      <a href="#why-hermes">Why Hermes Go</a>
+      <a href="#connect">1-Click Setup</a>
+      <a href="app-map.html">Full App Map</a>
+      <a href="#download" class="nav-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download APK
+      </a>
+    </div>
+    <button class="mobile-menu-btn" aria-label="Menu" id="menuBtn" title="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Mobile Remote Client · Self-Hosted Hermes Agent
+      </div>
+      <h1 class="display">Your AI agent,<br>in your pocket.</h1>
+      <p class="body">Hermes Go is the official native mobile client for your self-hosted <code class="inline-code">hermes-agent</code>. One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.</p>
+
+      <div class="hero-actions">
+        <a href="#download" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download APK
+        </a>
+        <a href="#connect" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 14a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2"/><path d="M12 14v7"/><path d="M8 21h8"/><path d="M2 10h20"/></svg>
+          1-Click Setup Prompt
+        </a>
+      </div>
+      <div style="font-size:12px;color:var(--subtle);margin-top:12px;font-weight:500">Android APK available now · Coming soon to Google Play Store</div>
+    </div>
+
+    <!-- Hero Visual: real chat screenshot -->
+    <div class="hero-visual">
+      <div class="hero-shot">
+        <img src="screens/chat.jpg" alt="Hermes Go chat — live agent session with code block and tool timeline" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics Strip -->
+<section class="metrics-strip">
+  <div class="container metrics-grid">
+    <div>
+      <div class="metric-val">100%</div>
+      <div class="metric-lbl">Direct Remote WebSocket (No Relays)</div>
+    </div>
+    <div>
+      <div class="metric-val">1 Prompt</div>
+      <div class="metric-lbl">Automated Agent Setup</div>
+    </div>
+    <div>
+      <div class="metric-val">8</div>
+      <div class="metric-lbl">App Surfaces</div>
+    </div>
+    <div>
+      <div class="metric-val">50+</div>
+      <div class="metric-lbl">Built-in Agent Tools</div>
+    </div>
+  </div>
+</section>
+
+<!-- App Structure Explorer -->
+<section class="section screenshots" id="screenshots">
+  <div class="container">
+    <div class="screenshots-intro">
+      <p class="caption">In the App</p>
+      <h2 class="h1">Real screens. Real agent.</h2>
+    </div>
+
+    <div class="shot-grid">
+      <button class="shot-card" data-full="screens/sessions.jpg" aria-label="Sessions screenshot" type="button">
+        <div class="shot-frame"><img src="screens/sessions.jpg" alt="Sessions surface with inbox, folders and projects" loading="lazy"></div>
+        <div class="shot-meta"><span class="shot-label">Sessions</span><span class="shot-where">Sessions · Inbox</span></div>
+      </button>
+      <button class="shot-card" data-full="screens/dashboard-settings.jpg" aria-label="Dashboard and Settings screenshots" type="button">
+        <div class="shot-frame"><img src="screens/dashboard-settings.jpg" alt="Dashboard hero with performance and System Hermes Go features settings" loading="lazy"></div>
+        <div class="shot-meta"><span class="shot-label">Dashboard &amp; Settings</span><span class="shot-where">Dashboard · hero · System · Setup</span></div>
+      </button>
+      <button class="shot-card" data-full="screens/drawer.jpg" aria-label="Drawer flyouts" type="button">
+        <div class="shot-frame"><img src="screens/drawer.jpg" alt="Drawer open showing Brain Work and System surfaces" loading="lazy"></div>
+        <div class="shot-meta"><span class="shot-label">Drawer</span><span class="shot-where">Brain · Work · System</span></div>
+      </button>
+      <button class="shot-card" data-full="screens/sessions-switch.jpg" aria-label="Session status and switcher" type="button">
+        <div class="shot-frame"><img src="screens/sessions-switch.jpg" alt="Session status sheet and switch session sheet" loading="lazy"></div>
+        <div class="shot-meta"><span class="shot-label">Session sheets</span><span class="shot-where">Chat · header · Sessions</span></div>
+      </button>
+      <button class="shot-card" data-full="screens/artifacts.jpg" aria-label="Artifacts browser and workspace menu" type="button">
+        <div class="shot-frame"><img src="screens/artifacts.jpg" alt="Context window workspace menu and artifacts browser" loading="lazy"></div>
+        <div class="shot-meta"><span class="shot-label">Context &amp; Artifacts</span><span class="shot-where">Chat · Workspace · Work · Artifacts</span></div>
+      </button>
+      <button class="shot-card" data-full="screens/models-activity.jpg" aria-label="Activity panel and Models picker" type="button">
+        <div class="shot-frame"><img src="screens/models-activity.jpg" alt="Activity panel and models picker sheet" loading="lazy"></div>
+        <div class="shot-meta"><span class="shot-label">Activity &amp; Models</span><span class="shot-where">Chat · Activity · Brain · Models</span></div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="features-intro">
+      <p class="caption">App Structure</p>
+      <h2 class="h1">Everything in Hermes Go.<br>One surface per job.</h2>
+    </div>
+
+    <div class="app-explorer" id="appExplorer">
+      <!-- Rail (populated by JS) -->
+      <div class="hub-rail" id="hubRail" role="tablist" aria-label="App hubs"></div>
+      <!-- Panel -->
+      <div class="hub-panel" id="hubPanel" role="tabpanel"></div>
+    </div>
+    <div class="explorer-link">
+      <a href="app-map.html">View the full App Map →
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Hermes Go Section -->
+<section class="section why-section" id="why-hermes">
+  <div class="container">
+    <div class="why-intro">
+      <p class="caption">Why Hermes Go</p>
+      <h2 class="h1">Your agent stays on your server.<br>Hermes Go puts it in your hand.</h2>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="h3">No cloud. No relay.</h3>
+        <p>A direct Tailscale WebSocket to your server. Nothing passes through a third party.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3 class="h3">Set up in one prompt.</h3>
+        <p>The agent configures auth, binds port 9119, detects Tailscale, and hands you the details.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M12 18h.01"/></svg></div>
+        <h3 class="h3">The full agent, not a chat app.</h3>
+        <p>Voice, approvals, tools, cron, Star Map, system control — everything desktop does, in your hand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Real screenshots gallery -->
+<!-- App Structure Explorer -->
+
+<!-- How to Connect & Onboarding Setup Prompt -->
+<section class="section" id="connect">
+  <div class="container">
+    <div class="connect-grid">
+      <div>
+        <p class="caption" style="color:var(--accent);margin-bottom:14px">1-Click Agent Setup</p>
+        <h2 class="h1" style="margin-bottom:20px">Let your Hermes Agent configure itself automatically.</h2>
+        <p class="body" style="margin-bottom:28px">No config files. No network scripts. Paste the prompt into any running Hermes Agent — CLI, Telegram, Discord, or Desktop.</p>
+        <div class="connect-steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Copy Setup Prompt</h3>
+              <p>Click the <strong>Copy Onboarding Prompt</strong> button on the right.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Paste to your Hermes Agent</h3>
+              <p>Paste the prompt into your agent via CLI, Telegram bot, or desktop chat. The agent reads config, creates basic auth, starts the gateway on port 9119, and checks Tailscale.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Enter the 5 Lines in Hermes Go</h3>
+              <p>Your agent replies with 5 exact connection lines (Protocol, Host, Port, Username, Password). Enter them in Hermes Go to connect instantly!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="prompt-box-card">
+          <div class="prompt-box-header">
+            <div class="prompt-box-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Canonical Onboarding Setup Prompt
+            </div>
+            <button class="copy-prompt-btn" id="copyBootstrapBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-code-body" id="bootstrapPromptText">Set up Hermes Dashboard login for Hermes Go (mobile). Follow IN ORDER. Never invent credentials.
+
+GOAL: Give the user Protocol, Host, Port, Username, Password for the mobile connect screen.
+
+A) CHECK EXISTING AUTH
+Read ~/.hermes/.env and ~/.hermes/config.yaml for dashboard basic auth:
+- Username: HERMES_DASHBOARD_BASIC_AUTH_USERNAME or dashboard.basic_auth.username
+- Password: ONLY HERMES_DASHBOARD_BASIC_AUTH_PASSWORD
+
+B) CREATE AUTH (only if needed)
+1. Ask the user for a username and password. Wait for their answer.
+2. Update ~/.hermes/.env (chmod 600). Set HERMES_DASHBOARD_BASIC_AUTH_* secrets.
+
+C) START + VERIFY
+1. Run: hermes dashboard --host 0.0.0.0 --port 9119 --no-open
+2. Verify auth: curl -s http://127.0.0.1:9119/api/status
+3. Pick Host (Tailscale IPv4 or LAN IP).
+
+D) FINAL REPLY
+Reply with ONLY these 5 lines:
+Protocol: <http|https>
+Host: <ip-or-hostname>
+Port: <port>
+Username: <username>
+Password: <password></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust & Download -->
+<section class="section trust" id="download">
+  <div class="container">
+    <h2 class="h1">Get Hermes Go</h2>
+    <p class="body" style="margin-top:10px;margin-bottom:36px">The mobile client for your self-hosted Hermes agent.</p>
+    <div class="trust-badges">
+      <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Direct &amp; Secure</span><small>Port 9119 / Tailscale</small></div>
+      <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span>Official Native App</span><small>React Native Engine</small></div>
+      <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span>Zero Telemetry</span><small>Private by default</small></div>
+    </div>
+    <a href="HermesGo.apk" class="btn btn-primary" style="padding:15px 32px;font-size:15px" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Latest APK (v1.0.0)
+    </a>
+    <div style="margin-top:10px;font-size:12px;color:var(--subtle)">Coming soon to Google Play Store</div>
+    <div>
+      <div class="trust-hash" id="trustHash">
+        <span>SHA-256:</span>
+        <code>342b6ef2a6b41c5299e943f7f33ce7fb96d4adeb08179921493cbbc388bdd899</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <img src="splash-icon.png" alt="Hermes Go App Icon" class="footer-logo-img">
+      Hermes Go Mobile Client
+    </div>
+    <div class="footer-links">
+      <a href="#screenshots">Screenshots</a>
+      <a href="#features">App Map</a>
+      <a href="app-map.html">Full App Map</a>
+      <a href="#why-hermes">Why Hermes Go</a>
+      <a href="#connect">Connect</a>
+      <a href="#download">Download</a>
+    </div>
+    <div style="font-size:13px;color:var(--subtle)">
+      © 2026 Hermes AI Ecosystem. Remote mobile client for self-hosted Hermes Agent.
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky Mobile Bottom Download Bar -->
+<div class="mobile-sticky-bar" id="stickyMobileBar">
+  <div style="display:flex;align-items:center;gap:8px">
+    <img src="splash-icon.png" alt="Hermes Go App Icon" style="width:22px;height:22px;object-fit:contain">
+    <span style="font-size:13px;font-weight:700">Hermes Go <span style="font-size:10px;color:var(--subtle)">v1.0.0</span></span>
+  </div>
+  <a href="#download" class="btn btn-primary" style="padding:6px 14px;font-size:12px">Download APK</a>
+</div>
+
+</main>
+
+<!-- Screenshot Lightbox -->
+<div class="shot-lightbox" id="shotLightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button class="shot-lightbox-close" id="shotLightboxClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <button class="shot-lightbox-nav" id="shotLightboxPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <img id="shotLightboxImg" alt="">
+  <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+</div>
+
+<script src="app-map.js"></script>
+<script>
+// Theme Switcher Logic
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = htmlEl.getAttribute('data-theme');
+  const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+  htmlEl.setAttribute('data-theme', nextTheme);
+});
+
+// Mobile Nav Menu Toggle — close on link click, outside click, or Escape
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+function setMenuOpen(open) {
+  navLinks.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+}
+menuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  setMenuOpen(!navLinks.classList.contains('open'));
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => setMenuOpen(false));
+});
+document.addEventListener('click', (e) => {
+  if (!navLinks.classList.contains('open')) return;
+  if (navLinks.contains(e.target) || menuBtn.contains(e.target)) return;
+  setMenuOpen(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) setMenuOpen(false);
+});
+
+// Sticky Mobile Bottom Download Bar — show past hero, hide inside #download section
+const stickyMobileBar = document.getElementById('stickyMobileBar');
+const downloadSection = document.getElementById('download');
+function updateStickyBar() {
+  if (!stickyMobileBar) return;
+  if (window.innerWidth >= 769) { stickyMobileBar.classList.remove('visible'); return; }
+  const rect = downloadSection ? downloadSection.getBoundingClientRect() : null;
+  const pastHero = window.scrollY > 350;
+  const insideDownload = rect && rect.top < window.innerHeight && rect.bottom > 0;
+  stickyMobileBar.classList.toggle('visible', pastHero && !insideDownload);
+}
+window.addEventListener('scroll', updateStickyBar, { passive: true });
+window.addEventListener('resize', updateStickyBar);
+
+// Scroll-reveal for Why Hermes Go
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach((el) => io.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('in'));
+}
+
+// Copy Trust Hash
+const trustHash = document.getElementById('trustHash');
+trustHash.addEventListener('click', () => {
+  const hashText = trustHash.querySelector('code').textContent;
+  navigator.clipboard.writeText(hashText).then(() => {
+    const origSpan = trustHash.querySelector('span').textContent;
+    trustHash.querySelector('span').textContent = 'Copied!';
+    setTimeout(() => {
+      trustHash.querySelector('span').textContent = origSpan;
+    }, 2000);
+  });
+});
+
+// Copy Canonical Bootstrap Setup Prompt
+const copyBootstrapBtn = document.getElementById('copyBootstrapBtn');
+const bootstrapPromptText = document.getElementById('bootstrapPromptText');
+
+copyBootstrapBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(bootstrapPromptText.textContent).then(() => {
+    const origText = copyBootstrapBtn.innerHTML;
+    copyBootstrapBtn.innerHTML = '✓ Copied!';
+    setTimeout(() => {
+      copyBootstrapBtn.innerHTML = origText;
+    }, 2000);
+  });
+});
+
+// ── Screenshot gallery lightbox ──
+const lightbox = document.getElementById('shotLightbox');
+const lightboxImg = document.getElementById('shotLightboxImg');
+const lbClose = document.getElementById('shotLightboxClose');
+const lbPrev = document.getElementById('shotLightboxPrev');
+const lbNext = document.getElementById('shotLightboxNext');
+const cards = document.querySelectorAll('.shot-card');
+let lbIndex = -1;
+let lbTouchStartX = 0, lbTouchStartY = 0, lbTouchStartT = 0;
+
+function openLb(i) {
+  lbIndex = i;
+  const src = cards[i].getAttribute('data-full');
+  lightboxImg.src = src;
+  lightboxImg.alt = cards[i].getAttribute('aria-label') || '';
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  lbIndex = -1;
+}
+function navLb(dir) {
+  if (lbIndex < 0) return;
+  lbIndex = (lbIndex + dir + cards.length) % cards.length;
+  openLb(lbIndex);
+}
+
+cards.forEach((c, i) => {
+  c.addEventListener('click', (e) => { e.preventDefault(); openLb(i); });
+});
+lbClose.addEventListener('click', closeLb);
+lbPrev.addEventListener('click', () => navLb(-1));
+lbNext.addEventListener('click', () => navLb(1));
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+
+// Mobile swipe navigation
+lightbox.addEventListener('touchstart', (e) => {
+  const t = e.changedTouches[0];
+  lbTouchStartX = t.screenX; lbTouchStartY = t.screenY; lbTouchStartT = Date.now();
+}, { passive: true });
+lightbox.addEventListener('touchend', (e) => {
+  const t = e.changedTouches[0];
+  const dx = t.screenX - lbTouchStartX;
+  const dy = t.screenY - lbTouchStartY;
+  const dt = Date.now() - lbTouchStartT;
+  if (dt > 800) return;
+  if (Math.abs(dy) > Math.abs(dx)) return; // ignore vertical scrolls
+  if (Math.abs(dx) < 50) return;
+  navLb(dx > 0 ? -1 : 1);
+}, { passive: true });
+// Enable pinch-zoom on the image itself
+lightboxImg.style.touchAction = 'pinch-zoom';
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  else if (e.key === 'ArrowRight') navLb(1);
+  else if (e.key === 'ArrowLeft') navLb(-1);
+});
+
+// ── App Structure Explorer ──
+// Data lives in app-map.js (shared with app-map.html) — update once, both stay in sync.
+// HUB_ICONS / HUB_MAP are global bindings from app-map.js.
+const HUBS = HUB_MAP;
+
+const hubRail = document.getElementById('hubRail');
+const hubPanel = document.getElementById('hubPanel');
+let activeHub = 0;
+
+function segRow(seg) {
+  return `<div class="seg-item"><span class="seg-dot"></span><div class="seg-text"><div class="seg-label">${seg.label}</div><div class="seg-desc">${seg.desc}</div></div></div>`;
+}
+
+function renderRail() {
+  hubRail.innerHTML = HUBS.map((h, i) =>
+    `<button class="hub-rail-btn${i === activeHub ? ' active' : ''}" role="tab" aria-selected="${i === activeHub}" data-hub="${i}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg>
+      ${h.label}
+    </button>`
+  ).join('');
+}
+
+function renderPanel() {
+  const h = HUBS[activeHub];
+  hubPanel.innerHTML = `
+    <div class="hub-panel-head">
+      <div class="hub-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg></div>
+      <div>
+        <h3 class="h3">${h.label}</h3>
+        <div class="caption" style="color:var(--accent)">${h.tag}</div>
+      </div>
+    </div>
+    <div class="hub-segments">${h.segments.map(segRow).join('')}</div>`;
+}
+
+hubRail.addEventListener('click', (e) => {
+  const btn = e.target.closest('.hub-rail-btn');
+  if (!btn) return;
+  activeHub = parseInt(btn.getAttribute('data-hub'), 10);
+  renderRail();
+  renderPanel();
+});
+
+renderRail();
+renderPanel();
+
+</script>
+</body>
+</html>
