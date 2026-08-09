@@ -6,7 +6,7 @@
 
 **Your AI agent, in your pocket.**
 
-The official native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.nousresearch.com). One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.
+A native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.nousresearch.com). One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.
 
 `v1.0.0` · Android APK · Closed Source · Zero Telemetry
 
@@ -72,7 +72,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 [Download Hermes Go v1.0.0](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (170 MB)
 
-**Verify the download** — the SHA-256 of the official APK is:
+**Verify the download** — the SHA-256 of the published APK is:
 
 ```
 342b6ef2a6b41c5299e943f7f33ce7fb96d4adeb08179921493cbbc388bdd899
