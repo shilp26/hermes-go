@@ -10,6 +10,8 @@ A native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.
 
 `v1.0.0` · Android APK · Closed Source · Zero Telemetry
 
+[![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
+
 </div>
 
 ---
