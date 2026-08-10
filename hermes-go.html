@@ -618,6 +618,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .changelog-cta { margin-top: 32px; text-align: center; }
 .changelog-cta a { font-size: 13.5px; font-weight: 600; color: var(--accent); }
 .changelog-cta a:hover { color: var(--accent-strong); }
+/* Collapsed older entries */
+.cl-old-wrap { position: relative; }
+.cl-old-wrap.collapsed { max-height: 360px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%); }
+.cl-old-wrap.expanded { max-height: none; -webkit-mask-image: none; mask-image: none; }
+.cl-old { margin-top: 32px; }
+.cl-old .cl-group { margin-bottom: 10px; }
+.cl-old .cl-group h4 { font-size: 11px; }
+.cl-old .cl-group li { font-size: 12.5px; margin-bottom: 4px; }
+.cl-old .cl-group li::before { top: 6px; width: 4px; height: 4px; }
+.changelog-toggle { margin-top: 24px; text-align: center; }
+.changelog-toggle button { background: transparent; border: 1px solid var(--border); padding: 9px 24px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--subtle); cursor: pointer; transition: all 0.25s; }
+.changelog-toggle button:hover { border-color: var(--accent); color: var(--accent); }
 
 @media (max-width: 768px) {
   .changelog-item { padding-left: 22px; }
@@ -893,7 +905,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <span class="changelog-date" style="color:var(--accent)">OTA &middot; No new APK</span>
       </div>
       <h3>Personality changes, PR badges, and sharper reliability</h3>
-
       <div class="cl-group">
         <h4>Added</h4>
         <ul>
@@ -901,7 +912,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li>Personality switches now show a "personality changed" note in the timeline</li>
         </ul>
       </div>
-
       <div class="cl-group">
         <h4>Fixed</h4>
         <ul>
@@ -921,19 +931,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <span class="changelog-date" style="color:var(--accent)">OTA &middot; No new APK</span>
       </div>
       <h3>Instant open, slash commands, and full tool cards</h3>
-
       <div class="cl-group">
         <h4>Added</h4>
         <ul>
           <li>Instant session open — recent messages pre-loaded in background, paint from cache</li>
-          <li>Native slash commands &mdash; /learn, /goal, and skills intercepted and run properly</li>
+          <li>Native slash commands — /learn, /goal, and skills intercepted and run properly</li>
           <li>Multi-photo attachments — select several at once, oversized ones skipped with a summary</li>
           <li>Cleaner reconnects — duplicate session-resume calls prevented</li>
           <li>Review scope — point Review at any folder, discover git repos automatically</li>
           <li>Pin backup — workspace pins restored across profile switches</li>
         </ul>
       </div>
-
       <div class="cl-group">
         <h4>Fixed</h4>
         <ul>
@@ -952,15 +960,106 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <span class="changelog-date" style="color:var(--accent)">First Release</span>
       </div>
       <h3>The complete Hermes agent, in your pocket</h3>
-      <p style="font-size:13.5px;color:var(--muted);line-height:1.55">
-        Live streaming, voice, inline media, approvals, subagents, Star Map, system control, multi-server, and zero telemetry — everything desktop does, in a native Android app.
-      </p>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.55">Live streaming, voice, inline media, approvals, subagents, Star Map, system control, multi-server, and zero telemetry — everything desktop does, in a native Android app.</p>
+    </div>
+
+    <!-- Older releases (collapsed) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+      <!-- v0.9.0 -->
+      <div class="changelog-item cl-old reveal">
+        <div class="changelog-meta">
+          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.9.0</span>
+          <span class="changelog-date">6 Aug 2026</span>
+        </div>
+        <h3>Star Map, queue panel, bulk prefetch, composer todo, settings, keep-awake, model chains, voice plan</h3>
+        <div class="cl-group">
+          <ul>
+            <li>Star Map visualization and knowledge graph</li>
+            <li>Queue panel sheet and async delegation</li>
+            <li>Bulk prefetch for sessions</li>
+            <li>Composer todo status panel with live sync</li>
+            <li>Settings surface — connection and common jobs moved out of chat</li>
+            <li>Keep-awake streaming</li>
+            <li>Fallback model chains</li>
+            <li>Voice master plan</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v0.8.0 -->
+      <div class="changelog-item cl-old reveal">
+        <div class="changelog-meta">
+          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.8.0</span>
+          <span class="changelog-date">24 Jul 2026</span>
+        </div>
+        <h3>Expo config, EAS build, OTA pipeline, multi-server prep, image gen fix, performance</h3>
+        <div class="cl-group">
+          <ul>
+            <li>Expo project initialization and configuration</li>
+            <li>EAS Build + OTA update pipeline</li>
+            <li>Multi-server support prep in Connect flow</li>
+            <li>Auto-pin runtimeVersion for OTA updates</li>
+            <li>Performance optimizations</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v0.7.0 -->
+      <div class="changelog-item cl-old reveal">
+        <div class="changelog-meta">
+          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.7.0</span>
+          <span class="changelog-date">19 Jul 2026</span>
+        </div>
+        <h3>EAS Build, WASM support, ChatShell, internal docs</h3>
+        <div class="cl-group">
+          <ul>
+            <li>EAS Build configuration and OTA updates</li>
+            <li>Metro config for WASM support</li>
+            <li>ChatShell — integrated session switcher + connection status</li>
+            <li>Internal Repowiki documentation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v0.6.0 -->
+      <div class="changelog-item cl-old reveal">
+        <div class="changelog-meta">
+          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.6.0</span>
+          <span class="changelog-date">2 Jul 2026</span>
+        </div>
+        <h3>The foundation — mobile app, gateway, LiquidGlass, tool cards, dashboard, persistence</h3>
+        <div class="cl-group">
+          <ul>
+            <li>Mobile app structure with gateway WebSocket connection</li>
+            <li>LiquidGlass chat architecture + 10 specialized tool cards</li>
+            <li>Dashboard with API client, sync services, sparklines</li>
+            <li>SQLite persistence with background sync</li>
+            <li>Session branching and auto-compress tracking</li>
+            <li>Model selection architecture + hook + UI</li>
+            <li>System control center: env, config, health</li>
+            <li>Profile management with persistent storage</li>
+            <li>Chat workspace + git review with unified diff</li>
+            <li>Subagent list UI, clarify/sudo/secret prompt cards</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- v0.1.0 -->
+      <div class="changelog-item cl-old reveal">
+        <div class="changelog-meta">
+          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.1.0</span>
+          <span class="changelog-date">27 Jun 2026</span>
+        </div>
+        <h3>Initial commit — project scaffold</h3>
+      </div>
+    </div>
+
+    <div class="changelog-toggle">
+      <button id="clToggleBtn" onclick="document.getElementById('clOldWrap').classList.toggle('collapsed');document.getElementById('clOldWrap').classList.toggle('expanded');this.textContent=document.getElementById('clOldWrap').classList.contains('collapsed')?'Show full history ↑':'Show less ↓';">Show full history ↑</button>
     </div>
 
     <div class="changelog-cta">
-      <a href="https://github.com/shilp26/hermes-go/blob/main/CHANGELOG.md" target="_blank" rel="noopener">
-        View full changelog on GitHub →
-      </a>
+      <a href="https://github.com/shilp26/hermes-go/blob/main/CHANGELOG.md" target="_blank" rel="noopener">View full changelog on GitHub →</a>
     </div>
   </div>
 </section>
