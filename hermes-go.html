@@ -600,7 +600,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .trust-hash { margin-top: 22px; padding: 10px 18px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12px; color: var(--subtle); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
 .trust-hash code { color: var(--muted); }
 
-/* Footer */
+/* Changelog */
+.changelog-section { background: var(--surface); border-y: 1px solid var(--border); }
+.changelog-grid { max-width: 920px; margin-inline: auto; }
+.changelog-item { position: relative; padding-left: 32px; border-left: 2px solid var(--border); }
+.changelog-item::before { content: ''; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.changelog-item + .changelog-item { margin-top: 40px; }
+.changelog-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.changelog-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-strong); background: var(--accent-soft); padding: 3px 10px; border-radius: 6px; }
+.changelog-date { font-size: 12px; color: var(--subtle); font-weight: 500; }
+.changelog-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.changelog-item .cl-group { margin-bottom: 16px; }
+.changelog-item .cl-group h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--subtle); margin-bottom: 8px; }
+.changelog-item .cl-group ul { list-style: none; padding: 0; margin: 0; }
+.changelog-item .cl-group li { position: relative; padding-left: 16px; font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 6px; }
+.changelog-item .cl-group li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 2px; background: var(--accent); }
+.changelog-cta { margin-top: 32px; text-align: center; }
+.changelog-cta a { font-size: 13.5px; font-weight: 600; color: var(--accent); }
+.changelog-cta a:hover { color: var(--accent-strong); }
+
+@media (max-width: 768px) {
+  .changelog-item { padding-left: 22px; }
+  .changelog-item + .changelog-item { margin-top: 28px; }
+  .changelog-meta { gap: 8px; }
+}
 .footer { border-top: 1px solid var(--border-hair); padding-block: 44px; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; }
@@ -695,6 +718,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <a href="#screenshots">Screenshots</a>
       <a href="#features">App Map</a>
       <a href="#why-hermes">Why Hermes Go</a>
+      <a href="#changelog">Changelog</a>
       <a href="#connect">1-Click Setup</a>
       <a href="app-map.html">Full App Map</a>
       <a href="#download" class="nav-cta">
@@ -855,8 +879,91 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   </div>
 </section>
 
-<!-- Real screenshots gallery -->
-<!-- App Structure Explorer -->
+<!-- Changelog -->
+<section class="section changelog-section" id="changelog">
+  <div class="container changelog-grid">
+    <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
+    <h2 class="h1" style="text-align:center;margin-bottom:48px">Changelog</h2>
+
+    <!-- Update 2 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">Update 2</span>
+        <span class="changelog-date">10 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA &middot; No new APK</span>
+      </div>
+      <h3>Personality changes, PR badges, and sharper reliability</h3>
+
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>GitHub pull-request badges on session rows — tap to open the PR in your browser</li>
+          <li>Personality switches now show a "personality changed" note in the timeline</li>
+        </ul>
+      </div>
+
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Context ring no longer gets stuck on "—" when a session is rebound</li>
+          <li>Message editing and rewinds stay accurate after model or personality switches</li>
+          <li>Rewind reliability improved — truncations now confirm properly with the gateway</li>
+          <li>Model picker keeps the expanded section in view when scrolling</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Update 1 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">Update 1</span>
+        <span class="changelog-date">10 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA &middot; No new APK</span>
+      </div>
+      <h3>Instant open, slash commands, and full tool cards</h3>
+
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>Instant session open — recent messages pre-loaded in background, paint from cache</li>
+          <li>Native slash commands &mdash; /learn, /goal, and skills intercepted and run properly</li>
+          <li>Multi-photo attachments — select several at once, oversized ones skipped with a summary</li>
+          <li>Cleaner reconnects — duplicate session-resume calls prevented</li>
+          <li>Review scope — point Review at any folder, discover git repos automatically</li>
+          <li>Pin backup — workspace pins restored across profile switches</li>
+        </ul>
+      </div>
+
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Blank browser and vision tool cards — screenshots, analysis, and errors now render fully</li>
+          <li>Context-usage ring loads automatically when a session opens</li>
+          <li>Activity sheet performance — expanding a tool no longer re-renders the entire list</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v1.0.0 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v1.0.0</span>
+        <span class="changelog-date">9 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">First Release</span>
+      </div>
+      <h3>The complete Hermes agent, in your pocket</h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.55">
+        Live streaming, voice, inline media, approvals, subagents, Star Map, system control, multi-server, and zero telemetry — everything desktop does, in a native Android app.
+      </p>
+    </div>
+
+    <div class="changelog-cta">
+      <a href="https://github.com/shilp26/hermes-go/blob/main/CHANGELOG.md" target="_blank" rel="noopener">
+        View full changelog on GitHub →
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- How to Connect & Onboarding Setup Prompt -->
 <section class="section" id="connect">
@@ -967,6 +1074,7 @@ Password: <password></div>
     <div class="footer-links">
       <a href="#screenshots">Screenshots</a>
       <a href="#features">App Map</a>
+      <a href="#changelog">Changelog</a>
       <a href="app-map.html">Full App Map</a>
       <a href="#why-hermes">Why Hermes Go</a>
       <a href="#connect">Connect</a>
