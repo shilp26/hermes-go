@@ -6,6 +6,59 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.0] — Update 2 — 2026-08-10
+
+OTA update. No new APK — installed app self-updates. Same version, same hash.
+
+### Added
+
+#### Sessions
+- **Session PR badges**: GitHub pull-request badges on session rows, tap to open in browser
+
+#### Chat
+- **Personality switch hairlines**: `personality_switch` renders as a muted "personality changed" timeline row (desktop parity)
+
+### Fixed
+
+#### Chat
+- **Context ring stuck on "—" after lineage rebind**: `claimEffectiveSession` rebind (effective ≠ requested) now clears `_liveSessionId` so usage/breakdown re-resume against the leaf instead of the ancestor
+- **Edit ordinals inflated by bookkeeping**: `userOrdinalBefore` now counts only `role=user` rows without `display_kind` — `model_switch` / `personality_switch` no longer inflate edit/restore ordinals
+
+#### Gateway
+- **Edit-truncate confirm flags**: `confirm_truncate=true` now sent with `truncate_before_user_ordinal` (gateway 4029); `confirm_empty_truncate` sent when ordinal is 0 (gateway 4028 / desktop rewind.ts parity)
+
+#### Settings
+- **Model picker scroll**: long provider lists no longer leave the expanded section off-screen; section Y is recorded on layout and scrolled into view
+
+---
+
+## [1.0.0] — Update 1 — 2026-08-10
+
+OTA update. No new APK — installed app self-updates. Same version, same hash.
+
+### Added
+
+#### Sessions
+- **Cold-open prefetch**: newest message page pre-warmed into SQLite so session opens paint from cache instead of blocking on the network
+
+#### Chat
+- **Slash-command interception** (desktop parity): `/learn`, `/goal`, and skill slash-commands are intercepted and dispatched natively — exec, plugin, prefill, skill, and alias modes supported; built-in commands surface in the Skills picker with per-kind icons
+- **Multi-select photo attachments**: composer photo picker now allows multiple photos with ordered selection; oversized images are skipped with a summary alert instead of aborting
+- **Session resume dedup**: one in-flight `session.resume` per gateway client + semantic key prevents duplicate transport calls
+
+#### Workspace
+- **Per-thread Review scope**: Review can now point at a specific folder independent of the agent CWD; "Not a git repository" empty state discovers git repos among subdirectories
+- **Browse-pin prefs backup**: workspace pins are now part of the backup payload and restored across profile switches
+
+### Fixed
+
+#### Chat
+- **Blank tool cards (browser + vision)**: root cause was `unwrapUntrusted` leaving prose preamble after stripping tags → `JSON.parse` returned null and blanked every specialized card; new shared `tool-result-parse.ts` library handles browser, vision, and web tool results with a robust loose JSON parser; cards now render screenshots, analysis, clicked/typed/pressed actions, console errors, and image artifacts
+- **Context-usage auto-load on session open**: idle opens only hydrated HTTP history (no resume) so `_liveSessionId` was missing and auto-load never fired; new `context-usage-autoload.ts` guards auto-load with live-id checks and 300ms post-resume delay
+- **Activity sheet re-rendering all rows on tool expand**: inline `onToggle` closures broke `memo()` on every row; refactored to one stable `useCallback` handler + adaptive progressive mount (batch 4 / 96ms for 40+ tools)
+
+---
+
 ## [1.0.0] — 2026-08-09
 
 First public release. The complete Hermes agent, in your pocket.
