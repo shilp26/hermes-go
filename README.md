@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="splash-icon.png" alt="Hermes Go" width="120" height="120" />
+<img src="assets/splash-icon.png" alt="Hermes Go" width="120" height="120" />
 
 # Hermes Go
 
@@ -235,6 +235,6 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## License
 
-**This repository (the website) is open source.** The Hermes Go application itself is **closed source** — distributed as a signed APK with a published SHA-256 for verification. The APK is provided for personal use; redistribution or modification of the binary is not permitted without written consent.
+**This repository (the website) is open source** under the [MIT License](LICENSE). The Hermes Go application itself is **closed source** — distributed as a signed APK with a published SHA-256 for verification. The APK is provided for personal use; redistribution or modification of the binary is not permitted without written consent.
 
 © 2026 Hermes AI Ecosystem
