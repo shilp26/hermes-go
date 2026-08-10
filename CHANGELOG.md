@@ -13,22 +13,22 @@ OTA update. No new APK — installed app self-updates. Same version, same hash.
 ### Added
 
 #### Sessions
-- **Session PR badges**: GitHub pull-request badges on session rows, tap to open in browser
+- **PR badges**: session rows now show GitHub pull-request badges — tap to open the PR in your browser
 
 #### Chat
-- **Personality switch hairlines**: `personality_switch` renders as a muted "personality changed" timeline row (desktop parity)
+- **Personality changes**: switching your agent's personality now shows a subtle "personality changed" note in the timeline
 
 ### Fixed
 
 #### Chat
-- **Context ring stuck on "—" after lineage rebind**: `claimEffectiveSession` rebind (effective ≠ requested) now clears `_liveSessionId` so usage/breakdown re-resume against the leaf instead of the ancestor
-- **Edit ordinals inflated by bookkeeping**: `userOrdinalBefore` now counts only `role=user` rows without `display_kind` — `model_switch` / `personality_switch` no longer inflate edit/restore ordinals
+- **Context ring**: no longer gets stuck on "—" when a session is rebound to its parent or child thread — usage and context breakdown now resume correctly
+- **Message editing**: rewinds and edits stay accurate even after model or personality switches in the thread
 
 #### Gateway
-- **Edit-truncate confirm flags**: `confirm_truncate=true` now sent with `truncate_before_user_ordinal` (gateway 4029); `confirm_empty_truncate` sent when ordinal is 0 (gateway 4028 / desktop rewind.ts parity)
+- **Rewind reliability**: message truncation and rewinds now confirm properly with the gateway, matching desktop behavior
 
 #### Settings
-- **Model picker scroll**: long provider lists no longer leave the expanded section off-screen; section Y is recorded on layout and scrolled into view
+- **Model picker**: long provider lists keep the expanded section in view when scrolling — no more losing the open group off-screen
 
 ---
 
@@ -39,23 +39,23 @@ OTA update. No new APK — installed app self-updates. Same version, same hash.
 ### Added
 
 #### Sessions
-- **Cold-open prefetch**: newest message page pre-warmed into SQLite so session opens paint from cache instead of blocking on the network
+- **Instant open**: recent messages are pre-loaded in the background, so opening a session paints from cache instead of waiting on the network
 
 #### Chat
-- **Slash-command interception** (desktop parity): `/learn`, `/goal`, and skill slash-commands are intercepted and dispatched natively — exec, plugin, prefill, skill, and alias modes supported; built-in commands surface in the Skills picker with per-kind icons
-- **Multi-select photo attachments**: composer photo picker now allows multiple photos with ordered selection; oversized images are skipped with a summary alert instead of aborting
-- **Session resume dedup**: one in-flight `session.resume` per gateway client + semantic key prevents duplicate transport calls
+- **Native slash commands**: `/learn`, `/goal`, and skill commands are now intercepted and run as real commands with proper output — no more sending them as plain text; built-in commands appear at the top of the Skills picker with their own icons
+- **Multi-photo attachments**: attach several photos at once; oversized images are skipped with a summary instead of aborting the whole send
+- **Cleaner reconnects**: duplicate session-resume calls are prevented, so reconnecting is faster and more reliable
 
 #### Workspace
-- **Per-thread Review scope**: Review can now point at a specific folder independent of the agent CWD; "Not a git repository" empty state discovers git repos among subdirectories
-- **Browse-pin prefs backup**: workspace pins are now part of the backup payload and restored across profile switches
+- **Review scope**: Review can now point at a specific folder — independent of where the agent is working; if a folder isn't a git repo, Review finds nearby git repos and lets you pick one
+- **Pin backup**: workspace pins are backed up and restored across profile switches
 
 ### Fixed
 
 #### Chat
-- **Blank tool cards (browser + vision)**: root cause was `unwrapUntrusted` leaving prose preamble after stripping tags → `JSON.parse` returned null and blanked every specialized card; new shared `tool-result-parse.ts` library handles browser, vision, and web tool results with a robust loose JSON parser; cards now render screenshots, analysis, clicked/typed/pressed actions, console errors, and image artifacts
-- **Context-usage auto-load on session open**: idle opens only hydrated HTTP history (no resume) so `_liveSessionId` was missing and auto-load never fired; new `context-usage-autoload.ts` guards auto-load with live-id checks and 300ms post-resume delay
-- **Activity sheet re-rendering all rows on tool expand**: inline `onToggle` closures broke `memo()` on every row; refactored to one stable `useCallback` handler + adaptive progressive mount (batch 4 / 96ms for 40+ tools)
+- **Blank tool cards**: browser and vision tool results no longer show as empty cards — screenshots, analysis, actions taken, and errors now render fully
+- **Context usage on open**: the context-window usage ring now loads automatically when a session opens (previously it only appeared after a manual refresh)
+- **Activity sheet performance**: expanding a tool no longer re-renders the entire list — smooth even with 40+ tools in a session
 
 ---
 
