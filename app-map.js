@@ -132,6 +132,7 @@ const LUCIDE = {
   qr: `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M14 21h3"/><path d="M21 14v3"/><path d="M21 21h.01"/>`,
   table: `<path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/>`,
   share2: `<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>`,
+  cloud: `<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>`,
 };
 
 /* ── Map by hub key (used in landing explorer + app map rail + app map detail) ── */
@@ -165,6 +166,9 @@ const SEGMENT_ICONS = {
   'Subagents': LUCIDE.gitBranch,
   'Composer tools': LUCIDE.paperclip,
   'Share from other apps': LUCIDE.share2,
+  'Cloud': LUCIDE.cloud,
+  'Feedback & info': LUCIDE.messageSquareText,
+  'Files': LUCIDE.folder,
 
   // Sessions
   'Inbox': LUCIDE.inbox,
@@ -253,6 +257,25 @@ const FEATURE_ICONS = {
 
   // Chat — Live streaming links
   'Tappable links': LUCIDE.link2,
+
+  // Connect — Cloud
+  'Cloud sign-in': LUCIDE.cloud,
+  'Cookie reconnect': LUCIDE.refreshCw,
+
+  // Settings — Feedback & info
+  'Feedback': LUCIDE.messageSquareText,
+  'What\u2019s New': LUCIDE.bell,
+  'Backup preview': LUCIDE.listChecks,
+
+  // Work — Files
+  'File browser': LUCIDE.folder,
+  '@file chips': LUCIDE.fileText,
+  '@folder chips': LUCIDE.folder,
+  'Stable pins': LUCIDE.refreshCw,
+
+  // Brain — Skills
+  'Open & edit': LUCIDE.pencil,
+  'Invocation chips': LUCIDE.sparkle,
 
   // Chat — Composer tools
   'Attachments': LUCIDE.paperclip,
@@ -594,6 +617,8 @@ const HUB_MAP = [
         label: 'Skills', desc: 'Enable & manage agent skills',
         features: [
           { name: 'Skill list', desc: 'Every installed skill with enable toggle', where: 'Brain · Skills' },
+          { name: 'Open & edit', desc: 'Edit skills from the Skills hub or skill tool cards', where: 'Brain · Skills' },
+          { name: 'Invocation chips', desc: 'Skill calls appear in history as chips, not expanded text', where: 'Chat · history' },
         ],
       },
       {
@@ -658,6 +683,15 @@ const HUB_MAP = [
           { name: 'Board', desc: 'Tasks in columns, live updates', where: 'Work · Kanban' },
         ],
       },
+      {
+        label: 'Files', desc: 'Browse host files · @file chips',
+        features: [
+          { name: 'File browser', desc: 'Browse the agent host filesystem from the phone', where: 'Work · Files' },
+          { name: '@file chips', desc: 'Long-press a file to drop an @file chip into the composer without replacing your draft', where: 'Work · Files' },
+          { name: '@folder chips', desc: 'Long-press a folder to reference it inline', where: 'Work · Files' },
+          { name: 'Stable pins', desc: 'Browse pins and Review scopes survive cold start, reinstall, and backup', where: 'Work · Files' },
+        ],
+      },
     ],
   },
   {
@@ -681,6 +715,13 @@ const HUB_MAP = [
         features: [
           { name: 'Pairing requests', desc: 'Approve or reject new user devices', where: 'Connect · Pairing' },
           { name: 'QR provisioning', desc: 'Scan to pair a new device', where: 'Connect · Pairing' },
+        ],
+      },
+      {
+        label: 'Cloud', desc: 'Hermes Cloud · portal sign-in',
+        features: [
+          { name: 'Cloud sign-in', desc: 'Sign in with the portal, pick your org and agent', where: 'Connect · Cloud' },
+          { name: 'Cookie reconnect', desc: 'Stays connected without re-entering credentials', where: 'Connect · Cloud' },
         ],
       },
     ],
@@ -762,6 +803,14 @@ const HUB_MAP = [
         label: 'Profile', desc: 'Active profile',
         features: [
           { name: 'Active profile', desc: 'Which profile the app is connected as', where: 'Settings · Profile' },
+        ],
+      },
+      {
+        label: 'Feedback & info', desc: 'Feedback · What\u2019s New · backup preview',
+        features: [
+          { name: 'Feedback', desc: 'Submit bug, feature, improvement, or question with screenshots and status tracking', where: 'Settings · Feedback' },
+          { name: 'What\u2019s New', desc: 'Release notes in-app, product version in the footer', where: 'Settings · What\u2019s New' },
+          { name: 'Backup preview', desc: 'See what a prefs restore brings back before accepting', where: 'Settings · Backup' },
         ],
       },
     ],

@@ -8,7 +8,7 @@
 
 A native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.nousresearch.com). One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.
 
-`v1.0.3` · Android APK · Closed Source · Zero Telemetry
+`v1.0.4` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -46,7 +46,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 41 segments, 106 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 44 segments, 117 features" width="100%">
 </p>
 
 ### Surfaces
@@ -56,13 +56,13 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 | **Dashboard** | 6 | 12 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
 | **Chat** | 8 | 38 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
 | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
-| **Brain** | 7 | 14 | Models, skills, tools, memory, Star Map, MCP, plugins |
-| **Work** | 3 | 7 | Artifacts browser, cron jobs, kanban board |
-| **Connect** | 3 | 3 | Channels, webhooks, pairing |
+| **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
+| **Work** | 4 | 11 | Artifacts browser, cron jobs, kanban board, host files |
+| **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
 | **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
-| **Settings** | 4 | 7 | Servers, connection, appearance, profile |
+| **Settings** | 5 | 8 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 8 surfaces · 41 segments · 106 features**
+**Total: 8 surfaces · 44 segments · 117 features**
 
 > Full interactive map: [app-map.html](app-map.html)
 
@@ -72,7 +72,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.3](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (170 MB)
+[Download Hermes Go v1.0.4](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (170 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
