@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.4] — 2026-08-11
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### Connect
+- **Hermes Cloud**: sign in with the portal, pick your organization and agent — cookie-based reconnect keeps you connected; the self-hosted password flow is unchanged
+
+#### Settings
+- **Feedback**: submit a bug, feature idea, improvement, or question with optional screenshots, and track its status
+- **What's New**: browse release notes right in the app; the product version is shown in the footer
+- **Backup preview**: see exactly what a mobile preferences backup will restore — folders, filters, workspace pins, appearance — before you accept it
+
+#### Workspace
+- **@file and @folder chips**: long-press a file or folder in Workspace → Files to drop it into the composer without replacing your draft
+
+#### Skills
+- **Open and edit skills** from the Skills hub and from skill tool cards; skill invocations appear in history as neat chips instead of expanded model text
+
+### Fixed
+
+#### Workspace
+- **Pins and scopes survive**: Files browse pins and Review scopes now live on stable session ids — they survive cold start, reinstall, and backup restore, and sync with client prefs
+- **Git badge accuracy**: the header git dirty badge now aligns with the Review scope path when one is set
+
+---
+
 ## [1.0.3] — 2026-08-11
 
 OTA update — the installed app self-updates.
