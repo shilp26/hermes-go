@@ -131,6 +131,7 @@ const LUCIDE = {
   dot: `<circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>`,
   qr: `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M14 21h3"/><path d="M21 14v3"/><path d="M21 21h.01"/>`,
   table: `<path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/>`,
+  share2: `<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>`,
 };
 
 /* ── Map by hub key (used in landing explorer + app map rail + app map detail) ── */
@@ -163,6 +164,7 @@ const SEGMENT_ICONS = {
   'Queue & steer': LUCIDE.arrowUpDown,
   'Subagents': LUCIDE.gitBranch,
   'Composer tools': LUCIDE.paperclip,
+  'Share from other apps': LUCIDE.share2,
 
   // Sessions
   'Inbox': LUCIDE.inbox,
@@ -242,6 +244,15 @@ const FEATURE_ICONS = {
   // Chat — Subagents
   'Subagent list': LUCIDE.gitBranch,
   'Async delegation': LUCIDE.gitBranch,
+
+  // Chat — Share from other apps
+  'Send to chat': LUCIDE.share2,
+  'Destination picker': LUCIDE.folder,
+  'Stage in composer': LUCIDE.pencil,
+  'Size guard': LUCIDE.shield,
+
+  // Chat — Live streaming links
+  'Tappable links': LUCIDE.link2,
 
   // Chat — Composer tools
   'Attachments': LUCIDE.paperclip,
@@ -463,6 +474,7 @@ const HUB_MAP = [
           { name: 'Markdown', desc: 'Headers, lists, emphasis in messages', where: 'Chat · thread' },
           { name: 'Tables', desc: 'GFM tables with horizontal scroll', where: 'Chat · thread' },
           { name: 'Code blocks', desc: 'Syntax-highlighted with copy button', where: 'Chat · thread' },
+          { name: 'Tappable links', desc: 'Bare http(s) links open on tap — even inside code blocks', where: 'Chat · message' },
           { name: 'Context ring', desc: 'Live context window usage', where: 'Chat · header' },
         ],
       },
@@ -508,6 +520,15 @@ const HUB_MAP = [
         features: [
           { name: 'Subagent list', desc: 'Live thoughts and tool calls of delegated workers', where: 'Chat · thread' },
           { name: 'Async delegation', desc: 'Background tasks keep running, status shown inline', where: 'Chat · thread' },
+        ],
+      },
+      {
+        label: 'Share from other apps', desc: 'Send files & links into chat',
+        features: [
+          { name: 'Send to chat', desc: 'Share images, PDFs, Word/Excel, text, or links from any app straight into Hermes', where: 'OS share · Send to chat' },
+          { name: 'Destination picker', desc: 'Folders, starred sessions, search, or a new chat', where: 'Send to chat · picker' },
+          { name: 'Stage in composer', desc: 'Never auto-sends — merges with whatever is already drafted', where: 'Composer · staged' },
+          { name: 'Size guard', desc: 'Shares over 25 MB rejected with a clear message before upload', where: 'Send to chat · upload' },
         ],
       },
       {

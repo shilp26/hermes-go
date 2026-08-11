@@ -46,7 +46,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 40 segments, 101 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 41 segments, 106 features" width="100%">
 </p>
 
 ### Surfaces
@@ -54,7 +54,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 | Surface | Segments | Features | What it does |
 |---|---|---|---|
 | **Dashboard** | 6 | 12 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
-| **Chat** | 7 | 33 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, composer tools |
+| **Chat** | 8 | 38 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
 | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | **Brain** | 7 | 14 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | **Work** | 3 | 7 | Artifacts browser, cron jobs, kanban board |
@@ -62,7 +62,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 | **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
 | **Settings** | 4 | 7 | Servers, connection, appearance, profile |
 
-**Total: 8 surfaces · 40 segments · 101 features**
+**Total: 8 surfaces · 41 segments · 106 features**
 
 > Full interactive map: [app-map.html](app-map.html)
 
