@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Hermes Go — a mobile client for your remote self-hosted Hermes AI agent. Connect via local network or Tailscale to port 9119.">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FAFAFA">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -24,10 +24,10 @@
 /* ── Dual-theme tokens (light-first, Linear-grade) ── */
 :root,
 :root[data-theme="light"] {
-  --bg: #FFFFFF;
-  --bg-soft: #FFFFFF;
+  --bg: #FAFAFA;
+  --bg-soft: #F5F5F7;
   --surface: #FFFFFF;
-  --surface-muted: #FFFFFF;
+  --surface-muted: #F2F2F7;
   --surface-elevated: #FFFFFF;
   --surface-glass: rgba(255, 255, 255, 0.86);
   --fg: #0A0A0F;
@@ -60,8 +60,8 @@
   --shadow-phone: 0 24px 60px rgba(15, 23, 42, 0.10), 0 6px 16px rgba(15, 23, 42, 0.06);
   --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.04);
   --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
-  --nav-bg: rgba(255, 255, 255, 0.84);
-  --section-alt: #FFFFFF;
+  --nav-bg: rgba(250, 250, 250, 0.84);
+  --section-alt: #F5F5F7;
   --feature-card-hover: #F9F9FB;
   --phone-bezel: #1A1F2E;
   --phone-bezel-ring: #0A0A0F;
@@ -130,7 +130,7 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
 /* ── Typography scale ── */
-.display { font-size: clamp(40px, 6vw, 76px); font-weight: 800; line-height: 1.02; letter-spacing: -0.04em; }
+.display { font-size: clamp(38px, 5.5vw, 68px); font-weight: 800; line-height: 1.05; letter-spacing: -0.035em; }
 .h1 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; }
 .h2 { font-size: clamp(22px, 2.8vw, 30px); font-weight: 700; line-height: 1.18; letter-spacing: -0.015em; }
 .h3 { font-size: clamp(17px, 2vw, 21px); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
@@ -141,526 +141,82 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ── Layout ── */
 .container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 32px; }
-.section { padding-block: 64px; }
-@media (max-width: 768px) { .section { padding-block: 40px; } .container { padding-inline: 20px; } }
+.section { padding-block: 100px; }
+@media (max-width: 768px) { .section { padding-block: 60px; } .container { padding-inline: 20px; } }
 
 /* ── Skip link ── */
 .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--accent-contrast); padding: 8px 16px; font-weight: 600; font-size: 14px; border-radius: 0 0 6px 0; z-index: 200; transition: top 0.2s; }
 .skip-link:focus { top: 0; }
 
 /* ── Navigation ── */
-.nav {
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 100;
-  background: var(--nav-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-hair);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.nav.scrolled {
-  border-bottom-color: var(--border);
-  box-shadow: 0 1px 0 var(--border-hair), 0 4px 20px rgba(15, 23, 42, 0.05);
-}
-:root[data-theme="dark"] .nav.scrolled {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-.nav-inner {
-  position: relative;
-  z-index: 101;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  height: 64px;
-}
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--fg);
-  flex-shrink: 0;
-  transition: opacity 0.2s;
-}
-.nav-logo:hover { opacity: 0.85; }
-.nav-logo-img { width: 36px; height: 36px; object-fit: contain; }
-.nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-.nav-logo-name { font-weight: 800; font-size: 18px; letter-spacing: -0.025em; }
-.nav-logo-sub { font-size: 8.5px; font-weight: 600; color: var(--subtle); letter-spacing: 0.02em; margin-top: 1px; }
-.nav-center {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.nav-group {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 4px;
-  border-radius: 10px;
-  border: 1px solid var(--border-hair);
-  background: var(--surface);
-}
-.nav-link {
-  position: relative;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--subtle);
-  padding: 7px 12px;
-  border-radius: 7px;
-  transition: color 0.2s, background 0.2s;
-  white-space: nowrap;
-}
-.nav-link:hover { color: var(--fg); background: var(--surface-muted); }
-.nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.nav-link.is-active {
-  color: var(--accent-strong);
-  background: var(--accent-soft);
-}
-.nav-link-ext {
-  margin-left: 4px;
-  padding: 7px 12px;
-  border-radius: 7px;
-  border: 1px solid transparent;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-}
-.nav-link-ext:hover {
-  color: var(--fg);
-  border-color: var(--border);
-  background: var(--surface);
-}
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-.nav-cta {
-  background: var(--accent);
-  color: var(--accent-contrast);
-  padding: 9px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.005em;
-  transition: transform 0.15s, box-shadow 0.2s;
-  min-height: 40px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.025em; color: var(--fg); }
+.nav-logo-img { width: 34px; height: 34px; object-fit: contain; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--fg); }
+.nav-cta { background: var(--accent); color: var(--accent-contrast); padding: 11px 20px; border-radius: 8px; font-size: 13.5px; font-weight: 700; letter-spacing: 0.005em; transition: transform 0.15s, box-shadow 0.2s; min-height: 40px; display: inline-flex; align-items: center; gap: 7px; }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--accent-soft); }
-.nav-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .nav-cta svg { width: 15px; height: 15px; }
-.theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-  flex-shrink: 0;
-}
+.theme-toggle { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color 0.2s, border-color 0.2s, background 0.2s; }
 .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
-.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .theme-toggle svg { width: 16px; height: 16px; }
 .theme-toggle .sun { display: none; }
 :root[data-theme="light"] .theme-toggle .sun { display: block; }
 :root[data-theme="light"] .theme-toggle .moon { display: none; }
-.mobile-menu-btn {
-  display: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  align-items: center;
-  justify-content: center;
-  color: var(--fg);
-  flex-shrink: 0;
-  transition: border-color 0.2s, background 0.2s;
-}
-.mobile-menu-btn:hover { border-color: var(--accent); }
-.mobile-menu-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mobile-menu-btn svg { width: 20px; height: 20px; transition: transform 0.25s, opacity 0.25s; }
-.mobile-menu-btn .icon-close { display: none; }
-.mobile-menu-btn[aria-expanded="true"] .icon-menu { display: none; }
-.mobile-menu-btn[aria-expanded="true"] .icon-close { display: block; }
-@media (max-width: 900px) {
-  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .nav.scrolled { box-shadow: none; }
-  .nav-inner { height: 56px; }
-  .theme-toggle,
-  .mobile-menu-btn {
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: transparent;
-    border-radius: 0;
-    color: var(--fg);
-  }
-  .theme-toggle:hover,
-  .mobile-menu-btn:hover { color: var(--muted); border: none; }
-  .nav-actions { gap: 0; position: relative; z-index: 2; }
-  .nav-logo { position: relative; z-index: 2; }
-  .nav-center {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    position: fixed;
-    inset: 0;
-    top: 0;
-    padding: calc(56px + env(safe-area-inset-top, 0px)) 0 calc(24px + env(safe-area-inset-bottom, 0px));
-    background: var(--bg);
-    border: none;
-    box-shadow: none;
-    max-height: none;
-    overflow-y: auto;
-    z-index: 1;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-  }
-  .nav-center.open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .nav-center { transition: none; }
-  }
-  .nav-group {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 0 24px;
-    border: none;
-    background: transparent;
-  }
-  .nav-link {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--fg);
-    padding: 18px 0;
-    min-height: 0;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid var(--border-hair);
-    background: transparent;
-  }
-  .nav-link:hover { background: transparent; color: var(--muted); }
-  .nav-link.is-active {
-    color: var(--fg);
-    font-weight: 600;
-    background: transparent;
-    padding-left: 0;
-    border-left: none;
-  }
-  .nav-link-ext {
-    margin: 0;
-    padding: 18px 24px 0;
-    min-height: 0;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--subtle);
-  }
-  .nav-link-ext:hover { color: var(--fg); background: transparent; border: none; }
-  .nav-cta-desktop { display: none; }
-  .mobile-menu-btn { display: flex; }
+.mobile-menu-btn { display: none; padding: 10px; line-height: 1; border-radius: 6px; min-width: 44px; min-height: 44px; color: var(--fg); order: 10; }
+.theme-toggle { order: 11; }
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; gap: 14px; position: absolute; top: 62px; left: 0; right: 0; background: var(--bg); padding: 20px 24px; border-bottom: 1px solid var(--border); }
+  .nav-links.open { display: flex; }
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
 }
 
 /* ── Hero Section ── */
-.hero {
-  position: relative;
-  padding-top: calc(72px + 24px);
-  padding-bottom: 80px;
-  overflow: hidden;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 30%, var(--accent-soft) 0%, transparent 58%),
-    radial-gradient(ellipse 45% 35% at 10% 80%, rgba(20, 184, 166, 0.04) 0%, transparent 50%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(var(--border-hair) 1px, transparent 1px), linear-gradient(90deg, var(--border-hair) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, rgba(0,0,0,0.3) 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, rgba(0,0,0,0.3) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 64px;
-  align-items: center;
-}
-.hero-copy { max-width: 600px; }
-.hero-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.hero-meta .changelog-badge { display: inline-flex; align-items: center; gap: 6px; }
-.hero-meta .changelog-badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
+.hero { min-height: auto; display: flex; align-items: center; position: relative; padding-top: 72px; padding-bottom: 40px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border-hair); background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse-dot 2s ease-in-out infinite; }
 @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
 .hero h1 { margin-bottom: 20px; }
-.hero-lead {
-  font-size: 18px;
-  line-height: 1.65;
-  color: var(--muted);
-  max-width: 50ch;
-  margin-bottom: 36px;
-}
-.hero-lead code { font-size: 0.88em; }
-.hero-highlights {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.hero-highlights li {
-  position: relative;
-  padding-left: 20px;
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.55;
-}
-.hero-highlights li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 9px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-.hero-highlights strong { color: var(--fg); font-weight: 700; }
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.hero-footnote {
-  margin-top: 18px;
-  font-size: 12px;
-  color: var(--subtle);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.hero-footnote::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; letter-spacing: 0.01em; transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s, background-color 0.15s, border-color 0.15s; touch-action: manipulation; }
+.hero p { max-width: 54ch; margin-bottom: 28px; }
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 26px; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.01em; transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s, background-color 0.15s; touch-action: manipulation; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0) scale(0.98); }
-.btn-primary { background: var(--accent); color: var(--accent-contrast); box-shadow: 0 4px 16px var(--accent-soft); }
-.btn-primary:hover { box-shadow: 0 12px 32px var(--accent-soft); }
+.btn-primary { background: var(--accent); color: var(--accent-contrast); }
+.btn-primary:hover { box-shadow: 0 8px 24px var(--accent-soft); }
 .btn-secondary { background: var(--surface-elevated); color: var(--fg); border: 1px solid var(--border-strong); }
 .btn-secondary:hover { border-color: var(--accent); }
 .btn svg { width: 18px; height: 18px; }
+
+/* Hero visual — real chat screenshot */
 .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-.hero-device { position: relative; width: min(340px, 100%); }
-.hero-device-card {
-  position: relative;
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 32px 64px rgba(15, 23, 42, 0.10);
-  overflow: hidden;
-}
-:root[data-theme="dark"] .hero-device-card {
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 32px 64px rgba(0, 0, 0, 0.4);
-}
 .hero-shot {
-  width: 100%;
-  max-height: 500px;
+  width: min(340px, 100%);
+  border-radius: 24px;
   overflow: hidden;
-  background: var(--surface);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-.hero-shot img {
-  width: 100%;
-  height: auto;
-  max-height: 500px;
-  display: block;
-  object-fit: contain;
-  object-position: top center;
-}
-.hero-device-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-}
-.hero-device-caption .shot-label { font-size: 13px; font-weight: 700; color: var(--fg); }
-.hero-device-caption .shot-where {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--subtle);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.hero-device-float {
-  position: absolute;
-  top: -16px;
-  right: -14px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border-radius: 10px;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-phone);
   background: var(--surface);
-  box-shadow: 0 4px 16px rgba(15,23,42,0.08);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--fg);
-  white-space: nowrap;
 }
-.hero-device-float .status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--success);
-  box-shadow: 0 0 0 3px var(--success-soft);
-  animation: live-pulse 1.8s ease-in-out infinite;
-}
-.hero-enter {
-  opacity: 0;
-  transform: translateY(16px);
-  animation: hero-rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.hero-copy .hero-enter:nth-child(1) { animation-delay: 0.05s; }
-.hero-copy .hero-enter:nth-child(2) { animation-delay: 0.12s; }
-.hero-copy .hero-enter:nth-child(3) { animation-delay: 0.19s; }
-.hero-copy .hero-enter:nth-child(4) { animation-delay: 0.26s; }
-.hero-copy .hero-enter:nth-child(5) { animation-delay: 0.33s; }
-.hero-copy .hero-enter:nth-child(6) { animation-delay: 0.40s; }
-.hero-visual.hero-enter { animation-delay: 0.28s; }
-@keyframes hero-rise { to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .hero-enter { opacity: 1; transform: none; animation: none; }
-  .hero-meta .changelog-badge::before,
-  .hero-device-float .status-dot { animation: none; }
-}
+.hero-shot img { width: 100%; height: auto; display: block; object-fit: contain; }
+
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-copy { max-width: none; margin-inline: auto; }
-  .hero-meta { justify-content: center; }
-  .hero-lead { margin-inline: auto; }
-  .hero-highlights { text-align: left; max-width: 440px; margin-inline: auto; }
+  .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+  .hero p { margin-inline: auto; }
   .hero-actions { justify-content: center; }
-  .hero-footnote { justify-content: center; }
-  .hero-device { width: min(300px, 100%); }
-  .hero-shot, .hero-shot img { max-height: 420px; }
-  .hero-device-float { right: 4px; top: -14px; }
+  .hero-shot { width: min(300px, 100%); }
 }
 
-/* ── Metrics Strip (editorial spine — echoes changelog/hero timeline) ── */
-.metrics-strip { background: var(--surface); border-bottom: 1px solid var(--border); padding-block: 36px; }
-.metrics-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 22px; flex-wrap: wrap; }
-.metrics-head .caption { color: var(--accent); }
-.metrics-head h2 { font-size: clamp(20px, 2.6vw, 26px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: var(--fg); }
-.metrics-head-r { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: var(--subtle); }
-.metrics-head-r .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); animation: live-pulse 1.8s ease-in-out infinite; flex-shrink: 0; }
-
-.metrics-spine { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-.metrics-spine::before {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; top: 13px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 50%, var(--border) 100%);
-  z-index: 0;
-}
-.metric-node { position: relative; padding: 0 18px; z-index: 1; }
-.metric-node:not(:first-child) { border-left: 1px solid var(--border-hair); }
-.metric-mark { position: relative; width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--accent); margin-bottom: 16px; box-shadow: 0 0 0 5px var(--surface); transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s; }
-.metric-node:hover .metric-mark { transform: scale(1.12); box-shadow: 0 0 0 5px var(--surface), 0 0 0 7px var(--accent-soft); }
-.metric-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-strong); background: var(--accent-soft); padding: 3px 9px; border-radius: 5px; margin-bottom: 10px; }
-.metric-val { font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; color: var(--fg); line-height: 1.05; letter-spacing: -0.03em; }
-.metric-val .accent { color: var(--accent); }
-.metric-lbl { font-size: 13px; font-weight: 600; color: var(--muted); margin-top: 8px; line-height: 1.4; }
-.metric-note { font-size: 11.5px; color: var(--subtle); margin-top: 6px; line-height: 1.45; }
-
-@media (max-width: 768px) {
-  .metrics-strip { padding-block: 24px; }
-  .metrics-head { margin-bottom: 16px; }
-  .metrics-spine { grid-template-columns: 1fr 1fr; gap: 0; }
-  .metrics-spine::before { display: none; }
-  .metric-node { padding: 12px 14px; }
-  .metric-node:not(:first-child) { border-left: 1px solid var(--border-hair); }
-  .metric-node:nth-child(3) { border-top: 1px solid var(--border-hair); }
-  .metric-node:nth-child(4) { border-top: 1px solid var(--border-hair); }
-  .metric-node:nth-child(odd) { border-left: none; }
-  .metric-mark { width: 22px; height: 22px; font-size: 9px; margin-bottom: 8px; box-shadow: 0 0 0 4px var(--surface); }
-  .metric-badge { font-size: 9px; padding: 2px 7px; margin-bottom: 6px; }
-  .metric-val { font-size: 22px; }
-  .metric-lbl { font-size: 12px; margin-top: 4px; }
-  .metric-note { font-size: 10.5px; margin-top: 4px; }
-}
-
-/* Authored entrance — staggered draw, not a uniform fade */
-@keyframes metric-draw { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.metrics-strip.in .metric-node { animation: metric-draw 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-.metrics-strip.in .metric-node:nth-child(1) { animation-delay: 0.04s; }
-.metrics-strip.in .metric-node:nth-child(2) { animation-delay: 0.12s; }
-.metrics-strip.in .metric-node:nth-child(3) { animation-delay: 0.20s; }
-.metrics-strip.in .metric-node:nth-child(4) { animation-delay: 0.28s; }
-@keyframes spine-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-.metrics-strip.in .metrics-spine::before { transform-origin: left center; animation: spine-draw 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-@media (max-width: 768px) { .metrics-strip.in .metrics-spine::before { transform-origin: top center; animation-name: spine-draw; } }
-@media (prefers-reduced-motion: reduce) {
-  .metrics-strip.in .metric-node, .metrics-strip.in .metrics-spine::before { animation: none; }
-}
+/* ── Metrics Counter Strip ── */
+.metrics-strip { background: var(--surface); border-y: 1px solid var(--border); padding-block: 28px; }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+@media (max-width: 768px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+.metric-val { font-size: 32px; font-weight: 800; color: var(--accent); line-height: 1.1; letter-spacing: -0.02em; }
+.metric-lbl { font-size: 12px; font-weight: 600; color: var(--subtle); margin-top: 4px; }
 
 /* ── iPhone Frame Component (Shared) ── */
 .phone {
@@ -879,51 +435,40 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .session-time { font-size: 10px; color: var(--subtle); flex-shrink: 0; font-weight: 500; }
 
 /* ── App Structure Explorer ── */
-.features-intro { text-align: center; margin-bottom: 32px; }
+.features-intro { text-align: center; margin-bottom: 48px; }
 .features-intro .caption { color: var(--accent); margin-bottom: 14px; }
 .app-explorer {
-  display: grid; grid-template-columns: 232px 1fr;
+  display: grid; grid-template-columns: 224px 1fr;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
   min-height: 440px;
 }
-.hub-rail { display: flex; flex-direction: column; gap: 2px; padding: 12px 10px; border-right: 1px solid var(--border-hair); background: var(--surface-muted); }
+.hub-rail { display: flex; flex-direction: column; gap: 4px; padding: 14px 10px; border-right: 1px solid var(--border-hair); background: var(--surface-muted); }
 .hub-rail-btn {
-  position: relative;
   display: flex; align-items: center; gap: 11px;
-  padding: 10px 12px 10px 14px; border-radius: 9px;
+  padding: 11px 12px; border-radius: 10px;
   font-size: 13.5px; font-weight: 600; color: var(--muted);
   transition: background 0.15s, color 0.15s;
   text-align: left; min-height: 44px;
 }
-.hub-rail-btn .hub-idx { font-size: 10.5px; font-weight: 800; color: var(--faint); font-variant-numeric: tabular-nums; width: 16px; flex-shrink: 0; transition: color 0.15s; }
-.hub-rail-btn svg { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.7; transition: opacity 0.15s; }
+.hub-rail-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 .hub-rail-btn:hover { background: var(--feature-card-hover); color: var(--fg); }
-.hub-rail-btn:hover .hub-idx { color: var(--subtle); }
-.hub-rail-btn:hover svg { opacity: 1; }
 .hub-rail-btn.active { background: var(--accent-soft); color: var(--accent); }
-.hub-rail-btn.active .hub-idx { color: var(--accent); }
-.hub-rail-btn.active svg { opacity: 1; color: var(--accent); }
-.hub-rail-btn.active::before { content: ''; position: absolute; left: 0; top: 9px; bottom: 9px; width: 2.5px; border-radius: 0 2px 2px 0; background: var(--accent); }
 .hub-panel { padding: 30px 34px; overflow-y: auto; max-height: 560px; }
-.hub-panel-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.hub-panel-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.hub-panel-icon svg { width: 21px; height: 21px; }
-.hub-panel-head h3 { margin-bottom: 3px; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
-.hub-panel-head .tag-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.hub-panel-head .caption { color: var(--accent); }
-.hub-panel-count { font-size: 10.5px; font-weight: 700; color: var(--muted); background: var(--surface-muted); border: 1px solid var(--border); padding: 2px 8px; border-radius: 5px; letter-spacing: 0.02em; }
-.hub-segments { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-.seg-item { display: flex; align-items: flex-start; gap: 12px; padding: 13px 14px; border-radius: 10px; transition: background 0.15s; min-height: 50px; border: 1px solid transparent; }
-.seg-item:hover { background: var(--surface-muted); border-color: var(--border-hair); }
-.seg-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.5; flex-shrink: 0; margin-top: 7px; transition: opacity 0.15s, transform 0.15s; }
-.seg-item:hover .seg-dot { opacity: 1; transform: scale(1.15); }
+.hub-panel-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.hub-panel-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hub-panel-icon svg { width: 22px; height: 22px; }
+.hub-panel-head h3 { margin-bottom: 2px; }
+.hub-segments { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.seg-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border-hair); border-radius: 12px; background: var(--bg-soft); transition: border-color 0.15s, background 0.15s; min-height: 52px; }
+.seg-item:hover { border-color: var(--border-strong); background: var(--surface-elevated); }
+.seg-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); opacity: 0.85; flex-shrink: 0; }
 .seg-text { min-width: 0; }
-.seg-label { font-size: 13.5px; font-weight: 700; color: var(--fg); line-height: 1.3; letter-spacing: -0.005em; }
-.seg-desc { font-size: 12px; color: var(--subtle); margin-top: 2px; line-height: 1.45; }
+.seg-label { font-size: 13.5px; font-weight: 700; color: var(--fg); line-height: 1.3; }
+.seg-desc { font-size: 12px; color: var(--subtle); margin-top: 1px; line-height: 1.4; }
 
 /* Segment entrance animation (staggered) */
 @keyframes seg-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -947,92 +492,42 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .explorer-link a:hover { background: var(--accent-soft); }
 .explorer-link svg { width: 15px; height: 15px; }
 
-/* ── Why Hermes Go — editorial pillars ── */
+/* ── Why Hermes Go — Pillars + Face-off ── */
 .why-section { background: var(--surface); border-y: 1px solid var(--border); }
-.why-intro { text-align: center; margin-bottom: 36px; }
+.why-intro { text-align: center; margin-bottom: 56px; }
 .why-intro .caption { color: var(--accent); margin-bottom: 14px; }
-.pillars { display: grid; grid-template-columns: repeat(3, 1fr); }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 64px; }
 .pillar {
-  position: relative;
-  padding: 8px 28px;
-  transition: opacity 0.25s ease;
+  padding: 28px 26px; border-radius: 16px;
+  background: var(--bg-soft); border: 1px solid var(--border-hair);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.2s, background 0.2s;
 }
-.pillar:not(:first-child) { border-left: 1px solid var(--border); }
-.pillar:hover { opacity: 1; }
-.pillars:hover .pillar:not(:hover) { opacity: 0.55; }
-.pillar-ghost {
-  font-size: 56px; font-weight: 800; line-height: 1;
-  color: var(--accent);
-  opacity: 0.12;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-  margin-bottom: 18px;
-  transition: opacity 0.3s ease;
-}
-.pillar:hover .pillar-ghost { opacity: 0.22; }
-.pillar h3 { margin-bottom: 8px; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.22; color: var(--fg); }
-.pillar p { font-size: 13.5px; color: var(--subtle); line-height: 1.6; }
+.pillar:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-elevated); }
+.pillar-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.pillar-icon svg { width: 21px; height: 21px; }
+.pillar h3 { margin-bottom: 6px; }
+.pillar p { font-size: 13.5px; color: var(--subtle); line-height: 1.55; }
 
 /* Scroll-reveal */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-/* ── Screenshots Gallery (editorial — echoes metrics/changelog language) ── */
+/* ── Screenshots Carousel ── */
 .screenshots { background: var(--section-alt); }
-.screenshots-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
-.screenshots-head .caption { color: var(--accent); margin-bottom: 10px; }
-.screenshots-head h2 { font-size: clamp(24px, 3.2vw, 34px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.12; color: var(--fg); }
-.screenshots-head-r { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--subtle); }
-.screenshots-head-r .count-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
-.screenshots-head-r .count-pill .num { color: var(--accent); font-weight: 800; }
-.screenshots-head-r .hint { color: var(--subtle); }
+.screenshots-intro { text-align: center; margin-bottom: 36px; }
+.screenshots-intro .caption { color: var(--accent); margin-bottom: 14px; }
 
-.shot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 8px; }
-.shot-card {
-  position: relative;
-  display: block; width: 100%; text-align: left; font: inherit; color: inherit; padding: 0;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
-  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s, border-color 0.2s;
-  cursor: zoom-in;
-}
+/* Real screenshot gallery — clean cards, mobile-first */
+.shot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+.shot-card { display: block; width: 100%; text-align: left; font: inherit; color: inherit; padding: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; cursor: zoom-in; }
 .shot-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.shot-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
-.shot-frame { position: relative; aspect-ratio: 16 / 10; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.shot-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.shot-frame { position: relative; aspect-ratio: 4 / 3; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .shot-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; object-fit: contain; }
-.shot-index {
-  position: absolute; bottom: 10px; right: 10px; z-index: 2;
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--surface-glass); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800; color: var(--accent); letter-spacing: 0.02em;
-}
-.shot-zoom {
-  position: absolute; bottom: 10px; right: 10px; z-index: 2;
-  display: flex; align-items: center; gap: 5px;
-  padding: 5px 9px; border-radius: 7px;
-  background: var(--surface-glass); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  font-size: 10.5px; font-weight: 700; color: var(--muted);
-  opacity: 0; transform: translateY(4px); transition: opacity 0.2s, transform 0.2s;
-}
-.shot-card:hover .shot-zoom, .shot-card:focus-visible .shot-zoom { opacity: 1; transform: none; }
-.shot-zoom svg { width: 12px; height: 12px; }
 .shot-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-top: 1px solid var(--border); }
-.shot-label { font-size: 13.5px; font-weight: 700; color: var(--fg); letter-spacing: -0.01em; flex-shrink: 0; }
-.shot-where { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; color: var(--accent-strong); background: var(--accent-soft); padding: 3px 8px; border-radius: 5px; white-space: nowrap; font-weight: 600; }
-
-/* Staggered entrance, reuses reveal->in */
-@keyframes shot-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-.shot-grid.in .shot-card { animation: shot-in 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-.shot-grid.in .shot-card:nth-child(1) { animation-delay: 0.04s; }
-.shot-grid.in .shot-card:nth-child(2) { animation-delay: 0.10s; }
-.shot-grid.in .shot-card:nth-child(3) { animation-delay: 0.16s; }
-.shot-grid.in .shot-card:nth-child(4) { animation-delay: 0.22s; }
-.shot-grid.in .shot-card:nth-child(5) { animation-delay: 0.28s; }
-.shot-grid.in .shot-card:nth-child(6) { animation-delay: 0.34s; }
-@media (prefers-reduced-motion: reduce) { .shot-grid.in .shot-card { animation: none; } }
+.shot-label { font-size: 13px; font-weight: 700; color: var(--fg); letter-spacing: -0.005em; }
+.shot-where { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; color: var(--subtle); background: var(--bg-soft); border: 1px solid var(--border); padding: 2px 8px; border-radius: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
 
 /* Lightbox */
 .shot-lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(10,10,15,0.92); display: none; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
@@ -1047,17 +542,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .shot-lightbox-nav svg { width: 20px; height: 20px; }
 .shot-lightbox-nav#shotLightboxPrev { left: 16px; }
 .shot-lightbox-nav#shotLightboxNext { right: 16px; }
-.shot-lightbox-counter { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 12px; font-weight: 700; color: var(--muted); z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
-.shot-lightbox-counter .cur { color: var(--accent); }
 @media (max-width: 600px) {
   .shot-lightbox-nav { width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
   .shot-lightbox-nav#shotLightboxPrev { left: 8px; }
   .shot-lightbox-nav#shotLightboxNext { right: 8px; }
   .shot-lightbox-close { top: 12px; right: 12px; }
-  .shot-lightbox-counter { top: 14px; }
 }
 @media (max-width: 900px) {
-  .shot-grid { grid-template-columns: 1fr; gap: 14px; }
+  .shot-grid { grid-template-columns: 1fr; gap: 12px; }
+  .shot-frame { aspect-ratio: 16 / 10; }
 }
 @media (min-width: 901px) and (max-width: 1200px) {
   .shot-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1076,80 +569,36 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .tool-dot.running { background: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-soft); animation: live-pulse 1s ease-in-out infinite; }
 
 /* ── Sticky Mobile Bottom CTA Bar ── */
-.mobile-sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--surface); border-top: 1px solid var(--border); padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; transform: translateY(100%); transition: transform 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
+.mobile-sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--surface); border-top: 1px solid var(--border); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; transform: translateY(100%); transition: transform 0.3s ease; }
 .mobile-sticky-bar.visible { transform: translateY(0); }
-@media (min-width: 769px) { .mobile-sticky-bar { display: none !important;; } }
-.sticky-bar-brand { display: flex; align-items: center; gap: 8px; }
-.sticky-bar-brand img { width: 24px; height: 24px; object-fit: contain; }
-.sticky-bar-brand span { font-size: 13px; font-weight: 700; color: var(--fg); }
-.sticky-bar-brand .ver { font-size: 10px; color: var(--subtle); font-weight: 500; }
-.sticky-bar-btn { padding: 8px 16px; font-size: 13px; font-weight: 700; border-radius: 8px; }
+@media (min-width: 769px) { .mobile-sticky-bar { display: none !important; } }
 
 /* How to Connect & Onboarding Prompt Box */
 .connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 @media (max-width: 900px) { .connect-grid { grid-template-columns: 1fr; } }
-.setup-spine { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-.setup-spine::before { content: ''; position: absolute; left: 0; right: 0; top: 14px; height: 2px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 50%, var(--border) 100%); z-index: 0; }
-.setup-node { position: relative; padding: 0 18px; z-index: 1; }
-.setup-node:not(:first-child) { border-left: 1px solid var(--border-hair); }
-.setup-mark { position: relative; width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--accent); margin-bottom: 16px; box-shadow: 0 0 0 5px var(--surface); transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s; }
-.setup-node:hover .setup-mark { transform: scale(1.12); box-shadow: 0 0 0 5px var(--surface), 0 0 0 7px var(--accent-soft); }
-.setup-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-strong); background: var(--accent-soft); padding: 3px 9px; border-radius: 5px; margin-bottom: 10px; }
-.setup-lbl { font-size: 14px; font-weight: 700; color: var(--fg); line-height: 1.3; }
-.setup-note { font-size: 12px; color: var(--subtle); margin-top: 6px; line-height: 1.5; }
-@media (max-width: 768px) {
-  .setup-spine { grid-template-columns: 1fr; gap: 0; }
-  .setup-spine::before { left: 13px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: linear-gradient(180deg, var(--accent) 0%, var(--accent-soft) 50%, var(--border) 100%); }
-  .setup-node { padding: 16px 0 16px 32px; }
-  .setup-node:not(:first-child) { border-left: none; border-top: 1px solid var(--border-hair); }
-  .setup-node:last-child { padding-bottom: 0; }
-  .setup-mark { margin-bottom: 12px; }
-}
+.connect-steps { display: flex; flex-direction: column; gap: 24px; }
+.step { display: flex; gap: 18px; }
+.step-num { width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 15px; }
+.step h3 { margin-bottom: 4px; }
+.step p { font-size: 14px; color: var(--subtle); line-height: 1.6; }
 
-.prompt-box-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-.prompt-box-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 12px; }
-.prompt-box-title { font-size: 13px; font-weight: 600; color: var(--subtle); display: flex; align-items: center; gap: 8px; }
-.prompt-box-title svg { width: 14px; height: 14px; color: var(--accent); }
-.copy-prompt-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: transparent; border: 1px solid var(--border-strong); color: var(--subtle); transition: border-color 0.15s, color 0.15s; flex-shrink: 0; }
-.copy-prompt-btn:hover { border-color: var(--accent); color: var(--accent); }
-.copy-prompt-btn.copied { border-color: #16a34a; color: #16a34a; }
-.prompt-code-body { background: var(--code-bg); color: var(--code-text); padding: 14px; border-radius: 8px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 11px; line-height: 1.6; border: 1px solid var(--border); max-height: 440px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
-.prompt-expand-btn { display: none; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px; margin-top: 10px; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--subtle); font-size: 12px; font-weight: 600; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
-.prompt-expand-btn:hover { border-color: var(--accent); color: var(--accent); }
-.prompt-expand-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
-.prompt-box-card.expanded .prompt-expand-btn svg { transform: rotate(180deg); }
-@media (max-width: 768px) {
-  .prompt-box-card:not(.expanded) .prompt-code-body { max-height: 140px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); }
-  .prompt-expand-btn { display: flex; }
-}
+.prompt-box-card { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 16px; padding: 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.prompt-box-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.prompt-box-title { font-size: 14px; font-weight: 700; color: var(--fg); display: flex; align-items: center; gap: 8px; }
+.prompt-box-title svg { width: 16px; height: 16px; color: var(--accent); }
+.copy-prompt-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 6px; background: var(--accent); color: var(--accent-contrast); font-size: 12px; font-weight: 700; transition: transform 0.15s, background 0.15s; }
+.copy-prompt-btn:hover { transform: translateY(-1px); }
+.prompt-code-body { background: var(--code-bg); color: var(--code-text); padding: 14px; border-radius: 10px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 11px; line-height: 1.55; border: 0.5px solid var(--border); max-height: 280px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
 
 /* Trust / Download */
-.trust { background: var(--section-alt); }
-.trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-@media (max-width: 900px) { .trust-grid { grid-template-columns: 1fr; gap: 32px; } }
-.trust-left .caption { margin-bottom: 12px; }
-.trust-left h2 { margin-bottom: 14px; }
-.trust-left .body { color: var(--subtle); margin-bottom: 28px; }
-.trust-badges { display: flex; flex-direction: column; gap: 16px; }
-.trust-badge { display: flex; align-items: center; gap: 14px; }
-.trust-badge-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.trust-badge-icon svg { width: 20px; height: 20px; color: var(--accent); }
-.trust-badge-text { display: flex; flex-direction: column; }
-.trust-badge-text span { font-size: 14px; font-weight: 700; color: var(--fg); }
-.trust-badge-text small { font-size: 12px; color: var(--subtle); margin-top: 1px; }
-
-.download-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; text-align: center; }
-.download-card-icon { width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 16px; overflow: hidden; }
-.download-card-icon img { width: 100%; height: 100%; object-fit: contain; }
-.download-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-.download-card .ver { font-size: 12px; color: var(--subtle); margin-bottom: 18px; }
-.download-card .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
-.download-card .store-note { font-size: 12px; color: var(--subtle); margin-bottom: 16px; }
-.trust-hash { padding: 10px 14px; border-radius: 8px; background: var(--code-bg); border: 1px solid var(--border); font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 11px; color: var(--subtle); display: flex; align-items: center; gap: 8px; cursor: pointer; transition: border-color 0.15s; }
-.trust-hash:hover { border-color: var(--accent); }
-.trust-hash code { color: var(--muted); word-break: break-all; flex: 1; }
-.trust-hash .hash-label { color: var(--accent); font-weight: 700; flex-shrink: 0; }
-.trust-hash .hash-copy { width: 14px; height: 14px; color: var(--subtle); flex-shrink: 0; }
+.trust { background: var(--section-alt); text-align: center; }
+.trust-badges { display: flex; justify-content: center; gap: 36px; margin-bottom: 36px; flex-wrap: wrap; }
+.trust-badge { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.trust-badge svg { width: 28px; height: 28px; color: var(--accent); }
+.trust-badge span { font-size: 13px; font-weight: 700; color: var(--fg); }
+.trust-badge small { font-size: 11px; color: var(--subtle); }
+.trust-hash { margin-top: 22px; padding: 10px 18px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12px; color: var(--subtle); display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+.trust-hash code { color: var(--muted); }
 
 /* Changelog */
 .changelog-section { background: var(--surface); border-y: 1px solid var(--border); }
@@ -1187,80 +636,72 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .changelog-item + .changelog-item { margin-top: 28px; }
   .changelog-meta { gap: 8px; }
 }
-/* Footer */
-.footer { border-top: 1px solid var(--border-hair); padding-block: 36px; }
+.footer { border-top: 1px solid var(--border-hair); padding-block: 44px; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; }
 .footer-logo-img { width: 28px; height: 28px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); object-fit: contain; }
-.footer-links { display: flex; gap: 26px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 26px; }
 .footer-links a { font-size: 14px; color: var(--subtle); transition: color 0.2s; }
 .footer-links a:hover { color: var(--fg); }
-.footer-copy { font-size: 13px; color: var(--subtle); }
-.footer-bottom { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.footer-bottom .footer-links { justify-content: flex-end; }
 
 /* ══ Mobile Responsive Overrides ══ */
 @media (max-width: 768px) {
   .nav { padding-top: env(safe-area-inset-top); }
-  .nav-inner { height: 56px; }
-  .hero { padding-top: calc(64px + 16px + env(safe-area-inset-top)); padding-bottom: 56px; }
-  .display { font-size: clamp(38px, 12vw, 50px); letter-spacing: -0.035em; text-align: center; }
+  .nav-inner { height: 58px; }
+  .nav-links { top: calc(58px + env(safe-area-inset-top)); }
+  .nav-links a { font-size: 16px; padding: 10px 0; min-height: 44px; display: flex; align-items: center; }
+  .nav-cta { text-align: center; justify-content: center; }
+  .hero { min-height: auto; padding-top: calc(72px + env(safe-area-inset-top)); }
+  .display { font-size: clamp(34px, 9vw, 44px); }
   .h1 { font-size: clamp(24px, 7vw, 32px); }
-  .hero-lead { font-size: 16px; margin-bottom: 28px; }
-  .hero-highlights { gap: 12px; margin-bottom: 28px; }
-  .hero-highlights li { font-size: 13.5px; padding-left: 18px; }
-  .section { padding-block: 36px; }
-  .features-intro { margin-bottom: 24px; }
+  .section { padding-block: 56px; }
+  .features-intro { margin-bottom: 36px; }
   .app-explorer { grid-template-columns: 1fr; min-height: 0; }
-  .hub-rail { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border-hair); padding: 10px 12px; gap: 4px; scrollbar-width: none; }
+  .hub-rail { flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border-hair); padding: 10px 12px; gap: 6px; scrollbar-width: none; }
   .hub-rail::-webkit-scrollbar { display: none; }
-  .hub-rail-btn { white-space: nowrap; padding: 9px 12px; font-size: 13px; }
-  .hub-rail-btn .hub-idx { display: none; }
+  .hub-rail-btn { white-space: nowrap; padding: 10px 14px; font-size: 13px; }
   .hub-rail-btn svg { display: none; }
-  .hub-rail-btn.active::before { display: none; }
   .hub-panel { padding: 22px 20px; max-height: none; overflow-y: visible; }
   .hub-segments { grid-template-columns: 1fr; }
-  .pillars { grid-template-columns: 1fr; }
-  .pillar { padding: 16px 0; }
-  .pillar:not(:first-child) { border-left: none; border-top: 1px solid var(--border); }
-  .pillar-ghost { font-size: 32px; margin-bottom: 8px; }
-  .pillar h3 { font-size: 15px; }
-  .pillar p { font-size: 12.5px; }
+  .seg-item { min-height: 48px; }
   .btn { padding: 12px 20px; min-height: 48px; }
-  .copy-prompt-btn { width: 40px; height: 40px; }
-  .prompt-box-card { padding: 16px; }
-  .prompt-code-body { font-size: 10.5px; max-height: 380px; }
-  .trust-badges { gap: 14px; }
-  .download-card { padding: 22px 18px; }
-  .trust-hash { font-size: 10.5px; }
+  .copy-prompt-btn { padding: 10px 16px; min-height: 44px; }
+  .prompt-box-card { padding: 18px 16px; }
+  .prompt-code-body { font-size: 10.5px; max-height: 320px; }
+  .trust-badges { gap: 24px; }
+  .trust-hash { max-width: 100%; padding: 12px 14px; font-size: 11px; word-break: break-all; white-space: normal; text-align: left; }
   .footer-inner { flex-direction: column; text-align: center; gap: 14px; }
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 18px; }
+  .mobile-sticky-bar { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .step { gap: 14px; }
+  .step-num { width: 34px; height: 34px; font-size: 14px; }
+  .metric-val { font-size: 26px; }
 }
 
 @media (max-width: 600px) {
   .container { padding-inline: 16px; }
-  .hero-inner { gap: 32px; }
-  .hero-copy { text-align: center; }
-  .hero-meta { justify-content: center; }
-  .hero-lead { margin-inline: auto; }
-  .hero-highlights { margin-inline: auto; text-align: left; }
+  .hero-grid { gap: 28px; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { justify-content: center; width: 100%; }
-  .hero-footnote { justify-content: center; }
-  .pillar-ghost { font-size: 28px; }
+  .metrics-grid { gap: 18px; }
+  .metric-val { font-size: 24px; }
+  .pillars { grid-template-columns: 1fr; gap: 12px; margin-bottom: 44px; }
+  .pillar { padding: 22px 20px; }
   .connect-grid { gap: 36px; }
-  .trust-badge-icon { width: 36px; height: 36px; }
-  .trust-badge-icon svg { width: 18px; height: 18px; }
-  .footer { padding-block: 28px; }
+  .connect-steps { gap: 20px; }
+  .trust-badges { gap: 20px; }
+  .trust-badge svg { width: 24px; height: 24px; }
+  .footer { padding-block: 32px; }
   .mobile-sticky-bar { padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
   .mobile-sticky-bar .btn { min-height: 44px; }
 }
 
 @media (max-width: 400px) {
   .container { padding-inline: 12px; }
-  .display { font-size: clamp(32px, 10vw, 42px); }
-  .hero-lead { font-size: 15px; }
-  .hero-device-float { font-size: 10px; padding: 5px 10px; }
+  .display { font-size: 30px; }
+  .hero-badge { font-size: 10px; padding: 5px 10px; }
+  .metric-val { font-size: 21px; }
+  .metric-lbl { font-size: 11px; }
   .trust-badges { gap: 16px; }
   .trust-badge span { font-size: 12px; }
   .trust-badge small { font-size: 10px; }
@@ -1268,8 +709,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* Landscape phones: top-align, never vertically center */
 @media (max-height: 600px) and (orientation: landscape) {
-  .hero { padding-top: calc(64px + env(safe-area-inset-top)); padding-bottom: 40px; }
-  .hero-inner { gap: 20px; }
+  .hero { min-height: auto; align-items: flex-start; padding-top: calc(64px + env(safe-area-inset-top)); }
+  .hero-grid { gap: 20px; }
   .hero-visual { order: 2; }
   .section { padding-block: 40px; }
 }
@@ -1279,138 +720,87 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <a href="#main" class="skip-link">Skip to content</a>
 
 <!-- Navigation -->
-<nav class="nav" id="siteNav" aria-label="Main navigation">
+<nav class="nav" id="siteNav">
   <div class="container nav-inner">
     <a href="#" class="nav-logo">
-      <img src="assets/splash-icon.png" alt="" class="nav-logo-img" width="36" height="36">
-      <div class="nav-logo-text">
-        <div class="nav-logo-name">Hermes Go</div>
-        <div class="nav-logo-sub">Mobile Remote Client</div>
-      </div>
+      <img src="assets/splash-icon.png" alt="Hermes Go App Icon" class="nav-logo-img">
+      Hermes Go
     </a>
-
-    <div class="nav-center" id="navLinks">
-      <div class="nav-group" role="list">
-        <a href="#screenshots" class="nav-link" data-section="screenshots" role="listitem">Screenshots</a>
-        <a href="#features" class="nav-link" data-section="features" role="listitem">App Map</a>
-        <a href="#why-hermes" class="nav-link" data-section="why-hermes" role="listitem">Why</a>
-        <a href="#changelog" class="nav-link" data-section="changelog" role="listitem">Changelog</a>
-        <a href="#connect" class="nav-link" data-section="connect" role="listitem">Setup</a>
-      </div>
-      <a href="app-map.html" class="nav-link-ext">Full App Map</a>
-    </div>
-
-    <div class="nav-actions">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
-      </button>
-      <a href="#download" class="nav-cta nav-cta-desktop">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download
+    <div class="nav-links" id="navLinks">
+      <a href="#screenshots">Screenshots</a>
+      <a href="#features">App Map</a>
+      <a href="#why-hermes">Why Hermes Go</a>
+      <a href="#changelog">Changelog</a>
+      <a href="#connect">1-Click Setup</a>
+      <a href="app-map.html">Full App Map</a>
+      <a href="#download" class="nav-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download APK
       </a>
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks" id="menuBtn">
-        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
     </div>
+    <button class="mobile-menu-btn" aria-label="Menu" id="menuBtn" title="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+    </button>
   </div>
 </nav>
 
 <main id="main">
 
 <!-- Hero Section -->
-<section class="hero" aria-labelledby="hero-heading">
-  <div class="container hero-inner">
-    <div class="hero-copy">
-      <h1 class="display hero-enter" id="hero-heading">Your AI agent,<br>in your pocket.</h1>
-
-      <p class="hero-lead hero-enter">A native mobile client for your self-hosted <code class="inline-code">hermes-agent</code> — live streaming, voice, artifacts, and full agent control from anywhere.</p>
-
-      <div class="hero-enter" aria-label="Key capabilities">
-        <ul class="hero-highlights">
-          <li><strong>One-prompt setup</strong> — basic auth, port 9119, Tailscale detection, connection details handed back</li>
-          <li><strong>Direct WebSocket</strong> — 100% remote over LAN or Tailscale, no relays</li>
-          <li><strong>8 app surfaces</strong> — chat, voice, brain, work, sessions, dashboard, connect, settings</li>
-        </ul>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Mobile Remote Client · Self-Hosted Hermes Agent
       </div>
+      <h1 class="display">Your AI agent,<br>in your pocket.</h1>
+      <p class="body">Hermes Go is a native mobile client for your self-hosted <code class="inline-code">hermes-agent</code>. One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.</p>
 
-      <div class="hero-actions hero-enter">
+      <div class="hero-actions">
         <a href="#download" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download APK
         </a>
         <a href="#connect" class="btn btn-secondary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 14a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2"/><path d="M12 14v7"/><path d="M8 21h8"/><path d="M2 10h20"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 14a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2"/><path d="M12 14v7"/><path d="M8 21h8"/><path d="M2 10h20"/></svg>
           1-Click Setup Prompt
         </a>
       </div>
-      <p class="hero-footnote hero-enter">Android APK available now · Coming soon to Play Store</p>
+      <div style="font-size:12px;color:var(--subtle);margin-top:12px;font-weight:500">Android APK available now · Coming soon to Google Play Store</div>
     </div>
 
-    <div class="hero-visual hero-enter">
-      <div class="hero-device">
-        <div class="hero-device-float" aria-hidden="true">
-          <span class="status-dot"></span>
-          Live streaming
-        </div>
-        <figure class="hero-device-card">
-          <div class="hero-shot">
-            <img src="screens/chat.jpg" alt="Hermes Go chat — live agent session with code block and tool timeline" width="390" height="844" loading="eager">
-          </div>
-          <figcaption class="hero-device-caption">
-            <span class="shot-label">Chat</span>
-            <span class="shot-where">Live session · Tools · Code</span>
-          </figcaption>
-        </figure>
+    <!-- Hero Visual: real chat screenshot -->
+    <div class="hero-visual">
+      <div class="hero-shot">
+        <img src="screens/chat.jpg" alt="Hermes Go chat — live agent session with code block and tool timeline" loading="eager">
       </div>
     </div>
   </div>
 </section>
 
 <!-- Metrics Strip -->
-<section class="metrics-strip reveal" id="metrics">
-  <div class="container">
-    <div class="metrics-head">
-      <div>
-        <p class="caption">By the numbers</p>
-        <h2>What you get, measured.</h2>
-      </div>
-      <div class="metrics-head-r">
-        <span class="live-dot" aria-hidden="true"></span>
-        Live across all 8 surfaces
-      </div>
+<section class="metrics-strip">
+  <div class="container metrics-grid">
+    <div>
+      <div class="metric-val">100%</div>
+      <div class="metric-lbl">Direct Remote WebSocket (No Relays)</div>
     </div>
-
-    <div class="metrics-spine">
-      <div class="metric-node">
-        <div class="metric-mark" aria-hidden="true">1</div>
-        <span class="metric-badge">Transport</span>
-        <div class="metric-val"><span class="accent">100%</span></div>
-        <div class="metric-lbl">Direct remote WebSocket</div>
-        <p class="metric-note">No relays, no third party — LAN or Tailscale only.</p>
-      </div>
-      <div class="metric-node">
-        <div class="metric-mark" aria-hidden="true">2</div>
-        <span class="metric-badge">Setup</span>
-        <div class="metric-val"><span class="accent">1</span> prompt</div>
-        <div class="metric-lbl">Automated agent setup</div>
-        <p class="metric-note">Auth, port 9119, Tailscale detection — handed back to you.</p>
-      </div>
-      <div class="metric-node">
-        <div class="metric-mark" aria-hidden="true">3</div>
-        <span class="metric-badge">Surfaces</span>
-        <div class="metric-val"><span class="accent">8</span></div>
-        <div class="metric-lbl">App surfaces</div>
-        <p class="metric-note">Chat, voice, brain, work, sessions, dashboard, connect, settings.</p>
-      </div>
-      <div class="metric-node">
-        <div class="metric-mark" aria-hidden="true">4</div>
-        <span class="metric-badge">Tools</span>
-        <div class="metric-val"><span class="accent">50+</span></div>
-        <div class="metric-lbl">Built-in agent tools</div>
-        <p class="metric-note">Every tool the desktop agent has, on the phone.</p>
-      </div>
+    <div>
+      <div class="metric-val">1 Prompt</div>
+      <div class="metric-lbl">Automated Agent Setup</div>
+    </div>
+    <div>
+      <div class="metric-val">8</div>
+      <div class="metric-lbl">App Surfaces</div>
+    </div>
+    <div>
+      <div class="metric-val">50+</div>
+      <div class="metric-lbl">Built-in Agent Tools</div>
     </div>
   </div>
 </section>
@@ -1418,64 +808,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <!-- App Structure Explorer -->
 <section class="section screenshots" id="screenshots">
   <div class="container">
-    <div class="screenshots-head">
-      <div>
-        <p class="caption">In the App</p>
-        <h2>Real screens. Real agent.</h2>
-      </div>
-      <div class="screenshots-head-r">
-        <span class="count-pill"><span class="num">6</span> surfaces</span>
-        <span class="hint">Tap any to enlarge</span>
-      </div>
+    <div class="screenshots-intro">
+      <p class="caption">In the App</p>
+      <h2 class="h1">Real screens. Real agent.</h2>
     </div>
 
-    <div class="shot-grid reveal">
+    <div class="shot-grid">
       <button class="shot-card" data-full="screens/sessions.jpg" aria-label="Sessions screenshot" type="button">
-        <div class="shot-frame">
-          <span class="shot-index" aria-hidden="true">01</span>
-          <img src="screens/sessions.jpg" alt="Sessions surface with inbox, folders and projects" loading="lazy">
-          <span class="shot-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Zoom</span>
-        </div>
+        <div class="shot-frame"><img src="screens/sessions.jpg" alt="Sessions surface with inbox, folders and projects" loading="lazy"></div>
         <div class="shot-meta"><span class="shot-label">Sessions</span><span class="shot-where">Sessions · Inbox</span></div>
       </button>
       <button class="shot-card" data-full="screens/dashboard-settings.jpg" aria-label="Dashboard and Settings screenshots" type="button">
-        <div class="shot-frame">
-          <span class="shot-index" aria-hidden="true">02</span>
-          <img src="screens/dashboard-settings.jpg" alt="Dashboard hero with performance and System Hermes Go features settings" loading="lazy">
-          <span class="shot-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Zoom</span>
-        </div>
+        <div class="shot-frame"><img src="screens/dashboard-settings.jpg" alt="Dashboard hero with performance and System Hermes Go features settings" loading="lazy"></div>
         <div class="shot-meta"><span class="shot-label">Dashboard &amp; Settings</span><span class="shot-where">Dashboard · hero · System · Setup</span></div>
       </button>
       <button class="shot-card" data-full="screens/drawer.jpg" aria-label="Drawer flyouts" type="button">
-        <div class="shot-frame">
-          <span class="shot-index" aria-hidden="true">03</span>
-          <img src="screens/drawer.jpg" alt="Drawer open showing Brain Work and System surfaces" loading="lazy">
-          <span class="shot-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Zoom</span>
-        </div>
+        <div class="shot-frame"><img src="screens/drawer.jpg" alt="Drawer open showing Brain Work and System surfaces" loading="lazy"></div>
         <div class="shot-meta"><span class="shot-label">Drawer</span><span class="shot-where">Brain · Work · System</span></div>
       </button>
       <button class="shot-card" data-full="screens/sessions-switch.jpg" aria-label="Session status and switcher" type="button">
-        <div class="shot-frame">
-          <span class="shot-index" aria-hidden="true">04</span>
-          <img src="screens/sessions-switch.jpg" alt="Session status sheet and switch session sheet" loading="lazy">
-          <span class="shot-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Zoom</span>
-        </div>
+        <div class="shot-frame"><img src="screens/sessions-switch.jpg" alt="Session status sheet and switch session sheet" loading="lazy"></div>
         <div class="shot-meta"><span class="shot-label">Session sheets</span><span class="shot-where">Chat · header · Sessions</span></div>
       </button>
       <button class="shot-card" data-full="screens/artifacts.jpg" aria-label="Artifacts browser and workspace menu" type="button">
-        <div class="shot-frame">
-          <span class="shot-index" aria-hidden="true">05</span>
-          <img src="screens/artifacts.jpg" alt="Context window workspace menu and artifacts browser" loading="lazy">
-          <span class="shot-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Zoom</span>
-        </div>
+        <div class="shot-frame"><img src="screens/artifacts.jpg" alt="Context window workspace menu and artifacts browser" loading="lazy"></div>
         <div class="shot-meta"><span class="shot-label">Context &amp; Artifacts</span><span class="shot-where">Chat · Workspace · Work · Artifacts</span></div>
       </button>
       <button class="shot-card" data-full="screens/models-activity.jpg" aria-label="Activity panel and Models picker" type="button">
-        <div class="shot-frame">
-          <span class="shot-index" aria-hidden="true">06</span>
-          <img src="screens/models-activity.jpg" alt="Activity panel and models picker sheet" loading="lazy">
-          <span class="shot-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Zoom</span>
-        </div>
+        <div class="shot-frame"><img src="screens/models-activity.jpg" alt="Activity panel and models picker sheet" loading="lazy"></div>
         <div class="shot-meta"><span class="shot-label">Activity &amp; Models</span><span class="shot-where">Chat · Activity · Brain · Models</span></div>
       </button>
     </div>
@@ -1513,17 +873,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
     <div class="pillars">
       <div class="pillar reveal">
-        <div class="pillar-ghost" aria-hidden="true">01</div>
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3 class="h3">No cloud. No relay.</h3>
         <p>A direct Tailscale WebSocket to your server. Nothing passes through a third party.</p>
       </div>
       <div class="pillar reveal">
-        <div class="pillar-ghost" aria-hidden="true">02</div>
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
         <h3 class="h3">Set up in one prompt.</h3>
         <p>The agent configures auth, binds port 9119, detects Tailscale, and hands you the details.</p>
       </div>
       <div class="pillar reveal">
-        <div class="pillar-ghost" aria-hidden="true">03</div>
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M12 18h.01"/></svg></div>
         <h3 class="h3">The full agent, not a chat app.</h3>
         <p>Voice, approvals, tools, cron, Star Map, system control — everything desktop does, in your hand.</p>
       </div>
@@ -1535,7 +895,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <section class="section changelog-section" id="changelog">
   <div class="container changelog-grid">
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
-    <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
+    <h2 class="h1" style="text-align:center;margin-bottom:48px">Changelog</h2>
 
     <!-- Update 2 -->
     <div class="changelog-item reveal">
@@ -1695,7 +1055,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </div>
 
     <div class="changelog-toggle">
-      <button id="clToggleBtn" onclick="document.getElementById('clOldWrap').classList.toggle('collapsed');document.getElementById('clOldWrap').classList.toggle('expanded');this.textContent=document.getElementById('clOldWrap').classList.contains('collapsed')?'Show full history ↑':'Show less ↓';if(document.getElementById('clOldWrap').classList.contains('collapsed')){document.getElementById('changelog').scrollIntoView({behavior:'smooth',block:'start'})}">Show full history ↑</button>
+      <button id="clToggleBtn" onclick="document.getElementById('clOldWrap').classList.toggle('collapsed');document.getElementById('clOldWrap').classList.toggle('expanded');this.textContent=document.getElementById('clOldWrap').classList.contains('collapsed')?'Show full history ↑':'Show less ↓';">Show full history ↑</button>
     </div>
 
     <div class="changelog-cta">
@@ -1709,27 +1069,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="container">
     <div class="connect-grid">
       <div>
-        <p class="caption" style="margin-bottom:12px">1-Click Setup</p>
-        <h2 class="h1" style="margin-bottom:16px">Paste one prompt. Your agent configures itself.</h2>
-        <p class="body" style="margin-bottom:32px;color:var(--subtle)">Copy the setup prompt, paste it into any running Hermes Agent — CLI, Telegram, or Discord — and it asks for a username and password if needed, then replies with URL, user, and password.</p>
-        <div class="setup-spine">
-          <div class="setup-node">
-            <div class="setup-mark" aria-hidden="true">1</div>
-            <span class="setup-badge">Copy</span>
-            <div class="setup-lbl">Copy setup prompt</div>
-            <p class="setup-note">Tap the copy icon. The onboarding prompt is copied to your clipboard.</p>
+        <p class="caption" style="color:var(--accent);margin-bottom:14px">1-Click Agent Setup</p>
+        <h2 class="h1" style="margin-bottom:20px">Let your Hermes Agent configure itself automatically.</h2>
+        <p class="body" style="margin-bottom:28px">No config files. No network scripts. Paste the prompt into any running Hermes Agent — CLI, Telegram, Discord, or Desktop.</p>
+        <div class="connect-steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Copy Setup Prompt</h3>
+              <p>Click the <strong>Copy Onboarding Prompt</strong> button on the right.</p>
+            </div>
           </div>
-          <div class="setup-node">
-            <div class="setup-mark" aria-hidden="true">2</div>
-            <span class="setup-badge">Paste</span>
-            <div class="setup-lbl">Paste into Hermes</div>
-            <p class="setup-note">Paste into Hermes on your server — CLI, Telegram, or Discord. It asks for a username and password if needed, then starts the gateway on port 9119.</p>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Paste to your Hermes Agent</h3>
+              <p>Paste the prompt into your agent via CLI, Telegram bot, or desktop chat. The agent reads config, creates basic auth, starts the gateway on port 9119, and checks Tailscale.</p>
+            </div>
           </div>
-          <div class="setup-node">
-            <div class="setup-mark" aria-hidden="true">3</div>
-            <span class="setup-badge">Connect</span>
-            <div class="setup-lbl">Enter in Hermes Go</div>
-            <p class="setup-note">Your agent replies with URL, user, and password. Enter them in Hermes Go to connect.</p>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Enter the 5 Lines in Hermes Go</h3>
+              <p>Your agent replies with 5 exact connection lines (Protocol, Host, Port, Username, Password). Enter them in Hermes Go to connect instantly!</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1738,10 +1101,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="prompt-box-header">
             <div class="prompt-box-title">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              Onboarding Prompt
+              Canonical Onboarding Setup Prompt
             </div>
-            <button class="copy-prompt-btn" id="copyBootstrapBtn" aria-label="Copy prompt">
+            <button class="copy-prompt-btn" id="copyBootstrapBtn">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Prompt
             </button>
           </div>
           <div class="prompt-code-body" id="bootstrapPromptText">Set up Hermes Dashboard login for Hermes Go (mobile). Follow IN ORDER. Never invent credentials.
@@ -1751,43 +1115,24 @@ GOAL: Give the user Protocol, Host, Port, Username, Password for the mobile conn
 A) CHECK EXISTING AUTH
 Read ~/.hermes/.env and ~/.hermes/config.yaml for dashboard basic auth:
 - Username: HERMES_DASHBOARD_BASIC_AUTH_USERNAME or dashboard.basic_auth.username
-- Password: ONLY HERMES_DASHBOARD_BASIC_AUTH_PASSWORD (a password_hash cannot be reversed)
-If username + readable password exist → do NOT rewrite secrets; go to C.
-If username exists but password is only a hash → ask the user for the current password, OR ask permission to set a new password (then do B).
-If nothing is configured → do B.
+- Password: ONLY HERMES_DASHBOARD_BASIC_AUTH_PASSWORD
 
 B) CREATE AUTH (only if needed)
 1. Ask the user for a username and password. Wait for their answer.
-2. Update ~/.hermes/.env (chmod 600). Remove any old HERMES_DASHBOARD_BASIC_AUTH_* lines, then set:
-HERMES_DASHBOARD_BASIC_AUTH_USERNAME=<username>
-HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=<password>
-HERMES_DASHBOARD_BASIC_AUTH_SECRET=<run: openssl rand -base64 32>
-3. If config.yaml has "basic" under plugins.disabled, remove it so the basic auth plugin can load.
+2. Update ~/.hermes/.env (chmod 600). Set HERMES_DASHBOARD_BASIC_AUTH_* secrets.
 
 C) START + VERIFY
-1. Ensure dashboard listens on all interfaces:
-hermes dashboard --host 0.0.0.0 --port 9119 --no-open
-(If something else owns 9119, stop/restart that process first. Do not use --insecure; it does nothing.)
-2. Verify auth is on:
-curl -s http://127.0.0.1:9119/api/status
-Must show auth_required: true and auth_providers including "basic". If not, fix auth and restart, then re-check.
-3. Pick Host for the phone:
-- Prefer Tailscale IPv4 (tailscale ip -4) → Protocol http
-- Else LAN/private IP → Protocol http
-- Else public domain behind HTTPS reverse proxy → Protocol https, Port 443 (or the proxy port)
+1. Run: hermes dashboard --host 0.0.0.0 --port 9119 --no-open
+2. Verify auth: curl -s http://127.0.0.1:9119/api/status
+3. Pick Host (Tailscale IPv4 or LAN IP).
 
 D) FINAL REPLY
-Reply with ONLY these 5 lines — nothing else:
-
+Reply with ONLY these 5 lines:
 Protocol: <http|https>
 Host: <ip-or-hostname>
 Port: <port>
 Username: <username>
 Password: <password></div>
-          <button class="prompt-expand-btn" id="promptExpandBtn" aria-label="Show full prompt">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            Show full prompt
-          </button>
         </div>
       </div>
     </div>
@@ -1797,42 +1142,22 @@ Password: <password></div>
 <!-- Trust & Download -->
 <section class="section trust" id="download">
   <div class="container">
-    <div class="trust-grid">
-      <div class="trust-left">
-        <p class="caption" style="color:var(--accent);margin-bottom:12px">Get Hermes Go</p>
-        <h2 class="h1" style="margin-bottom:14px">Direct download. No middleman.</h2>
-        <p class="body" style="margin-bottom:28px;color:var(--subtle)">The mobile client for your self-hosted Hermes agent. Native Android APK — sideload today, Play Store soon.</p>
-        <div class="trust-badges">
-          <div class="trust-badge">
-            <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="trust-badge-text"><span>Direct &amp; Secure</span><small>Port 9119 · Tailscale · no relays</small></div>
-          </div>
-          <div class="trust-badge">
-            <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-            <div class="trust-badge-text"><span>Native App</span><small>React Native engine</small></div>
-          </div>
-          <div class="trust-badge">
-            <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
-            <div class="trust-badge-text"><span>Zero Telemetry</span><small>Private by default</small></div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="download-card">
-          <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
-          <h3>Hermes Go</h3>
-          <div class="ver">v1.0.0 · Android APK</div>
-          <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download APK
-          </a>
-          <div class="store-note">Coming soon to Google Play Store</div>
-          <div class="trust-hash" id="trustHash">
-            <span class="hash-label">SHA-256</span>
-            <code>342b6ef2a6b41c5299e943f7f33ce7fb96d4adeb08179921493cbbc388bdd899</code>
-            <svg class="hash-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          </div>
-        </div>
+    <h2 class="h1">Get Hermes Go</h2>
+    <p class="body" style="margin-top:10px;margin-bottom:36px">The mobile client for your self-hosted Hermes agent.</p>
+    <div class="trust-badges">
+      <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Direct &amp; Secure</span><small>Port 9119 / Tailscale</small></div>
+      <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span>Native App</span><small>React Native Engine</small></div>
+      <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span>Zero Telemetry</span><small>Private by default</small></div>
+    </div>
+    <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" style="padding:15px 32px;font-size:15px" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Latest APK (v1.0.0)
+    </a>
+    <div style="margin-top:10px;font-size:12px;color:var(--subtle)">Coming soon to Google Play Store</div>
+    <div>
+      <div class="trust-hash" id="trustHash">
+        <span>SHA-256:</span>
+        <code>342b6ef2a6b41c5299e943f7f33ce7fb96d4adeb08179921493cbbc388bdd899</code>
       </div>
     </div>
   </div>
@@ -1843,28 +1168,30 @@ Password: <password></div>
   <div class="container footer-inner">
     <div class="footer-logo">
       <img src="assets/splash-icon.png" alt="Hermes Go App Icon" class="footer-logo-img">
-      Hermes Go
+      Hermes Go Mobile Client
     </div>
-    <nav class="footer-links" aria-label="Footer">
+    <div class="footer-links">
       <a href="#screenshots">Screenshots</a>
       <a href="#features">App Map</a>
       <a href="#changelog">Changelog</a>
       <a href="app-map.html">Full App Map</a>
       <a href="#why-hermes">Why Hermes Go</a>
-      <a href="#connect">Setup</a>
+      <a href="#connect">Connect</a>
       <a href="#download">Download</a>
-    </nav>
-    <div class="footer-copy">© 2026 Hermes AI Ecosystem · Remote mobile client for self-hosted Hermes Agent</div>
+    </div>
+    <div style="font-size:13px;color:var(--subtle)">
+      © 2026 Hermes AI Ecosystem. Remote mobile client for self-hosted Hermes Agent.
+    </div>
   </div>
 </footer>
 
 <!-- Sticky Mobile Bottom Download Bar -->
 <div class="mobile-sticky-bar" id="stickyMobileBar">
-  <div class="sticky-bar-brand">
-    <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.0</span></span>
+  <div style="display:flex;align-items:center;gap:8px">
+    <img src="assets/splash-icon.png" alt="Hermes Go App Icon" style="width:22px;height:22px;object-fit:contain">
+    <span style="font-size:13px;font-weight:700">Hermes Go <span style="font-size:10px;color:var(--subtle)">v1.0.0</span></span>
   </div>
-  <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
+  <a href="#download" class="btn btn-primary" style="padding:6px 14px;font-size:12px">Download APK</a>
 </div>
 
 </main>
@@ -1872,7 +1199,6 @@ Password: <password></div>
 <!-- Screenshot Lightbox -->
 <div class="shot-lightbox" id="shotLightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
   <button class="shot-lightbox-close" id="shotLightboxClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-  <div class="shot-lightbox-counter" id="shotLightboxCounter"><span class="cur">1</span><span>/</span><span class="total">6</span></div>
   <button class="shot-lightbox-nav" id="shotLightboxPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
   <img id="shotLightboxImg" alt="">
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -1890,58 +1216,28 @@ themeToggle.addEventListener('click', () => {
   htmlEl.setAttribute('data-theme', nextTheme);
 });
 
-// Mobile Nav Menu Toggle
-const siteNav = document.getElementById('siteNav');
+// Mobile Nav Menu Toggle — close on link click, outside click, or Escape
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
-
 function setMenuOpen(open) {
   navLinks.classList.toggle('open', open);
-  siteNav.classList.toggle('menu-open', open);
   menuBtn.setAttribute('aria-expanded', String(open));
-  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  document.body.style.overflow = open ? 'hidden' : '';
 }
-
 menuBtn.addEventListener('click', (e) => {
-  e.preventDefault();
   e.stopPropagation();
   setMenuOpen(!navLinks.classList.contains('open'));
 });
-
 navLinks.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => setMenuOpen(false));
 });
-
+document.addEventListener('click', (e) => {
+  if (!navLinks.classList.contains('open')) return;
+  if (navLinks.contains(e.target) || menuBtn.contains(e.target)) return;
+  setMenuOpen(false);
+});
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && navLinks.classList.contains('open')) setMenuOpen(false);
 });
-
-// Nav scroll state + active section highlight
-const navSectionLinks = document.querySelectorAll('.nav-link[data-section]');
-const navSections = [...navSectionLinks].map(link => document.getElementById(link.dataset.section)).filter(Boolean);
-
-function updateNavState() {
-  if (siteNav) siteNav.classList.toggle('scrolled', window.scrollY > 8);
-}
-
-if (navSections.length && 'IntersectionObserver' in window) {
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      navSectionLinks.forEach(link => {
-        link.classList.toggle('is-active', link.dataset.section === id);
-      });
-    });
-  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-  navSections.forEach(section => sectionObserver.observe(section));
-} else {
-  navSectionLinks[0]?.classList.add('is-active');
-}
-
-window.addEventListener('scroll', updateNavState, { passive: true });
-updateNavState();
 
 // Sticky Mobile Bottom Download Bar — show past hero, hide inside #download section
 const stickyMobileBar = document.getElementById('stickyMobileBar');
@@ -1978,12 +1274,10 @@ const trustHash = document.getElementById('trustHash');
 trustHash.addEventListener('click', () => {
   const hashText = trustHash.querySelector('code').textContent;
   navigator.clipboard.writeText(hashText).then(() => {
-    const copyIcon = trustHash.querySelector('.hash-copy');
-    const orig = copyIcon.outerHTML;
-    copyIcon.outerHTML = '<svg class="hash-copy" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    const origSpan = trustHash.querySelector('span').textContent;
+    trustHash.querySelector('span').textContent = 'Copied!';
     setTimeout(() => {
-      const newCheck = trustHash.querySelector('.hash-copy');
-      if (newCheck) newCheck.outerHTML = orig;
+      trustHash.querySelector('span').textContent = origSpan;
     }, 2000);
   });
 });
@@ -1994,22 +1288,12 @@ const bootstrapPromptText = document.getElementById('bootstrapPromptText');
 
 copyBootstrapBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(bootstrapPromptText.textContent).then(() => {
-    const origHTML = copyBootstrapBtn.innerHTML;
-    copyBootstrapBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-    copyBootstrapBtn.classList.add('copied');
+    const origText = copyBootstrapBtn.innerHTML;
+    copyBootstrapBtn.innerHTML = '✓ Copied!';
     setTimeout(() => {
-      copyBootstrapBtn.innerHTML = origHTML;
-      copyBootstrapBtn.classList.remove('copied');
+      copyBootstrapBtn.innerHTML = origText;
     }, 2000);
   });
-});
-
-// Expand/collapse prompt on mobile
-const promptExpandBtn = document.getElementById('promptExpandBtn');
-const promptBoxCard = document.querySelector('.prompt-box-card');
-promptExpandBtn.addEventListener('click', () => {
-  const expanded = promptBoxCard.classList.toggle('expanded');
-  promptExpandBtn.lastChild.textContent = expanded ? ' Show less' : ' Show full prompt';
 });
 
 // ── Screenshot gallery lightbox ──
@@ -2018,18 +1302,10 @@ const lightboxImg = document.getElementById('shotLightboxImg');
 const lbClose = document.getElementById('shotLightboxClose');
 const lbPrev = document.getElementById('shotLightboxPrev');
 const lbNext = document.getElementById('shotLightboxNext');
-const lbCounter = document.getElementById('shotLightboxCounter');
-const lbCur = lbCounter ? lbCounter.querySelector('.cur') : null;
-const lbTotal = lbCounter ? lbCounter.querySelector('.total') : null;
 const cards = document.querySelectorAll('.shot-card');
 let lbIndex = -1;
 let lbTouchStartX = 0, lbTouchStartY = 0, lbTouchStartT = 0;
-if (lbTotal) lbTotal.textContent = cards.length;
 
-function updateLbCounter() {
-  if (!lbCur) return;
-  lbCur.textContent = lbIndex + 1;
-}
 function openLb(i) {
   lbIndex = i;
   const src = cards[i].getAttribute('data-full');
@@ -2037,7 +1313,6 @@ function openLb(i) {
   lightboxImg.alt = cards[i].getAttribute('aria-label') || '';
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
-  updateLbCounter();
 }
 function closeLb() {
   lightbox.classList.remove('open');
@@ -2099,7 +1374,6 @@ function segRow(seg) {
 function renderRail() {
   hubRail.innerHTML = HUBS.map((h, i) =>
     `<button class="hub-rail-btn${i === activeHub ? ' active' : ''}" role="tab" aria-selected="${i === activeHub}" data-hub="${i}">
-      <span class="hub-idx">${String(i + 1).padStart(2, '0')}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg>
       ${h.label}
     </button>`
@@ -2113,10 +1387,7 @@ function renderPanel() {
       <div class="hub-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg></div>
       <div>
         <h3 class="h3">${h.label}</h3>
-        <div class="tag-row">
-          <span class="caption" style="color:var(--accent)">${h.tag}</span>
-          <span class="hub-panel-count">${h.segments.length} segments</span>
-        </div>
+        <div class="caption" style="color:var(--accent)">${h.tag}</div>
       </div>
     </div>
     <div class="hub-segments">${h.segments.map(segRow).join('')}</div>`;

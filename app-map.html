@@ -23,7 +23,7 @@
 <style>
 /* ── Light tokens (default) ── */
 :root, :root[data-theme="light"] {
-  --bg: #FAFAFA;
+  --bg: #FFFFFF;
   --bg-soft: #F5F5F7;
   --surface: #FFFFFF;
   --surface-soft: #F9F9FB;
@@ -45,7 +45,7 @@
   --node: #FFFFFF;
   --edge: #D6D6DC;
   --edge-strong: #A0A0AB;
-  --nav-bg: rgba(250, 250, 250, 0.86);
+  --nav-bg: rgba(255, 255, 255, 0.86);
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 :root[data-theme="dark"] {
@@ -149,12 +149,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero .caption { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 12px; }
 .hero h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
 .hero p { margin-top: 10px; font-size: 15px; color: var(--muted); max-width: 60ch; line-height: 1.6; }
-.stats { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
-.stat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); font-size: 12.5px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
-.stat-pill b { color: var(--fg); font-weight: 700; }
+
+/* ── Stats row ── */
+.stats-row { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+.stats-row .search-toggle { margin-left: auto; }
+.stats-cluster { display: inline-flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.stat-cell { display: flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-right: 1px solid var(--border); }
+.stat-cell:last-child { border-right: none; }
+.stat-cell b { font-size: 16px; font-weight: 800; color: var(--fg); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+.stat-cell span { font-size: 11.5px; font-weight: 600; color: var(--subtle); }
+.stat-divider { width: 1px; height: 22px; background: var(--border); }
+.search-toggle { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); transition: color 0.15s, border-color 0.15s, background 0.15s; flex-shrink: 0; }
+.search-toggle:hover { color: var(--accent-ink); border-color: var(--accent); }
+.search-toggle.active { color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+.search-toggle svg { width: 17px; height: 17px; }
 
 /* ── Search ── */
-.search-wrap { position: relative; margin: 20px 0 28px; }
+.search-wrap { position: relative; margin: 0; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease, opacity 0.2s ease, margin 0.3s ease; }
+.search-wrap.open { max-height: 80px; opacity: 1; margin: 16px 0 24px; }
 .search-wrap svg.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--subtle); pointer-events: none; }
 .search-wrap kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 10.5px; color: var(--faint); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; background: var(--surface-soft); pointer-events: none; }
 #docSearch {
@@ -195,7 +207,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ── Surface detail ── */
 .surface-detail { scroll-margin-top: 76px; margin-bottom: 22px; }
 .detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
-.detail-head { display: flex; align-items: center; gap: 14px; padding: 20px 22px; border-bottom: 1px solid var(--border); }
+.detail-head { display: flex; align-items: center; gap: 14px; padding: 20px 22px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+.detail-head:hover { background: var(--bg-soft); }
 .detail-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .detail-icon svg { width: 22px; height: 22px; }
 .detail-title { flex: 1; min-width: 0; }
@@ -205,6 +218,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .detail-count { display: flex; flex-direction: column; align-items: flex-end; }
 .detail-count b { font-size: 18px; font-weight: 800; color: var(--fg); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
 .detail-count span { font-size: 10.5px; color: var(--subtle); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 3px; font-weight: 600; }
+.detail-chevron { width: 18px; height: 18px; color: var(--faint); flex-shrink: 0; transition: transform 0.2s ease, color 0.15s; display: none; }
+.surface-detail.expanded .detail-chevron { transform: rotate(180deg); color: var(--accent-ink); }
 
 .detail-body { padding: 4px 0 6px; }
 
@@ -233,15 +248,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   white-space: nowrap; flex-shrink: 0; margin-top: 3px;
   font-weight: 500;
 }
-.feature-row.match { background: var(--accent-soft); border-radius: 6px; margin-inline: -8px; padding-inline: 8px; }
+  .feature-row.match { background: var(--accent-soft); border-radius: 6px; margin-inline: -8px; padding-inline: 8px; }
+  @media (max-width: 900px) { .feature-row.match { margin-inline: 0; padding-inline: 0; border-radius: 4px; } }
 .feature-row .hl { color: var(--accent-ink); font-weight: 700; background: rgba(45, 212, 191, 0.18); border-radius: 3px; padding: 0 2px; }
 .segment.hidden, .surface-detail.hidden, .feature-row.hidden { display: none; }
 .surface-detail.search-open .detail-body { display: block; animation: none; }
 
 /* ── Footer ── */
-.doc-footer { border-top: 1px solid var(--border); padding: 24px 0 0; margin-top: 48px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
-.doc-footer .note { font-size: 12px; color: var(--subtle); }
-.doc-footer code { font-family: var(--mono); font-size: 11px; color: var(--muted); background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; }
+.doc-footer { border-top: 1px solid var(--border); padding: 12px 0 0; margin-top: 32px; display: flex; justify-content: flex-end; }
+.doc-footer .note { font-size: 10.5px; color: var(--faint); font-weight: 500; }
 
 /* ── Mobile ── */
 @media (max-width: 900px) {
@@ -267,25 +282,54 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   }
   .side-nav-item svg { width: 13px; height: 13px; }
   .side-nav-item .count { display: none; }
-  .main { padding: 20px 16px 80px; }
+  .main { padding: 16px 16px 64px; }
   .header-inner { padding-inline: 16px; gap: 10px; }
   .header-link { display: none; }
   .mobile-menu-btn { display: flex; }
   .app-map-menu.open { display: flex; }
-  .feature-list { grid-template-columns: 1fr; gap: 0; }
-  .feature-row { padding: 7px 0; }
-  .feature-where { font-size: 10px; }
-  .detail-head { padding: 16px 18px; gap: 12px; }
-  .detail-icon { width: 38px; height: 38px; }
-  .detail-icon svg { width: 19px; height: 19px; }
-  .detail-title h2 { font-size: 17px; }
+
+  /* Flat surface layout — no card chrome */
+  .surface-detail { margin-bottom: 0; scroll-margin-top: 58px; }
+  .detail-card { background: transparent; border: none; border-radius: 0; box-shadow: none; }
+  .detail-head { padding: 14px 0; gap: 12px; border-bottom: none; }
+  .detail-head:hover { background: transparent; }
+  .surface-detail:not(.expanded) .detail-head { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 0; }
+  .surface-detail.expanded .detail-head { padding-bottom: 0; }
+  .detail-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--accent-soft); }
+  .detail-icon svg { width: 18px; height: 18px; }
+  .detail-title h2 { font-size: 16px; }
+  .detail-title .tag { font-size: 11.5px; }
   .detail-counts { gap: 10px; }
-  .detail-count b { font-size: 16px; }
-  .segment { padding: 14px 18px; }
+  .detail-count b { font-size: 15px; }
+  .detail-count span { font-size: 9px; }
+  .detail-chevron { display: flex; }
+  .surface-detail:not(.expanded) .detail-body { display: none; }
+
+  /* Flat segments — hairline separators, no borders */
+  .detail-body { padding: 0; }
+  .segment { padding: 12px 0; border-top: 1px solid var(--border-hair); }
+  .segment:first-child { border-top: none; padding-top: 14px; }
+  .segment-head { gap: 8px; margin-bottom: 6px; }
+  .segment-icon { width: 20px; height: 20px; }
+  .segment-icon svg { width: 12px; height: 12px; }
+  .segment-name { font-size: 13px; }
+  .segment-desc { font-size: 11.5px; }
+  .feature-list { grid-template-columns: 1fr; gap: 0; }
+  .feature-row { padding: 6px 0; }
+  .feature-icon { width: 16px; height: 16px; margin-top: 0; }
+  .feature-icon svg { width: 12px; height: 12px; }
+  .feature-name { font-size: 13px; }
+  .feature-desc { font-size: 11.5px; line-height: 1.45; }
+  .feature-where { font-size: 9.5px; padding: 2px 6px; }
+
+  /* Stats compact */
+  .stats-cluster { flex-wrap: wrap; }
+  .stat-cell { padding: 7px 10px; }
+  .stat-cell b { font-size: 14px; }
+  .stat-cell span { font-size: 10.5px; }
 }
 @media (max-width: 480px) {
   .header-badge { display: none; }
-  .stat-pill { font-size: 11.5px; padding: 6px 11px; }
   .hero h1 { font-size: 26px; }
 }
 </style>
@@ -329,10 +373,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <p class="caption">Reference</p>
       <h1>App Map</h1>
       <p>Every surface, segment, and feature in Hermes Go — what it does and exactly where to find it.</p>
-      <div class="stats" id="docStats"></div>
+      <div class="stats-row">
+        <div class="stats-cluster" id="docStats"></div>
+        <button class="search-toggle" id="searchToggle" aria-label="Search the app map" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
     </section>
 
-    <div class="search-wrap">
+    <div class="search-wrap" id="searchWrap">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input id="docSearch" type="text" placeholder="Search features, surfaces, paths…" autocomplete="off" aria-label="Search the app map">
       <kbd>/</kbd>
@@ -343,7 +392,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div id="surfaces"></div>
 
     <footer class="doc-footer">
-      <div class="note">Generated from <code>app-map.js</code> — the single source of truth.</div>
       <div class="note" id="genNote"></div>
     </footer>
   </main>
@@ -447,7 +495,7 @@ surfacesEl.innerHTML = HUB_MAP.map((h, i) => {
   return `
     <section class="surface-detail" id="surface-${i}" data-surface="${h.label.toLowerCase()}">
       <div class="detail-card">
-        <div class="detail-head">
+        <div class="detail-head" data-surface-idx="${i}">
           <div class="detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${HUB_ICONS[h.icon]}</svg></div>
           <div class="detail-title">
             <h2>${h.label}</h2>
@@ -457,6 +505,7 @@ surfacesEl.innerHTML = HUB_MAP.map((h, i) => {
             <div class="detail-count"><b>${segCount}</b><span>segments</span></div>
             <div class="detail-count"><b>${featCount}</b><span>features</span></div>
           </div>
+          <svg class="detail-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="detail-body">${segments}</div>
       </div>
@@ -467,19 +516,31 @@ surfacesEl.innerHTML = HUB_MAP.map((h, i) => {
 const totalSegs = HUB_MAP.reduce((n, h) => n + h.segments.length, 0);
 const totalFeats = HUB_MAP.reduce((n, h) => n + h.segments.reduce((m, s) => m + s.features.length, 0), 0);
 document.getElementById('docStats').innerHTML = `
-  <span class="stat-pill"><b>${HUB_MAP.length}</b> surfaces</span>
-  <span class="stat-pill"><b>${totalSegs}</b> segments</span>
-  <span class="stat-pill"><b>${totalFeats}</b> features</span>`;
+  <div class="stat-cell"><b>${HUB_MAP.length}</b><span>surfaces</span></div>
+  <div class="stat-cell"><b>${totalSegs}</b><span>segments</span></div>
+  <div class="stat-cell"><b>${totalFeats}</b><span>features</span></div>`;
 const genNote = document.getElementById('genNote');
-genNote.textContent = 'Last verified against hermes-mobile source · ' + new Date().toISOString().slice(0, 10);
+const d = new Date();
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const suffix = (n) => { const s = ['th','st','nd','rd'], v = n % 100; return s[(v - 20) % 10] || s[v] || s[0]; };
+genNote.textContent = d.getDate() + suffix(d.getDate()) + ' ' + months[d.getMonth()] + " '" + String(d.getFullYear()).slice(2);
 
 /* ── Click nav → scroll + highlight ── */
 const detailEls = [...document.querySelectorAll('.surface-detail')];
 const navItems = [...document.querySelectorAll('.side-nav-item')];
 let currentActiveIdx = 0;
+const isMobile = () => window.innerWidth <= 900;
+
+function expandSurface(i) {
+  detailEls.forEach((el, j) => {
+    if (j === i) el.classList.add('expanded');
+    else el.classList.remove('expanded');
+  });
+}
 
 function activateNode(i) {
   navItems.forEach((n, j) => n.classList.toggle('active', j === i));
+  if (isMobile()) expandSurface(i);
   detailEls[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -487,6 +548,20 @@ navItems.forEach((btn) => {
   btn.addEventListener('click', () => {
     const i = parseInt(btn.getAttribute('data-target'), 10);
     activateNode(i);
+  });
+});
+
+/* ── Mobile: tap detail head to expand/collapse ── */
+detailEls.forEach((el, i) => {
+  const head = el.querySelector('.detail-head');
+  head.addEventListener('click', () => {
+    if (!isMobile()) return;
+    if (el.classList.contains('expanded')) {
+      el.classList.remove('expanded');
+    } else {
+      expandSurface(i);
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
   });
 });
 
@@ -503,10 +578,31 @@ function updateSpy() {
 }
 window.addEventListener('scroll', updateSpy, { passive: true });
 
-/* ── Search ── */
+/* ── Search toggle ── */
+const searchToggle = document.getElementById('searchToggle');
+const searchWrap = document.getElementById('searchWrap');
 const searchInput = document.getElementById('docSearch');
 const searchStatus = document.getElementById('searchStatus');
 const segmentEls = [...document.querySelectorAll('.segment')];
+
+function openSearch() {
+  searchWrap.classList.add('open');
+  searchToggle.classList.add('active');
+  searchToggle.setAttribute('aria-expanded', 'true');
+  setTimeout(() => searchInput.focus(), 100);
+}
+function closeSearch() {
+  searchWrap.classList.remove('open');
+  searchToggle.classList.remove('active');
+  searchToggle.setAttribute('aria-expanded', 'false');
+  searchInput.value = '';
+  runSearch('');
+  searchInput.blur();
+}
+searchToggle.addEventListener('click', () => {
+  if (searchWrap.classList.contains('open')) closeSearch();
+  else openSearch();
+});
 
 function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function highlight(text, q) {
@@ -571,16 +667,15 @@ searchInput.addEventListener('input', () => runSearch(searchInput.value));
 document.addEventListener('keydown', (e) => {
   if (e.key === '/' && document.activeElement !== searchInput) {
     e.preventDefault();
-    searchInput.focus();
+    openSearch();
   }
   if (e.key === 'Escape' && document.activeElement === searchInput) {
-    searchInput.value = '';
-    runSearch('');
-    searchInput.blur();
+    closeSearch();
   }
 });
 
 /* ── Initial draw after layout settles ── */
+if (isMobile()) expandSurface(0);
 requestAnimationFrame(() => updateSpy());
 </script>
 </body>
