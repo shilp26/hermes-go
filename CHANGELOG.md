@@ -6,6 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.0] — Update 3 — 2026-08-11
+
+OTA update. No new APK — installed app self-updates. Same version, same hash.
+
+### Added
+
+#### Share — from other apps
+- **Send to chat**: share images, PDFs, Word/Excel files, text, or links from any app straight into Hermes — pick a session or start a new chat, and review the payload in the composer before anything is sent
+- **Staged, never auto-sent**: shared content lands in the composer only, merging with any draft already in the box
+- **Size guard**: shares over 25 MB are rejected with a clear message before upload
+
+#### Chat
+- **Tappable links**: bare http(s) links in assistant messages — including links inside code blocks — and in your own message bubbles now open on tap
+
+### Changed
+
+#### Chat
+- **Shorter effort labels**: reasoning-effort chips in the composer are more compact (e.g. Medium → Med)
+
+#### Sessions
+- **Consistent picker height**: the session switcher and share picker keep the same height, so the destination list feels stable
+
+---
+
 ## [1.0.0] — Update 2 — 2026-08-10
 
 OTA update. No new APK — installed app self-updates. Same version, same hash.
