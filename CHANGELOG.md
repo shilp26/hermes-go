@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [1.0.3] — 2026-08-11
 
-OTA update. No new APK — installed app self-updates. Same version, same hash.
+OTA update — the installed app self-updates.
 
 ### Added
 
@@ -32,7 +32,7 @@ OTA update. No new APK — installed app self-updates. Same version, same hash.
 
 ## [1.0.2] — 2026-08-10
 
-OTA update. No new APK — installed app self-updates. Same version, same hash.
+OTA update — the installed app self-updates.
 
 ### Added
 
@@ -58,7 +58,7 @@ OTA update. No new APK — installed app self-updates. Same version, same hash.
 
 ## [1.0.1] — 2026-08-10
 
-OTA update. No new APK — installed app self-updates. Same version, same hash.
+OTA update — the installed app self-updates.
 
 ### Added
 
