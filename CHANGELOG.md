@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.5] — 2026-08-12
+
+OTA update — the installed app self-updates.
+
+### Fixed
+
+#### Sessions
+- **Deleted chats disappear immediately** — removed sessions drop out of the list right away, including ones already gone from the server
+- **Faster inbox** — session rows are lighter and the list churns less, so scrolling stays smooth
+
+#### Chat
+- **Context ring stays live** — the context-usage ring keeps loading after opening or rebinding a session instead of freezing on "—"
+- **No cross-chat errors** — a failed turn in one session never paints its error onto another chat
+- **Usage breakdown** — the usage sheet now shows each category's share of context tokens
+
+---
+
 ## [1.0.4] — 2026-08-11
 
 OTA update — the installed app self-updates.
