@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.6] — 2026-08-12
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### Settings
+- **Feature map**: open it from Settings — search every screen, jump by area, and tap to go straight to any feature
+
+### Changed
+
+#### Settings
+- **Default model label**: shows as provider · name in Settings
+- **Model refresh**: refresh the model list from the picker header (chat, dashboard, Settings) — a clear error appears if it fails, and the last-good list stays intact
+
+#### Chat
+- **Quieter mic**: the mic control softens while you type, keeping the send row uncluttered
+
+---
+
 ## [1.0.5] — 2026-08-12
 
 OTA update — the installed app self-updates.
