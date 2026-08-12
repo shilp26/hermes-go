@@ -226,7 +226,6 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 ## Roadmap
 
 - [ ] **Android widget** — quick actions (new chat, voice, starred) from the home screen
-- [ ] **Share to Hermes** — send text, images, and PDFs from other apps into a chat
 - [ ] Google Play Store release
 - [ ] iOS build
 - [ ] More channel integrations
