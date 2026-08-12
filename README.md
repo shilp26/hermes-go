@@ -72,12 +72,12 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.6](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (170 MB)
+[Download Hermes Go v1.0.6](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
 ```
-624d27c91fd63b6be8d73ca1628e1e370730d40fb59a86b41584c43568925175
+b379e81548492f27aa1fe15da6684ed5135be994b1e5d1c96950ab713e156462
 ```
 
 ```bash
