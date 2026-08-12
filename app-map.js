@@ -133,6 +133,7 @@ const LUCIDE = {
   table: `<path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/>`,
   share2: `<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>`,
   cloud: `<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>`,
+  map: `<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15"/><path d="M15 6v15"/>`,
 };
 
 /* ── Map by hub key (used in landing explorer + app map rail + app map detail) ── */
@@ -266,6 +267,7 @@ const FEATURE_ICONS = {
   'Feedback': LUCIDE.messageSquareText,
   'What\u2019s New': LUCIDE.bell,
   'Backup preview': LUCIDE.listChecks,
+  'Feature map': LUCIDE.map,
 
   // Work — Files
   'File browser': LUCIDE.folder,
@@ -811,6 +813,7 @@ const HUB_MAP = [
           { name: 'Feedback', desc: 'Submit bug, feature, improvement, or question with screenshots and status tracking', where: 'Settings · Feedback' },
           { name: 'What\u2019s New', desc: 'Release notes in-app, product version in the footer', where: 'Settings · What\u2019s New' },
           { name: 'Backup preview', desc: 'See what a prefs restore brings back before accepting', where: 'Settings · Backup' },
+          { name: 'Feature map', desc: 'Search every screen, jump by area, tap to go straight to a feature', where: 'Settings · Feature map' },
         ],
       },
     ],
