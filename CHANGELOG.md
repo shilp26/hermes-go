@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.9] — 2026-08-14
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### Chat — Fast lane
+- **Fast lane**: toggle Fast / priority processing on models that support it (chat header and Settings) — lightning only when the model catalog says it can handle it
+- **Pick with intent**: when you choose a Fast-capable model, the sheet asks Use Fast or Standard before it closes
+
+#### Chat — Reasoning effort
+- **Effort levels Off → Ultra**: set reasoning effort for the session and as a profile default, wherever the model supports reasoning
+
+#### Settings — Model pickers
+- **Smarter pickers**: chat and Settings model lists got search, provider groups, Fast control, and cleaner rows
+- **Safer default changes**: the default model now changes through the real assignment flow, with an expensive-model confirm and a cron impact review when jobs are affected
+- **Richer default row**: Settings shows name, context size, effort, and Fast for the current default
+
+#### App
+- **Faster search**: global search opens quicker from the drawer, with a steadier keyboard and calmer jump list
+
+### Fixed
+
+#### Chat
+- **Uncertain live turns queue**: if recovery of a live turn is unclear, Send queues the message instead of starting a second turn — quiet retries keep going without locking the composer
+
+---
+
 ## [1.0.8] — 2026-08-13
 
 OTA update — the installed app self-updates.

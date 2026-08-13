@@ -8,7 +8,7 @@
 
 A native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.nousresearch.com). One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.
 
-`v1.0.8` · Android APK · Closed Source · Zero Telemetry
+`v1.0.9` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -50,7 +50,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 45 segments, 124 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 45 segments, 126 features" width="100%">
 </p>
 
 ### Surfaces
@@ -58,7 +58,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 14 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 38 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 40 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
@@ -66,7 +66,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 8 surfaces · 45 segments · 124 features**
+**Total: 8 surfaces · 45 segments · 126 features**
 
 > Full interactive map: [app-map.html](app-map.html)
 
@@ -76,7 +76,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.8](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.9](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -125,6 +125,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Composer: attachments, `/` skills, `@` mentions, prompt improve, YOLO mode, todo status
 - **Share from other apps** — send images, PDFs, Word/Excel files, text, or links straight into a chat
 - **Background job control** — inspect output, stop, or dismiss running host processes from the chat meta row
+- **Fast lane** — toggle priority processing on supported models, with Use Fast or Standard choice on pick
+- **Reasoning effort** — set Off → Ultra per session and as a profile default
 
 ### 🎙️ Voice
 - Hold-to-dictate with STT

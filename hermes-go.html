@@ -1161,6 +1161,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .download-card .ver { font-size: 12px; color: var(--subtle); margin-bottom: 18px; }
 .download-card .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
 .download-card .store-note { font-size: 12px; color: var(--subtle); margin-bottom: 16px; }
+.download-card .arch-note { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 10.5px; color: var(--faint); margin: -8px 0 10px; }
 .trust-hash { padding: 10px 14px; border-radius: 8px; background: var(--code-bg); border: 1px solid var(--border); font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 11px; color: var(--subtle); display: flex; align-items: center; gap: 8px; cursor: pointer; transition: border-color 0.15s; }
 .trust-hash:hover { border-color: var(--accent); }
 .trust-hash code { color: var(--muted); word-break: break-all; flex: 1; }
@@ -1557,6 +1558,33 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="container changelog-grid">
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
+
+    <!-- v1.0.9 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.9</span>
+        <span class="changelog-date">14 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3>Fast lane, reasoning effort, smarter model picks</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>Fast lane — toggle priority processing on supported models, with Use Fast or Standard choice on pick</li>
+          <li>Reasoning effort Off → Ultra for the session and as a profile default</li>
+          <li>Smarter model pickers — search, provider groups, Fast control, cleaner rows</li>
+          <li>Safer default-model changes — expensive-model confirm and cron impact review</li>
+          <li>Settings default row shows name, context size, effort, and Fast</li>
+          <li>Global search opens faster with a steadier keyboard</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Uncertain live turns now queue instead of starting a second turn — quiet retries, no locked composer</li>
+        </ul>
+      </div>
+    </div>
 
     <!-- v1.0.8 -->
     <div class="changelog-item reveal">
@@ -1993,11 +2021,12 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.8 · Android APK</div>
+          <div class="ver">v1.0.9 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
           </a>
+          <div class="arch-note">arm64 · 64-bit Android</div>
           <div class="store-note">Coming soon to Google Play Store</div>
           <div class="trust-hash" id="trustHash">
             <span class="hash-label">SHA-256</span>
@@ -2038,7 +2067,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.8</span></span>
+    <span>Hermes Go <span class="ver">v1.0.9</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
@@ -2149,11 +2178,36 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach((el) => el.classList.add('in'));
 }
 
+// Copy helper — navigator.clipboard needs HTTPS/localhost; fall back to
+// execCommand('copy') on plain HTTP (e.g. the Tailscale dev URL, mobile).
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((resolve, reject) => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    ok ? resolve() : reject(new Error('copy failed'));
+  });
+}
+
 // Copy Trust Hash
 const trustHash = document.getElementById('trustHash');
 trustHash.addEventListener('click', () => {
   const hashText = trustHash.querySelector('code').textContent;
-  navigator.clipboard.writeText(hashText).then(() => {
+  copyText(hashText).then(() => {
     const copyIcon = trustHash.querySelector('.hash-copy');
     const orig = copyIcon.outerHTML;
     copyIcon.outerHTML = '<svg class="hash-copy" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
@@ -2169,7 +2223,7 @@ const copyBootstrapBtn = document.getElementById('copyBootstrapBtn');
 const bootstrapPromptText = document.getElementById('bootstrapPromptText');
 
 copyBootstrapBtn.addEventListener('click', () => {
-  navigator.clipboard.writeText(bootstrapPromptText.textContent).then(() => {
+  copyText(bootstrapPromptText.textContent).then(() => {
     const origHTML = copyBootstrapBtn.innerHTML;
     copyBootstrapBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
     copyBootstrapBtn.classList.add('copied');
