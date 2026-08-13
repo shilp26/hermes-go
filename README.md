@@ -123,6 +123,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Send queue, mid-run steering, clean stop
 - Subagent lists with live delegation, async task cards
 - Composer: attachments, `/` skills, `@` mentions, prompt improve, YOLO mode, todo status
+- **Share from other apps** — send images, PDFs, Word/Excel files, text, or links straight into a chat
+- **Background job control** — inspect output, stop, or dismiss running host processes from the chat meta row
 
 ### 🎙️ Voice
 - Hold-to-dictate with STT
@@ -137,7 +139,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 
 ### 🧠 Brain
 - Model provider catalog with fallback chain and effort control
-- Skills with enable toggles
+- Skills with enable toggles — **open and edit skills** from the Skills hub or skill tool cards
 - Toolsets with environment configuration
 - Memory block viewer/editor
 - **Star Map** — interactive learning graph: constellation, clusters, timeline, node editor, curator
@@ -147,12 +149,15 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ### 📋 Work
 - Artifacts browser (images, audio, files)
 - Cron jobs: list, run-now, status badges
-- Kanban board with live updates
+- Kanban board with live updates — **request review** from ready or running tasks
+- **Host files** — browse the agent filesystem, drop `@file` / `@folder` chips into the composer
+- **Processes** — manage background jobs from live sessions, filter and start/stop with confirmation
 
 ### 🔌 Connect
 - Channel status (Telegram, Discord, Slack) with live dots
 - Webhook routes
 - Pairing requests + QR provisioning
+- **Hermes Cloud** — portal sign-in, org and agent pick, cookie-based reconnect
 
 ### 🖥️ System
 - Health: host gauges, gateway status
@@ -167,6 +172,10 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Connection details + Tailscale detection
 - Theme (dark/light)
 - Active profile
+- **Feedback** — submit a bug, feature idea, improvement, or question with screenshots and status tracking
+- **What's New** — release notes in-app, product version in the footer
+- **Backup preview** — see exactly what a prefs restore brings back before accepting
+- **Feature map** — search every screen, jump by area, tap to go straight to a feature
 
 ---
 
