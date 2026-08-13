@@ -106,7 +106,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ### 3. Connect to your agent
 
 1. Open Hermes Go
-2. **Self-hosted** — enter your agent's address (`http://<host>:9119` on your LAN, or your Tailscale IP) and your basic-auth credentials (set during `hermes-agent` setup)
+2. **Self-hosted** — enter your agent's address (`http://<host>:9119` on your LAN, your Tailscale IP, or `https://your-domain` behind a TLS reverse proxy) and your basic-auth credentials (set during `hermes-agent` setup)
 3. **Hermes Cloud** — sign in from the Connect screen with your portal account, pick your org and agent
 4. Done — the full agent is in your hand
 
