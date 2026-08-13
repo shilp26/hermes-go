@@ -301,6 +301,8 @@ const FEATURE_ICONS = {
   'Todo status': LUCIDE.listChecks,
   'Model & effort': LUCIDE.sliders,
   'Model & effort row': LUCIDE.sliders,
+  'Fast lane': LUCIDE.zap,
+  'Effort Off → Ultra': LUCIDE.sliders,
 
   // Dashboard — Agent status
   'Agent health': LUCIDE.heartPulse,
@@ -581,6 +583,8 @@ const HUB_MAP = [
           { name: 'YOLO mode', desc: 'Toggle auto-approval for the session', where: 'Composer · toggle' },
           { name: 'Todo status', desc: 'Live task checklist synced with the run', where: 'Composer · panel' },
           { name: 'Model & effort', desc: 'Per-session model and reasoning effort', where: 'Chat · header' },
+          { name: 'Fast lane', desc: 'Priority processing on supported models — Use Fast or Standard on pick', where: 'Chat · header' },
+          { name: 'Effort Off → Ultra', desc: 'Reasoning effort for the session and as a profile default', where: 'Chat · header' },
         ],
       },
     ],
