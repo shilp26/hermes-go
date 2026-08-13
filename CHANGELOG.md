@@ -6,6 +6,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.8] — 2026-08-13
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### App — Spotlight search
+- **Jump anywhere**: open Search from the drawer rail — a Spotlight-style jump list grouped by Home, Brain, Work, Connect, System, Settings, and Actions
+- **Type to go**: filter pages and actions — new chat, Feature map, cron, console, profile switcher — and tap to jump straight there, including focusing the Home composer
+- **In-app update banner**: Hermes Go updates now show on Home — "update available" / "update ready" with Update or Restart; the banner stays until you apply, and Retry appears if a download fails
+
+#### Feature map
+- **Sharper search**: area filter chips keep your search pinned, with clearer loading, retry, and "no matches" states plus a one-tap clear
+
+### Fixed
+
+#### Connect
+- **Steadier reconnects**: recovers reliably after the phone sleeps, the network blips, or a socket that looks open but is dead — no more hanging "connected" that never answers
+
+#### Cron
+- **Model-change warning**: switching the default model warns when scheduled cron jobs would stay on the old model, and offers to open Cron to review them
+
+#### Chat
+- **Per-session effort**: reasoning effort stays on the chat you set it in — switching sessions no longer leaks the last pick onto the next one
+
+#### App
+- **Cleaner icon**: the Android adaptive icon and the connect / restoring-session mark sit cleanly without a plate
+
+---
+
 ## [1.0.7] — 2026-08-12
 
 OTA update — the installed app self-updates.
