@@ -34,7 +34,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 ## Screenshots
 
 <p align="center">
-  <img src="screens/chat.jpg" alt="Chat" width="560">
+  <img src="screens/chat.jpg" alt="Chat" height="500">
 </p>
 
 | Sessions | Dashboard & Settings | Drawer |
