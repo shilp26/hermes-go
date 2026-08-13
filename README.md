@@ -33,17 +33,17 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ## Screenshots
 
-| Chat | Sessions | Dashboard |
-|---|---|---|
-| ![Chat](screens/chat.jpg) | ![Sessions](screens/sessions.jpg) | ![Dashboard](screens/dashboard-settings.jpg) |
-
-| Drawer | Session sheets | Artifacts |
-|---|---|---|
-| ![Drawer](screens/drawer.jpg) | ![Session sheets](screens/sessions-switch.jpg) | ![Artifacts](screens/artifacts.jpg) |
-
-| Activity & Models |
+| Chat |
 |---|
-| ![Activity & Models](screens/models-activity.jpg) |
+| ![Chat](screens/chat.jpg) |
+
+| Sessions | Dashboard & Settings | Drawer |
+|---|---|---|
+| ![Sessions](screens/sessions.jpg) | ![Dashboard & Settings](screens/dashboard-settings.jpg) | ![Drawer](screens/drawer.jpg) |
+
+| Session sheets | Context & Artifacts | Activity & Models |
+|---|---|---|
+| ![Session sheets](screens/sessions-switch.jpg) | ![Context & Artifacts](screens/artifacts.jpg) | ![Activity & Models](screens/models-activity.jpg) |
 
 ---
 
