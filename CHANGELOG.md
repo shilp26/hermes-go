@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.7] — 2026-08-12
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### Work
+- **Processes screen**: manage background jobs from live sessions — filter all / running / finished, and start or stop processes with a confirmation prompt
+
+#### Chat
+- **Background job control**: sessions with running host processes show a terminal control in the meta row — open a sheet to inspect output, stop a running job, or dismiss finished ones
+
+#### Kanban
+- **Request review**: hand off ready or running kanban tasks to review, with an optional note
+
+### Changed
+
+#### Chat
+- **Compact process notices**: background process completion and watch events render as small timeline pills instead of chat bubbles
+- **Live status bar**: shows "1 action" / "N actions" instead of verb + target
+
+---
+
 ## [1.0.6] — 2026-08-12
 
 OTA update — the installed app self-updates.

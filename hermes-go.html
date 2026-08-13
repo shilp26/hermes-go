@@ -1537,6 +1537,31 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
 
+    <!-- v1.0.7 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.7</span>
+        <span class="changelog-date">12 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3>Background processes, kanban review handoff</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>Processes screen in Work — manage background jobs, filter all / running / finished, start or stop with confirmation</li>
+          <li>Background job control in chat — terminal control in the meta row, inspect output, stop or dismiss</li>
+          <li>Request review from kanban tasks with an optional handoff note</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Changed</h4>
+        <ul>
+          <li>Process completion and watch notices render as compact timeline pills instead of chat bubbles</li>
+          <li>Live status bar shows "1 action" / "N actions" instead of verb + target</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- v1.0.6 -->
     <div class="changelog-item reveal">
       <div class="changelog-meta">
@@ -1919,7 +1944,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.6 · Android APK</div>
+          <div class="ver">v1.0.7 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
@@ -1960,7 +1985,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.6</span></span>
+    <span>Hermes Go <span class="ver">v1.0.7</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
