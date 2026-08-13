@@ -43,10 +43,6 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 | Activity & Models |
 |---|
-| ![Activity panel and Models picker](screens/models-activity.jpg) |
-
-| Activity & Models |
-|---|
 | ![Activity & Models](screens/models-activity.jpg) |
 
 ---
