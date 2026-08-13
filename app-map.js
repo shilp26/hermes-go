@@ -170,6 +170,7 @@ const SEGMENT_ICONS = {
   'Cloud': LUCIDE.cloud,
   'Feedback & info': LUCIDE.messageSquareText,
   'Files': LUCIDE.folder,
+  'Processes': LUCIDE.activity,
 
   // Sessions
   'Inbox': LUCIDE.inbox,
@@ -274,6 +275,14 @@ const FEATURE_ICONS = {
   '@file chips': LUCIDE.fileText,
   '@folder chips': LUCIDE.folder,
   'Stable pins': LUCIDE.refreshCw,
+
+  // Work — Processes
+  'Process list': LUCIDE.activity,
+  'Start / stop': LUCIDE.power,
+  'Job sheet': LUCIDE.terminalSquare,
+
+  // Work — Kanban
+  'Request review': LUCIDE.checkSquare,
 
   // Brain — Skills
   'Open & edit': LUCIDE.pencil,
@@ -683,6 +692,7 @@ const HUB_MAP = [
         label: 'Kanban', desc: 'Live task board across columns',
         features: [
           { name: 'Board', desc: 'Tasks in columns, live updates', where: 'Work · Kanban' },
+          { name: 'Request review', desc: 'Hand off ready or running tasks to review, with an optional note', where: 'Work · Kanban' },
         ],
       },
       {
@@ -692,6 +702,14 @@ const HUB_MAP = [
           { name: '@file chips', desc: 'Long-press a file to drop an @file chip into the composer without replacing your draft', where: 'Work · Files' },
           { name: '@folder chips', desc: 'Long-press a folder to reference it inline', where: 'Work · Files' },
           { name: 'Stable pins', desc: 'Browse pins and Review scopes survive cold start, reinstall, and backup', where: 'Work · Files' },
+        ],
+      },
+      {
+        label: 'Processes', desc: 'Background jobs from live sessions',
+        features: [
+          { name: 'Process list', desc: 'All background processes, filterable by running or finished', where: 'Work · Processes' },
+          { name: 'Start / stop', desc: 'Launch or terminate a process with a confirmation prompt', where: 'Work · Processes' },
+          { name: 'Job sheet', desc: 'Inspect output, stop a running job, or dismiss finished ones', where: 'Chat · meta row' },
         ],
       },
     ],
