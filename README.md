@@ -25,7 +25,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 - **Artifacts** — images, audio, and HTML previews inline in chat
 - **Full control** — approvals, sudo, secrets, queue, steer, stop
 - **Deep visibility** — health, analytics, logs, ops console, config editor
-- **Your server, your data** — connects over LAN or Tailscale, never through a cloud relay
+- **Your server, your data** — connects direct to your server over LAN or Tailscale, or via Hermes Cloud for portal-managed agents
 
 > **Closed source.** The app is distributed as a signed APK. No telemetry, no analytics, no tracking. Your conversations stay on your machine.
 
@@ -106,8 +106,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ### 3. Connect to your agent
 
 1. Open Hermes Go
-2. Enter your agent's address — `http://<host>:9119` on your LAN, or your Tailscale IP
-3. Enter your basic-auth credentials (set during `hermes-agent` setup)
+2. **Self-hosted** — enter your agent's address (`http://<host>:9119` on your LAN, or your Tailscale IP) and your basic-auth credentials (set during `hermes-agent` setup)
+3. **Hermes Cloud** — sign in from the Connect screen with your portal account, pick your org and agent
 4. Done — the full agent is in your hand
 
 ---
@@ -185,8 +185,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 |---|---|
 | **Distribution** | Signed APK via GitHub Releases |
 | **Telemetry** | **None.** Zero analytics, zero tracking |
-| **Data path** | Direct to your server (LAN / Tailscale) — no cloud relay |
-| **Auth** | Basic auth against your self-hosted agent |
+| **Data path** | Direct to your server (LAN / Tailscale) or Hermes Cloud — no telemetry either way |
+| **Auth** | Basic auth (self-hosted) or Hermes Cloud portal sign-in |
 | **Secrets** | Stored in platform secure storage (expo-secure-store) |
 | **Source** | Closed source — the APK is the artifact of record |
 | **Verification** | SHA-256 published with every release |
@@ -202,6 +202,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 | State | Zustand 5 |
 | Persistence | expo-sqlite (local-first, background sync) |
 | Real-time | WebSocket JSON-RPC gateway client |
+| Cloud | Hermes Cloud portal (org & agent pick, cookie reconnect) |
 | Voice | STT dictation + TTS playback |
 | Icons | lucide-react-native |
 | Build | EAS Build (APK) + OTA updates (expo-updates) |
@@ -220,12 +221,16 @@ If the hash matches, the file is exactly what we published — nothing added, no
 │  Transport   │  WebSocket JSON-RPC client   │
 │  Auth        │  Basic auth · secure store   │
 └──────────────┴──────────────────────────────┘
-        │  WebSocket (JSON-RPC) / REST
-        ▼
-┌─────────────────────────────────────────────┐
-│        Your self-hosted Hermes Agent        │
-│        (port 9119 · LAN or Tailscale)       │
-└─────────────────────────────────────────────┘
+        │                        │
+        │  WebSocket (JSON-RPC)  │  Hermes Cloud (portal
+        │  / REST                │  sign-in · org & agent
+        ▼                        ▼  pick · cookie reconnect)
+┌──────────────────┐  ┌───────────────────────┐
+│ Your self-hosted │  │    Hermes Cloud       │
+│   Hermes Agent   │  │      agents           │
+│ (port 9119 · LAN │  │  (portal-managed)     │
+│  or Tailscale)   │  │                       │
+└──────────────────┘  └───────────────────────┘
 ```
 
 ---
@@ -233,15 +238,6 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for the full release history.
-
----
-
-## Roadmap
-
-- [ ] **Android widget** — quick actions (new chat, voice, starred) from the home screen
-- [ ] Google Play Store release
-- [ ] iOS build
-- [ ] More channel integrations
 
 ---
 

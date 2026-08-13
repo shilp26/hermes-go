@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Hermes Go — a mobile client for your remote self-hosted Hermes AI agent. Connect via local network or Tailscale to port 9119.">
+<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Connect to your own server over LAN or Tailscale, or via Hermes Cloud.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta property="og:description" content="A native mobile client for your self-hosted Hermes agent. One prompt setup, live streaming, voice, artifacts, and full agent control.">
+<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. One prompt setup, live streaming, voice, artifacts, and full agent control.">
 <meta property="og:image" content="assets/og-image.png">
 <meta property="og:site_name" content="Hermes Go">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta name="twitter:description" content="A native mobile client for your self-hosted Hermes agent. One prompt setup, live streaming, voice, artifacts, and full agent control.">
+<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. One prompt setup, live streaming, voice, artifacts, and full agent control.">
 <meta name="twitter:image" content="assets/og-image.png">
 <title>Hermes Go — Remote Mobile Client for Hermes AI Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1346,12 +1346,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="hero-copy">
       <h1 class="display hero-enter" id="hero-heading">Your AI agent,<br>in your pocket.</h1>
 
-      <p class="hero-lead hero-enter">A native mobile client for your self-hosted <code class="inline-code">hermes-agent</code> — live streaming, voice, artifacts, and full agent control from anywhere.</p>
+      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, voice, artifacts, and full agent control from anywhere.</p>
 
       <div class="hero-enter" aria-label="Key capabilities">
         <ul class="hero-highlights">
           <li><strong>One-prompt setup</strong> — basic auth, port 9119, Tailscale detection, connection details handed back</li>
-          <li><strong>Direct WebSocket</strong> — 100% remote over LAN or Tailscale, no relays</li>
+          <li><strong>Direct WebSocket</strong> — over LAN or Tailscale to your server, or via Hermes Cloud</li>
           <li><strong>8 app surfaces</strong> — chat, voice, brain, work, sessions, dashboard, connect, settings</li>
         </ul>
       </div>
@@ -1409,7 +1409,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <span class="metric-badge">Transport</span>
         <div class="metric-val"><span class="accent">100%</span></div>
         <div class="metric-lbl">Direct remote WebSocket</div>
-        <p class="metric-note">No relays, no third party — LAN or Tailscale only.</p>
+        <p class="metric-note">LAN or Tailscale direct — or Hermes Cloud.</p>
       </div>
       <div class="metric-node">
         <div class="metric-mark" aria-hidden="true">2</div>
@@ -1529,14 +1529,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="container">
     <div class="why-intro">
       <p class="caption">Why Hermes Go</p>
-      <h2 class="h1">Your agent stays on your server.<br>Hermes Go puts it in your hand.</h2>
+      <h2 class="h1">Your agent, wherever it runs.<br>Hermes Go puts it in your hand.</h2>
     </div>
 
     <div class="pillars">
       <div class="pillar reveal">
         <div class="pillar-ghost" aria-hidden="true">01</div>
-        <h3 class="h3">No cloud. No relay.</h3>
-        <p>A direct Tailscale WebSocket to your server. Nothing passes through a third party.</p>
+        <h3 class="h3">Direct or Cloud — your choice.</h3>
+        <p>A direct Tailscale WebSocket to your own server — or Hermes Cloud when you want a managed agent. Nothing runs through an unknown third party.</p>
       </div>
       <div class="pillar reveal">
         <div class="pillar-ghost" aria-hidden="true">02</div>
@@ -1945,11 +1945,11 @@ Password: <password></div>
       <div class="trust-left">
         <p class="caption" style="color:var(--accent);margin-bottom:12px">Get Hermes Go</p>
         <h2 class="h1" style="margin-bottom:14px">Direct download. No middleman.</h2>
-        <p class="body" style="margin-bottom:28px;color:var(--subtle)">The mobile client for your self-hosted Hermes agent. Native Android APK — sideload today, Play Store soon.</p>
+        <p class="body" style="margin-bottom:28px;color:var(--subtle)">The mobile client for your Hermes agent — self-hosted or Hermes Cloud. Native Android APK — sideload today, Play Store soon.</p>
         <div class="trust-badges">
           <div class="trust-badge">
             <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="trust-badge-text"><span>Direct &amp; Secure</span><small>Port 9119 · Tailscale · no relays</small></div>
+            <div class="trust-badge-text"><span>Direct &amp; Secure</span><small>Port 9119 · Tailscale · Hermes Cloud</small></div>
           </div>
           <div class="trust-badge">
             <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
@@ -2002,7 +2002,7 @@ Password: <password></div>
         GitHub
       </a>
     </nav>
-    <div class="footer-copy">© 2026 Hermes AI Ecosystem · Remote mobile client for self-hosted Hermes Agent</div>
+    <div class="footer-copy">© 2026 Hermes AI Ecosystem · Remote mobile client for your Hermes agent</div>
   </div>
 </footer>
 
