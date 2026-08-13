@@ -55,16 +55,16 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ### Surfaces
 
-| Surface | Segments | Features | What it does |
-|---|---|---|---|
-| **Dashboard** | 6 | 12 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
-| **Chat** | 8 | 38 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
-| **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
-| **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
-| **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
-| **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
-| **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
-| **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
+| | Surface | Segments | Features | What it does |
+|---|---|---|---|---|
+| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 12 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 38 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
+| <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
+| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
+| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
+| <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
+| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
 **Total: 8 surfaces · 45 segments · 122 features**
 
