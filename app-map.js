@@ -288,6 +288,10 @@ const FEATURE_ICONS = {
   'Open & edit': LUCIDE.pencil,
   'Invocation chips': LUCIDE.sparkle,
 
+  // Dashboard — Quick compose
+  'Spotlight search': LUCIDE.search,
+  'Update banner': LUCIDE.bell,
+
   // Chat — Composer tools
   'Attachments': LUCIDE.paperclip,
   'Slash skills': LUCIDE.hash,
@@ -486,6 +490,8 @@ const HUB_MAP = [
         features: [
           { name: 'Composer', desc: 'Type and send without opening the chat screen', where: 'Dashboard · bottom' },
           { name: 'Model & effort row', desc: 'Pick model and effort when the keyboard opens', where: 'Dashboard · composer' },
+          { name: 'Spotlight search', desc: 'Jump to any screen or action — new chat, Feature map, cron, console, profile switcher', where: 'Drawer rail · Search' },
+          { name: 'Update banner', desc: 'In-app "update available" / "update ready" with Update, Restart, or Retry', where: 'Home · top' },
         ],
       },
       {
