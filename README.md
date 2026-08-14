@@ -70,7 +70,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 **Total: 8 surfaces · 45 segments · 126 features**
 
-> Full interactive map: [app-map.html](app-map.html)
+> Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
 ---
 
