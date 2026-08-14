@@ -249,4 +249,4 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 **This repository (the website) is open source** under the [MIT License](LICENSE). The Hermes Go application itself is **closed source** — distributed as a signed APK with a published SHA-256 for verification. The APK is provided for personal use; redistribution or modification of the binary is not permitted without written consent.
 
-© 2026 Hermes AI Ecosystem
+© 2026 Hermes Go by Shilp
