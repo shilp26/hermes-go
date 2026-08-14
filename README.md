@@ -29,6 +29,8 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 > **Closed source.** The app is distributed as a signed APK. No telemetry, no analytics, no tracking. Your conversations stay on your machine.
 
+> 💙 **Built on [Hermes Agent](https://github.com/NousResearch/hermes-agent) by [Nous Research](https://nousresearch.com/) — thank you for making this possible!**
+
 ---
 
 ## Screenshots

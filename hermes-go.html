@@ -1215,6 +1215,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .footer-links .footer-github { display: inline-flex; align-items: center; gap: 6px; color: var(--fg); }
 .footer-links .footer-github svg { width: 15px; height: 15px; fill: currentColor; }
 .footer-copy { font-size: 13px; color: var(--subtle); }
+.footer-built { font-size: 13px; color: var(--subtle); margin-bottom: 6px; }
+.footer-built a { color: var(--fg); font-weight: 600; transition: color 0.2s; }
+.footer-built a:hover { color: var(--accent); }
 .footer-bottom { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 .footer-bottom .footer-links { justify-content: flex-end; }
 
@@ -2059,6 +2062,7 @@ Password: <password></div>
         GitHub
       </a>
     </nav>
+    <div class="footer-built">💙 Built on <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">Hermes Agent</a> by <a href="https://nousresearch.com/" target="_blank" rel="noopener">Nous Research</a> — thank you!</div>
     <div class="footer-copy">© 2026 Hermes AI Ecosystem · Remote mobile client for your Hermes agent</div>
   </div>
 </footer>
