@@ -103,7 +103,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 3. Tap **Install**
 4. Open **Hermes Go**
 
-> **Why sideload?** The APK is distributed directly — no Play Store review queue. The SHA-256 above is your guarantee of authenticity. A Play Store release is planned.
+> A Play Store release is planned.
 
 ### 3. Connect to your agent
 
