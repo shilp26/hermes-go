@@ -1562,6 +1562,42 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
 
+    <!-- v1.0.10 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.10</span>
+        <span class="changelog-date">15 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3>Session loops, host pressure alerts, reconnect polish</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>Recurring loops — keep an active /loop pinned above the composer with prompt, countdown, and status</li>
+          <li>Pause, resume, or stop loops from the card itself</li>
+          <li>Activity stack — todos, subagents, and loops collapse into one compact group when busy</li>
+          <li>Unfinished task plans stay pinned across turns and show when work is from the last turn</li>
+          <li>Memory and disk pressure alerts on Home and Health when the host reports elevated pressure</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Changed</h4>
+        <ul>
+          <li>Tool cards are easier to scan with readable values, chips, lists, and markdown</li>
+          <li>History continues correctly after in-place compaction</li>
+          <li>Long clarify questions and options wrap fully; long lists scroll while Other and Confirm stay reachable</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Long background sleeps, dead sockets, and handshake timeouts reconnect instead of getting stuck</li>
+          <li>Parked approvals and clarify prompts return after reconnect</li>
+          <li>Live usage updates the context bar quietly; completed turns settle so Stop does not remain stuck</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- v1.0.9 -->
     <div class="changelog-item reveal">
       <div class="changelog-meta">
@@ -1617,8 +1653,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v1.0.7 -->
-    <div class="changelog-item reveal">
+    <div class="changelog-item cl-old reveal">
       <div class="changelog-meta">
         <span class="changelog-badge">v1.0.7</span>
         <span class="changelog-date">12 Aug 2026</span>
@@ -1641,9 +1680,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         </ul>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.6 -->
     <div class="changelog-item cl-old reveal">
@@ -2026,7 +2062,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.9 · Android APK</div>
+          <div class="ver">v1.0.10 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
@@ -2073,7 +2109,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.9</span></span>
+    <span>Hermes Go <span class="ver">v1.0.10</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>

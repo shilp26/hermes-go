@@ -6,9 +6,9 @@
 
 **Your AI agent, in your pocket.**
 
-A native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.nousresearch.com). One prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details.
+A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal.
 
-`v1.0.9` · Android APK · Closed Source · Zero Telemetry
+`v1.0.10` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -18,7 +18,7 @@ A native mobile client for your self-hosted [Hermes Agent](https://hermes-agent.
 
 ## What is Hermes Go?
 
-Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It is not a chat wrapper — it is the full agent in your hand:
+Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Hermes Cloud. It is not a chat wrapper — it is the full agent in your hand:
 
 - **Live streaming** — reasoning rows, tool timelines, and markdown as they happen
 - **Voice** — dictate, hear replies, hands-free conversation loop
@@ -27,7 +27,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 - **Deep visibility** — health, analytics, logs, ops console, config editor
 - **Your server, your data** — connects direct to your server over LAN or Tailscale, or via Hermes Cloud for portal-managed agents
 
-> **Closed source.** The app is distributed as a signed APK. No telemetry, no analytics, no tracking. Your conversations stay on your machine.
+> **Closed source.** The app is distributed as a signed APK. No telemetry, no analytics, no tracking. Self-hosted connections go directly to your server; Hermes Cloud connections use Hermes Cloud.
 
 > 💙 **Built on [Hermes Agent](https://github.com/NousResearch/hermes-agent) by [Nous Research](https://nousresearch.com/) — thank you for making this possible!**
 
@@ -52,7 +52,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 45 segments, 126 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 45 segments, 136 features" width="100%">
 </p>
 
 ### Surfaces
@@ -60,15 +60,15 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 14 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 40 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 49 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
-| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 16 | Health, analytics, setup, ops console, logs, power tools |
+| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 17 | Health, analytics, setup, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 8 surfaces · 45 segments · 126 features**
+**Total: 8 surfaces · 45 segments · 136 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -78,7 +78,7 @@ Hermes Go is a **native Android client** for the self-hosted Hermes AI agent. It
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.9](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.10](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -129,6 +129,11 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Background job control** — inspect output, stop, or dismiss running host processes from the chat meta row
 - **Fast lane** — toggle priority processing on supported models, with Use Fast or Standard choice on pick
 - **Reasoning effort** — set Off → Ultra per session and as a profile default
+- **Session loops** — recurring `/loop` cards with countdown, status, pause, resume, and stop controls
+- **Activity stack** — keep todos, subagents, and loops organized above the composer
+- **Persistent task plans** — unfinished work stays visible across turns
+- **Recovered prompts** — approvals and clarify prompts return after reconnect
+- **Readable tool cards** — key-values, chips, lists, and markdown instead of raw output
 
 ### 🎙️ Voice
 - Hold-to-dictate with STT
@@ -165,6 +170,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 
 ### 🖥️ System
 - Health: host gauges, gateway status
+- **Memory and disk pressure alerts** — advisory notices on Home and Health when the host reports elevated pressure
 - Analytics: usage trends
 - Setup: app features, voice, thinking depth, safety, UI
 - Ops console with readable parsed output

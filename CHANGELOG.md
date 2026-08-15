@@ -6,6 +6,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.10] — 2026-08-15
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### Chat — Session loops
+- **Recurring loops**: keep an active `/loop` pinned above the composer with its prompt, countdown, and status
+- **Loop controls**: pause, resume, or stop from the card itself — no command to remember
+- **Activity stack**: todos, subagents, and loops share a compact stack above the input; three live surfaces collapse into one Activity group
+- **Plans that stick**: unfinished todo lists stay pinned across turns, show when work is from the last turn, and do not reappear after completion
+
+#### System — Host pressure
+- **Memory and disk alerts**: Home and Health show an advisory when the gateway reports elevated or critical pressure; alerts stay quiet on older agents
+
+### Changed
+
+#### Chat — Prompts and history
+- **Readable tool cards**: key-values, chips, lists, and markdown are easier to scan than raw output
+- **Complete history after compaction**: archived rows continue past an in-place compaction boundary instead of stopping early
+- **Clearer prompts**: long clarify questions and options wrap fully; long option lists scroll while Other and Confirm stay reachable
+
+### Fixed
+
+#### Connect and live turns
+- **Recover after backgrounding**: long sleeps, dead sockets, and handshake timeouts now reconnect instead of leaving a permanent retry state
+- **Parked prompts return**: approvals and clarify prompts can be restored after reconnect, so blocked work can be answered again
+- **Steadier turns**: live usage updates the context bar without transcript noise; completed turns settle cleanly so Stop does not remain stuck
+
+---
+
 ## [1.0.9] — 2026-08-14
 
 OTA update — the installed app self-updates.
