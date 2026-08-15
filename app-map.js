@@ -221,6 +221,8 @@ const FEATURE_ICONS = {
   'Code blocks': LUCIDE.code,
   'Tables': LUCIDE.table ?? LUCIDE.listFilter,
   'Context ring': LUCIDE.cpu,
+  'Readable tool cards': LUCIDE.terminalSquare,
+  'Compacted history': LUCIDE.archive,
 
   // Chat — Voice
   'Dictate': LUCIDE.mic,
@@ -240,12 +242,17 @@ const FEATURE_ICONS = {
   'Clarify': LUCIDE.alertCircle,
   'Sudo': LUCIDE.terminal,
   'Secret': LUCIDE.lock,
+  'Prompt recovery': LUCIDE.rotateCcw,
+  'Long option lists': LUCIDE.layers,
 
   // Chat — Queue & steer
   'Send queue': LUCIDE.arrowUpDown,
   'Queue panel': LUCIDE.arrowUpDown,
   'Steer': LUCIDE.hand,
   'Stop': LUCIDE.stop,
+  'Session loops': LUCIDE.refreshCw,
+  'Loop controls': LUCIDE.play,
+  'Loop wakeups': LUCIDE.bell,
 
   // Chat — Subagents
   'Subagent list': LUCIDE.gitBranch,
@@ -303,6 +310,8 @@ const FEATURE_ICONS = {
   'Model & effort row': LUCIDE.sliders,
   'Fast lane': LUCIDE.zap,
   'Effort Off → Ultra': LUCIDE.sliders,
+  'Activity stack': LUCIDE.layers,
+  'Persistent task plans': LUCIDE.listChecks,
 
   // Dashboard — Agent status
   'Agent health': LUCIDE.heartPulse,
@@ -397,6 +406,7 @@ const FEATURE_ICONS = {
   // System — Health
   'Host gauges': LUCIDE.heartPulse,
   'Gateway status': LUCIDE.shieldCheck,
+  'Memory & disk alerts': LUCIDE.activity,
 
   // System — Analytics
   'Usage trends': LUCIDE.trendingUp,
@@ -518,6 +528,8 @@ const HUB_MAP = [
           { name: 'Code blocks', desc: 'Syntax-highlighted with copy button', where: 'Chat · thread' },
           { name: 'Tappable links', desc: 'Bare http(s) links open on tap — even inside code blocks', where: 'Chat · message' },
           { name: 'Context ring', desc: 'Live context window usage', where: 'Chat · header' },
+          { name: 'Readable tool cards', desc: 'Tool results shown as readable values, chips, lists, and markdown', where: 'Chat · tool card' },
+          { name: 'Compacted history', desc: 'Archived rows continue past an in-place compaction boundary', where: 'Chat · history' },
         ],
       },
       {
@@ -546,6 +558,8 @@ const HUB_MAP = [
           { name: 'Clarify', desc: 'Answer multi-select questions with one tap', where: 'Chat · prompt card' },
           { name: 'Sudo', desc: 'Enter a password when the agent needs elevation', where: 'Chat · prompt card' },
           { name: 'Secret', desc: 'Provide secrets without leaking them into chat', where: 'Chat · prompt card' },
+          { name: 'Prompt recovery', desc: 'Parked approvals and clarify prompts return after reconnect', where: 'Chat · prompt card' },
+          { name: 'Long option lists', desc: 'Options wrap and scroll while Other and Confirm stay reachable', where: 'Chat · prompt card' },
         ],
       },
       {
@@ -555,6 +569,9 @@ const HUB_MAP = [
           { name: 'Queue panel', desc: 'See and manage the queued messages', where: 'Composer · queue chip' },
           { name: 'Steer', desc: 'Guide the agent mid-run without interrupting', where: 'Composer · steer' },
           { name: 'Stop', desc: 'Cancel the current turn cleanly', where: 'Composer · stop' },
+          { name: 'Session loops', desc: 'Keep recurring /loop work pinned with countdown and status', where: 'Composer · loop card' },
+          { name: 'Loop controls', desc: 'Pause, resume, or stop a loop from its card', where: 'Composer · loop card' },
+          { name: 'Loop wakeups', desc: 'Quiet wakeup markers keep recurring work out of chat bubbles', where: 'Chat · thread' },
         ],
       },
       {
@@ -585,6 +602,8 @@ const HUB_MAP = [
           { name: 'Model & effort', desc: 'Per-session model and reasoning effort', where: 'Chat · header' },
           { name: 'Fast lane', desc: 'Priority processing on supported models — Use Fast or Standard on pick', where: 'Chat · header' },
           { name: 'Effort Off → Ultra', desc: 'Reasoning effort for the session and as a profile default', where: 'Chat · header' },
+          { name: 'Activity stack', desc: 'Todos, subagents, and loops share a compact stack above the input', where: 'Composer · activity' },
+          { name: 'Persistent task plans', desc: 'Unfinished todo lists stay pinned across turns', where: 'Composer · todo card' },
         ],
       },
     ],
@@ -764,6 +783,7 @@ const HUB_MAP = [
         features: [
           { name: 'Host gauges', desc: 'CPU, memory, disk of the agent machine', where: 'System · Health' },
           { name: 'Gateway status', desc: 'Connection state to the gateway', where: 'System · Health' },
+          { name: 'Memory & disk alerts', desc: 'Advisory notices when the host reports elevated or critical pressure', where: 'Home · Health' },
         ],
       },
       {
