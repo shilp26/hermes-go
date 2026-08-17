@@ -29,6 +29,7 @@ const LUCIDE = {
   server: `<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>`,
   settings: `<path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/>`,
   userRound: `<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>`,
+  bot: `<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>`,
   terminal: `<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>`,
 
   // ── Segments (from HubFlyout.tsx) ──
@@ -140,6 +141,7 @@ const LUCIDE = {
 const HUB_ICONS = {
   dashboard: LUCIDE.layoutDashboard,
   chat: LUCIDE.messageSquare,
+  bots: LUCIDE.bot,
   sessions: LUCIDE.messageSquareText,
   brain: LUCIDE.brain,
   work: LUCIDE.workflow,
@@ -171,6 +173,10 @@ const SEGMENT_ICONS = {
   'Feedback & info': LUCIDE.messageSquareText,
   'Files': LUCIDE.folder,
   'Processes': LUCIDE.activity,
+
+  // Bots
+  'Agents': LUCIDE.bot,
+  'Routines': LUCIDE.clock,
 
   // Sessions
   'Inbox': LUCIDE.inbox,
@@ -312,6 +318,22 @@ const FEATURE_ICONS = {
   'Effort Off → Ultra': LUCIDE.sliders,
   'Activity stack': LUCIDE.layers,
   'Persistent task plans': LUCIDE.listChecks,
+
+  // Bots Mode — Agents and Routines
+  'Bots': LUCIDE.bot,
+  'Agent search': LUCIDE.search,
+  'Agent roster': LUCIDE.bot,
+  'Open Bot Chat': LUCIDE.messageSquare,
+  'Bot actions': LUCIDE.arrowUpDown,
+  'Bot details': LUCIDE.edit,
+  'New Agent': LUCIDE.plus,
+  'Agent identity': LUCIDE.userRound,
+  'Assign with @': LUCIDE.at,
+  'Assignment receipts': LUCIDE.activity,
+  'Bot request cards': LUCIDE.messageSquareText,
+  'Agent routines': LUCIDE.clock,
+  'Create routine': LUCIDE.plus,
+  'Routine controls': LUCIDE.play,
 
   // Dashboard — Agent status
   'Agent health': LUCIDE.heartPulse,
@@ -604,6 +626,35 @@ const HUB_MAP = [
           { name: 'Effort Off → Ultra', desc: 'Reasoning effort for the session and as a profile default', where: 'Chat · header' },
           { name: 'Activity stack', desc: 'Todos, subagents, and loops share a compact stack above the input', where: 'Composer · activity' },
           { name: 'Persistent task plans', desc: 'Unfinished todo lists stay pinned across turns', where: 'Composer · todo card' },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'bots', label: 'Bots', icon: 'bots', tag: 'Agents · Routines',
+    segments: [
+      {
+        label: 'Agents', desc: 'Named teammates with their own chat and identity',
+        features: [
+          { name: 'Bots', desc: 'Roster of named AI teammates on this Hermes host', where: 'Drawer rail · after Chat' },
+          { name: 'Agent search', desc: 'Find teammates by display name, handle, profile, or description', where: 'Bots · Agents · search' },
+          { name: 'Agent roster', desc: 'Faces, previews, last-active time, status pills, and unread work', where: 'Bots · Agents' },
+          { name: 'Open Bot Chat', desc: 'Open the pinned forever conversation for a teammate', where: 'Bots · Agents' },
+          { name: 'Bot actions', desc: 'Open Details or start a new scratch chat from the roster', where: 'Bots · Agents · swipe' },
+          { name: 'Bot details', desc: 'Edit title, description, model, skills, tools, and SOUL', where: 'Bots · Details' },
+          { name: 'New Agent', desc: 'Create or clone a named teammate with its own profile', where: 'Bots · Agents · +' },
+          { name: 'Agent identity', desc: 'Live face moods, photo avatars, stable handles, Default and In Chat state', where: 'Bots · Agents · roster' },
+          { name: 'Assign with @', desc: 'Ask one or several teammates from any chat or Home and receive their reply here', where: 'Chat or Home · composer · @' },
+          { name: 'Assignment receipts', desc: 'Asking, Waiting, Couldn\'t reach, and Replied status with open-chat shortcuts', where: 'Chat · assignment card' },
+          { name: 'Bot request cards', desc: 'Assigned agents see who asked and what was requested, with expand and copy', where: 'Bot Chat · inbound card' },
+        ],
+      },
+      {
+        label: 'Routines', desc: 'Scheduled work owned by a teammate',
+        features: [
+          { name: 'Agent routines', desc: 'Interval, daily, or one-time work that runs as a chosen teammate', where: 'Bots · Routines' },
+          { name: 'Create routine', desc: 'Pick an agent, instruction, schedule mode, and live expression preview', where: 'Bots · Routines · create' },
+          { name: 'Routine controls', desc: 'Filter, pause, resume, run now, inspect history, or delete', where: 'Bots · Routines · detail' },
         ],
       },
     ],
