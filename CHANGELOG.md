@@ -6,6 +6,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.11] — 2026-08-18
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🤖 Bots Mode — Agents
+- **Bots hub**: a new drawer destination for named AI teammates, with **Agents** and **Routines** segments, expanding search, pull-to-refresh, and clear offline or host-version states.
+- **Build an AI teammate**: create from scratch or clone another profile with a name, handle, title, description, model, reasoning effort, Fast mode, skills, toolsets, optional SOUL, and key-sharing controls.
+- **Bot identity**: live geometric faces with idle and working moods, stable handles, optional JPEG/PNG/WebP avatars, and roster indicators for Default, In Chat, and unread work.
+- **Bot details**: edit the teammate’s title, description, model, skills, tools, and SOUL; see its chats, memory and skill counts, Star Map, and routines from one sheet.
+- **Forever Bot Chat**: one canonical conversation per teammate stays out of Home and Sessions recents, while scratch chats remain separate and easy to start.
+
+#### 💬 Chat — assign work from any session
+- **Assign with @**: type `@` in any existing chat or Home composer to choose a teammate without leaving the conversation. The agent works in its own Bot Chat and its reply comes back here.
+- **Multi-agent assignments**: select several teammates, remove them as chips, and send one request to the group; self-mentions are excluded.
+- **Live assignment receipts**: see Asking, Waiting, Couldn't reach, or Replied for each teammate, open their Bot Chat, and read the returned markdown reply in place.
+- **Bot-side request cards**: assigned agents see who asked, what was requested, and can expand or copy the request without exposing protocol details.
+
+#### ⏱️ Bots Mode — Routines
+- **Agent routines**: schedule recurring work as a specific teammate with interval, daily, or one-time timing and a live expression preview.
+- **Routine controls**: filter by teammate, inspect next run and history, pause, resume, run now, or delete.
+
+#### 🧭 Home, navigation, and sessions
+- **Bots discovery**: Bots now appears in the drawer rail, hub flyout, global search, and Feature Map; a bot’s Star Map opens scoped to that teammate.
+- **Running loops on Home**: see active loops from the dashboard and tap View to open the relevant chat.
+- **Session unread state**: mark chats read or unread where the host supports watermarks; bot chats remain owned by Bots instead of cluttering recents.
+
+### Changed
+
+#### 🎨 Bots Mode UX/UI
+- Roster rows now show a face, last-active time, preview, @handle, unread dot, status pills, and an active face ring; swipe right for Details or left for a new scratch chat.
+- Create and Details sheets preview faces live, confirm dirty closes, save only changed fields, and roll back skill or tool changes if a save fails.
+- Empty, offline, outdated-host, failed-load, and no-search-result states now explain what is happening instead of showing a blank screen.
+
+#### 🔒 Chat, profiles, and settings
+- Bot conversations keep their own profile for resume, sending, queued work, and usage while the management profile stays where you left it.
+- The composer model pill now honestly shows profile model, reasoning effort, and Fast state; history tips fetch newest-first so compacted archives do not hide recent days.
+- Backup settings explain exactly what is uploaded and restored, including the path and the data that is never included.
+
+### Fixed
+
+#### 🛡️ Bot isolation and reliability
+- Opening a Bot Chat no longer switches the drawer’s management profile or leaks bot state into regular sessions.
+- Pinned Bot Chats reopen directly instead of waiting on a long roster fetch; scratch chats are created only when first used.
+- Bot profile operations now cover profile creation, configuration, assets, skills, toolsets, and avatar generation, with honest “host update needed” handling when the server is too old.
+- Bot assignment receipts survive app restarts, multi-target replies stay attached to the correct request, and profile-scoped session/message data stays with the right teammate.
+
+---
+
 ## [1.0.10] — 2026-08-15
 
 OTA update — the installed app self-updates.

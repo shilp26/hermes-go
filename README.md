@@ -8,7 +8,9 @@
 
 A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal.
 
-`v1.0.10` · Android APK · Closed Source · Zero Telemetry
+**Bots Mode** brings named AI teammates to your phone — assign work from any chat with `@`, keep each teammate’s conversation isolated, and schedule routines for them.
+
+`v1.0.11` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -52,7 +54,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 8 surfaces, 45 segments, 136 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 47 segments, 150 features" width="100%">
 </p>
 
 ### Surfaces
@@ -61,6 +63,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 14 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
 | <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 49 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 2 | 14 | Agents, Bot Chat, @-assign from any session, assignment receipts, routines, profile identity |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
@@ -68,7 +71,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 17 | Health, analytics, setup, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 8 surfaces · 45 segments · 136 features**
+**Total: 9 surfaces · 47 segments · 150 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -78,7 +81,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.10](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.11](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -134,6 +137,15 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Persistent task plans** — unfinished work stays visible across turns
 - **Recovered prompts** — approvals and clarify prompts return after reconnect
 - **Readable tool cards** — key-values, chips, lists, and markdown instead of raw output
+- **Assign with @ from any session** — choose one or several teammates, keep chatting, and receive their replies back in the current conversation
+
+### 🤖 Bots Mode
+- **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
+- **Bot Chat** — one canonical conversation per teammate, kept out of normal Sessions recents; scratch chats remain separate
+- **Agent identity** — live faces, optional photo avatars, handles, last-active previews, unread dots, Default/In Chat status
+- **Bot details** — edit profile, skills, tools, SOUL, model, Star Map scope, chats, and routines from one sheet
+- **@-assign** — ask a teammate from any chat or Home; multi-agent chips, live Asking/Waiting/Replied receipts, and returned markdown in place
+- **Routines** — schedule agent-owned work daily, at intervals, or once; pause, resume, run, inspect history, or delete
 
 ### 🎙️ Voice
 - Hold-to-dictate with STT
@@ -225,7 +237,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ┌─────────────────────────────────────────────┐
 │                 Hermes Go (Android)          │
 ├──────────────┬──────────────────────────────┤
-│  UI Layer    │  Drawer rail · 8 surfaces    │
+│  UI Layer    │  Drawer rail · 9 surfaces    │
 │  State       │  Zustand stores (sync-aware) │
 │  Persistence │  SQLite · background sync    │
 │  Transport   │  WebSocket JSON-RPC client   │

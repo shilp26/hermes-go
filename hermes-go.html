@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Connect to your own server over LAN or Tailscale, or via Hermes Cloud.">
+<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, @-assign teammates from any chat, and connect over LAN, Tailscale, or Hermes Cloud.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. One prompt setup, live streaming, voice, artifacts, and full agent control.">
+<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, @-assign teammates from any chat, live streaming, voice, and full agent control.">
 <meta property="og:image" content="assets/og-image.png">
 <meta property="og:site_name" content="Hermes Go">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. One prompt setup, live streaming, voice, artifacts, and full agent control.">
+<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, @-assign teammates from any chat, live streaming, voice, and full agent control.">
 <meta name="twitter:image" content="assets/og-image.png">
 <title>Hermes Go — Remote Mobile Client for Hermes AI Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1350,13 +1350,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="hero-copy">
       <h1 class="display hero-enter" id="hero-heading">Your AI agent,<br>in your pocket.</h1>
 
-      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, voice, artifacts, and full agent control from anywhere.</p>
+      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bot Mode</strong>, voice, artifacts, and full agent control from anywhere.</p>
 
       <div class="hero-enter" aria-label="Key capabilities">
         <ul class="hero-highlights">
           <li><strong>One-prompt setup</strong> — basic auth, port 9119, Tailscale detection, connection details handed back</li>
           <li><strong>Direct WebSocket</strong> — over LAN or Tailscale to your server, or via Hermes Cloud</li>
-          <li><strong>8 app surfaces</strong> — chat, voice, brain, work, sessions, dashboard, connect, settings</li>
+          <li><strong>Bot Mode</strong> — named teammates, @-assign from any chat, and routines</li>
         </ul>
       </div>
 
@@ -1403,7 +1403,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
       <div class="metrics-head-r">
         <span class="live-dot" aria-hidden="true"></span>
-        Live across all 8 surfaces
+        Live across all 9 surfaces
       </div>
     </div>
 
@@ -1562,6 +1562,47 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
 
+    <!-- v1.0.11 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.11</span>
+        <span class="changelog-date">18 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3><strong>Bots Mode</strong> — AI teammates, @-assign, routines</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li><strong>Bots Mode</strong> — a new Bots hub with Agents and Routines, search, roster states, pull-to-refresh, and a clear path when the host needs an update</li>
+          <li>Build an AI teammate — create or clone a profile with its own name, handle, face, avatar, model, reasoning effort, Fast mode, skills, tools, and SOUL</li>
+          <li>Forever Bot Chat — one canonical conversation per teammate, kept out of Home and Sessions recents; scratch chats stay separate</li>
+          <li><strong>Assign from any session</strong> — type @ in any chat or Home composer, choose one or several teammates, and keep talking while they work in their own chats</li>
+          <li>Assignment receipts — Asking, Waiting, Couldn't reach, or Replied status, open-chat shortcuts, and returned markdown replies shown in the original conversation</li>
+          <li>Bot-side request cards — the assigned teammate sees who asked, what they asked, and can expand or copy the request</li>
+          <li>Agent routines — schedule interval, daily, or one-time work for a specific teammate; filter, pause, resume, run, inspect history, or delete</li>
+          <li>Bots discovery — drawer rail, hub flyout, global search, Feature Map, bot-scoped Star Map, and a Home banner for running loops</li>
+          <li>Session unread state — mark supported chats read or unread while Bots keeps canonical Bot Chats out of normal recents</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Changed</h4>
+        <ul>
+          <li>Bots roster rows now show faces, last-active time, previews, handles, unread dots, status pills, and active face rings; swipe right for Details or left for a scratch chat</li>
+          <li>Create and Details sheets preview faces live, confirm dirty closes, save only changed fields, and safely roll back failed skill or tool changes</li>
+          <li>Bot conversations keep their own profile for resume, sending, queued work, and usage while the management profile stays where you left it</li>
+          <li>Model pills now show the actual profile model, reasoning effort, and Fast state; backup settings explain exactly what is uploaded and restored</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Opening a Bot Chat no longer switches the management profile or leaks bot state into regular sessions</li>
+          <li>Pinned Bot Chats reopen directly instead of waiting on a long roster fetch; scratch chats are created only when first used</li>
+          <li>Assignment receipts survive restarts, multi-target replies stay attached to the right request, and bot session data stays with the right teammate</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- v1.0.10 -->
     <div class="changelog-item reveal">
       <div class="changelog-meta">
@@ -1626,7 +1667,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </div>
 
     <!-- v1.0.8 -->
-    <div class="changelog-item reveal">
+    <div class="changelog-item cl-old reveal">
       <div class="changelog-meta">
         <span class="changelog-badge">v1.0.8</span>
         <span class="changelog-date">13 Aug 2026</span>
@@ -2062,7 +2103,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.10 · Android APK</div>
+          <div class="ver">v1.0.11 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
@@ -2109,7 +2150,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.10</span></span>
+    <span>Hermes Go <span class="ver">v1.0.11</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
@@ -2125,7 +2166,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=109"></script>
+<script src="app-map.js?v=110"></script>
 <script>
 // Theme Switcher Logic
 const themeToggle = document.getElementById('themeToggle');
