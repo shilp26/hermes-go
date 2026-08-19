@@ -6,6 +6,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.12] — 2026-08-19
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🤖 Bots Mode — roster and identity
+- **Hide from roster**: take an agent off the visible roster without disabling its mentions or routines.
+- **Hidden agents**: reveal hidden teammates from a dedicated row, with an unread indicator when one has new activity.
+- **Bot avatars**: choose a face, upload a photo, or generate an image from Bot Details or New Agent.
+- **Bot-scoped Star Map**: open the selected teammate’s learning graph directly from its Details sheet.
+
+#### 💬 Chat — handoff, activity, and voice
+- **Desktop-style @ handoff**: assignments go through the current agent while the specialist keeps its own Bot Chat; the reply returns to the original conversation.
+- **Assignment and request cards**: cleaner Asking, Waiting, and Replied cards, expandable requests, copy support, and a direct path to the specialist chat.
+- **Batch clarification**: answer several questions in one card with multi-select, Other, Confirm, and Skip.
+- **Technical activity view**: switch the Activity sheet to raw JSON when the underlying tool payload matters.
+- **Home voice controls**: dictate into the Home composer or start a hands-free voice chat from Home.
+
+### Changed
+
+#### 🎨 Bots Mode UX/UI
+- Roster rows prefer the pinned Bot Chat for preview, unread state, sorting, and last-active details; hidden rows are visibly dimmed when revealed.
+- Bot faces now prefer real photos and animated geometric faces over unusable desktop snapshot images, with a safe fallback when an avatar cannot load.
+- Assignment cards use a consistent compact chrome, quote the request, collapse long specialist replies, and keep the thread anchored while cards expand.
+
+#### 🧭 Chat and navigation
+- HTML `<details>` / `<summary>` sections in agent replies are now collapsible like the desktop client while tags inside code fences stay untouched.
+- Activity cards preserve real per-tool elapsed time, including after background recovery and history rehydration.
+- Session and Bots gesture hints are dismissible and remembered per host.
+- The default management profile can have a display nickname without changing its identity.
+- Cron surfaces distinguish a scheduled fire that never reached the gateway from a job that ran and failed.
+
+### Fixed
+
+#### 🛡️ Handoff and connection reliability
+- Temporary polling misses during an assignment no longer appear as a failed handoff; the card remains in Asking or Waiting until the specialist answers.
+- Handoff receipts and returned replies stay attached to the correct conversation across thread switches, restarts, and Bot Chat isolation.
+- Reconnecting after a stale live connection resumes the durable conversation instead of replaying attachments or sending through a dead session.
+- Batch clarification prompts restore correctly after reconnect, with previously selected answers still available to edit.
+
 ## [1.0.11] — 2026-08-18
 
 OTA update — the installed app self-updates.

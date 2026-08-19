@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, @-assign teammates from any chat, and connect over LAN, Tailscale, or Hermes Cloud.">
+<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, desktop-style @ handoff, hidden rosters, and routines over LAN, Tailscale, or Hermes Cloud.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, @-assign teammates from any chat, live streaming, voice, and full agent control.">
+<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, desktop-style @ handoff, live activity, voice, and full agent control.">
 <meta property="og:image" content="assets/og-image.png">
 <meta property="og:site_name" content="Hermes Go">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, @-assign teammates from any chat, live streaming, voice, and full agent control.">
+<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, desktop-style @ handoff, live activity, voice, and full agent control.">
 <meta name="twitter:image" content="assets/og-image.png">
 <title>Hermes Go — Remote Mobile Client for Hermes AI Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1350,13 +1350,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="hero-copy">
       <h1 class="display hero-enter" id="hero-heading">Your AI agent,<br>in your pocket.</h1>
 
-      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bot Mode</strong>, voice, artifacts, and full agent control from anywhere.</p>
+      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bots Mode</strong>, desktop-style @ handoff, voice, artifacts, and full agent control from anywhere.</p>
 
       <div class="hero-enter" aria-label="Key capabilities">
         <ul class="hero-highlights">
           <li><strong>One-prompt setup</strong> — basic auth, port 9119, Tailscale detection, connection details handed back</li>
           <li><strong>Direct WebSocket</strong> — over LAN or Tailscale to your server, or via Hermes Cloud</li>
-          <li><strong>Bot Mode</strong> — named teammates, @-assign from any chat, and routines</li>
+          <li><strong>Bots Mode</strong> — named teammates, desktop-style @ handoff from any chat, and routines</li>
         </ul>
       </div>
 
@@ -1562,6 +1562,48 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
 
+    <!-- v1.0.12 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.12</span>
+        <span class="changelog-date">19 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3><strong>Bots Mode</strong> — desktop handoff, hidden rosters, cleaner cards</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li><strong>Desktop-style @ handoff</strong> — assign through the current agent while the specialist works in its own Bot Chat and replies return here</li>
+          <li>Hide agents from the roster without disabling mentions or routines, then reveal hidden agents with unread activity indicators</li>
+          <li>Bot avatars — choose a face, upload a photo, or generate an image from Details or New Agent</li>
+          <li>Bot-scoped Star Map from each teammate’s Details sheet</li>
+          <li>Batch clarification cards with multi-select, Other, Confirm, and Skip</li>
+          <li>Technical Activity view for raw JSON tool payloads</li>
+          <li>Dictation and hands-free voice chat from Home</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Changed</h4>
+        <ul>
+          <li>Assignment cards now use compact status chrome, expandable requests, copy support, and collapsible specialist replies</li>
+          <li>Bot roster previews prefer the pinned Bot Chat and show clearer hidden, unread, avatar, and last-active states</li>
+          <li>Agent replies support collapsible HTML details sections without changing code-fenced content</li>
+          <li>Activity cards keep real per-tool elapsed time after background recovery and history rehydration</li>
+          <li>Sessions and Bots gesture hints can be dismissed and remembered; the default profile supports a display nickname</li>
+          <li>Cron screens distinguish a scheduled fire that never reached the gateway from a job that ran and failed</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Temporary assignment polling misses no longer turn a live handoff into a false failure</li>
+          <li>Handoff receipts and replies remain attached to the correct conversation across restarts and Bot Chat isolation</li>
+          <li>Stale live connections resume the durable conversation instead of replaying attachments through a dead session</li>
+          <li>Batch clarification answers restore correctly after reconnect</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- v1.0.11 -->
     <div class="changelog-item reveal">
       <div class="changelog-meta">
@@ -1639,33 +1681,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
     </div>
 
-    <!-- v1.0.9 -->
-    <div class="changelog-item reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.9</span>
-        <span class="changelog-date">14 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
-      </div>
-      <h3>Fast lane, reasoning effort, smarter model picks</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Fast lane — toggle priority processing on supported models, with Use Fast or Standard choice on pick</li>
-          <li>Reasoning effort Off → Ultra for the session and as a profile default</li>
-          <li>Smarter model pickers — search, provider groups, Fast control, cleaner rows</li>
-          <li>Safer default-model changes — expensive-model confirm and cron impact review</li>
-          <li>Settings default row shows name, context size, effort, and Fast</li>
-          <li>Global search opens faster with a steadier keyboard</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Uncertain live turns now queue instead of starting a second turn — quiet retries, no locked composer</li>
-        </ul>
-      </div>
-    </div>
-
     <!-- v1.0.8 -->
     <div class="changelog-item cl-old reveal">
       <div class="changelog-meta">
@@ -1696,6 +1711,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
     <!-- Older releases (collapsed, fade from 4th) -->
     <div class="cl-old-wrap collapsed" id="clOldWrap">
+
+    <!-- v1.0.9 -->
+    <div class="changelog-item cl-old reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.9</span>
+        <span class="changelog-date">14 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3>Fast lane, reasoning effort, smarter model picks</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>Fast lane — toggle priority processing on supported models, with Use Fast or Standard choice on pick</li>
+          <li>Reasoning effort Off → Ultra for the session and as a profile default</li>
+          <li>Smarter model pickers — search, provider groups, Fast control, cleaner rows</li>
+          <li>Safer default-model changes — expensive-model confirm and cron impact review</li>
+          <li>Settings default row shows name, context size, effort, and Fast</li>
+          <li>Global search opens faster with a steadier keyboard</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Uncertain live turns now queue instead of starting a second turn — quiet retries, no locked composer</li>
+        </ul>
+      </div>
+    </div>
+
 
     <!-- v1.0.7 -->
     <div class="changelog-item cl-old reveal">
@@ -2103,7 +2146,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.11 · Android APK</div>
+          <div class="ver">v1.0.12 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
@@ -2150,7 +2193,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.11</span></span>
+    <span>Hermes Go <span class="ver">v1.0.12</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
@@ -2166,7 +2209,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=111"></script>
+<script src="app-map.js?v=112"></script>
 <script>
 // Theme Switcher Logic
 const themeToggle = document.getElementById('themeToggle');

@@ -8,9 +8,9 @@
 
 A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal.
 
-**Bots Mode** brings named AI teammates to your phone — assign work from any chat with `@`, keep each teammate’s conversation isolated, and schedule routines for them.
+**Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, and schedule routines for them.
 
-`v1.0.11` · Android APK · Closed Source · Zero Telemetry
+`v1.0.12` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -54,16 +54,16 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 47 segments, 150 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 47 segments, 157 features" width="100%">
 </p>
 
 ### Surfaces
 
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
-| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 14 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 49 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 2 | 14 | Agents, Bot Chat, @-assign from any session, assignment receipts, routines, profile identity |
+| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 16 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 50 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 2 | 18 | Agents, Bot Chat, @-assign handoff, assignment receipts, avatars, hidden roster, Star Map, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
@@ -71,7 +71,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 17 | Health, analytics, setup, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 9 surfaces · 47 segments · 150 features**
+**Total: 9 surfaces · 47 segments · 157 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -81,7 +81,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.11](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.12](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -130,6 +130,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Composer: attachments, `/` skills, `@` mentions, prompt improve, YOLO mode, todo status
 - **Share from other apps** — send images, PDFs, Word/Excel files, text, or links straight into a chat
 - **Background job control** — inspect output, stop, or dismiss running host processes from the chat meta row
+- **Tool timing** — per-tool elapsed time remains accurate after background recovery and history rehydration
 - **Fast lane** — toggle priority processing on supported models, with Use Fast or Standard choice on pick
 - **Reasoning effort** — set Off → Ultra per session and as a profile default
 - **Session loops** — recurring `/loop` cards with countdown, status, pause, resume, and stop controls
@@ -137,13 +138,20 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Persistent task plans** — unfinished work stays visible across turns
 - **Recovered prompts** — approvals and clarify prompts return after reconnect
 - **Readable tool cards** — key-values, chips, lists, and markdown instead of raw output
+- **Technical Activity view** — switch to raw JSON when you need the underlying tool payload
+- **Batch clarify** — answer several questions in one card with multi-select, Other, Confirm, and Skip
+- **Collapsible details** — HTML `<details>` / `<summary>` sections work like the desktop client while code fences stay untouched
 - **Assign with @ from any session** — choose one or several teammates, keep chatting, and receive their replies back in the current conversation
+- **Desktop-style handoff** — assignments travel through the current agent while the specialist keeps its own Bot Chat
 
 ### 🤖 Bots Mode
 - **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
 - **Bot Chat** — one canonical conversation per teammate, kept out of normal Sessions recents; scratch chats remain separate
 - **Agent identity** — live faces, optional photo avatars, handles, last-active previews, unread dots, Default/In Chat status
+- **Roster controls** — hide agents without disabling mentions or routines; reveal hidden agents with unread indicators
+- **Bot avatars** — choose a face, upload a photo, or generate an image
 - **Bot details** — edit profile, skills, tools, SOUL, model, Star Map scope, chats, and routines from one sheet
+- **Bot-scoped Star Map** — open the selected teammate’s learning graph from Details
 - **@-assign** — ask a teammate from any chat or Home; multi-agent chips, live Asking/Waiting/Replied receipts, and returned markdown in place
 - **Routines** — schedule agent-owned work daily, at intervals, or once; pause, resume, run, inspect history, or delete
 
@@ -169,7 +177,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 
 ### 📋 Work
 - Artifacts browser (images, audio, files)
-- Cron jobs: list, run-now, status badges
+- Cron jobs: list, run-now, status badges, and clear scheduled-fire errors
 - Kanban board with live updates — **request review** from ready or running tasks
 - **Host files** — browse the agent filesystem, drop `@file` / `@folder` chips into the composer
 - **Processes** — manage background jobs from live sessions, filter and start/stop with confirmation
@@ -193,7 +201,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Multi-server with URL switching
 - Connection details + Tailscale detection
 - Theme (dark/light)
-- Active profile
+- Active profile with a display nickname for the default profile
 - **Feedback** — submit a bug, feature idea, improvement, or question with screenshots and status tracking
 - **What's New** — release notes in-app, product version in the footer
 - **Backup preview** — see exactly what a prefs restore brings back before accepting
