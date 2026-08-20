@@ -8,9 +8,9 @@
 
 A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal.
 
-**Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, and schedule routines for them.
+**Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, and choose from 16 themes.
 
-`v1.0.12` · Android APK · Closed Source · Zero Telemetry
+`v1.0.13` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -81,7 +81,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.12](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.13](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -143,6 +143,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Collapsible details** — HTML `<details>` / `<summary>` sections work like the desktop client while code fences stay untouched
 - **Assign with @ from any session** — choose one or several teammates, keep chatting, and receive their replies back in the current conversation
 - **Desktop-style handoff** — assignments travel through the current agent while the specialist keeps its own Bot Chat
+- **Voice & Home assign** — voice dictation and Home sends use the same desktop-style handoff as typed @mentions
 
 ### 🤖 Bots Mode
 - **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
@@ -150,10 +151,15 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Agent identity** — live faces, optional photo avatars, handles, last-active previews, unread dots, Default/In Chat status
 - **Roster controls** — hide agents without disabling mentions or routines; reveal hidden agents with unread indicators
 - **Bot avatars** — choose a face, upload a photo, or generate an image
-- **Bot details** — edit profile, skills, tools, SOUL, model, Star Map scope, chats, and routines from one sheet
+- **Bot details** — edit profile, skills, tools, MCP, SOUL, model, Star Map scope, chats, and routines from one sheet
+- **Bot chats** — manage Forever Bot Chat, scratch chats, hidden chats, and deletion from Details
+- **Forever /new** — compact the canonical Bot Chat instead of resetting it; use New chat for throwaways
 - **Bot-scoped Star Map** — open the selected teammate’s learning graph from Details
 - **@-assign** — ask a teammate from any chat or Home; multi-agent chips, live Asking/Waiting/Replied receipts, and returned markdown in place
 - **Routines** — schedule agent-owned work daily, at intervals, or once; pause, resume, run, inspect history, or delete
+
+### 🗂️ Sessions
+- **Action sheets** — long-press actions show icons for star, folder, read/unread, rename, archive, and delete
 
 ### 🎙️ Voice
 - Hold-to-dictate with STT
@@ -193,6 +199,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Memory and disk pressure alerts** — advisory notices on Home and Health when the host reports elevated pressure
 - Analytics: usage trends
 - Setup: app features, voice, thinking depth, safety, UI
+- **Onboarding setup prompt** — collapse or expand the full prompt, then copy it
 - Ops console with readable parsed output
 - Live log stream with pause-on-scroll
 - Power tools: config editor, environment, OAuth, profiles, files, credentials
@@ -200,7 +207,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ### ⚙️ Settings
 - Multi-server with URL switching
 - Connection details + Tailscale detection
-- Theme (dark/light)
+- **Theme gallery** — 16 WCAG-minded presets with live preview, System/Dark/Light filters, and separate dark & light defaults
+- **Theme reset** — restore Obsidian Teal / Titanium Frost; choices persist
 - Active profile with a display nickname for the default profile
 - **Feedback** — submit a bug, feature idea, improvement, or question with screenshots and status tracking
 - **What's New** — release notes in-app, product version in the footer

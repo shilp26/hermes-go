@@ -6,6 +6,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.13] — 2026-08-20
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🎨 Themes — 16 presets with live gallery
+- **Theme gallery**: choose from 16 WCAG-minded presets with live preview cards in a 2-column grid.
+- **Dark presets**: Obsidian Teal, Midnight OLED, Tokyo Night, Catppuccin Mocha, Nord Polar, Rosé Pine Moon, Cyber Synthwave, Obsidian Gold, Emerald Matrix.
+- **Light presets**: Titanium Frost, Catppuccin Latte, Nord Snow, Rosé Pine Dawn, Kyoto Matcha, Paper & Ink, Solar Daylight.
+- **System mode**: pick separate dark and light defaults; long-press the mode segment to open the gallery.
+- **Reset** restores the default Obsidian Teal / Titanium Frost; choices persist with appearance prefs.
+
+#### 🤖 Bot Details — chats, MCP, forever /new
+- **MCP panel**: search and filter servers with On/Off toggles when the gateway is connected; clear offline note when not.
+- **Chats section**: Forever Bot Chat pin, Draft, live pulse, unread dot, preview, relative time, and message count.
+- **Delete scratch chats**: ··· menu on non-forever chats with confirm; Forever chat cannot be deleted.
+- **Hidden Bot Chats**: list hidden Bot Chats via session.list include_hidden; profile-scoped delete via gateway or REST.
+- **/new in Bot Chat**: typing /new or /reset in the forever Bot Chat rewrites to /compact with a notice pointing to New chat for throwaways.
+
+#### 📋 Sessions and menus
+- **Action sheet icons**: session long-press items now show Lucide icons for star, folder, read/unread, rename, archive, and delete.
+- **Android/Web action sheet**: grabber, title/subtitle, Lucide icons, elevated surface, and theme tokens.
+
+#### 🔌 Onboarding
+- **Collapsible setup prompt**: expand to read the full prompt, then copy; replaces the plain text block.
+
+### Changed
+
+#### 🎨 Tokenized UI
+- Expanded color tokens for surfaces, glass, scrims, chip colors, YOLO/reasoning, code/markdown, inputs, media placeholders, and shadows.
+- Chat, composer, dashboard, sessions filters, banners, tool cards, code blocks, model/effort pickers, and status chrome all use theme colors instead of hardcoded hex.
+- Soft assign/pending/danger tints and send-button shadows follow the active palette.
+
+#### 💬 @-assign polish
+- Voice dictation and Home sends use the same desktop-style handoff wire and card watch as typed @mentions.
+- Pending/failed rows use theme soft fills; failure text can wrap to three lines.
+- Removed the old Home-only assign shortcut that skipped the current-agent turn.
+
+### Fixed
+
+#### 🛡️ Bot Chat reliability
+- The forever Bot Chat stays primary in Details; other chats collapse under "Other chats (N)".
+- Skills and tools toggles can now disable while a change is in flight.
+- Credentials note appears when relevant; leave-and-open flows for New chat, routines, and memory work as expected.
+
 ## [1.0.12] — 2026-08-19
 
 OTA update — the installed app self-updates.
