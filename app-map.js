@@ -214,7 +214,7 @@ const SEGMENT_ICONS = {
   // Settings
   'Servers': LUCIDE.server,
   'Connection': LUCIDE.network,
-  'Appearance': LUCIDE.eye,
+  'Appearance & Themes': LUCIDE.eye,
   'Profile': LUCIDE.userRound,
 };
 
@@ -649,9 +649,9 @@ const HUB_MAP = [
           { name: 'Bots', desc: 'Roster of named AI teammates on this Hermes host', where: 'Drawer rail · after Chat' },
           { name: 'Agent search', desc: 'Find teammates by display name, handle, profile, or description', where: 'Bots · Agents · search' },
           { name: 'Agent roster', desc: 'Faces, previews, last-active time, status pills, and unread work', where: 'Bots · Agents' },
-          { name: 'Open Bot Chat', desc: 'Open the pinned forever conversation for a teammate', where: 'Bots · Agents' },
+          { name: 'Open Bot Chat', desc: 'Open the pinned forever conversation; /new compacts it instead of resetting it', where: 'Bots · Agents · Details' },
           { name: 'Bot actions', desc: 'Open Details or start a new scratch chat from the roster', where: 'Bots · Agents · swipe' },
-          { name: 'Bot details', desc: 'Edit title, description, model, skills, tools, and SOUL', where: 'Bots · Details' },
+          { name: 'Bot details', desc: 'Edit identity, model, skills, tools, MCP, SOUL, chats, and routines', where: 'Bots · Details' },
           { name: 'New Agent', desc: 'Create or clone a named teammate with its own profile', where: 'Bots · Agents · +' },
           { name: 'Agent identity', desc: 'Live face moods, photo avatars, stable handles, Default and In Chat state', where: 'Bots · Agents · roster' },
           { name: 'Bot avatar', desc: 'Choose a face, upload a photo, or generate an image', where: 'Bots · Details or New Agent' },
@@ -909,9 +909,9 @@ const HUB_MAP = [
         ],
       },
       {
-        label: 'Appearance', desc: 'Theme & interface',
+        label: 'Appearance & Themes', desc: '16 presets · System / Dark / Light',
         features: [
-          { name: 'Theme', desc: 'Dark and light mode', where: 'Settings · Appearance' },
+          { name: 'Theme', desc: '16 presets with live previews, System / Dark / Light filters, and separate defaults', where: 'Settings · Appearance & Themes' },
         ],
       },
       {
