@@ -215,6 +215,9 @@ const SEGMENT_ICONS = {
   'Servers': LUCIDE.server,
   'Connection': LUCIDE.network,
   'Appearance & Themes': LUCIDE.eye,
+  'Custom endpoints': LUCIDE.server,
+  'Blob Studio': LUCIDE.image,
+  'Expanded composer': LUCIDE.maximize,
   'Profile': LUCIDE.userRound,
 };
 
@@ -561,6 +564,8 @@ const HUB_MAP = [
           { name: 'Context ring', desc: 'Live context window usage', where: 'Chat · header' },
           { name: 'Readable tool cards', desc: 'Tool results shown as readable values, chips, lists, and markdown', where: 'Chat · tool card' },
           { name: 'Compacted history', desc: 'Archived rows continue past an in-place compaction boundary', where: 'Chat · history' },
+          { name: 'Expanded composer', desc: 'Long drafts open into a full-screen editor with model/effort, chips, and send', where: 'Chat · composer → expand' },
+          { name: 'Paste collapse', desc: 'Large pastes, code fences, and stack traces auto-collapse into snippet attachments', where: 'Chat · composer' },
           { name: 'Technical activity view', desc: 'Raw JSON for tool calls instead of styled activity cards', where: 'Chat · Activity sheet header' },
         ],
       },
@@ -654,6 +659,8 @@ const HUB_MAP = [
           { name: 'Bot details', desc: 'Edit identity, model, skills, tools, MCP, SOUL, chats, and routines', where: 'Bots · Details' },
           { name: 'New Agent', desc: 'Create or clone a named teammate with its own profile', where: 'Bots · Agents · +' },
           { name: 'Agent identity', desc: 'Live face moods, photo avatars, stable handles, Default and In Chat state', where: 'Bots · Agents · roster' },
+          { name: 'Blob Studio', desc: 'Customize bot avatars with live Blobatar faces, shapes, colors, and pose controls', where: 'Bots · Details → Avatar' },
+          { name: 'Working pill', desc: 'Pulsing status indicator when a bot has a live task', where: 'Bots · Agents · roster' },
           { name: 'Bot avatar', desc: 'Choose a face, upload a photo, or generate an image', where: 'Bots · Details or New Agent' },
           { name: 'Star Map for a bot', desc: 'Open that teammate’s learning graph from Details', where: 'Bots · Details' },
           { name: 'Hide from roster', desc: 'Remove an agent from the visible list while mentions and routines keep working', where: 'Bots · Details' },
@@ -716,6 +723,7 @@ const HUB_MAP = [
           { name: 'Provider catalog', desc: 'Configure providers and assign models', where: 'Brain · Models' },
           { name: 'Fallback chain', desc: 'Auto-try model B when model A fails', where: 'Brain · Models · Fallback' },
           { name: 'Effort control', desc: 'Reasoning effort per model', where: 'Brain · Models' },
+          { name: 'Custom endpoints', desc: 'Add, edit, and delete OpenAI-compatible providers with server-side API keys', where: 'Brain · Models → Custom' },
         ],
       },
       {
