@@ -8,9 +8,9 @@
 
 A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal.
 
-**Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, and choose from 16 themes.
+**Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v1.0.13` · Android APK · Closed Source · Zero Telemetry
+`v1.0.14` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -71,7 +71,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 17 | Health, analytics, setup, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 9 surfaces · 47 segments · 157 features**
+**Total: 9 surfaces · 47 segments · 162 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -81,7 +81,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.13](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.14](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -152,6 +152,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Roster controls** — hide agents without disabling mentions or routines; reveal hidden agents with unread indicators
 - **Bot avatars** — choose a face, upload a photo, or generate an image
 - **Bot details** — edit profile, skills, tools, MCP, SOUL, model, Star Map scope, chats, and routines from one sheet
+- **Blob Studio** — customize bot avatars with live Blobatar faces, shapes, colors, and pose controls
+- **Working pill** — pulsing status indicator when a bot has a live task
 - **Bot chats** — manage Forever Bot Chat, scratch chats, hidden chats, and deletion from Details
 - **Forever /new** — compact the canonical Bot Chat instead of resetting it; use New chat for throwaways
 - **Bot-scoped Star Map** — open the selected teammate’s learning graph from Details
@@ -166,6 +168,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Read any reply aloud (TTS)
 - Hands-free conversation loop: listen → think → speak
 - Inline audio playback for TTS tool output
+- **Expanded composer** — long drafts open into a full-screen editor with model/effort, chips, and send
+- **Paste collapse** — large pastes, code fences, and stack traces auto-collapse into snippet attachments
 
 ### 📦 Artifacts
 - Every media item from a session, searchable
@@ -174,6 +178,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 
 ### 🧠 Brain
 - Model provider catalog with fallback chain and effort control
+- **Custom endpoints** — add, edit, and delete OpenAI-compatible providers (Ollama, vLLM, LM Studio) with server-side API keys
 - Skills with enable toggles — **open and edit skills** from the Skills hub or skill tool cards
 - Toolsets with environment configuration
 - Memory block viewer/editor
@@ -207,6 +212,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 ### ⚙️ Settings
 - Multi-server with URL switching
 - Connection details + Tailscale detection
+- **Custom endpoints** — manage OpenAI-compatible providers from Brain → Models
 - **Theme gallery** — 16 WCAG-minded presets with live preview, System/Dark/Light filters, and separate dark & light defaults
 - **Theme reset** — restore Obsidian Teal / Titanium Frost; choices persist
 - Active profile with a display nickname for the default profile

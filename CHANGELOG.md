@@ -6,6 +6,45 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.14] — 2026-08-21
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🧠 Brain — Custom endpoints
+- **Custom endpoints sheet**: list, add, edit, and delete custom OpenAI-compatible API endpoints (Ollama, vLLM, LM Studio, and more).
+- **Endpoint testing**: probe the URL for reachability and auto-discover available models for the picker.
+- **Server-side API keys**: keys are stored server-side only — replace, keep, or clear; never shown back to the client.
+- **Legacy support**: existing config.yaml endpoints appear as activatable rows (not deletable).
+- Surface in Models, Global Search, and Feature Map.
+
+#### 🤖 Blob Studio
+- **Blobatar defaults**: new bots start with live Blobatar faces — blob, sun, cloud, nub, and more.
+- **Blob Studio**: tune looks, body, face, color, pose, hue/tone, background, and traits with live preview.
+- **Seed controls**: shuffle the seed, lock an identity, pin/unpin axes, and discard unsaved edits with confirm.
+- **Alternate avatars**: keep classic geometric shapes, photo upload, and AI generate as slide options.
+- **Bot Chat watermark**: faint blob face watermark in Bot Chat only; pulsing Working pill when a bot's task is live.
+
+#### 💬 Composer — expand + paste collapse
+- **Expanded composer**: long drafts open into a full-screen editor with model/effort, chips, / and @, dictate, and send/steer/stop.
+- **Paste collapse**: large pastes, code fences, and stack traces auto-collapse into snippet attachments.
+- **Snippet preview**: detect language for snippet names; tap a snippet to preview; paste from clipboard the same way.
+
+### Changed
+
+#### 🖥️ Dashboard & settings
+- **Needs Attention**: swipe left to dismiss rows; revive after 48h or when the issue clears.
+- **Hermes update alerts**: non-dismissable until the update is handled.
+- **Thinking budget**: Unlimited is now the default step budget with 20/40/60/80 caps.
+- **Background reconnect**: suppress the brief "Connecting…" flash when the socket recovers quickly.
+
+### Fixed
+
+#### 🛡️ Bot presence
+- Blob face, Working pill, and work mood now correctly reflect a bot's live task status.
+- Bot Chat watermark persists and clears as expected.
+
 ## [1.0.13] — 2026-08-20
 
 OTA update — the installed app self-updates.

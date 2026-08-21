@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, 16 theme presets, desktop-style @ handoff, and routines over LAN, Tailscale, or Hermes Cloud.">
+<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, 16 theme presets, custom endpoints, desktop-style @ handoff, and routines over LAN, Tailscale, or Hermes Cloud.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, desktop-style @ handoff, live activity, voice, and full agent control.">
+<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, custom endpoints, desktop-style @ handoff, live activity, voice, and full agent control.">
 <meta property="og:image" content="assets/og-image.png">
 <meta property="og:site_name" content="Hermes Go">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, desktop-style @ handoff, live activity, voice, and full agent control.">
+<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, custom endpoints, desktop-style @ handoff, live activity, voice, and full agent control.">
 <meta name="twitter:image" content="assets/og-image.png">
 <title>Hermes Go — Remote Mobile Client for Hermes AI Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1350,7 +1350,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="hero-copy">
       <h1 class="display hero-enter" id="hero-heading">Your AI agent,<br>in your pocket.</h1>
 
-      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bots Mode</strong>, 16 themes, desktop-style @ handoff, voice, artifacts, and full agent control from anywhere.</p>
+      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bots Mode</strong>, 16 themes, custom endpoints, desktop-style @ handoff, voice, artifacts, and full agent control from anywhere.</p>
 
       <div class="hero-enter" aria-label="Key capabilities">
         <ul class="hero-highlights">
@@ -1358,6 +1358,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li><strong>Direct WebSocket</strong> — over LAN or Tailscale to your server, or via Hermes Cloud</li>
           <li><strong>Bots Mode</strong> — named teammates, desktop-style @ handoff from any chat, and routines</li>
           <li><strong>16 themes</strong> — dark, light, and system presets with a live gallery</li>
+          <li><strong>Custom endpoints</strong> — connect Ollama, vLLM, LM Studio, and more</li>
         </ul>
       </div>
 
@@ -1563,6 +1564,44 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
 
+    <!-- v1.0.14 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-meta">
+        <span class="changelog-badge">v1.0.14</span>
+        <span class="changelog-date">21 Aug 2026</span>
+        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      </div>
+      <h3>Custom endpoints, Blob Studio, expand + paste collapse</h3>
+      <div class="cl-group">
+        <h4>Added</h4>
+        <ul>
+          <li>Custom endpoints sheet — list, add, edit, and delete OpenAI-compatible providers (Ollama, vLLM, LM Studio)</li>
+          <li>Endpoint testing with reachability probes and auto-discovered models for the picker</li>
+          <li>Server-side API keys — replace, keep, or clear; never shown back</li>
+          <li>Blob Studio — tune bot avatar looks, body, face, color, pose, and background with live preview</li>
+          <li>New bots default to live Blobatar faces; shuffle seed, lock identity, pin/unpin axes</li>
+          <li>Expanded composer — long drafts open into a full-screen editor with model/effort, chips, and send</li>
+          <li>Paste collapse — large pastes, code fences, and stack traces auto-collapse into snippet attachments</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Changed</h4>
+        <ul>
+          <li>Swipe left to dismiss Needs Attention rows; revive after 48h or when the issue clears</li>
+          <li>Hermes update alerts are non-dismissable until the update is handled</li>
+          <li>Unlimited is now the default thinking budget with 20/40/60/80 caps</li>
+          <li>Background reconnect suppresses the brief "Connecting…" flash</li>
+        </ul>
+      </div>
+      <div class="cl-group">
+        <h4>Fixed</h4>
+        <ul>
+          <li>Blob face, Working pill, and work mood correctly reflect live bot task status</li>
+          <li>Bot Chat watermark persists and clears as expected</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- v1.0.13 -->
     <div class="changelog-item reveal">
       <div class="changelog-meta">
@@ -1641,8 +1680,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
     </div>
 
+
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v1.0.11 -->
-    <div class="changelog-item reveal">
+    <div class="changelog-item cl-old reveal">
       <div class="changelog-meta">
         <span class="changelog-badge">v1.0.11</span>
         <span class="changelog-date">18 Aug 2026</span>
@@ -1682,9 +1725,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
     </div>
 
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.10 -->
     <div class="changelog-item cl-old reveal">
@@ -2187,7 +2227,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.13 · Android APK</div>
+          <div class="ver">v1.0.14 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
@@ -2234,7 +2274,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.13</span></span>
+    <span>Hermes Go <span class="ver">v1.0.14</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
@@ -2250,7 +2290,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=113"></script>
+<script src="app-map.js?v=114"></script>
 <script>
 // Theme Switcher Logic
 const themeToggle = document.getElementById('themeToggle');
