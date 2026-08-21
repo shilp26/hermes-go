@@ -61,6 +61,9 @@
   --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.04);
   --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
   --nav-bg: rgba(255, 255, 255, 0.84);
+  --cl-success: #34C759; --cl-success-soft: #E8F9ED;
+  --cl-info: #007AFF; --cl-info-soft: #EAF2FF;
+  --cl-danger: #FF3B30; --cl-danger-soft: #FFF0EE;
   --section-alt: #FFFFFF;
   --feature-card-hover: #F9F9FB;
   --phone-bezel: #1A1F2E;
@@ -106,6 +109,9 @@
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
   --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3);
   --nav-bg: rgba(10, 10, 15, 0.84);
+  --cl-success: #4ADE80; --cl-success-soft: #0F2E1F;
+  --cl-info: #60A5FA; --cl-info-soft: #0F213D;
+  --cl-danger: #F87171; --cl-danger-soft: #331013;
   --section-alt: #111118;
   --feature-card-hover: #1A1A24;
   --phone-bezel: #2D3748;
@@ -1168,42 +1174,91 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .trust-hash .hash-label { color: var(--accent); font-weight: 700; flex-shrink: 0; }
 .trust-hash .hash-copy { width: 14px; height: 14px; color: var(--subtle); flex-shrink: 0; }
 
-/* Changelog */
-.changelog-section { background: var(--surface); border-y: 1px solid var(--border); }
-.changelog-grid { max-width: 920px; margin-inline: auto; }
-.changelog-item { position: relative; padding-left: 32px; border-left: 2px solid var(--border); }
-.changelog-item::before { content: ''; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
-.changelog-item + .changelog-item { margin-top: 40px; }
-.changelog-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-.changelog-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-strong); background: var(--accent-soft); padding: 3px 10px; border-radius: 6px; }
+/* ── Changelog Section & What's New Timeline ── */
+.changelog-section { background: var(--surface); border-y: 1px solid var(--border); padding: 80px 0; }
+.changelog-grid { max-width: 760px; margin-inline: auto; padding-inline: 24px; }
+.changelog-item { position: relative; display: flex; align-items: stretch; gap: 0; }
+.changelog-rail { width: 24px; flex-shrink: 0; margin-right: 18px; display: flex; flex-direction: column; align-items: center; }
+.changelog-rail-line { width: 2px; background: var(--border); }
+.changelog-rail-top { height: 10px; min-height: 10px; flex-shrink: 0; }
+.changelog-rail-node { width: 14px; height: 14px; min-width: 14px; min-height: 14px; border-radius: 50%; border: 2px solid var(--border-strong); background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 2; flex-shrink: 0; }
+.changelog-rail-node-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--subtle); }
+.changelog-item.is-latest .changelog-rail-node { border-color: var(--accent); }
+.changelog-item.is-latest .changelog-rail-node-dot { background: var(--accent); }
+.changelog-item.is-release .changelog-rail-node { border-color: var(--cl-info); }
+.changelog-item.is-release .changelog-rail-node-dot { background: var(--cl-info); }
+.changelog-rail-bottom { flex: 1; min-height: 12px; }
+
+.changelog-body { flex: 1; min-width: 0; padding-bottom: 40px; }
+.changelog-item.is-last .changelog-body { padding-bottom: 8px; }
+
+.changelog-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.changelog-meta-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.changelog-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: var(--muted); background: var(--surface-muted); padding: 3px 9px; border-radius: 6px; }
+.changelog-item.is-latest .changelog-badge { color: var(--accent-strong); background: var(--accent-soft); }
 .changelog-date { font-size: 12px; color: var(--subtle); font-weight: 500; }
-.changelog-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-.changelog-item .cl-group { margin-bottom: 16px; }
-.changelog-item .cl-group h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--subtle); margin-bottom: 8px; }
-.changelog-item .cl-group ul { list-style: none; padding: 0; margin: 0; }
-.changelog-item .cl-group li { position: relative; padding-left: 16px; font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 6px; }
-.changelog-item .cl-group li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 2px; background: var(--accent); }
-.changelog-cta { margin-top: 32px; text-align: center; }
-.changelog-cta a { font-size: 13.5px; font-weight: 600; color: var(--accent); }
-.changelog-cta a:hover { color: var(--accent-strong); }
-/* Collapsed older entries */
+
+.cl-typechip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.cl-typechip svg { width: 12px; height: 12px; display: block; }
+.cl-typechip.ota { color: var(--cl-success); background: var(--cl-success-soft); }
+.cl-typechip.release { color: var(--cl-info); background: var(--cl-info-soft); }
+
+.changelog-item h3 { font-size: 16px; font-weight: 700; color: var(--fg); line-height: 1.4; margin: 6px 0 0; letter-spacing: -0.01em; }
+.changelog-item .cl-summary { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-top: 8px; }
+
+.changelog-item .cl-group { margin-top: 18px; }
+.cl-grouphdr { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.cl-grouphdr-icon { width: 22px; height: 22px; min-width: 22px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; }
+.cl-grouphdr-icon svg { width: 13px; height: 13px; }
+.cl-grouphdr-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.cl-group--added .cl-grouphdr-icon { background: var(--cl-success-soft); }
+.cl-group--added .cl-grouphdr-icon svg { stroke: var(--cl-success); }
+.cl-group--added .cl-grouphdr-label { color: var(--cl-success); }
+
+.cl-group--changed .cl-grouphdr-icon { background: var(--cl-info-soft); }
+.cl-group--changed .cl-grouphdr-icon svg { stroke: var(--cl-info); }
+.cl-group--changed .cl-grouphdr-label { color: var(--cl-info); }
+
+.cl-group--fixed .cl-grouphdr-icon { background: var(--cl-danger-soft); }
+.cl-group--fixed .cl-grouphdr-icon svg { stroke: var(--cl-danger); }
+.cl-group--fixed .cl-grouphdr-label { color: var(--cl-danger); }
+
+.cl-group--improved .cl-grouphdr-icon { background: var(--accent-soft); }
+.cl-group--improved .cl-grouphdr-icon svg { stroke: var(--accent-strong); }
+.cl-group--improved .cl-grouphdr-label { color: var(--accent-strong); }
+
+.cl-group--removed .cl-grouphdr-icon { background: var(--warning-soft); }
+.cl-group--removed .cl-grouphdr-icon svg { stroke: var(--warning); }
+.cl-group--removed .cl-grouphdr-label { color: var(--warning); }
+
+.cl-subsection { margin-top: 8px; }
+.cl-subsection:first-of-type { margin-top: 4px; }
+.cl-subhead { font-size: 12px; font-weight: 600; color: var(--muted); margin: 0 0 6px 2px; }
+
+ul.cl-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2px 0; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.cl-bullet-dot { width: 5px; height: 5px; min-width: 5px; min-height: 5px; border-radius: 2px; background: var(--accent); opacity: 0.6; margin-top: 7px; flex-shrink: 0; }
+.cl-bullet-text { flex: 1; min-width: 0; }
+.cl-bullet-text strong { color: var(--fg); font-weight: 600; }
+
 .cl-old-wrap { position: relative; }
-.cl-old-wrap.collapsed { max-height: 360px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%); }
+.cl-old-wrap.collapsed { max-height: 460px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); }
 .cl-old-wrap.expanded { max-height: none; -webkit-mask-image: none; mask-image: none; }
-.cl-old { margin-top: 32px; }
-.cl-old .cl-group { margin-bottom: 10px; }
-.cl-old .cl-group h4 { font-size: 11px; }
-.cl-old .cl-group li { font-size: 12.5px; margin-bottom: 4px; }
-.cl-old .cl-group li::before { top: 6px; width: 4px; height: 4px; }
+
 .changelog-toggle { margin-top: 24px; text-align: center; }
-.changelog-toggle button { background: transparent; border: 1px solid var(--border); padding: 9px 24px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--subtle); cursor: pointer; transition: all 0.25s; }
-.changelog-toggle button:hover { border-color: var(--accent); color: var(--accent); }
+.changelog-toggle button { background: var(--surface); border: 1px solid var(--border); padding: 10px 24px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-card); }
+.changelog-toggle button:hover { border-color: var(--accent); color: var(--accent-strong); transform: translateY(-1px); }
 
 @media (max-width: 768px) {
-  .changelog-item { padding-left: 22px; }
-  .changelog-item + .changelog-item { margin-top: 28px; }
-  .changelog-meta { gap: 8px; }
+  .changelog-section { padding: 50px 0; }
+  .changelog-grid { padding-inline: 16px; }
+  .changelog-rail { margin-right: 14px; width: 20px; }
+  .changelog-body { padding-bottom: 32px; }
+  .changelog-item h3 { font-size: 15px; }
+  ul.cl-list > li { font-size: 13px; }
 }
+
 /* Footer */
 .footer { border-top: 1px solid var(--border-hair); padding-block: 36px; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
@@ -1561,551 +1616,1170 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <!-- Changelog -->
 <section class="section changelog-section" id="changelog">
   <div class="container changelog-grid">
-    <p class="caption" style="color:var(--accent);margin-bottom:14px;text-align:center">What&rsquo;s New</p>
-    <h2 class="h1" style="text-align:center;margin-bottom:32px">Changelog</h2>
+    <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
+    <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
     <!-- v1.0.14 -->
-    <div class="changelog-item reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.14</span>
-        <span class="changelog-date">21 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Custom endpoints, Blob Studio, expand + paste collapse</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Custom endpoints sheet — list, add, edit, and delete OpenAI-compatible providers (Ollama, vLLM, LM Studio)</li>
-          <li>Endpoint testing with reachability probes and auto-discovered models for the picker</li>
-          <li>Server-side API keys — replace, keep, or clear; never shown back</li>
-          <li>Blob Studio — tune bot avatar looks, body, face, color, pose, and background with live preview</li>
-          <li>New bots default to live Blobatar faces; shuffle seed, lock identity, pin/unpin axes</li>
-          <li>Expanded composer — long drafts open into a full-screen editor with model/effort, chips, and send</li>
-          <li>Paste collapse — large pastes, code fences, and stack traces auto-collapse into snippet attachments</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Swipe left to dismiss Needs Attention rows; revive after 48h or when the issue clears</li>
-          <li>Hermes update alerts are non-dismissable until the update is handled</li>
-          <li>Unlimited is now the default thinking budget with 20/40/60/80 caps</li>
-          <li>Background reconnect suppresses the brief "Connecting…" flash</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Blob face, Working pill, and work mood correctly reflect live bot task status</li>
-          <li>Bot Chat watermark persists and clears as expected</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.14</span>
+            <span class="changelog-date">21 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Custom endpoints, Blob Studio, expand + paste collapse</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Brain — Custom endpoints</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Custom endpoints sheet</strong>: list, add, edit, and delete custom OpenAI-compatible API endpoints (Ollama, vLLM, LM Studio, and more).</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Endpoint testing</strong>: probe the URL for reachability and auto-discover available models for the picker.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Server-side API keys</strong>: keys are stored server-side only — replace, keep, or clear; never shown back to the client.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Legacy support</strong>: existing config.yaml endpoints appear as activatable rows (not deletable).</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Surface in Models, Global Search, and Feature Map.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Blob Studio</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Blobatar defaults</strong>: new bots start with live Blobatar faces — blob, sun, cloud, nub, and more.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Blob Studio</strong>: tune looks, body, face, color, pose, hue/tone, background, and traits with live preview.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Seed controls</strong>: shuffle the seed, lock an identity, pin/unpin axes, and discard unsaved edits with confirm.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Alternate avatars</strong>: keep classic geometric shapes, photo upload, and AI generate as slide options.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot Chat watermark</strong>: faint blob face watermark in Bot Chat only; pulsing Working pill when a bot&#x27;s task is live.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Composer — expand + paste collapse</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Expanded composer</strong>: long drafts open into a full-screen editor with model/effort, chips, / and @, dictate, and send/steer/stop.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Paste collapse</strong>: large pastes, code fences, and stack traces auto-collapse into snippet attachments.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Snippet preview</strong>: detect language for snippet names; tap a snippet to preview; paste from clipboard the same way.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Dashboard &amp; settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Needs Attention</strong>: swipe left to dismiss rows; revive after 48h or when the issue clears.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Hermes update alerts</strong>: non-dismissable until the update is handled.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Thinking budget</strong>: Unlimited is now the default step budget with 20/40/60/80 caps.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Background reconnect</strong>: suppress the brief &quot;Connecting…&quot; flash when the socket recovers quickly.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bot presence</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Blob face, Working pill, and work mood now correctly reflect a bot&#x27;s live task status.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bot Chat watermark persists and clears as expected.</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.13 -->
     <div class="changelog-item reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.13</span>
-        <span class="changelog-date">20 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>16 themes, Bot Details chats & MCP, forever /new</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Theme gallery with 16 WCAG presets — live preview cards, System/Dark/Light filters, and separate dark & light defaults</li>
-          <li>Bot Details now shows a Chats section with Forever Bot Chat pin, scratch chat management, delete, and hidden chats</li>
-          <li>Bot Details MCP panel with search, filter, and On/Off toggles when the gateway is connected</li>
-          <li>/new in a forever Bot Chat redirects to /compact with a notice pointing to New chat</li>
-          <li>Session action sheet items now show Lucide icons; Android/Web sheet uses grabber, title, and elevated surface</li>
-          <li>Collapsible setup prompt on onboarding — expand to read, then copy</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Expanded color tokens across chat, composer, dashboard, sessions, banners, tool cards, code blocks, and status chrome</li>
-          <li>Voice dictation and Home sends now use the same desktop-style handoff wire and card watch as typed @mentions</li>
-          <li>Pending/failed assign rows use theme soft fills with wrap-friendly failure text</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Skills and tools toggles can disable while a change is in flight</li>
-          <li>Bot Details credential note and leave-and-open flows work as expected</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.13</span>
+            <span class="changelog-date">20 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>16 themes, Bot Details chats & MCP, forever /new</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Themes — 16 presets with live gallery</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Theme gallery</strong>: choose from 16 WCAG-minded presets with live preview cards in a 2-column grid.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Dark presets</strong>: Obsidian Teal, Midnight OLED, Tokyo Night, Catppuccin Mocha, Nord Polar, Rosé Pine Moon, Cyber Synthwave, Obsidian Gold, Emerald Matrix.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Light presets</strong>: Titanium Frost, Catppuccin Latte, Nord Snow, Rosé Pine Dawn, Kyoto Matcha, Paper &amp; Ink, Solar Daylight.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>System mode</strong>: pick separate dark and light defaults; long-press the mode segment to open the gallery.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Reset</strong> restores the default Obsidian Teal / Titanium Frost; choices persist with appearance prefs.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bot Details — chats, MCP, forever /new</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>MCP panel</strong>: search and filter servers with On/Off toggles when the gateway is connected; clear offline note when not.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Chats section</strong>: Forever Bot Chat pin, Draft, live pulse, unread dot, preview, relative time, and message count.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Delete scratch chats</strong>: ··· menu on non-forever chats with confirm; Forever chat cannot be deleted.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Hidden Bot Chats</strong>: list hidden Bot Chats via session.list include_hidden; profile-scoped delete via gateway or REST.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>/new in Bot Chat</strong>: typing /new or /reset in the forever Bot Chat rewrites to /compact with a notice pointing to New chat for throwaways.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Sessions and menus</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Action sheet icons</strong>: session long-press items now show Lucide icons for star, folder, read/unread, rename, archive, and delete.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Android/Web action sheet</strong>: grabber, title/subtitle, Lucide icons, elevated surface, and theme tokens.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Onboarding</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Collapsible setup prompt</strong>: expand to read the full prompt, then copy; replaces the plain text block.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Tokenized UI</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Expanded color tokens for surfaces, glass, scrims, chip colors, YOLO/reasoning, code/markdown, inputs, media placeholders, and shadows.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Chat, composer, dashboard, sessions filters, banners, tool cards, code blocks, model/effort pickers, and status chrome all use theme colors instead of hardcoded hex.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Soft assign/pending/danger tints and send-button shadows follow the active palette.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">@-assign polish</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Voice dictation and Home sends use the same desktop-style handoff wire and card watch as typed @mentions.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Pending/failed rows use theme soft fills; failure text can wrap to three lines.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Removed the old Home-only assign shortcut that skipped the current-agent turn.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bot Chat reliability</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">The forever Bot Chat stays primary in Details; other chats collapse under &quot;Other chats (N)&quot;.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Skills and tools toggles can now disable while a change is in flight.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Credentials note appears when relevant; leave-and-open flows for New chat, routines, and memory work as expected.</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.12 -->
     <div class="changelog-item reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.12</span>
-        <span class="changelog-date">19 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3><strong>Bots Mode</strong> — desktop handoff, hidden rosters, cleaner cards</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li><strong>Desktop-style @ handoff</strong> — assign through the current agent while the specialist works in its own Bot Chat and replies return here</li>
-          <li>Hide agents from the roster without disabling mentions or routines, then reveal hidden agents with unread activity indicators</li>
-          <li>Bot avatars — choose a face, upload a photo, or generate an image from Details or New Agent</li>
-          <li>Bot-scoped Star Map from each teammate’s Details sheet</li>
-          <li>Batch clarification cards with multi-select, Other, Confirm, and Skip</li>
-          <li>Technical Activity view for raw JSON tool payloads</li>
-          <li>Dictation and hands-free voice chat from Home</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Assignment cards now use compact status chrome, expandable requests, copy support, and collapsible specialist replies</li>
-          <li>Bot roster previews prefer the pinned Bot Chat and show clearer hidden, unread, avatar, and last-active states</li>
-          <li>Agent replies support collapsible HTML details sections without changing code-fenced content</li>
-          <li>Activity cards keep real per-tool elapsed time after background recovery and history rehydration</li>
-          <li>Sessions and Bots gesture hints can be dismissed and remembered; the default profile supports a display nickname</li>
-          <li>Cron screens distinguish a scheduled fire that never reached the gateway from a job that ran and failed</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Temporary assignment polling misses no longer turn a live handoff into a false failure</li>
-          <li>Handoff receipts and replies remain attached to the correct conversation across restarts and Bot Chat isolation</li>
-          <li>Stale live connections resume the durable conversation instead of replaying attachments through a dead session</li>
-          <li>Batch clarification answers restore correctly after reconnect</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.12</span>
+            <span class="changelog-date">19 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3><strong>Bots Mode</strong> — desktop handoff, hidden rosters, cleaner cards</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots Mode — roster and identity</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Hide from roster</strong>: take an agent off the visible roster without disabling its mentions or routines.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Hidden agents</strong>: reveal hidden teammates from a dedicated row, with an unread indicator when one has new activity.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot avatars</strong>: choose a face, upload a photo, or generate an image from Bot Details or New Agent.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot-scoped Star Map</strong>: open the selected teammate’s learning graph directly from its Details sheet.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — handoff, activity, and voice</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Desktop-style @ handoff</strong>: assignments go through the current agent while the specialist keeps its own Bot Chat; the reply returns to the original conversation.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Assignment and request cards</strong>: cleaner Asking, Waiting, and Replied cards, expandable requests, copy support, and a direct path to the specialist chat.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Batch clarification</strong>: answer several questions in one card with multi-select, Other, Confirm, and Skip.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Technical activity view</strong>: switch the Activity sheet to raw JSON when the underlying tool payload matters.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Home voice controls</strong>: dictate into the Home composer or start a hands-free voice chat from Home.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots Mode UX/UI</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Roster rows prefer the pinned Bot Chat for preview, unread state, sorting, and last-active details; hidden rows are visibly dimmed when revealed.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bot faces now prefer real photos and animated geometric faces over unusable desktop snapshot images, with a safe fallback when an avatar cannot load.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Assignment cards use a consistent compact chrome, quote the request, collapse long specialist replies, and keep the thread anchored while cards expand.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat and navigation</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">HTML `&lt;details&gt;` / `&lt;summary&gt;` sections in agent replies are now collapsible like the desktop client while tags inside code fences stay untouched.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Activity cards preserve real per-tool elapsed time, including after background recovery and history rehydration.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Session and Bots gesture hints are dismissible and remembered per host.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">The default management profile can have a display nickname without changing its identity.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Cron surfaces distinguish a scheduled fire that never reached the gateway from a job that ran and failed.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Handoff and connection reliability</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Temporary polling misses during an assignment no longer appear as a failed handoff; the card remains in Asking or Waiting until the specialist answers.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Handoff receipts and returned replies stay attached to the correct conversation across thread switches, restarts, and Bot Chat isolation.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Reconnecting after a stale live connection resumes the durable conversation instead of replaying attachments or sending through a dead session.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Batch clarification prompts restore correctly after reconnect, with previously selected answers still available to edit.</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-
 
     <!-- Older releases (collapsed, fade from 4th) -->
     <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.11 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.11</span>
-        <span class="changelog-date">18 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3><strong>Bots Mode</strong> — AI teammates, @-assign, routines</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li><strong>Bots Mode</strong> — a new Bots hub with Agents and Routines, search, roster states, pull-to-refresh, and a clear path when the host needs an update</li>
-          <li>Build an AI teammate — create or clone a profile with its own name, handle, face, avatar, model, reasoning effort, Fast mode, skills, tools, and SOUL</li>
-          <li>Forever Bot Chat — one canonical conversation per teammate, kept out of Home and Sessions recents; scratch chats stay separate</li>
-          <li><strong>Assign from any session</strong> — type @ in any chat or Home composer, choose one or several teammates, and keep talking while they work in their own chats</li>
-          <li>Assignment receipts — Asking, Waiting, Couldn't reach, or Replied status, open-chat shortcuts, and returned markdown replies shown in the original conversation</li>
-          <li>Bot-side request cards — the assigned teammate sees who asked, what they asked, and can expand or copy the request</li>
-          <li>Agent routines — schedule interval, daily, or one-time work for a specific teammate; filter, pause, resume, run, inspect history, or delete</li>
-          <li>Bots discovery — drawer rail, hub flyout, global search, Feature Map, bot-scoped Star Map, and a Home banner for running loops</li>
-          <li>Session unread state — mark supported chats read or unread while Bots keeps canonical Bot Chats out of normal recents</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Bots roster rows now show faces, last-active time, previews, handles, unread dots, status pills, and active face rings; swipe right for Details or left for a scratch chat</li>
-          <li>Create and Details sheets preview faces live, confirm dirty closes, save only changed fields, and safely roll back failed skill or tool changes</li>
-          <li>Bot conversations keep their own profile for resume, sending, queued work, and usage while the management profile stays where you left it</li>
-          <li>Model pills now show the actual profile model, reasoning effort, and Fast state; backup settings explain exactly what is uploaded and restored</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Opening a Bot Chat no longer switches the management profile or leaks bot state into regular sessions</li>
-          <li>Pinned Bot Chats reopen directly instead of waiting on a long roster fetch; scratch chats are created only when first used</li>
-          <li>Assignment receipts survive restarts, multi-target replies stay attached to the right request, and bot session data stays with the right teammate</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.11</span>
+            <span class="changelog-date">18 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3><strong>Bots Mode</strong> — AI teammates, @-assign, routines</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots Mode — Agents</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bots hub</strong>: a new drawer destination for named AI teammates, with <strong>Agents</strong> and <strong>Routines</strong> segments, expanding search, pull-to-refresh, and clear offline or host-version states.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Build an AI teammate</strong>: create from scratch or clone another profile with a name, handle, title, description, model, reasoning effort, Fast mode, skills, toolsets, optional SOUL, and key-sharing controls.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot identity</strong>: live geometric faces with idle and working moods, stable handles, optional JPEG/PNG/WebP avatars, and roster indicators for Default, In Chat, and unread work.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot details</strong>: edit the teammate’s title, description, model, skills, tools, and SOUL; see its chats, memory and skill counts, Star Map, and routines from one sheet.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Forever Bot Chat</strong>: one canonical conversation per teammate stays out of Home and Sessions recents, while scratch chats remain separate and easy to start.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — assign work from any session</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Assign with @</strong>: type `@` in any existing chat or Home composer to choose a teammate without leaving the conversation. The agent works in its own Bot Chat and its reply comes back here.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Multi-agent assignments</strong>: select several teammates, remove them as chips, and send one request to the group; self-mentions are excluded.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Live assignment receipts</strong>: see Asking, Waiting, Couldn&#x27;t reach, or Replied for each teammate, open their Bot Chat, and read the returned markdown reply in place.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot-side request cards</strong>: assigned agents see who asked, what was requested, and can expand or copy the request without exposing protocol details.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots Mode — Routines</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Agent routines</strong>: schedule recurring work as a specific teammate with interval, daily, or one-time timing and a live expression preview.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Routine controls</strong>: filter by teammate, inspect next run and history, pause, resume, run now, or delete.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Home, navigation, and sessions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bots discovery</strong>: Bots now appears in the drawer rail, hub flyout, global search, and Feature Map; a bot’s Star Map opens scoped to that teammate.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Running loops on Home</strong>: see active loops from the dashboard and tap View to open the relevant chat.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Session unread state</strong>: mark chats read or unread where the host supports watermarks; bot chats remain owned by Bots instead of cluttering recents.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots Mode UX/UI</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Roster rows now show a face, last-active time, preview, @handle, unread dot, status pills, and an active face ring; swipe right for Details or left for a new scratch chat.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Create and Details sheets preview faces live, confirm dirty closes, save only changed fields, and roll back skill or tool changes if a save fails.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Empty, offline, outdated-host, failed-load, and no-search-result states now explain what is happening instead of showing a blank screen.</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat, profiles, and settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bot conversations keep their own profile for resume, sending, queued work, and usage while the management profile stays where you left it.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">The composer model pill now honestly shows profile model, reasoning effort, and Fast state; history tips fetch newest-first so compacted archives do not hide recent days.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Backup settings explain exactly what is uploaded and restored, including the path and the data that is never included.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bot isolation and reliability</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Opening a Bot Chat no longer switches the drawer’s management profile or leaks bot state into regular sessions.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Pinned Bot Chats reopen directly instead of waiting on a long roster fetch; scratch chats are created only when first used.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bot profile operations now cover profile creation, configuration, assets, skills, toolsets, and avatar generation, with honest “host update needed” handling when the server is too old.</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bot assignment receipts survive app restarts, multi-target replies stay attached to the correct request, and profile-scoped session/message data stays with the right teammate.</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-
     <!-- v1.0.10 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.10</span>
-        <span class="changelog-date">15 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Session loops, host pressure alerts, reconnect polish</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Recurring loops — keep an active /loop pinned above the composer with prompt, countdown, and status</li>
-          <li>Pause, resume, or stop loops from the card itself</li>
-          <li>Activity stack — todos, subagents, and loops collapse into one compact group when busy</li>
-          <li>Unfinished task plans stay pinned across turns and show when work is from the last turn</li>
-          <li>Memory and disk pressure alerts on Home and Health when the host reports elevated pressure</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Tool cards are easier to scan with readable values, chips, lists, and markdown</li>
-          <li>History continues correctly after in-place compaction</li>
-          <li>Long clarify questions and options wrap fully; long lists scroll while Other and Confirm stay reachable</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Long background sleeps, dead sockets, and handshake timeouts reconnect instead of getting stuck</li>
-          <li>Parked approvals and clarify prompts return after reconnect</li>
-          <li>Live usage updates the context bar quietly; completed turns settle so Stop does not remain stuck</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.10</span>
+            <span class="changelog-date">15 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Session loops, host pressure alerts, reconnect polish</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — Session loops</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Recurring loops</strong>: keep an active `/loop` pinned above the composer with its prompt, countdown, and status</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Loop controls</strong>: pause, resume, or stop from the card itself — no command to remember</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Activity stack</strong>: todos, subagents, and loops share a compact stack above the input; three live surfaces collapse into one Activity group</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Plans that stick</strong>: unfinished todo lists stay pinned across turns, show when work is from the last turn, and do not reappear after completion</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">System — Host pressure</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Memory and disk alerts</strong>: Home and Health show an advisory when the gateway reports elevated or critical pressure; alerts stay quiet on older agents</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — Prompts and history</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Readable tool cards</strong>: key-values, chips, lists, and markdown are easier to scan than raw output</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Complete history after compaction</strong>: archived rows continue past an in-place compaction boundary instead of stopping early</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Clearer prompts</strong>: long clarify questions and options wrap fully; long option lists scroll while Other and Confirm stay reachable</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Connect and live turns</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Recover after backgrounding</strong>: long sleeps, dead sockets, and handshake timeouts now reconnect instead of leaving a permanent retry state</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Parked prompts return</strong>: approvals and clarify prompts can be restored after reconnect, so blocked work can be answered again</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Steadier turns</strong>: live usage updates the context bar without transcript noise; completed turns settle cleanly so Stop does not remain stuck</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.9 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.9</span>
-        <span class="changelog-date">14 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Fast lane, reasoning effort, smarter model picks</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Fast lane — toggle priority processing on supported models, with Use Fast or Standard choice on pick</li>
-          <li>Reasoning effort Off → Ultra for the session and as a profile default</li>
-          <li>Smarter model pickers — search, provider groups, Fast control, cleaner rows</li>
-          <li>Safer default-model changes — expensive-model confirm and cron impact review</li>
-          <li>Settings default row shows name, context size, effort, and Fast</li>
-          <li>Global search opens faster with a steadier keyboard</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Uncertain live turns now queue instead of starting a second turn — quiet retries, no locked composer</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.9</span>
+            <span class="changelog-date">14 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Fast lane, reasoning effort, smarter model picks</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — Fast lane</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Fast lane</strong>: toggle Fast / priority processing on models that support it (chat header and Settings) — lightning only when the model catalog says it can handle it</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Pick with intent</strong>: when you choose a Fast-capable model, the sheet asks Use Fast or Standard before it closes</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — Reasoning effort</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Effort levels Off → Ultra</strong>: set reasoning effort for the session and as a profile default, wherever the model supports reasoning</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings — Model pickers</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Smarter pickers</strong>: chat and Settings model lists got search, provider groups, Fast control, and cleaner rows</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Safer default changes</strong>: the default model now changes through the real assignment flow, with an expensive-model confirm and a cron impact review when jobs are affected</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Richer default row</strong>: Settings shows name, context size, effort, and Fast for the current default</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">App</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Faster search</strong>: global search opens quicker from the drawer, with a steadier keyboard and calmer jump list</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Uncertain live turns queue</strong>: if recovery of a live turn is unclear, Send queues the message instead of starting a second turn — quiet retries keep going without locking the composer</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-
 
     <!-- v1.0.8 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.8</span>
-        <span class="changelog-date">13 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Spotlight search, in-app updates, steadier connect</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Jump anywhere — Spotlight-style search from the drawer rail, grouped by Home, Brain, Work, Connect, System, Settings, and Actions</li>
-          <li>Type to filter pages and actions — new chat, Feature map, cron, console, profile switcher — and tap to jump, including focusing the Home composer</li>
-          <li>Update banner on Home — "update available" / "update ready" with Update or Restart; stays until you apply, Retry on failure</li>
-          <li>Feature map search upgraded — area filter chips, loading / retry / no-matches states, one-tap clear</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Reconnects recover after sleep, network blips, or dead sockets — no more hanging "connected"</li>
-          <li>Switching the default model warns when scheduled cron jobs would stay on the old model, with a shortcut to review</li>
-          <li>Reasoning effort stays per chat — switching sessions no longer leaks the pick</li>
-          <li>Adaptive icon and connect marks render cleanly without a plate</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.8</span>
+            <span class="changelog-date">13 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Spotlight search, in-app updates, steadier connect</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">App — Spotlight search</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Jump anywhere</strong>: open Search from the drawer rail — a Spotlight-style jump list grouped by Home, Brain, Work, Connect, System, Settings, and Actions</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Type to go</strong>: filter pages and actions — new chat, Feature map, cron, console, profile switcher — and tap to jump straight there, including focusing the Home composer</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>In-app update banner</strong>: Hermes Go updates now show on Home — &quot;update available&quot; / &quot;update ready&quot; with Update or Restart; the banner stays until you apply, and Retry appears if a download fails</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Feature map</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Sharper search</strong>: area filter chips keep your search pinned, with clearer loading, retry, and &quot;no matches&quot; states plus a one-tap clear</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Connect</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Steadier reconnects</strong>: recovers reliably after the phone sleeps, the network blips, or a socket that looks open but is dead — no more hanging &quot;connected&quot; that never answers</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Cron</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Model-change warning</strong>: switching the default model warns when scheduled cron jobs would stay on the old model, and offers to open Cron to review them</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Per-session effort</strong>: reasoning effort stays on the chat you set it in — switching sessions no longer leaks the last pick onto the next one</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">App</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Cleaner icon</strong>: the Android adaptive icon and the connect / restoring-session mark sit cleanly without a plate</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-
-
-
     <!-- v1.0.7 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.7</span>
-        <span class="changelog-date">12 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Background processes, kanban review handoff</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Processes screen in Work — manage background jobs, filter all / running / finished, start or stop with confirmation</li>
-          <li>Background job control in chat — terminal control in the meta row, inspect output, stop or dismiss</li>
-          <li>Request review from kanban tasks with an optional handoff note</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Process completion and watch notices render as compact timeline pills instead of chat bubbles</li>
-          <li>Live status bar shows "1 action" / "N actions" instead of verb + target</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.7</span>
+            <span class="changelog-date">12 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Background processes, kanban review handoff</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Work</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Processes screen</strong>: manage background jobs from live sessions — filter all / running / finished, and start or stop processes with a confirmation prompt</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Background job control</strong>: sessions with running host processes show a terminal control in the meta row — open a sheet to inspect output, stop a running job, or dismiss finished ones</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Kanban</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Request review</strong>: hand off ready or running kanban tasks to review, with an optional note</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Compact process notices</strong>: background process completion and watch events render as small timeline pills instead of chat bubbles</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Live status bar</strong>: shows &quot;1 action&quot; / &quot;N actions&quot; instead of verb + target</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.6 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.6</span>
-        <span class="changelog-date">12 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Feature map, model refresh, quieter mic</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Feature map in Settings — search every screen, jump by area, tap to go straight to any feature</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Default model shows as provider · name in Settings</li>
-          <li>Refresh model lists from the picker header — clear error on failure, last-good list stays intact</li>
-          <li>Mic control softens while typing, keeping the send row uncluttered</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.6</span>
+            <span class="changelog-date">12 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Feature map, model refresh, quieter mic</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Feature map</strong>: open it from Settings — search every screen, jump by area, and tap to go straight to any feature</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Default model label</strong>: shows as provider · name in Settings</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Model refresh</strong>: refresh the model list from the picker header (chat, dashboard, Settings) — a clear error appears if it fails, and the last-good list stays intact</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Quieter mic</strong>: the mic control softens while you type, keeping the send row uncluttered</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.5 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.5</span>
-        <span class="changelog-date">12 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Deleted chats vanish, steady context ring, isolated errors</h3>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Deleted chats disappear from the list immediately — including ones already gone from the server</li>
-          <li>Context-usage ring keeps loading after open or rebind instead of freezing on "—"</li>
-          <li>A failed turn in one session never paints its error onto another chat</li>
-          <li>Faster inbox — lighter session rows, less list churn</li>
-          <li>Usage sheet now shows each category's share of context tokens</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.5</span>
+            <span class="changelog-date">12 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Performance, context ring recovery, cache fixes</h3>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Sessions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Deleted chats disappear immediately</strong> — removed sessions drop out of the list right away, including ones already gone from the server</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Faster inbox</strong> — session rows are lighter and the list churns less, so scrolling stays smooth</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Context ring stays live</strong> — the context-usage ring keeps loading after opening or rebinding a session instead of freezing on &quot;—&quot;</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>No cross-chat errors</strong> — a failed turn in one session never paints its error onto another chat</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Usage breakdown</strong> — the usage sheet now shows each category&#x27;s share of context tokens</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.4 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.4</span>
-        <span class="changelog-date">11 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Hermes Cloud, feedback, What&rsquo;s New, workspace continuity</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Hermes Cloud — sign in with the portal, pick your organization and agent; cookie-based reconnect keeps you connected</li>
-          <li>Feedback — submit a bug, feature idea, improvement, or question with optional screenshots, and track its status</li>
-          <li>What&rsquo;s New — browse release notes in-app; product version shown in the footer</li>
-          <li>Backup preview — see exactly what a mobile preferences backup will restore before you accept it</li>
-          <li>@file and @folder chips — long-press a file or folder in Workspace to drop it into the composer without replacing your draft</li>
-          <li>Open and edit skills from the Skills hub and skill tool cards; invocations appear as neat chips in history</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Files browse pins and Review scopes survive cold start, reinstall, and backup restore</li>
-          <li>Header git dirty badge now aligns with the Review scope path when set</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.4</span>
+            <span class="changelog-date">11 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Hermes Cloud, feedback, What's New, backup preview</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Connect</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Hermes Cloud</strong>: sign in with the portal, pick your organization and agent — cookie-based reconnect keeps you connected; the self-hosted password flow is unchanged</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Feedback</strong>: submit a bug, feature idea, improvement, or question with optional screenshots, and track its status</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>What&#x27;s New</strong>: browse release notes right in the app; the product version is shown in the footer</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Backup preview</strong>: see exactly what a mobile preferences backup will restore — folders, filters, workspace pins, appearance — before you accept it</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Workspace</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>@file and @folder chips</strong>: long-press a file or folder in Workspace → Files to drop it into the composer without replacing your draft</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Skills</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Open and edit skills</strong> from the Skills hub and from skill tool cards; skill invocations appear in history as neat chips instead of expanded model text</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Workspace</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Pins and scopes survive</strong>: Files browse pins and Review scopes now live on stable session ids — they survive cold start, reinstall, and backup restore, and sync with client prefs</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Git badge accuracy</strong>: the header git dirty badge now aligns with the Review scope path when one is set</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.3 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.3</span>
-        <span class="changelog-date">11 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Share from other apps, tappable links</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Send to chat — share images, PDFs, Word/Excel files, text, or links from any app straight into Hermes; pick a session or start a new chat, and review everything in the composer before it&rsquo;s sent</li>
-          <li>Shared content is staged in the composer only — never auto-sent — and merges with any draft already in the box</li>
-          <li>Shares over 25 MB are rejected with a clear message before upload</li>
-          <li>Bare http(s) links in assistant messages — including inside code blocks — and in your own bubbles now open on tap</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Changed</h4>
-        <ul>
-          <li>Reasoning-effort chips in the composer are more compact (e.g. Medium &rarr; Med)</li>
-          <li>Session switcher and share picker keep the same height, so the destination list feels stable</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.3</span>
+            <span class="changelog-date">11 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Files & @file chips, persistent session pins</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Share — from other apps</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Send to chat</strong>: share images, PDFs, Word/Excel files, text, or links from any app straight into Hermes — pick a session or start a new chat, and review the payload in the composer before anything is sent</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Staged, never auto-sent</strong>: shared content lands in the composer only, merging with any draft already in the box</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Size guard</strong>: shares over 25 MB are rejected with a clear message before upload</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Tappable links</strong>: bare http(s) links in assistant messages — including links inside code blocks — and in your own message bubbles now open on tap</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Shorter effort labels</strong>: reasoning-effort chips in the composer are more compact (e.g. Medium → Med)</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Sessions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Consistent picker height</strong>: the session switcher and share picker keep the same height, so the destination list feels stable</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Update 2 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.2</span>
-        <span class="changelog-date">10 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <!-- v1.0.2 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Personality changes, PR badges, and sharper reliability</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>GitHub pull-request badges on session rows — tap to open the PR in your browser</li>
-          <li>Personality switches now show a "personality changed" note in the timeline</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Context ring no longer gets stuck on "—" when a session is rebound</li>
-          <li>Message editing and rewinds stay accurate after model or personality switches</li>
-          <li>Rewind reliability improved — truncations now confirm properly with the gateway</li>
-          <li>Model picker keeps the expanded section in view when scrolling</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.2</span>
+            <span class="changelog-date">10 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Offline media, message edit, PR badges</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Sessions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>PR badges</strong>: session rows now show GitHub pull-request badges — tap to open the PR in your browser</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Personality changes</strong>: switching your agent&#x27;s personality now shows a subtle &quot;personality changed&quot; note in the timeline</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Context ring</strong>: no longer gets stuck on &quot;—&quot; when a session is rebound to its parent or child thread — usage and context breakdown now resume correctly</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Message editing</strong>: rewinds and edits stay accurate even after model or personality switches in the thread</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Gateway</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Rewind reliability</strong>: message truncation and rewinds now confirm properly with the gateway, matching desktop behavior</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Model picker</strong>: long provider lists keep the expanded section in view when scrolling — no more losing the open group off-screen</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Update 1 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge">v1.0.1</span>
-        <span class="changelog-date">10 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">OTA</span>
+    <!-- v1.0.1 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>Instant open, slash commands, and full tool cards</h3>
-      <div class="cl-group">
-        <h4>Added</h4>
-        <ul>
-          <li>Instant session open — recent messages pre-loaded in background, paint from cache</li>
-          <li>Native slash commands — /learn, /goal, and skills intercepted and run properly</li>
-          <li>Multi-photo attachments — select several at once, oversized ones skipped with a summary</li>
-          <li>Cleaner reconnects — duplicate session-resume calls prevented</li>
-          <li>Review scope — point Review at any folder, discover git repos automatically</li>
-          <li>Pin backup — workspace pins restored across profile switches</li>
-        </ul>
-      </div>
-      <div class="cl-group">
-        <h4>Fixed</h4>
-        <ul>
-          <li>Blank browser and vision tool cards — screenshots, analysis, and errors now render fully</li>
-          <li>Context-usage ring loads automatically when a session opens</li>
-          <li>Activity sheet performance — expanding a tool no longer re-renders the entire list</li>
-        </ul>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.1</span>
+            <span class="changelog-date">10 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Instant open, slash commands, full tool cards</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Sessions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Instant open</strong>: recent messages are pre-loaded in the background, so opening a session paints from cache instead of waiting on the network</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Native slash commands</strong>: `/learn`, `/goal`, and skill commands are now intercepted and run as real commands with proper output — no more sending them as plain text; built-in commands appear at the top of the Skills picker with their own icons</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Multi-photo attachments</strong>: attach several photos at once; oversized images are skipped with a summary instead of aborting the whole send</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Cleaner reconnects</strong>: duplicate session-resume calls are prevented, so reconnecting is faster and more reliable</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Workspace</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Review scope</strong>: Review can now point at a specific folder — independent of where the agent is working; if a folder isn&#x27;t a git repo, Review finds nearby git repos and lets you pick one</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Pin backup</strong>: workspace pins are backed up and restored across profile switches</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Blank tool cards</strong>: browser and vision tool results no longer show as empty cards — screenshots, analysis, actions taken, and errors now render fully</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Context usage on open</strong>: the context-window usage ring now loads automatically when a session opens (previously it only appeared after a manual refresh)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Activity sheet performance</strong>: expanding a tool no longer re-renders the entire list — smooth even with 40+ tools in a session</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- v1.0.0 -->
-    <div class="changelog-item cl-old reveal">
-      <div class="changelog-meta">
-        <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v1.0.0</span>
-        <span class="changelog-date">9 Aug 2026</span>
-        <span class="changelog-date" style="color:var(--accent)">First Release</span>
+    <div class="changelog-item reveal is-release">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
-      <h3>The complete Hermes agent, in your pocket</h3>
-      <p style="font-size:13.5px;color:var(--muted);line-height:1.55">Live streaming, voice, inline media, approvals, subagents, Star Map, system control, multi-server, and zero telemetry — everything desktop does, in a native Android app.</p>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.0</span>
+            <span class="changelog-date">9 Aug 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
+        </div>
+        <h3>The complete Hermes agent, in your pocket</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat — Liquid Glass</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Live streaming with reasoning rows and tool timelines</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Markdown rendering: headers, lists, emphasis, GFM tables, syntax-highlighted code blocks with copy button</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Context ring showing live context-window usage</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Inline media: images with full-screen viewer, audio playback, HTML fences → live WebView preview, SVG preview</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Session artifacts: every media item from a session, searchable (chat header · Package)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Approvals: approve/deny, clarify, sudo, secret prompts</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Send queue (hold-to-queue), mid-run steering, clean stop</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Subagent lists with live delegation thoughts and tool calls</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Async delegation with background task cards</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Composer: attachments (gallery/camera), `/` skills palette, `@` mentions, prompt improve, YOLO mode, todo status panel</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Per-session model and reasoning-effort picker</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Voice</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Hold-to-dictate (STT)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Read-aloud (TTS) on any message</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Hands-free voice conversation loop</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Inline audio playback for TTS tool output</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Dashboard</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Agent status: health, active model, live sessions</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Performance: usage stats, host gauges (CPU/memory), sparklines</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Capabilities: skills/tools/MCP/cron counts at a glance</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Alerts + agent-update modal</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Quick compose from home</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Profile switcher sheet</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Sessions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Inbox with server-side stars and live badges</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Folders &amp; projects (local pin groups, client-prefs backup)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Full-text search across message bodies with snippets</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bulk select: archive/delete, rename</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Brain</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Model provider catalog with fallback chain and effort control</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Skills with enable toggles</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Toolsets with environment configuration</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Memory block viewer/editor</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Star Map</strong>: interactive learning graph — constellation, clusters, timeline, node editor, curator controls</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">MCP server connections</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Plugin toggles</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Work</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Artifacts browser: images, audio, files from recent sessions</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Full-screen image viewer with pinch-zoom</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Offline-first artifact browsing (cached session media)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Cron jobs: list, run-now, status badges</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Kanban board with live updates</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Connect</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Channel status with live dots (Telegram, Discord, Slack)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Webhook routes</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Pairing requests + QR provisioning</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">System</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Health: host gauges, gateway status</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Analytics: usage trends</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Setup: app features, voice, thinking depth, safety, UI</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Ops console with readable parsed output</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Live log stream with pause-on-scroll</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Power tools: config editor, environment, OAuth login, profiles, files, credentials</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Multi-server with URL switching</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Connection details + Tailscale detection</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Theme (dark/light)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Active profile</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Platform</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">EAS Build (APK) + OTA updates via expo-updates</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Local-first SQLite persistence with background sync</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">WebSocket JSON-RPC gateway client</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Android widget (HermesQuickActions) and share-intent (text/images/PDF) <strong>native scaffolding configured</strong> — UI/UX implementation planned (see Roadmap)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Older releases (collapsed) -->
     <!-- v0.9.0 -->
-      <div class="changelog-item cl-old reveal">
+    <div class="changelog-item reveal is-release">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
         <div class="changelog-meta">
-          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.9.0</span>
-          <span class="changelog-date">6 Aug 2026</span>
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v0.9.0</span>
+            <span class="changelog-date">6 Aug 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
         </div>
-        <h3>Star Map, queue panel, bulk prefetch, composer todo, settings, keep-awake, model chains, voice plan</h3>
-        <div class="cl-group">
-          <ul>
-            <li>Star Map visualization and knowledge graph</li>
-            <li>Queue panel sheet and async delegation</li>
-            <li>Bulk prefetch for sessions</li>
-            <li>Composer todo status panel with live sync</li>
-            <li>Settings surface — connection and common jobs moved out of chat</li>
-            <li>Keep-awake streaming</li>
-            <li>Fallback model chains</li>
-            <li>Voice master plan</li>
-          </ul>
+        <h3>Star Map, queue panel, bulk prefetch, composer todo</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Star Map visualization and knowledge graph integration</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Queue panel sheet and async delegation</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Bulk prefetch utilities for sessions</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Composer todo status panel with live syncing</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Settings panel: connection and common jobs moved to new Settings surface</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Inverted FlatList expand/collapse scroll anchoring</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Composer tips, keep-awake streaming, workspace improvements</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Fallback model chain implementation</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">App Features and Voice Master Plan</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Chat composer tip page widened to include minimum conversation turns on open</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">TodoStatusCard enhanced with expanded state and animations</span></li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- v0.8.0 -->
-      <div class="changelog-item cl-old reveal">
+    <!-- v0.8.0 -->
+    <div class="changelog-item reveal is-release">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
         <div class="changelog-meta">
-          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.8.0</span>
-          <span class="changelog-date">24 Jul 2026</span>
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v0.8.0</span>
+            <span class="changelog-date">24 Jul 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
         </div>
-        <h3>Expo config, EAS build, OTA pipeline, multi-server prep, image gen fix, performance</h3>
-        <div class="cl-group">
-          <ul>
-            <li>Expo project initialization and configuration</li>
-            <li>EAS Build + OTA update pipeline</li>
-            <li>Multi-server support prep in Connect flow</li>
-            <li>Auto-pin runtimeVersion for OTA updates</li>
-            <li>Performance optimizations</li>
-          </ul>
+        <h3>Expo config, EAS build, OTA pipeline, performance</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Hermes Go project initialization with Expo configuration</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">EAS Build + OTA update pipeline</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Multi-server support prep in Connect flow</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Image generation tool display fix</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Auto-pin runtimeVersion for OTA updates</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Performance optimizations and production logging</span></li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- v0.7.0 -->
-      <div class="changelog-item cl-old reveal">
+    <!-- v0.7.0 -->
+    <div class="changelog-item reveal is-release">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
         <div class="changelog-meta">
-          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.7.0</span>
-          <span class="changelog-date">19 Jul 2026</span>
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v0.7.0</span>
+            <span class="changelog-date">19 Jul 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
         </div>
         <h3>EAS Build, WASM support, ChatShell, internal docs</h3>
-        <div class="cl-group">
-          <ul>
-            <li>EAS Build configuration and OTA updates</li>
-            <li>Metro config for WASM support</li>
-            <li>ChatShell — integrated session switcher + connection status</li>
-            <li>Internal Repowiki documentation</li>
-          </ul>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">EAS Build configuration and OTA updates</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Metro config for WASM support</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">ChatShell component with integrated session switcher and connection status</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Internal Repowiki documentation</span></li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- v0.6.0 -->
-      <div class="changelog-item cl-old reveal">
+    <!-- v0.6.0 -->
+    <div class="changelog-item reveal is-release">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
         <div class="changelog-meta">
-          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.6.0</span>
-          <span class="changelog-date">2 Jul 2026</span>
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v0.6.0</span>
+            <span class="changelog-date">2 Jul 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
         </div>
-        <h3>The foundation — mobile app, gateway, LiquidGlass, tool cards, dashboard, persistence</h3>
-        <div class="cl-group">
-          <ul>
-            <li>Mobile app structure with gateway WebSocket connection</li>
-            <li>LiquidGlass chat architecture + 10 specialized tool cards</li>
-            <li>Dashboard with API client, sync services, sparklines</li>
-            <li>SQLite persistence with background sync</li>
-            <li>Session branching and auto-compress tracking</li>
-            <li>Model selection architecture + hook + UI</li>
-            <li>System control center: env, config, health</li>
-            <li>Profile management with persistent storage</li>
-            <li>Chat workspace + git review with unified diff</li>
-            <li>Subagent list UI, clarify/sudo/secret prompt cards</li>
-          </ul>
+        <h3>First runnable mobile build, live streaming, voice</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Initial mobile application structure</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Hermes gateway connection flow</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">JSON-RPC gateway client with WebSocket connection and event handling</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">TUI Gateway JSON-RPC parity (tests, chat-store applyGatewayEvent, typed RPC wrappers)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">E2E smoke test against real Hermes gateway</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Comprehensive settings architecture with modular sub-screen management</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">LiquidGlass chat architecture and comprehensive tool card system</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Model selection architecture with hook, UI components, and API integration</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Chat session management and persistence with Hermes server integration</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Local SQLite persistence layer with background-sync architecture</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Session branching and auto-compress status tracking</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Activity-bar drawer with session and skill management pane navigation</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Dashboard with API client, sync services, and UI components</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Chat workspace and git file review system with unified diff support</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">System control center: environment management, configuration panels, health tracking</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Session management interface with search, archiving, and bulk actions</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Profile management system with persistent storage and sync-aware state</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">10 specialized tool cards (StatusRow, ExpandableBlock, TerminalOutputCard, etc.)</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Slash command palette using live gateway catalog</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Subagent list UI, review.summary + moa.* UI cards</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Clarify/sudo/secret prompt cards using proper RPCs</span></li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- v0.1.0 -->
-      <div class="changelog-item cl-old reveal">
-        <div class="changelog-meta">
-          <span class="changelog-badge" style="background:var(--surface-muted);color:var(--fg)">v0.1.0</span>
-          <span class="changelog-date">27 Jun 2026</span>
-        </div>
-        <h3>Initial commit — project scaffold</h3>
+    <!-- v0.1.0 -->
+    <div class="changelog-item reveal is-release is-last">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom" style="opacity:0;"></div>
       </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v0.1.0</span>
+            <span class="changelog-date">27 Jun 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
+        </div>
+        <h3>Initial prototype</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Initial commit — project scaffold</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
 
     <div class="changelog-toggle">
       <button id="clToggleBtn" onclick="document.getElementById('clOldWrap').classList.toggle('collapsed');document.getElementById('clOldWrap').classList.toggle('expanded');this.textContent=document.getElementById('clOldWrap').classList.contains('collapsed')?'Show full history ↑':'Show less ↓';if(document.getElementById('clOldWrap').classList.contains('collapsed')){document.getElementById('changelog').scrollIntoView({behavior:'smooth',block:'start'})}">Show full history ↑</button>
-    </div>
-
-    <div class="changelog-cta">
-      <a href="https://github.com/shilp26/hermes-go/blob/main/CHANGELOG.md" target="_blank" rel="noopener">View full changelog on GitHub →</a>
     </div>
   </div>
 </section>
@@ -2290,7 +2964,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=114"></script>
+<script src="app-map.js?v=116"></script>
 <script>
 // Theme Switcher Logic
 const themeToggle = document.getElementById('themeToggle');
