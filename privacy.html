@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Hermes Go Privacy & Security Architecture — self-hosted trust model, direct WebSocket transport, zero telemetry, OTA update verification, and hardware-backed credential storage.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy & Security — Hermes Go">
+<meta property="og:description" content="Self-hosted architecture, zero telemetry, verified OTA updates, and direct WebSocket transport. Learn how Hermes Go protects your data.">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:site_name" content="Hermes Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy & Security — Hermes Go">
+<meta name="twitter:description" content="Self-hosted architecture, zero telemetry, verified OTA updates, and direct WebSocket transport. Learn how Hermes Go protects your data.">
+<meta name="twitter:image" content="assets/og-image.png">
+<title>Privacy & Security — Hermes Go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── Dual-theme tokens (Albert Sans + System Mono) ── */
+:root, :root[data-theme="light"] {
+  --bg: #FFFFFF;
+  --bg-soft: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-soft: #F9F9FB;
+  --surface-muted: #F2F2F7;
+  --surface-elevated: #FFFFFF;
+  --fg: #0A0A0F;
+  --muted: #4A4A55;
+  --subtle: #6E6E7A;
+  --faint: #A0A0AB;
+  --border: #EAEAEE;
+  --border-strong: #D6D6DC;
+  --border-hair: rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  --accent: #14B8A6;
+  --accent-muted: #2DD4BF;
+  --accent-strong: #0D9488;
+  --accent-ink: #0F766E;
+  --accent-soft: rgba(20, 184, 166, 0.10);
+  --accent-subtle: #CCFBF1;
+  --success: #16A34A;
+  --success-soft: rgba(22, 163, 74, 0.10);
+  --warning: #D97706;
+  --warning-soft: rgba(217, 119, 6, 0.10);
+  --danger: #DC2626;
+  --danger-soft: rgba(220, 38, 38, 0.10);
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --code-bg: #16161F;
+  --code-fg: #E2E8F0;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0A0A0F;
+  --bg-soft: #111118;
+  --surface: #16161F;
+  --surface-soft: #1A1A24;
+  --surface-muted: #1F1F2A;
+  --surface-elevated: #1E1E2A;
+  --fg: #F5F5F7;
+  --muted: #B8B8C0;
+  --subtle: #8E8E98;
+  --faint: #4A4A55;
+  --border: #2A2A35;
+  --border-strong: #3A3A45;
+  --border-hair: rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --accent: #2DD4BF;
+  --accent-muted: #5EEAD4;
+  --accent-strong: #5EEAD4;
+  --accent-ink: #5EEAD4;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+  --accent-subtle: #134E4A;
+  --success: #4ADE80;
+  --success-soft: rgba(74, 222, 128, 0.12);
+  --warning: #FBBF24;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+  --danger: #F87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+  --nav-bg: rgba(10, 10, 15, 0.92);
+  --code-bg: #111118;
+  --code-fg: #E2E8F0;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  font-family: "Albert Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01";
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+::selection { background: var(--accent-soft); color: var(--accent-ink); }
+
+/* ── Header ── */
+.header {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  padding-top: env(safe-area-inset-top);
+}
+.header-inner {
+  display: flex; align-items: center; gap: 14px;
+  height: 58px; padding-inline: 24px; max-width: 1240px; margin-inline: auto;
+}
+.header-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 17px; letter-spacing: -0.025em; flex-shrink: 0;
+}
+.header-logo img { width: 28px; height: 28px; object-fit: contain; }
+.header-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-ink); background: var(--accent-soft);
+  padding: 4px 10px; border-radius: 100px; flex-shrink: 0;
+}
+.header-spacer { flex: 1; }
+.header-nav { display: flex; align-items: center; gap: 4px; }
+.header-link {
+  font-size: 13.5px; font-weight: 600; color: var(--muted);
+  transition: color 0.15s; padding: 8px 12px; border-radius: 6px;
+  display: inline-flex; align-items: center; min-height: 40px;
+}
+.header-link:hover { color: var(--fg); }
+.header-link.active { color: var(--accent-ink); background: var(--accent-soft); }
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); transition: color 0.2s, border-color 0.2s; flex-shrink: 0;
+}
+.theme-toggle:hover { color: var(--accent-strong); border-color: var(--accent); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .moon { display: none; }
+
+.mobile-menu-btn {
+  display: none; padding: 8px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface);
+  min-width: 36px; min-height: 36px; color: var(--fg);
+  align-items: center; justify-content: center;
+}
+.mobile-menu-btn svg { width: 18px; height: 18px; }
+
+/* ── Sleek Mobile Navigation Drawer ── */
+.mobile-drawer-overlay {
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(10, 10, 15, 0.4);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.mobile-drawer-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+
+.mobile-drawer {
+  position: fixed; top: 58px; right: 0; bottom: 0; width: min(320px, 85vw);
+  background: var(--surface); border-left: 1px solid var(--border);
+  z-index: 101; display: flex; flex-direction: column;
+  transform: translateX(100%); visibility: hidden; pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+  overflow-y: auto; overscroll-behavior: contain;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+}
+.mobile-drawer.open { transform: translateX(0); visibility: visible; pointer-events: auto; }
+
+.drawer-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.drawer-title { font-size: 14px; font-weight: 700; color: var(--fg); letter-spacing: -0.01em; }
+.drawer-close-btn {
+  width: 32px; height: 32px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); background: var(--surface-soft);
+}
+.drawer-close-btn svg { width: 16px; height: 16px; }
+
+.drawer-section-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--subtle); padding: 16px 20px 8px;
+}
+.drawer-nav-list { display: flex; flex-direction: column; padding: 0 10px; }
+.drawer-link {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--muted);
+  transition: background 0.15s, color 0.15s; min-height: 42px;
+}
+.drawer-link svg { width: 16px; height: 16px; color: var(--subtle); flex-shrink: 0; }
+.drawer-link:hover, .drawer-link:active { background: var(--surface-soft); color: var(--fg); }
+.drawer-link.active { background: var(--accent-soft); color: var(--accent-ink); }
+.drawer-link.active svg { color: var(--accent-ink); }
+
+.drawer-divider { height: 1px; background: var(--border); margin: 12px 16px; }
+
+/* ── Layout ── */
+.layout {
+  display: grid; grid-template-columns: 260px 1fr;
+  max-width: 1240px; margin-inline: auto; gap: 48px;
+  padding-top: 58px; padding-inline: 24px;
+}
+
+/* ── Sticky Sidebar ── */
+.sidebar {
+  position: sticky; top: 74px; align-self: start;
+  padding: 32px 0 40px;
+  max-height: calc(100vh - 90px); overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
+}
+.sidebar-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--subtle); padding: 0 10px 12px;
+}
+.side-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 8px 12px; border-radius: 8px;
+  font-size: 13.5px; font-weight: 600; color: var(--muted);
+  background: transparent; border: 1px solid transparent;
+  transition: background 0.15s, color 0.15s; text-align: left;
+  min-height: 38px;
+}
+.side-nav-item:hover { background: var(--bg-soft); color: var(--fg); }
+.side-nav-item.active { background: var(--accent-soft); color: var(--accent-ink); }
+.side-nav-item svg { width: 15px; height: 15px; flex-shrink: 0; color: currentColor; }
+
+/* ── Content ── */
+.main { padding: 40px 0 96px; min-width: 0; }
+
+/* Hero */
+.page-hero { margin-bottom: 24px; }
+.page-hero .pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-ink); background: var(--accent-soft);
+  padding: 4px 10px; border-radius: 100px; margin-bottom: 12px;
+}
+.page-hero h1 {
+  font-size: clamp(26px, 4vw, 40px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 10px;
+}
+.page-hero p {
+  font-size: 15px; color: var(--muted); max-width: 68ch; line-height: 1.6;
+}
+
+/* Mobile Quick Section Bar */
+.mobile-section-pills {
+  display: none; gap: 8px; overflow-x: auto; padding: 4px 0 16px;
+  margin-bottom: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.mobile-section-pills::-webkit-scrollbar { display: none; }
+.mobile-pill-btn {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 7px 12px; border-radius: 100px; font-size: 12px; font-weight: 700;
+  color: var(--muted); background: var(--surface); border: 1px solid var(--border);
+  flex-shrink: 0; transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.mobile-pill-btn:hover, .mobile-pill-btn.active {
+  background: var(--accent-soft); color: var(--accent-ink); border-color: var(--accent);
+}
+
+/* Key Guarantees Strip — Sleek & Compact */
+.guarantees-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 36px;
+}
+.guarantee-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow-card);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.guarantee-card-top {
+  display: flex; align-items: center; gap: 10px;
+}
+.guarantee-card .icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--accent-soft); color: var(--accent-ink);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.guarantee-card .icon svg { width: 15px; height: 15px; }
+.guarantee-card h3 {
+  font-size: 13.5px; font-weight: 700; letter-spacing: -0.01em; color: var(--fg);
+  line-height: 1.25;
+}
+.guarantee-card p {
+  font-size: 12px; color: var(--subtle); line-height: 1.45; margin-top: 2px;
+}
+
+/* Section styling */
+.doc-section {
+  scroll-margin-top: 84px; margin-bottom: 36px;
+}
+.doc-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow-card); overflow: hidden;
+}
+.doc-card-head {
+  padding: 20px 24px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+}
+.doc-card-title { display: flex; align-items: center; gap: 12px; }
+.doc-card-title .icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--accent-soft); color: var(--accent-ink);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.doc-card-title .icon svg { width: 18px; height: 18px; }
+.doc-card-title h2 { font-size: 18.5px; font-weight: 800; letter-spacing: -0.02em; }
+.doc-card-title .subtitle { font-size: 12.5px; color: var(--subtle); margin-top: 2px; }
+.doc-card-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 6px; flex-shrink: 0;
+}
+.badge-teal { color: var(--accent-ink); background: var(--accent-soft); }
+.badge-green { color: var(--success); background: var(--success-soft); }
+.badge-amber { color: var(--warning); background: var(--warning-soft); }
+
+.doc-card-body { padding: 22px 24px; }
+.doc-card-body p { font-size: 14px; color: var(--muted); margin-bottom: 14px; line-height: 1.65; }
+.doc-card-body p:last-child { margin-bottom: 0; }
+
+/* ── Visual Architecture Diagram ── */
+.arch-diagram-wrapper {
+  margin: 20px 0 24px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+.arch-diagram {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+.arch-node {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.arch-node-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.arch-node-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.arch-node-icon svg { width: 17px; height: 17px; }
+.arch-node-title { flex: 1; min-width: 0; }
+.arch-node-title h3 {
+  font-size: 14px; font-weight: 800; letter-spacing: -0.01em; color: var(--fg);
+}
+.arch-node-title .sub { font-size: 11.5px; color: var(--subtle); }
+.arch-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 6px; background: var(--surface-muted); color: var(--subtle);
+  flex-shrink: 0;
+}
+.arch-list {
+  list-style: none; display: flex; flex-direction: column; gap: 7px;
+  border-top: 1px solid var(--border); padding-top: 10px;
+}
+.arch-list-item {
+  display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted);
+}
+.arch-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0;
+}
+
+/* Architecture Bridge Connector */
+.arch-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  min-width: 150px;
+}
+.arch-pipe {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 100px;
+  box-shadow: var(--shadow-card);
+}
+.arch-pipe svg { width: 14px; height: 14px; color: var(--accent-ink); }
+.arch-pipe span {
+  font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg);
+}
+.arch-bridge-sub {
+  font-size: 11px; font-weight: 600; color: var(--subtle); text-align: center;
+}
+.arch-bridge-pill {
+  font-size: 10.5px; font-weight: 700; color: var(--success);
+  background: var(--success-soft); padding: 3px 8px; border-radius: 100px;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.arch-bridge-pill svg { width: 11px; height: 11px; }
+
+/* ── Interactive Terminal Box ── */
+.terminal-box {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 16px 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.terminal-dots { display: flex; align-items: center; gap: 6px; }
+.terminal-dots span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+.terminal-dots span:nth-child(1) { background: #FF5F56; }
+.terminal-dots span:nth-child(2) { background: #FFBD2E; }
+.terminal-dots span:nth-child(3) { background: #27C93F; }
+.terminal-title {
+  font-family: var(--mono); font-size: 11px; color: var(--subtle); font-weight: 600;
+}
+.terminal-body {
+  padding: 14px 16px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--code-fg);
+  overflow-x: auto;
+}
+.terminal-cmd { color: #A5F3FC; margin-bottom: 6px; }
+.terminal-cmd .prompt { color: var(--accent); font-weight: 700; margin-right: 6px; }
+.terminal-out { color: #94A3B8; word-break: break-all; }
+
+/* Tables */
+.table-wrap {
+  width: 100%; overflow-x: auto; margin: 16px 0;
+  border: 1px solid var(--border); border-radius: 10px;
+}
+.data-table {
+  width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;
+}
+.data-table th {
+  background: var(--surface-soft); color: var(--subtle); font-weight: 700;
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+.data-table td {
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  color: var(--muted); vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-soft); }
+.data-table b { color: var(--fg); font-weight: 700; }
+.data-table code {
+  font-family: var(--mono); font-size: 11.5px; padding: 2px 5px;
+  background: var(--surface-muted); border-radius: 4px; color: var(--fg);
+}
+
+/* Bullet list / Checks */
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.check-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; color: var(--muted); }
+.check-item svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; }
+.check-item.pos svg { color: var(--success); }
+.check-item.neg svg { color: var(--danger); }
+.check-item b { color: var(--fg); font-weight: 700; }
+
+/* Callout Box */
+.callout {
+  padding: 14px 18px; border-radius: 10px; margin: 16px 0;
+  border: 1px solid var(--border); background: var(--surface-soft);
+  font-size: 13px; color: var(--muted); line-height: 1.55;
+}
+.callout b { color: var(--fg); font-weight: 700; }
+.callout.teal { border-color: rgba(20, 184, 166, 0.3); background: var(--accent-soft); color: var(--accent-ink); }
+.callout.teal b { color: var(--accent-strong); }
+
+/* Hash block */
+.hash-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; border-radius: 6px; background: var(--code-bg);
+  border: 1px solid var(--border); font-family: var(--mono); font-size: 11.5px;
+  color: var(--code-fg); word-break: break-all; margin-top: 8px;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 48px 24px 64px;
+  margin-top: 32px;
+}
+.footer-inner {
+  max-width: 1240px; margin-inline: auto;
+  display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 16px; letter-spacing: -0.02em; color: var(--fg);
+}
+.footer-logo-img { width: 26px; height: 26px; object-fit: contain; }
+.footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px;
+}
+.footer-links a {
+  font-size: 13px; font-weight: 600; color: var(--subtle); transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--fg); }
+.footer-built { font-size: 12.5px; color: var(--subtle); }
+.footer-built a { color: var(--accent-ink); font-weight: 600; }
+.footer-built a:hover { text-decoration: underline; }
+.footer-copy { font-size: 11.5px; color: var(--faint); }
+
+/* ── Responsive Refinements ── */
+@media (max-width: 960px) {
+  .guarantees-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .arch-diagram { grid-template-columns: 1fr; gap: 12px; }
+  .arch-bridge {
+    flex-direction: row;
+    min-width: 0;
+    width: 100%;
+    justify-content: space-between;
+    background: var(--surface);
+    border: 1px dashed var(--border-strong);
+    border-radius: 10px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 20px; padding-inline: 16px; padding-top: 58px; }
+  .sidebar { display: none; }
+  .header-nav { display: none; }
+  .mobile-menu-btn { display: inline-flex; }
+  .mobile-section-pills { display: flex; }
+  .main { padding: 24px 0 64px; }
+  .doc-card-head { padding: 16px 18px; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .doc-card-body { padding: 16px 18px; }
+  .doc-card-title h2 { font-size: 17px; }
+}
+
+@media (max-width: 640px) {
+  .guarantees-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .guarantee-card {
+    padding: 10px 12px;
+    border-radius: 10px;
+    gap: 4px;
+  }
+  .guarantee-card-top { gap: 8px; }
+  .guarantee-card .icon { width: 24px; height: 24px; border-radius: 6px; }
+  .guarantee-card .icon svg { width: 13px; height: 13px; }
+  .guarantee-card h3 { font-size: 12px; font-weight: 700; }
+  .guarantee-card p { font-size: 11px; line-height: 1.35; }
+  
+  .arch-diagram-wrapper { padding: 14px; }
+  .arch-bridge { flex-direction: column; gap: 6px; }
+  .header-inner { padding-inline: 14px; }
+  .page-hero h1 { font-size: 24px; }
+  .page-hero p { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="hermes-go.html" class="header-logo" aria-label="Hermes Go Home">
+      <img src="assets/splash-icon.png" alt="Hermes Go Icon">
+      <span>Hermes Go</span>
+    </a>
+    <span class="header-badge">v1.0.14</span>
+    <div class="header-spacer"></div>
+    <nav class="header-nav" aria-label="Main Navigation">
+      <a href="hermes-go.html" class="header-link">Home</a>
+      <a href="app-map.html" class="header-link">App Map</a>
+      <a href="hermes-go.html#changelog" class="header-link">Changelog</a>
+      <a href="privacy.html" class="header-link active">Privacy &amp; Security</a>
+      <a href="hermes-go.html#download" class="header-link">Download</a>
+      <a href="https://github.com/shilp26/hermes-go" target="_blank" rel="noopener" class="header-link" aria-label="GitHub Repository">
+        <svg style="width:16px;height:16px;margin-right:6px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer Overlay & Panel -->
+<div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation Menu">
+  <div class="drawer-header">
+    <span class="drawer-title">Navigation</span>
+    <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="drawer-section-title">Pages</div>
+  <div class="drawer-nav-list">
+    <a href="hermes-go.html" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a href="app-map.html" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      App Map
+    </a>
+    <a href="hermes-go.html#changelog" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Changelog
+    </a>
+    <a href="privacy.html" class="drawer-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Privacy &amp; Security
+    </a>
+    <a href="hermes-go.html#download" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download APK
+    </a>
+    <a href="https://github.com/shilp26/hermes-go" target="_blank" rel="noopener" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      GitHub Repository
+    </a>
+  </div>
+
+  <div class="drawer-divider"></div>
+
+  <div class="drawer-section-title">Jump to Section</div>
+  <div class="drawer-nav-list">
+    <a href="#architecture" class="drawer-link drawer-section-link">Architecture &amp; Transport</a>
+    <a href="#data-flows" class="drawer-link drawer-section-link">Network Data Flows</a>
+    <a href="#ota-updates" class="drawer-link drawer-section-link">OTA Updates</a>
+    <a href="#supabase" class="drawer-link drawer-section-link">Supabase Scope</a>
+    <a href="#credentials" class="drawer-link drawer-section-link">Credentials &amp; Secrets</a>
+    <a href="#permissions" class="drawer-link drawer-section-link">Permissions</a>
+    <a href="#self-hosted" class="drawer-link drawer-section-link">Self-Hosted Model</a>
+    <a href="#open-source" class="drawer-link drawer-section-link">Open Source Status</a>
+    <a href="#verification" class="drawer-link drawer-section-link">Binary Verification</a>
+    <a href="#not-included" class="drawer-link drawer-section-link">Zero Telemetry</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <!-- Sticky Side Navigation (Desktop) -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Architecture &amp; Trust</div>
+    <a href="#architecture" class="side-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+      Architecture
+    </a>
+    <a href="#data-flows" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Network Data Flows
+    </a>
+    <a href="#ota-updates" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      OTA Updates
+    </a>
+    <a href="#supabase" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      Supabase Scope
+    </a>
+    <a href="#credentials" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Credentials &amp; Secrets
+    </a>
+    <a href="#permissions" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Permissions
+    </a>
+    <a href="#self-hosted" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Self-Hosted Model
+    </a>
+    <a href="#open-source" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Open Source Status
+    </a>
+    <a href="#verification" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Binary Verification
+    </a>
+    <a href="#not-included" class="side-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      Zero Telemetry
+    </a>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main">
+    <section class="page-hero">
+      <div class="pill">
+        <svg style="width:11px;height:11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Security &amp; Transparency Reference
+      </div>
+      <h1>How Hermes Go Works</h1>
+      <p>A transparent breakdown of the privacy model, network boundaries, update verification, credential handling, and open-source relationships in Hermes Go.</p>
+    </section>
+
+    <!-- Mobile Quick Scroll Pills -->
+    <div class="mobile-section-pills" aria-label="Quick section navigation">
+      <a href="#architecture" class="mobile-pill-btn active">Architecture</a>
+      <a href="#data-flows" class="mobile-pill-btn">Network Flows</a>
+      <a href="#ota-updates" class="mobile-pill-btn">OTA Updates</a>
+      <a href="#supabase" class="mobile-pill-btn">Supabase</a>
+      <a href="#credentials" class="mobile-pill-btn">Credentials</a>
+      <a href="#permissions" class="mobile-pill-btn">Permissions</a>
+      <a href="#self-hosted" class="mobile-pill-btn">Self-Hosted</a>
+      <a href="#open-source" class="mobile-pill-btn">Open Source</a>
+      <a href="#verification" class="mobile-pill-btn">Verification</a>
+      <a href="#not-included" class="mobile-pill-btn">Zero Telemetry</a>
+    </div>
+
+    <!-- Key Guarantees Grid (Compact, Sleek 4-Card System) -->
+    <div class="guarantees-grid">
+      <div class="guarantee-card">
+        <div class="guarantee-card-top">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Direct WSS</h3>
+        </div>
+        <p>Direct peer connection. No relay cloud.</p>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-card-top">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+          </div>
+          <h3>Zero Telemetry</h3>
+        </div>
+        <p>No tracking or analytics SDKs.</p>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-card-top">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Signed OTA</h3>
+        </div>
+        <p>Runtime-locked bundle validation.</p>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-card-top">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Hardware Keystore</h3>
+        </div>
+        <p>Android SecureStore encryption.</p>
+      </div>
+    </div>
+
+    <!-- 1. Architecture -->
+    <section class="doc-section" id="architecture">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div>
+              <h2>System Architecture &amp; Transport</h2>
+              <div class="subtitle">Direct client-to-agent peer communication model</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-teal">Direct WSS</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Hermes Go is a native mobile interface designed specifically to control a self-hosted <b>Hermes Agent</b> instance. It does not operate any central cloud databases, routing proxies, or traffic-intercepting relays.</p>
+
+          <!-- Modern Responsive Visual Architecture Diagram -->
+          <div class="arch-diagram-wrapper">
+            <div class="arch-diagram">
+              
+              <!-- Left Node: Mobile Device -->
+              <div class="arch-node">
+                <div class="arch-node-header">
+                  <div class="arch-node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </div>
+                  <div class="arch-node-title">
+                    <h3>Hermes Go</h3>
+                    <div class="sub">Android Client</div>
+                  </div>
+                  <span class="arch-badge">Edge UI</span>
+                </div>
+                <ul class="arch-list">
+                  <li class="arch-list-item"><span class="arch-dot"></span>React Native Native UI</li>
+                  <li class="arch-list-item"><span class="arch-dot"></span>Hardware SecureStore Keystore</li>
+                  <li class="arch-list-item"><span class="arch-dot"></span>Local Appearance &amp; Cache</li>
+                  <li class="arch-list-item"><span class="arch-dot"></span>Zero Cloud Telemetry</li>
+                </ul>
+              </div>
+
+              <!-- Bridge Connector -->
+              <div class="arch-bridge">
+                <div class="arch-pipe">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                  <span>WSS / JSON-RPC</span>
+                </div>
+                <div class="arch-bridge-sub">Point-to-Point Transport</div>
+                <div class="arch-bridge-pill">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  LAN · Tailscale · HTTPS
+                </div>
+              </div>
+
+              <!-- Right Node: Self-Hosted Server -->
+              <div class="arch-node">
+                <div class="arch-node-header">
+                  <div class="arch-node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                  </div>
+                  <div class="arch-node-title">
+                    <h3>Hermes Agent</h3>
+                    <div class="sub">Host Daemon</div>
+                  </div>
+                  <span class="arch-badge">Core Engine</span>
+                </div>
+                <ul class="arch-list">
+                  <li class="arch-list-item"><span class="arch-dot"></span>System Tools, Shell &amp; Skills</li>
+                  <li class="arch-list-item"><span class="arch-dot"></span>SQLite Sessions &amp; Memory DB</li>
+                  <li class="arch-list-item"><span class="arch-dot"></span>LLM Provider &amp; Model Gateway</li>
+                  <li class="arch-list-item"><span class="arch-dot"></span>Multi-Agent Bots Engine</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <p>All conversation turns, tool streaming outputs, system control operations, and cron jobs run on your host. The mobile client parses and renders incoming JSON-RPC streaming frames over a persistent WebSocket and dispatches user prompts directly to the agent runtime.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Data Flows -->
+    <section class="doc-section" id="data-flows">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h2>Network Data Flows</h2>
+              <div class="subtitle">Complete catalog of every outbound network request</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-green">3 Destinations Only</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Hermes Go makes network requests to exactly three distinct destinations. There are no silent or undeclared network calls:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Destination</th>
+                  <th>Payload Data</th>
+                  <th>Operational Purpose</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Your Hermes Server</b><br><code>LAN / Tailscale / Cloud</code></td>
+                  <td>Prompts, tool arguments, approval responses, session queries</td>
+                  <td>Core agent operations, real-time message streaming, system control</td>
+                  <td>Active user sessions &amp; background task monitoring</td>
+                </tr>
+                <tr>
+                  <td><b>Expo Update CDN</b><br><code>u.expo.dev</code></td>
+                  <td>APK runtime version string &amp; release channel</td>
+                  <td>Checks if an updated JavaScript bundle is available for the current APK</td>
+                  <td>On app launch &amp; manual refresh</td>
+                </tr>
+                <tr>
+                  <td><b>Supabase Edge Functions</b><br><code>*.supabase.co/functions/v1/</code></td>
+                  <td>User feedback text, category, optional anonymous device token</td>
+                  <td>Transmits voluntary bug reports and loads public changelog / feature catalog</td>
+                  <td>Only on explicit feedback submit or opening changelog</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>If your Hermes server is offline or disconnected, Hermes Go cannot communicate with any fallback servers, because no intermediate cloud backend exists.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. OTA Updates -->
+    <section class="doc-section" id="ota-updates">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <div>
+              <h2>Over-The-Air (OTA) Updates &amp; Integrity</h2>
+              <div class="subtitle">How JavaScript updates work without compromising native security</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-teal">Runtime-Locked</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Hermes Go uses Expo's modern EAS Update mechanism to deliver rapid bug fixes and UI enhancements directly without requiring users to reinstall the full Android APK for every patch.</p>
+
+          <ul class="check-list">
+            <li class="check-item pos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <div><b>What updates over the air:</b> UI components, state management logic, stylesheets, theme presets, and client-side formatting.</div>
+            </li>
+            <li class="check-item neg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <div><b>What NEVER updates over the air:</b> Native C++/Kotlin binary code, Android manifest definitions, requested OS permissions, or native SDK modules.</div>
+            </li>
+          </ul>
+
+          <div class="callout teal">
+            <b>Strict Runtime Version Guard:</b> Every OTA bundle is cryptographically tied to the exact native fingerprint of the distributed APK. If a bundle is signed for a different runtime fingerprint, the Android client immediately rejects it and continues running the local bundle. Any native change mandates a brand new signed APK distribution with a new SHA-256 hash.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Supabase Scope -->
+    <section class="doc-section" id="supabase">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <div>
+              <h2>Supabase Edge Integration Boundaries</h2>
+              <div class="subtitle">Strict separation between feedback storage and application data</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-amber">Public Endpoints Only</span>
+        </div>
+        <div class="doc-card-body">
+          <p>The mobile app connects to specific serverless Edge Functions hosted on Supabase for three public utility functions:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Function Endpoint</th>
+                  <th>Data Sent</th>
+                  <th>Authentication Required</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>/functions/v1/feedback</code></td>
+                  <td>User-submitted issue description, category (bug/feature), optional screenshot</td>
+                  <td>Anonymous device UUID (generated on first run, stored in SecureStore)</td>
+                </tr>
+                <tr>
+                  <td><code>/functions/v1/feature-map</code></td>
+                  <td>None (HTTP GET request)</td>
+                  <td>None (Public catalog query)</td>
+                </tr>
+                <tr>
+                  <td><code>/functions/v1/changelog</code></td>
+                  <td>None (HTTP GET request)</td>
+                  <td>None (Public version notes query)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p><b>Explicit non-goals:</b> Supabase is never used as an authentication provider, never stores your conversation transcripts, never receives memory entries, and does not record connection URLs or agent access tokens. No Supabase service-role keys are compiled into the client.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Credentials & Secrets -->
+    <section class="doc-section" id="credentials">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <h2>Credentials &amp; Secrets Storage</h2>
+              <div class="subtitle">Hardware-backed Android SecureStore encryption</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-green">Hardware Keystore</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Sensitive parameters are isolated using Android's hardware-backed KeyStore and EncryptedSharedPreferences (via Expo SecureStore):</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Secret Type</th>
+                  <th>On-Device Storage Location</th>
+                  <th>Transmission Target</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Gateway Auth Cookie / Token</b></td>
+                  <td>Android SecureStore (encrypted at rest)</td>
+                  <td>Sent only to your configured Hermes server</td>
+                </tr>
+                <tr>
+                  <td><b>WebSocket Ticket</b></td>
+                  <td>Ephemeral memory (single-use ticket)</td>
+                  <td>Exchanged during handshake, immediately expired</td>
+                </tr>
+                <tr>
+                  <td><b>Custom Provider API Keys</b></td>
+                  <td><b>Never stored on phone.</b> Managed on your server daemon.</td>
+                  <td>Client sends tri-state wire directive; server stores the secret</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Credentials and tokens are stripped from logs and cannot be inspected or exfiltrated by secondary tools.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Permissions -->
+    <section class="doc-section" id="permissions">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h2>Android Operating System Permissions</h2>
+              <div class="subtitle">Transparent mapping of device capabilities</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-teal">Least Privilege</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Every permission declared in Hermes Go maps strictly to an active, user-initiated feature:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Permission</th>
+                  <th>Associated In-App Feature</th>
+                  <th>Behavior &amp; Trigger</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>android.permission.INTERNET</code></td>
+                  <td>Server Connectivity</td>
+                  <td>Establishes WebSocket and HTTP connections to your agent server.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.RECORD_AUDIO</code></td>
+                  <td>Voice &amp; Dictation</td>
+                  <td>Activated only when holding or tapping the microphone button in composer.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.CAMERA</code></td>
+                  <td>Image Attachments</td>
+                  <td>Requested only when you choose to take a real-time photo to send to the agent.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.READ_MEDIA_*</code></td>
+                  <td>File &amp; Image Upload</td>
+                  <td>Invoked when selecting an image or document from your device gallery.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.FOREGROUND_SERVICE</code></td>
+                  <td>Background Reliability</td>
+                  <td>Maintains active agent streaming sessions during long-running tasks.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Hermes Go does not request background location, contacts, calendar, SMS, or telephony permissions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Self-Hosted Model -->
+    <section class="doc-section" id="self-hosted">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <h2>The Self-Hosted Security Model</h2>
+              <div class="subtitle">Your hardware owns the data, memory, and execution environment</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-green">100% Self-Contained</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Because Hermes Agent is self-hosted on your machine, your security perimeter remains entirely under your control:</p>
+          <ul class="check-list">
+            <li class="check-item pos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <div><b>Session History:</b> Stored in your host's local SQLite database.</div>
+            </li>
+            <li class="check-item pos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <div><b>Memories &amp; Skills:</b> Maintained within your server's local storage directory.</div>
+            </li>
+            <li class="check-item pos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <div><b>Workspace Files &amp; Artifacts:</b> Kept on your computer's filesystem.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Open Source Status -->
+    <section class="doc-section" id="open-source">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <h2>Open Source &amp; Licensing Relationships</h2>
+              <div class="subtitle">Clear delineation between open-source projects and the mobile binary</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-teal">Auditable Core</span>
+        </div>
+        <div class="doc-card-body">
+          <p>We maintain full transparency regarding the licensing of each layer in the ecosystem:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ecosystem Component</th>
+                  <th>Licensing Status</th>
+                  <th>Source &amp; Repository</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Hermes Agent (Backend Daemon)</b></td>
+                  <td>Open Source · MIT License</td>
+                  <td><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600;">NousResearch/hermes-agent</a></td>
+                </tr>
+                <tr>
+                  <td><b>Hermes Go Landing Site &amp; App Map</b></td>
+                  <td>Open Source · MIT License</td>
+                  <td><a href="https://github.com/shilp26/hermes-go" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600;">shilp26/hermes-go</a></td>
+                </tr>
+                <tr>
+                  <td><b>Hermes Go Android App</b></td>
+                  <td>Closed Source · Distributed as signed APK</td>
+                  <td>Independent mobile client compiled for Android arm64</td>
+                </tr>
+                <tr>
+                  <td><b>Blobatar Generative Avatar Engine</b></td>
+                  <td>Open Source · MIT License</td>
+                  <td><a href="https://github.com/Alain00/blobatar" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600;">Alain00/blobatar</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The backend agent which holds broad execution capabilities is fully open-source and auditable. Hermes Go acts as a lightweight interface client to communicate with that agent over your secure network.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Binary Verification -->
+    <section class="doc-section" id="verification">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <h2>Binary Verification &amp; Checksums</h2>
+              <div class="subtitle">Cryptographic validation for every released APK package</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-teal">SHA-256 Verified</span>
+        </div>
+        <div class="doc-card-body">
+          <p>Every distributed Hermes Go APK is signed and accompanied by an immutable SHA-256 hash. You can verify the integrity of your download before installing:</p>
+
+          <div class="callout">
+            <b>v1.0.0 Distribution Release Hash (arm64):</b>
+            <div class="hash-pill">
+              <code>2188b21b164b9fdcd0991c634772d1083227197b31c27173d472a2b19d1da3a1</code>
+            </div>
+          </div>
+
+          <p>Verify locally using standard terminal tooling:</p>
+          
+          <div class="terminal-box">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="terminal-title">Verify SHA-256 Checksum</div>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-cmd"><span class="prompt">$</span>sha256sum HermesGo.apk</div>
+              <div class="terminal-out">2188b21b164b9fdcd0991c634772d1083227197b31c27173d472a2b19d1da3a1  HermesGo.apk</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. What is NOT in Hermes Go -->
+    <section class="doc-section" id="not-included">
+      <div class="doc-card">
+        <div class="doc-card-head">
+          <div class="doc-card-title">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            </div>
+            <div>
+              <h2>Zero Telemetry Guarantee</h2>
+              <div class="subtitle">Explicit list of excluded third-party frameworks and tracking SDKs</div>
+            </div>
+          </div>
+          <span class="doc-card-badge badge-green">Guaranteed Zero</span>
+        </div>
+        <div class="doc-card-body">
+          <p>To be unequivocal, Hermes Go does <b>not</b> contain:</p>
+
+          <ul class="check-list">
+            <li class="check-item neg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <div><b>No third-party analytics:</b> No Google Analytics, Firebase Analytics, Amplitude, Mixpanel, Segment, or PostHog.</div>
+            </li>
+            <li class="check-item neg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <div><b>No crash logging to commercial services:</b> No Sentry, Crashlytics, or Bugsnag collecting stack traces with device context.</div>
+            </li>
+            <li class="check-item neg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <div><b>No advertising or monetization SDKs:</b> No ad banners, interstitials, affiliate injectors, or tracking pixels.</div>
+            </li>
+            <li class="check-item neg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <div><b>No mandatory cloud registration:</b> No user accounts, passwords, or registration forms to use the client.</div>
+            </li>
+            <li class="check-item neg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <div><b>No data brokerage:</b> Zero data sharing, selling, or monetization of telemetry.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="assets/splash-icon.png" alt="Hermes Go App Icon" class="footer-logo-img">
+      Hermes Go
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="hermes-go.html">Home</a>
+      <a href="hermes-go.html#screenshots">Screenshots</a>
+      <a href="hermes-go.html#features">App Map</a>
+      <a href="hermes-go.html#changelog">Changelog</a>
+      <a href="app-map.html">Full App Map</a>
+      <a href="privacy.html">Privacy &amp; Security</a>
+      <a href="hermes-go.html#connect">Setup</a>
+      <a href="hermes-go.html#download">Download</a>
+      <a href="https://github.com/shilp26/hermes-go" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <div class="footer-built">💙 Built on <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">Hermes Agent</a> by <a href="https://nousresearch.com/" target="_blank" rel="noopener">Nous Research</a> — thank you!</div>
+    <div class="footer-copy">© 2026 Hermes Go by Shilp · Remote mobile client for your Hermes agent</div>
+  </div>
+</footer>
+
+<script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = htmlEl.getAttribute('data-theme');
+  const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+  htmlEl.setAttribute('data-theme', nextTheme);
+  try { localStorage.setItem('theme', nextTheme); } catch (_) {}
+});
+
+// Sleek Mobile Navigation Drawer
+const menuBtn = document.getElementById('menuBtn');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerOverlay = document.getElementById('drawerOverlay');
+const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+
+function setDrawerOpen(open) {
+  mobileDrawer.classList.toggle('open', open);
+  drawerOverlay.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  menuBtn.setAttribute('aria-expanded', String(open));
+}
+
+menuBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  setDrawerOpen(!mobileDrawer.classList.contains('open'));
+});
+
+drawerCloseBtn.addEventListener('click', () => setDrawerOpen(false));
+drawerOverlay.addEventListener('click', () => setDrawerOpen(false));
+
+// Close drawer when any internal link is clicked
+document.querySelectorAll('.drawer-link').forEach(link => {
+  link.addEventListener('click', () => setDrawerOpen(false));
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mobileDrawer.classList.contains('open')) {
+    setDrawerOpen(false);
+  }
+});
+
+// Scroll spy for sidebar links & mobile pills
+const sideNavLinks = document.querySelectorAll('.side-nav-item');
+const mobilePills = document.querySelectorAll('.mobile-pill-btn');
+const docSections = document.querySelectorAll('.doc-section');
+const pillsContainer = document.querySelector('.mobile-section-pills');
+
+if ('IntersectionObserver' in window && docSections.length) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        
+        // Update desktop sidebar
+        sideNavLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          link.classList.toggle('active', href === '#' + id);
+        });
+
+        // Update mobile pills (scrolls horizontal strip only, never page window)
+        mobilePills.forEach(pill => {
+          const href = pill.getAttribute('href');
+          const isActive = href === '#' + id;
+          pill.classList.toggle('active', isActive);
+          if (isActive && pillsContainer) {
+            const pillLeft = pill.offsetLeft;
+            const pillWidth = pill.offsetWidth;
+            const containerWidth = pillsContainer.clientWidth;
+            pillsContainer.scrollTo({
+              left: pillLeft - (containerWidth / 2) + (pillWidth / 2),
+              behavior: 'smooth'
+            });
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -65% 0px' });
+
+  docSections.forEach(section => observer.observe(section));
+}
+</script>
+</body>
+</html>
