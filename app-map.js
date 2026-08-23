@@ -135,6 +135,11 @@ const LUCIDE = {
   share2: `<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>`,
   cloud: `<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>`,
   map: `<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15"/><path d="M15 6v15"/>`,
+  maximize: `<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>`,
+  history: `<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>`,
+  fileDiff: `<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 13h6"/><path d="M12 10v6"/>`,
+  gitPullRequest: `<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/>`,
+  batteryCharging: `<path d="M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1"/><path d="M6 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h1"/><line x1="22" y1="11" x2="22" y2="13"/><path d="M5 11l2.5 3L10 11l2.5 3"/>`,
 };
 
 /* ── Map by hub key (used in landing explorer + app map rail + app map detail) ── */
@@ -324,6 +329,13 @@ const FEATURE_ICONS = {
   'Dictate from Home': LUCIDE.mic,
   'Voice chat from Home': LUCIDE.headphones,
   'Technical activity view': LUCIDE.code,
+  'Checkpoints & rollback': LUCIDE.history,
+  'Checkpoint diff preview': LUCIDE.fileDiff,
+  'Point Checkpoints at a folder': LUCIDE.folder,
+  'Stage or discard a file': LUCIDE.gitPullRequest,
+  'Commit from Review': LUCIDE.gitCommit,
+  'Host battery indicator': LUCIDE.batteryCharging,
+  'Legal & Privacy': LUCIDE.scrollText,
 
   // Bots Mode — Agents and Routines
   'Bots': LUCIDE.bot,
@@ -641,6 +653,11 @@ const HUB_MAP = [
           { name: 'Effort Off → Ultra', desc: 'Reasoning effort for the session and as a profile default', where: 'Chat · header' },
           { name: 'Activity stack', desc: 'Todos, subagents, loops, and background status cards share a compact stack above the input', where: 'Composer · activity' },
           { name: 'Persistent task plans', desc: 'Unfinished todo lists stay pinned across turns', where: 'Composer · todo card' },
+          { name: 'Checkpoints & rollback', desc: 'Browse automatic shadow snapshots taken before agent file edits; restore files and rewind context', where: 'Chat · folder menu → Checkpoints' },
+          { name: 'Checkpoint diff preview', desc: 'Unified diffs and file-change statistics for every snapshot', where: 'Chat · Checkpoints → snapshot' },
+          { name: 'Point Checkpoints at a folder', desc: 'Retarget the active chat workspace to any project folder', where: 'Chat · Checkpoints → folder' },
+          { name: 'Stage or discard a file', desc: 'Stage, unstage, or discard uncommitted modifications with confirmation', where: 'Chat · Review sheet' },
+          { name: 'Commit from Review', desc: 'Type a commit message, commit staged files, or commit and push in one tap', where: 'Chat · Review → Commit bar' },
         ],
       },
     ],
@@ -856,6 +873,7 @@ const HUB_MAP = [
         features: [
           { name: 'Host gauges', desc: 'CPU, memory, disk of the agent machine', where: 'System · Health' },
           { name: 'Gateway status', desc: 'Connection state to the gateway', where: 'System · Health' },
+          { name: 'Host battery indicator', desc: 'Percentage, charging state, and power category for laptop hosts', where: 'System · Health' },
           { name: 'Memory & disk alerts', desc: 'Advisory notices when the host reports elevated or critical pressure', where: 'Home · Health' },
         ],
       },
@@ -935,6 +953,7 @@ const HUB_MAP = [
           { name: 'What\u2019s New', desc: 'Release notes in-app, product version in the footer', where: 'Settings · What\u2019s New' },
           { name: 'Backup preview', desc: 'See what a prefs restore brings back before accepting', where: 'Settings · Backup' },
           { name: 'Feature map', desc: 'Search every screen, jump by area, tap to go straight to a feature', where: 'Settings · Feature map' },
+          { name: 'Legal & Privacy', desc: 'About, architecture diagrams, Privacy Policy, Terms, license catalog, and contact', where: 'Settings · Legal & Privacy' },
         ],
       },
     ],
