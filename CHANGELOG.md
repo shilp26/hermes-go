@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.15] — 2026-08-24
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🗂️ Chat — Workspace checkpoints
+- **Checkpoints & rollback**: open from the chat folder menu to browse automatic shadow snapshots taken before agent file edits.
+- **Checkpoint preview**: unified diffs and file-change statistics (+ insertions / − deletions) for every snapshot.
+- **Restore & rewind**: bring files back and rewind the conversation to a snapshot, with safety checkpoint creation.
+- **Point at a folder**: retarget checkpoints at any project folder from the active chat workspace.
+- **Toggle in Setup**: enable or disable checkpoints in App Features with live gateway sync.
+
+#### 🔧 Chat — Git review: stage, discard & commit
+- **Interactive staging**: stage (+), unstage (−), or discard uncommitted modifications with confirmation.
+- **Quick Stage All / Unstage All** on section headers.
+- **Built-in Commit bar**: type a message, commit staged files, or commit and push upstream in one tap.
+
+#### ⚖️ Settings — Legal & Privacy hub
+- **Legal screen**: About, Architecture flow diagrams, Privacy Policy, Terms of Use, Licenses, and Contact.
+- **License catalog**: 82+ open-source packages with versions, license types, full text previews, and one-tap copy.
+- **Privacy integrity check**: compares the local policy against the public web mirror via SHA-256.
+
+#### 🖥️ System — Host battery
+- **Host battery badge**: percentage, charging state, and power category on System Health for laptop hosts.
+
+### Changed
+
+#### 💬 Chat, composer & model selection
+- Fix model picker crash (scrollToIndex out of range) when expanding and collapsing provider categories.
+- Provider-wait notices are now scoped per thread — thinking indicators never leak across concurrent sessions.
+- Expand and edit collapsed paste snippets inline before sending.
+- Quiet notice when the backend silently substitutes a model during fresh session creation.
+- Chosen models stay on the dashboard composer across sends instead of falling back to default.
+
+### Fixed
+
+#### 🔍 Discovery & navigation
+- Global Search and Feature Map now index Checkpoints & Rollback, Git Review actions, Legal & Privacy, and Host Battery.
+
 ## [1.0.14] — 2026-08-21
 
 OTA update — the installed app self-updates.

@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, 16 theme presets, custom endpoints, desktop-style @ handoff, and routines over LAN, Tailscale, or Hermes Cloud.">
+<meta name="description" content="Hermes Go — a mobile client for your Hermes AI agent. Bots Mode, 16 theme presets, custom endpoints, checkpoints & git review, and routines over LAN, Tailscale, or Hermes Cloud.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, custom endpoints, desktop-style @ handoff, live activity, voice, and full agent control.">
+<meta property="og:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, custom endpoints, checkpoints & git review, live activity, voice, and full agent control.">
 <meta property="og:image" content="assets/og-image.png">
 <meta property="og:site_name" content="Hermes Go">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hermes Go — Your AI agent, in your pocket">
-<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, custom endpoints, desktop-style @ handoff, live activity, voice, and full agent control.">
+<meta name="twitter:description" content="A native mobile client for your Hermes agent — self-hosted or Hermes Cloud. Bots Mode, 16 theme presets, custom endpoints, checkpoints & git review, live activity, voice, and full agent control.">
 <meta name="twitter:image" content="assets/og-image.png">
 <title>Hermes Go — Remote Mobile Client for Hermes AI Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1406,7 +1406,7 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <div class="hero-copy">
       <h1 class="display hero-enter" id="hero-heading">Your AI agent,<br>in your pocket.</h1>
 
-      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bots Mode</strong>, 16 themes, custom endpoints, desktop-style @ handoff, voice, artifacts, and full agent control from anywhere.</p>
+      <p class="hero-lead hero-enter">A native mobile client for your <code class="inline-code">hermes-agent</code> — self-hosted or Hermes Cloud. Live streaming, <strong>Bots Mode</strong>, 16 themes, custom endpoints, checkpoints & git review, desktop-style @ handoff, voice, artifacts, and full agent control from anywhere.</p>
 
       <div class="hero-enter" aria-label="Key capabilities">
         <ul class="hero-highlights">
@@ -1415,6 +1415,7 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
           <li><strong>Bots Mode</strong> — named teammates, desktop-style @ handoff from any chat, and routines</li>
           <li><strong>16 themes</strong> — dark, light, and system presets with a live gallery</li>
           <li><strong>Custom endpoints</strong> — connect Ollama, vLLM, LM Studio, and more</li>
+          <li><strong>Checkpoints & git</strong> — roll back file edits, stage, and commit from chat</li>
         </ul>
       </div>
 
@@ -1620,6 +1621,79 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
+    <!-- v1.0.15 -->
+    <div class="changelog-item reveal">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v1.0.15</span>
+            <span class="changelog-date">24 Aug 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Checkpoints &amp; rollback, git stage &amp; commit, Legal hub</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Workspace checkpoints</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Checkpoints &amp; rollback</strong> — browse automatic shadow snapshots taken before agent file edits</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Preview unified diffs and file-change statistics for every snapshot</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Restore files and rewind conversation context, with safety checkpoint creation</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Point checkpoints at any project folder and toggle them in App Features</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Git review</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Interactive staging — stage, unstage, or discard uncommitted modifications with confirmation</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Quick Stage All / Unstage All on section headers</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Built-in Commit bar — type a message, commit, or commit and push in one tap</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Settings · Legal &amp; Privacy</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Legal screen with About, architecture diagrams, Privacy Policy, Terms, Licenses, and Contact</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Open-source license catalog — 82+ packages with versions, license types, full previews, and copy</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Privacy integrity check against the public web mirror via SHA-256</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">System · Host battery</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Host battery badge — percentage, charging state, and power category on System Health</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Fixed the model picker crash when expanding and collapsing provider categories</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Provider-wait notices are scoped per thread — no more leaking across sessions</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Expand and edit collapsed paste snippets inline before sending</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Quiet notice when the backend silently substitutes a model on fresh session creation</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Chosen models stay on the dashboard composer across sends</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Global Search and Feature Map now index Checkpoints, Git Review, Legal &amp; Privacy, and Host Battery</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- v1.0.14 -->
     <div class="changelog-item reveal is-latest">
       <div class="changelog-rail">
@@ -1777,6 +1851,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v1.0.12 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
@@ -1851,8 +1928,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.11 -->
     <div class="changelog-item reveal">
@@ -2902,7 +2977,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.14 · Android APK</div>
+          <div class="ver">v1.0.15 · Android APK</div>
           <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
@@ -2950,7 +3025,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.14</span></span>
+    <span>Hermes Go <span class="ver">v1.0.15</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
@@ -2966,7 +3041,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=116"></script>
+<script src="app-map.js?v=117"></script>
 <script>
 // Theme Switcher Logic
 const themeToggle = document.getElementById('themeToggle');
