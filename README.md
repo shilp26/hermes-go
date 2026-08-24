@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v1.0.15` · Android APK · Closed Source · Zero Telemetry
+`v1.0.16` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -71,7 +71,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 17 | Health, analytics, setup, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
 
-**Total: 9 surfaces · 47 segments · 169 features**
+**Total: 9 surfaces · 47 segments · 172 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -81,7 +81,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.15](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.16](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -172,6 +172,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Paste collapse** — large pastes, code fences, and stack traces auto-collapse into snippet attachments
 - **Checkpoints & rollback** — browse shadow snapshots, preview diffs, restore files, and rewind context
 - **Git review** — stage, unstage, or discard changes and commit from the chat Review sheet
+- **Multi-server switching** — save, rename, and switch between Hermes hosts with one tap
 
 ### 📦 Artifacts
 - Every media item from a session, searchable
@@ -221,6 +222,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Feedback** — submit a bug, feature idea, improvement, or question with screenshots and status tracking
 - **What's New** — release notes in-app, product version in the footer
 - **Legal & Privacy** — About, architecture diagrams, Privacy Policy, Terms, 82+ license catalog, and contact
+- **Saved servers** — manage multiple gateway/cloud instances with nicknames, 1-tap switch, and clean teardown
 - **Backup preview** — see exactly what a prefs restore brings back before accepting
 - **Feature map** — search every screen, jump by area, tap to go straight to a feature
 

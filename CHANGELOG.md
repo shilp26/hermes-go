@@ -6,6 +6,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.16] — 2026-08-25
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🔀 Settings — Multi-server switching
+- **Saved servers**: save multiple Hermes gateway and cloud instances and switch between them with a single tap.
+- **Live switching overlay** — “Switching to…” with clean memory teardown so chats, profile scopes, outbox flights, and caches never leak across servers.
+- **Saved Servers card** in Settings: active host hero, status pills, 1-tap switch, custom rename, and add another server.
+- **Remove & forget** saved servers with confirmation, wiping local SQLite caches and background watches.
+- **Port-aware dedup** and safe cookie jar separation for multi-port localhost/LAN hosts.
+
+#### 🔌 Connect — Server nicknames
+- **Saved servers section** on the connect screen listing all configured instances and their sign-in validity.
+- **1-tap switch** for valid saved sessions, or prefill password form for expired credentials.
+- **Server Nickname field** on sign-in to label environments (e.g. “Home Lab”, “Work VM”).
+- **Add another server** without disconnecting or disturbing the active host.
+
+#### ⚡ Storage · Sync — Multi-page session sync
+- **Cursor-paginated session sync**: first page renders instantly, remaining pages stream in the background.
+- **Instance-scoped SQLite** and profile-generation gates prevent ghost session deletions or stale history across host switches.
+- Concurrency limiter and in-flight tracking for background conversation prefetching.
+
+#### 🛡️ Gateway — Connection resilience
+- **Connection epoch tracking** invalidates stale websocket messages and inflight commands during server transitions.
+- **Dynamic API client re-pointing** and abort handling when switching hosts or recovering from drops.
+- Reset active bot assign watches and control queues on host disconnect.
+
+### Fixed
+
+#### 🔍 Discovery & navigation
+- Global Search and Feature Map now index Switch server, Saved servers, Add server, and Remove server.
+
 ## [1.0.15] — 2026-08-24
 
 OTA update — the installed app self-updates.
