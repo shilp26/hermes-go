@@ -63,15 +63,15 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 16 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
 | <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 8 | 50 | Live streaming, voice, media & artifacts, approvals, queue & steer, subagents, share from other apps, composer tools |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 2 | 18 | Agents, Bot Chat, @-assign handoff, assignment receipts, avatars, hidden roster, Star Map, routines |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 3 | 24 | Agents, Bot Groups, shared rooms, consensus distillation, deliverables export, Bot Chat, avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
-| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 17 | Health, analytics, setup, ops console, logs, power tools |
-| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 9 | Servers, connection, appearance, profile, feedback & info |
+| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 14 | Servers, connection, appearance, profile, feedback & info, APK update checker |
 
-**Total: 9 surfaces · 47 segments · 172 features**
+**Total: 9 surfaces · 48 segments · 178 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -81,7 +81,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ### 1. Download the APK
 
-[Download Hermes Go v1.0.16](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
+[Download Hermes Go v1.0.17](https://github.com/shilp26/hermes-go/releases/tag/v1.0.0) (76 MB)
 
 **Verify the download** — the SHA-256 of the published APK is:
 
@@ -159,6 +159,10 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Bot-scoped Star Map** — open the selected teammate’s learning graph from Details
 - **@-assign** — ask a teammate from any chat or Home; multi-agent chips, live Asking/Waiting/Replied receipts, and returned markdown in place
 - **Routines** — schedule agent-owned work daily, at intervals, or once; pause, resume, run, inspect history, or delete
+- **Bot Groups & shared rooms** — organize teammates into named teams with server-synced memberships
+- **Multi-agent discussion room** — structured rounds with turn taking, passes, steering, and token-cost budget caps
+- **Executive consensus cards** — automated distillation of round discussions into takeaways, findings, risks, and next steps
+- **Scoped exports** — export clean executive deliverable summaries or full verbatim transcripts with code block inspection
 
 ### 🗂️ Sessions
 - **Action sheets** — long-press actions show icons for star, folder, read/unread, rename, archive, and delete
@@ -207,6 +211,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Memory and disk pressure alerts** — advisory notices on Home and Health when the host reports elevated pressure
 - Analytics: usage trends
 - Setup: app features, voice, thinking depth, safety, UI
+- **Checkpoints toggle** — enable or disable workspace shadow snapshots with live gateway synchronization
 - **Onboarding setup prompt** — collapse or expand the full prompt, then copy it
 - Ops console with readable parsed output
 - Live log stream with pause-on-scroll
@@ -225,6 +230,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Saved servers** — manage multiple gateway/cloud instances with nicknames, 1-tap switch, and clean teardown
 - **Backup preview** — see exactly what a prefs restore brings back before accepting
 - **Feature map** — search every screen, jump by area, tap to go straight to a feature
+- **APK update checker** — in-app GitHub release checker for sideloaded builds with 24h throttling and cooldown
 
 ---
 

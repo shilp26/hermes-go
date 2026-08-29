@@ -6,6 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.0.17] — 2026-08-30
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 👥 Bots — Bot Groups & shared rooms
+- **Bot Groups**: organize teammates into named teams by project or role; group memberships sync to your Hermes host.
+- **Shared room & turns**: multi-agent discussion room where seated bots take turns in capped rounds with pass support, turn aborting, and token-cost budget caps.
+- **Executive consensus cards**: automatically distill round discussions into key takeaways, core findings, risks & caveats, and next steps with one-tap copy/share.
+- **Scoped exports**: export clean consensus deliverables or full verbatim transcripts with built-in code block inspection.
+- **Room mentions & steering**: @everyone broadcast, individual bot tagging, midflight steering, and dynamic rounds extension.
+- **Group pills in Details**: add or remove an agent's group memberships directly from its detail sheet.
+- **Host profile backup**: group definitions and memberships are backed up to the host profile and cached locally in SQLite.
+
+#### 📦 Settings & Dashboard — Direct APK update checker
+- **Direct release check**: checks GitHub releases directly for new sideloaded APK builds with strict 24-hour automatic throttle and 5-minute manual cooldown.
+- **Dashboard update banner**: displays available native APK updates with release notes and a direct download shortcut.
+- **Settings check**: manual "Check for updates" in Settings to inspect release status anytime.
+
+#### ⚙️ System — Checkpoints & rollback toggle
+- **Setup toggle**: enable or disable workspace shadow snapshots directly from System Setup → App Features with live gateway environment synchronization.
+
+### Changed
+
+#### 💬 Bots & chat experience
+- Multi-agent rounds enforce serial turn execution and prevent runaway loops through per-round and per-reply caps.
+- Steer working teams midflight without losing message history or composer state.
+
+### Fixed
+
+#### 🔍 Discovery & navigation
+- Global Search and Feature Map now index Bot groups, Shared room, Executive consensus, Deliverable export, APK update checker, and Checkpoints toggle.
+
+---
+
 ## [1.0.16] — 2026-08-25
 
 OTA update — the installed app self-updates.
