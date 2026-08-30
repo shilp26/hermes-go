@@ -174,6 +174,7 @@ const SEGMENT_ICONS = {
   'Media & artifacts': LUCIDE.image,
   'Approvals': LUCIDE.checkSquare,
   'Queue & steer': LUCIDE.arrowUpDown,
+  'While the agent runs': LUCIDE.bellRing,
   'Subagents': LUCIDE.gitBranch,
   'Composer tools': LUCIDE.paperclip,
   'Share from other apps': LUCIDE.share2,
@@ -271,6 +272,11 @@ const FEATURE_ICONS = {
   'Session loops': LUCIDE.refreshCw,
   'Loop controls': LUCIDE.play,
   'Loop wakeups': LUCIDE.bell,
+
+  // Chat — While the agent runs (Hermes Live)
+  'Background keep-alive': LUCIDE.power,
+  'Live notifications': LUCIDE.bell,
+  'Act from the notification': LUCIDE.checkSquare,
 
   // Chat — Subagents
   'Subagent list': LUCIDE.gitBranch,
@@ -637,6 +643,14 @@ const HUB_MAP = [
           { name: 'Session loops', desc: 'Keep recurring /loop work pinned with countdown and status', where: 'Composer · loop card' },
           { name: 'Loop controls', desc: 'Pause, resume, or stop a loop from its card', where: 'Composer · loop card' },
           { name: 'Loop wakeups', desc: 'Quiet wakeup markers keep recurring work out of chat bubbles', where: 'Chat · thread' },
+        ],
+      },
+      {
+        label: 'While the agent runs', desc: 'Background execution & live notifications',
+        features: [
+          { name: 'Background keep-alive', desc: 'Native foreground service keeps turns, streaming, and heartbeat running with the screen off', where: 'Chat · background execution' },
+          { name: 'Live notifications', desc: 'Turn progress, streamed tokens, and tool status in the notification shade', where: 'Chat · background execution' },
+          { name: 'Act from the notification', desc: 'Quick-reply and approve/deny from the shade — on-device only, no push servers', where: 'Notification shade' },
         ],
       },
       {
