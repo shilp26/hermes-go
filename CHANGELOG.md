@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.0.0] — 2026-08-30
+
+Native APK release — download the new build from GitHub Releases.
+
+### Added
+
+#### 📡 Hermes Live — background execution & live notifications
+- **Background keep-alive**: a native foreground service keeps the WebSocket, heartbeats, and in-flight turns running while your phone screen is off or the app is backgrounded.
+- **Live notifications**: rich system notifications show turn progress, streamed tokens, and tool execution status in real time.
+- **Act from the notification**: quick-reply and approve/deny directly from the notification shade — no third-party push servers, everything stays on-device and direct to your server.
+- **Foreground service on remote-messaging class**: no Android 15 6-hour cap; CPU wake-lock keeps the heartbeat alive through screen-off.
+
+#### 🤖 Bot Groups & collaborative rooms
+- **Bot Groups**: create multi-agent teams with member rosters, @mention tags, and execution playbooks; memberships sync across devices via the host profile.
+- **Shared room & turns**: round-based group chat with dynamic leader dispatch, passes, capped rounds, and midflight steering.
+- **Consensus cards**: each round distills votes, rationale, and confidence into takeaways, findings, risks, and next steps.
+- **Deliverable reader**: one-tap copy and Markdown export of generated reports, with code-block extraction.
+- **Group routines**: schedule autonomous recurring multi-agent workflows run by the group lead.
+
+#### 💬 Chat — approvals & activity
+- **Approval runtime**: block on dangerous actions with approve/deny/sudo prompts, including "always allow" and batching.
+- **Live activity rows**: agent progress, todos, subagents, and loops in a compact stack above the composer.
+
+#### 🌐 Multi-server switching & host manager
+- **Saved servers**: store multiple self-hosted and cloud instances, switch with one tap, and label them with nicknames.
+- **Clean teardown**: switching overlay wipes per-host state so chats and caches never leak across servers.
+
+#### 🗂️ Workspace checkpoints & git review
+- **Checkpoints & rollback**: browse shadow snapshots taken before file edits, restore files, and rewind chat context.
+- **Git review**: stage or discard changes with confirmations, then commit and push from the phone.
+
+#### 🔄 Multi-page sync & offline resilience
+- **Cursor-paginated session sync**: fast startup on large catalogs; remaining pages stream in the background.
+- **Bot Groups sync**: group definitions and room state persist locally in SQLite and back up to the host profile.
+
+### Changed
+
+#### 🔍 Discovery & navigation
+- Global Search and Feature Map now index Hermes Live, Bot Groups, Group Chat, Group Routines, Deliverable Reader, and Saved Servers.
+
 ## [1.0.17] — 2026-08-30
 
 OTA update — the installed app self-updates.

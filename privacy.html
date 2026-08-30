@@ -608,7 +608,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <img src="assets/splash-icon.png" alt="Hermes Go Icon">
       <span>Hermes Go</span>
     </a>
-    <span class="header-badge">v1.0.17</span>
+    <span class="header-badge">v2.0.0</span>
     <div class="header-spacer"></div>
     <nav class="header-nav" aria-label="Main Navigation">
       <a href="hermes-go.html" class="header-link">Home</a>
@@ -893,10 +893,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
               <div class="subtitle">Complete catalog of every outbound network request</div>
             </div>
           </div>
-          <span class="doc-card-badge badge-green">3 Destinations Only</span>
+          <span class="doc-card-badge badge-green">4 Destinations Only</span>
         </div>
         <div class="doc-card-body">
-          <p>Hermes Go makes network requests to exactly three distinct destinations. There are no silent or undeclared network calls:</p>
+          <p>Hermes Go makes network requests to exactly four distinct destinations. There are no silent or undeclared network calls:</p>
 
           <div class="table-wrap">
             <table class="data-table">
@@ -920,6 +920,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                   <td>APK runtime version string &amp; release channel</td>
                   <td>Checks if an updated JavaScript bundle is available for the current APK</td>
                   <td>On app launch &amp; manual refresh</td>
+                </tr>
+                <tr>
+                  <td><b>GitHub Releases API</b><br><code>api.github.com</code></td>
+                  <td>Anonymous request — no account, token, or device data sent</td>
+                  <td>Checks the public latest release so the app can tell you when a new APK is available (throttled: at most once per 24 h automatically, 5-minute minimum gap between manual checks)</td>
+                  <td>Automatic daily check &amp; explicit "Check for updates" taps</td>
                 </tr>
                 <tr>
                   <td><b>Supabase Edge Functions</b><br><code>*.supabase.co/functions/v1/</code></td>
@@ -1106,8 +1112,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
               <tbody>
                 <tr>
                   <td><code>android.permission.INTERNET</code></td>
-                  <td>Server Connectivity</td>
-                  <td>Establishes WebSocket and HTTP connections to your agent server.</td>
+                  <td>Server Connectivity &amp; Update Checks</td>
+                  <td>Establishes WebSocket and HTTP connections to your agent server, plus the throttled anonymous GitHub release check for update detection.</td>
                 </tr>
                 <tr>
                   <td><code>android.permission.RECORD_AUDIO</code></td>
@@ -1126,14 +1132,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                 </tr>
                 <tr>
                   <td><code>android.permission.FOREGROUND_SERVICE</code></td>
-                  <td>Background Reliability</td>
+                  <td>Background Reliability (Hermes Live)</td>
                   <td>Maintains active agent streaming sessions during long-running tasks.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING</code></td>
+                  <td>Background Reliability (Hermes Live)</td>
+                  <td>Foreground service type that keeps streaming alive without the Android 15 6-hour runtime cap.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.WAKE_LOCK</code></td>
+                  <td>Background Reliability (Hermes Live)</td>
+                  <td>Prevents CPU suspension while a turn streams with the screen off, keeping the heartbeat alive.</td>
+                </tr>
+                <tr>
+                  <td><code>android.permission.POST_NOTIFICATIONS</code></td>
+                  <td>Live Notifications</td>
+                  <td>Shows completed-turn alerts, blocking approval prompts, and bot chat updates — delivered locally, no push service.</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <p>Hermes Go does not request background location, contacts, calendar, SMS, or telephony permissions.</p>
+          <p>Hermes Go does not request background location, contacts, calendar, SMS, or telephony permissions. All notifications are generated on-device — there is no Firebase Cloud Messaging or any third-party push relay.</p>
         </div>
       </div>
     </section>
@@ -1249,9 +1270,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <p>Every distributed Hermes Go APK is signed and accompanied by an immutable SHA-256 hash. You can verify the integrity of your download before installing:</p>
 
           <div class="callout">
-            <b>v1.0.0 Distribution Release Hash (arm64):</b>
+            <b>v2.0.0 Distribution Release Hash (arm64):</b>
             <div class="hash-pill">
-              <code>2188b21b164b9fdcd0991c634772d1083227197b31c27173d472a2b19d1da3a1</code>
+              <code>e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b</code>
             </div>
           </div>
 
@@ -1266,7 +1287,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
             </div>
             <div class="terminal-body">
               <div class="terminal-cmd"><span class="prompt">$</span>sha256sum HermesGo.apk</div>
-              <div class="terminal-out">2188b21b164b9fdcd0991c634772d1083227197b31c27173d472a2b19d1da3a1  HermesGo.apk</div>
+              <div class="terminal-out">e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b  HermesGo.apk</div>
             </div>
           </div>
         </div>

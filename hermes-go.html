@@ -1622,8 +1622,86 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
-    <!-- v1.0.17 -->
+    <!-- v2.0.0 -->
     <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v2.0.0</span>
+            <span class="changelog-date">30 Aug 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
+        </div>
+        <h3>Hermes Live, Bot Groups &amp; rooms, multi-host switcher, native v2.0.0 build</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Hermes Live — background execution &amp; live notifications</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Background keep-alive</strong> — a native foreground service keeps the WebSocket, heartbeats, and in-flight turns running while your phone screen is off or the app is backgrounded</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Live notifications</strong> — rich system notifications show turn progress, streamed tokens, and tool execution status in real time</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Act from the notification</strong> — quick-reply and approve/deny directly from the notification shade; no third-party push servers, everything stays on-device and direct to your server</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Remote-messaging foreground service</strong> — no Android 15 6-hour cap; CPU wake-lock keeps the heartbeat alive through screen-off</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots · Bot Groups &amp; collaborative rooms</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot Groups</strong> — create multi-agent teams with member rosters, @mention tags, and execution playbooks; memberships sync across devices via the host profile</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Shared room &amp; turns</strong> — round-based group chat with dynamic leader dispatch, passes, capped rounds, and midflight steering</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Consensus cards</strong> — each round distills votes, rationale, and confidence into takeaways, findings, risks, and next steps</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Deliverable reader</strong> — one-tap copy and Markdown export of generated reports, with code-block extraction</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Group routines</strong> — schedule autonomous recurring multi-agent workflows run by the group lead</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Approvals &amp; activity</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Approval runtime</strong> — block on dangerous actions with approve/deny/sudo prompts, including &quot;always allow&quot; and batching</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Live activity rows</strong> — agent progress, todos, subagents, and loops in a compact stack above the composer</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Multi-server switching &amp; host manager</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Saved servers</strong> — store multiple self-hosted and cloud instances, switch with one tap, and label them with nicknames</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Clean teardown</strong> — switching overlay wipes per-host state so chats and caches never leak across servers</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Workspace checkpoints &amp; git review</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Checkpoints &amp; rollback</strong> — browse shadow snapshots taken before file edits, restore files, and rewind chat context</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Git review</strong> — stage or discard changes with confirmations, then commit and push from the phone</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Storage · Multi-page sync &amp; offline resilience</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Cursor-paginated session sync</strong> — fast startup on large catalogs; remaining pages stream in the background</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Bot Groups sync</strong> — group definitions and room state persist locally in SQLite and back up to the host profile</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Discovery &amp; navigation</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Global Search and Feature Map now index Hermes Live, Bot Groups, Group Chat, Group Routines, Deliverable Reader, and Saved Servers</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v1.0.17 -->
+    <div class="changelog-item reveal">
       <div class="changelog-rail">
         <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
@@ -1751,10 +1829,13 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v1.0.15 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
-        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-line changelog-rail-top"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
         <div class="changelog-rail-line changelog-rail-bottom"></div>
       </div>
@@ -1823,9 +1904,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
         </div>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.14 -->
     <div class="changelog-item reveal">
@@ -3108,8 +3186,8 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v1.0.16 · Android APK</div>
-          <a href="https://github.com/shilp26/hermes-go/releases/tag/v1.0.0" class="btn btn-primary" target="_blank" rel="noopener">
+          <div class="ver">v2.0.0 · Android APK</div>
+          <a href="https://github.com/shilp26/hermes-go/releases/tag/v2.0.0" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
           </a>
@@ -3117,7 +3195,7 @@ Password: <password></div>
           <div class="store-note">Coming soon to Google Play Store</div>
           <div class="trust-hash" id="trustHash">
             <span class="hash-label">SHA-256</span>
-            <code>2188b21b164b9fdcd0991c634772d1083227197b31c27173d472a2b19d1da3a1</code>
+            <code>e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b</code>
             <svg class="hash-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           </div>
         </div>
@@ -3156,7 +3234,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v1.0.16</span></span>
+    <span>Hermes Go <span class="ver">v2.0.0</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Download APK</a>
 </div>
