@@ -6,6 +6,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.0] — 2026-09-07
+
+Native APK release — download the new build from GitHub Releases.
+
+### Added
+
+#### 🤖 Bots — Build Team
+- **Team Builder**: a visual canvas for assembling multi-agent teams — draggable bot nodes, edges, and auto-layout; open from Bots → Build Team.
+- **Soul auto-composition**: draft each teammate's identity yourself or let the builder propose one.
+- **Plan pipeline**: draft → verify → execute plans with human-in-the-loop question cards and locked user parameters.
+- **Starter templates**: prebuilt team recipes to start from in one tap.
+- **Team routines & schedules**: recurring multi-agent workflows owned by the team.
+- **Live deployment monitor**: progress sheets and an activity feed while a team deploys; archive finished teams.
+
+#### 🧠 Brain — Model specs & Cost Guard
+- **Model specs**: context window, max output, modalities, provider, latency, and pricing visible in the model picker.
+- **Capability badges**: vision, reasoning, and tool badges across every picker.
+- **Cost Guard**: spending budgets, threshold banners, and per-turn/session token guards.
+- **Cost confirm**: a confirmation dialog before sending to expensive models.
+- **Embedded Hub Picker**: switch Models, Skills, Tools, and Plugins without leaving the page.
+
+#### 💬 Chat — reasoning & prompts
+- **Live Reasoning banner**: expandable banner during thinking with elapsed time, token metrics, and collapsible thought traces.
+- **Side questions**: answer the agent's tool or subagent questions from chat as cards — without stalling the running turn; answers persist across sessions.
+- **Prompt stack**: collapsible stack of pending prompts with status pills; clarify/approval/sudo/secret prompts are strictly scoped to their owning session.
+- **Listing embeds**: tool results with lists or directory trees render as interactive sortable, filterable cards.
+- **Full-screen composer**: long-form writing modal with formatting tools, token estimates, and attachment management.
+- **Chat preferences**: composer layout, auto-scroll, and formatting options are remembered.
+
+#### 🔔 Notifications — richer shade actions
+- **Reply from the shade**: type a message into the running conversation straight from the notification.
+- **Stop from the shade**: cancel the running turn with a notification action button.
+- **Deep links**: one tap on a notification lands in the right session or group room.
+
+### Changed
+
+#### 🗺️ Feature Map — mosaic redesign
+- Interactive mosaic grid with category tiles, inspect modals, real-time fuzzy search, deep-link jumps, and persistent layout.
+
+#### ⏰ Cron — history & manual dispatch
+- Status indicators, trigger history per job, and on-demand manual dispatch with confirmation.
+
+#### 🧭 Navigation polish
+- Double-tap back to exit with toast; keyboard-avoidance offset fixes; faster folder reassignment with inline New Chat.
+
+#### 🔄 Reconnect resilience
+- Replay-gap detection resyncs messages missed while offline; detached turns and 4009 states recover without losing your draft or scroll position.
+
+### Removed
+
+- **Legacy GitHub APK update checker** — updates now arrive over OTA only.
+
 ## [2.0.0] — 2026-08-30
 
 Native APK release — download the new build from GitHub Releases.

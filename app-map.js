@@ -471,6 +471,7 @@ const FEATURE_ICONS = {
 
   // System — Health
   'Host gauges': LUCIDE.heartPulse,
+  'System gauges': LUCIDE.heartPulse,
   'Gateway status': LUCIDE.shieldCheck,
   'Memory & disk alerts': LUCIDE.activity,
 
@@ -546,7 +547,7 @@ const HUB_MAP = [
         label: 'Performance', desc: 'Tokens, sessions, CPU & memory',
         features: [
           { name: 'Usage stats', desc: 'Token and session totals over the window', where: 'Dashboard · Performance' },
-          { name: 'Host gauges', desc: 'CPU and memory of the agent machine', where: 'Dashboard · Performance' },
+          { name: 'Host gauges', desc: 'CPU and memory of the agent machine', where: 'Dashboard · Performance gauges' },
           { name: 'Sparklines', desc: 'Trends for each metric', where: 'Dashboard · Performance' },
         ],
       },
@@ -590,6 +591,7 @@ const HUB_MAP = [
         features: [
           { name: 'Streaming text', desc: 'Responses appear as they generate', where: 'Chat · thread' },
           { name: 'Reasoning rows', desc: 'Live thinking with interim steps', where: 'Chat · thread' },
+          { name: 'Live Reasoning banner', desc: 'Expandable banner during thinking with elapsed time, token metrics, and collapsible thought traces', where: 'Chat · thread' },
           { name: 'Tool timeline', desc: 'Every tool call with status and duration', where: 'Chat · thread' },
           { name: 'Markdown', desc: 'Headers, lists, emphasis, and collapsible details sections in messages', where: 'Chat · thread' },
           { name: 'Tables', desc: 'GFM tables with horizontal scroll', where: 'Chat · thread' },
@@ -597,8 +599,10 @@ const HUB_MAP = [
           { name: 'Tappable links', desc: 'Bare http(s) links open on tap — even inside code blocks', where: 'Chat · message' },
           { name: 'Context ring', desc: 'Live context window usage', where: 'Chat · header' },
           { name: 'Readable tool cards', desc: 'Tool results shown as readable values, chips, lists, and markdown', where: 'Chat · tool card' },
+          { name: 'Listing embeds', desc: 'Tool results with lists or directory trees render as interactive sortable, filterable cards', where: 'Chat · tool card' },
           { name: 'Compacted history', desc: 'Archived rows continue past an in-place compaction boundary', where: 'Chat · history' },
           { name: 'Expanded composer', desc: 'Long drafts open into a full-screen editor with model/effort, chips, and send', where: 'Chat · composer → expand' },
+          { name: 'Full-screen composer', desc: 'Long-form writing modal with formatting tools, token estimates, and attachment management', where: 'Chat · composer → full screen' },
           { name: 'Paste collapse', desc: 'Large pastes, code fences, and stack traces auto-collapse into snippet attachments', where: 'Chat · composer' },
           { name: 'Technical activity view', desc: 'Raw JSON for tool calls instead of styled activity cards', where: 'Chat · Activity sheet header' },
         ],
@@ -630,6 +634,8 @@ const HUB_MAP = [
           { name: 'Sudo', desc: 'Enter a password when the agent needs elevation', where: 'Chat · prompt card' },
           { name: 'Secret', desc: 'Provide secrets without leaking them into chat', where: 'Chat · prompt card' },
           { name: 'Prompt recovery', desc: 'Parked approvals and clarify prompts return after reconnect', where: 'Chat · prompt card' },
+          { name: 'Side questions', desc: 'Answer the agent\u2019s tool or subagent questions from chat as cards — without stalling the running turn', where: 'Chat · side question card' },
+          { name: 'Prompt stack', desc: 'Collapsible stack of pending prompts with status pills and strict session scoping', where: 'Chat · prompt stack' },
           { name: 'Long option lists', desc: 'Options wrap and scroll while Other and Confirm stay reachable', where: 'Chat · prompt card' },
         ],
       },
@@ -651,6 +657,9 @@ const HUB_MAP = [
           { name: 'Background keep-alive', desc: 'Native foreground service keeps turns, streaming, and heartbeat running with the screen off', where: 'Chat · background execution' },
           { name: 'Live notifications', desc: 'Turn progress, streamed tokens, and tool status in the notification shade', where: 'Chat · background execution' },
           { name: 'Act from the notification', desc: 'Quick-reply and approve/deny from the shade — on-device only, no push servers', where: 'Notification shade' },
+          { name: 'Reply from the shade', desc: 'Type a message into the running conversation straight from the notification', where: 'Notification shade' },
+          { name: 'Stop from the shade', desc: 'Cancel the running turn with a notification action button', where: 'Notification shade' },
+          { name: 'Notification deep links', desc: 'One tap on a notification lands in the right session or group room', where: 'Notification shade' },
         ],
       },
       {
@@ -724,6 +733,19 @@ const HUB_MAP = [
           { name: 'Shared room & turns', desc: 'Multi-agent discussion room with structured rounds, passes, steering, and turn limits', where: 'Bots · Groups · Room' },
           { name: 'Consensus card', desc: 'Automated round distillation with takeaways, findings, risks, and next-step actions', where: 'Bots · Room · Consensus' },
           { name: 'Deliverable export', desc: 'Export clean executive summaries or full verbatim transcripts with code block viewer', where: 'Bots · Room · Share' },
+          { name: 'Room orchestration', desc: 'Reliable dispatch leasing, turn sequencing, and recovery across instance switches', where: 'Bots · Room' },
+        ],
+      },
+      {
+        label: 'Build Team', desc: 'Visual multi-agent team builder with guided plans',
+        features: [
+          { name: 'Team canvas', desc: 'Draggable bot nodes and edges with auto-layout on an infinite canvas', where: 'Bots · Build Team' },
+          { name: 'Soul auto-compose', desc: 'Draft each teammate\u2019s identity, or let the builder propose one', where: 'Bots · Build Team' },
+          { name: 'Plan pipeline', desc: 'Draft → verify → execute plans with HITL question cards and parameter locks', where: 'Bots · Build Team · Plan' },
+          { name: 'Starter templates', desc: 'Prebuilt team recipes to start from in one tap', where: 'Bots · Build Team' },
+          { name: 'Team routines', desc: 'Schedule recurring multi-agent work owned by the team', where: 'Bots · Build Team · Routines' },
+          { name: 'Deployment monitor', desc: 'Live progress sheets and activity feed while a team deploys', where: 'Bots · Build Team · Deploy' },
+          { name: 'Team archive', desc: 'Park finished teams without deleting their setup', where: 'Bots · Build Team · Archive' },
         ],
       },
       {
@@ -780,6 +802,11 @@ const HUB_MAP = [
           { name: 'Fallback chain', desc: 'Auto-try model B when model A fails', where: 'Brain · Models · Fallback' },
           { name: 'Effort control', desc: 'Reasoning effort per model', where: 'Brain · Models' },
           { name: 'Custom endpoints', desc: 'Add, edit, and delete OpenAI-compatible providers with server-side API keys', where: 'Brain · Models → Custom' },
+          { name: 'Model specs', desc: 'Context window, max output, modalities, provider, latency, and pricing at a glance', where: 'Brain · Models / model picker' },
+          { name: 'Capability badges', desc: 'Vision, reasoning, and tool badges on models across every picker', where: 'Model picker · badges' },
+          { name: 'Cost Guard', desc: 'Spending budgets, threshold banners, and per-turn token guards', where: 'Brain · Cost Guard' },
+          { name: 'Cost confirm', desc: 'Confirmation dialog before sending to expensive models', where: 'Chat · composer' },
+          { name: 'Embedded Hub Picker', desc: 'Switch Models, Skills, Tools, and Plugins without leaving the page', where: 'Brain · hub switcher' },
         ],
       },
       {
@@ -844,6 +871,8 @@ const HUB_MAP = [
           { name: 'Job list', desc: 'Every scheduled job with its next run', where: 'Work · Cron' },
           { name: 'Run now', desc: 'Trigger a job and watch it complete', where: 'Work · Cron · row' },
           { name: 'Status badges', desc: 'Success, run failure, and scheduled-fire error state per job', where: 'Work · Cron · row' },
+          { name: 'Trigger history', desc: 'See each job\u2019s past runs and outcomes in one place', where: 'Work · Cron · job' },
+          { name: 'Manual dispatch', desc: 'Fire a scheduled job on demand with confirmation', where: 'Work · Cron · job' },
         ],
       },
       {
@@ -910,7 +939,7 @@ const HUB_MAP = [
       {
         label: 'Health', desc: 'Host gauges & gateway status',
         features: [
-          { name: 'Host gauges', desc: 'CPU, memory, disk of the agent machine', where: 'System · Health' },
+          { name: 'System gauges', desc: 'CPU, memory, disk of the agent machine', where: 'System · Health gauges' },
           { name: 'Gateway status', desc: 'Connection state to the gateway', where: 'System · Health' },
           { name: 'Host battery indicator', desc: 'Percentage, charging state, and power category for laptop hosts', where: 'System · Health' },
           { name: 'Memory & disk alerts', desc: 'Advisory notices when the host reports elevated or critical pressure', where: 'Home · Health' },
@@ -992,12 +1021,11 @@ const HUB_MAP = [
           { name: 'Feedback', desc: 'Submit bug, feature, improvement, or question with screenshots and status tracking', where: 'Settings · Feedback' },
           { name: 'What\u2019s New', desc: 'Release notes in-app, product version in the footer', where: 'Settings · What\u2019s New' },
           { name: 'Backup preview', desc: 'See what a prefs restore brings back before accepting', where: 'Settings · Backup' },
-          { name: 'Feature map', desc: 'Search every screen, jump by area, tap to go straight to a feature', where: 'Settings · Feature map' },
+          { name: 'Feature map', desc: 'Search every screen with fuzzy search on an interactive mosaic grid, jump by area, tap to go straight to a feature', where: 'Settings · Feature map' },
           { name: 'Legal & Privacy', desc: 'About, architecture diagrams, Privacy Policy, Terms, license catalog, and contact', where: 'Settings · Legal & Privacy' },
           { name: 'Switch saved server', desc: 'Save multiple Hermes gateway and cloud instances and switch between them with a single tap', where: 'Settings · Saved Servers' },
           { name: 'Add another server', desc: 'Sign in to a new instance without disconnecting the active host', where: 'Settings · Saved Servers / Connect' },
           { name: 'Remove saved server', desc: 'Forget a server with confirmation, wiping local SQLite caches and background watches', where: 'Settings · Saved Servers' },
-          { name: 'APK update checker', desc: 'In-app GitHub release checker for sideloaded builds with 24h throttling and cooldown', where: 'Settings · Feedback & info' },
         ],
       },
     ],

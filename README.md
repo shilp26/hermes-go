@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.0.0` · Android APK · Closed Source · Zero Telemetry
+`v2.1.0` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -54,7 +54,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 47 segments, 157 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 50 segments, 203 features" width="100%">
 </p>
 
 ### Surfaces
@@ -62,16 +62,16 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 16 | Agent status, performance, capabilities, alerts, quick compose, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 60 | Live streaming, voice, media & artifacts, approvals, queue & steer, Hermes Live background execution, subagents, share from other apps, composer tools |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 3 | 24 | Agents, Bot Groups, shared rooms, consensus distillation, deliverables export, Bot Chat, avatars, routines |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 68 | Live streaming, live reasoning, voice, media & artifacts, approvals & side questions, queue & steer, Hermes Live background execution, subagents, share from other apps, composer tools |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 32 | Agents, Bot Groups, shared rooms, consensus distillation, deliverables export, Build Team visual canvas, Bot Chat, avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
-| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 16 | Models, skills, tools, memory, Star Map, MCP, plugins |
-| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 15 | Artifacts browser, cron jobs, kanban board, host files, processes |
+| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 22 | Models with specs & Cost Guard, skills, tools, memory, Star Map, MCP, plugins |
+| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
-| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 14 | Servers, connection, appearance, profile, feedback & info, APK update checker |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 13 | Servers, connection, appearance, profile, feedback & info, feature map |
 
-**Total: 9 surfaces · 49 segments · 181 features**
+**Total: 9 surfaces · 50 segments · 203 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
