@@ -6,7 +6,7 @@
 
 **Your AI agent, in your pocket.**
 
-A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal.
+A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal. Now in **closed beta on Google Play** — join the [testing group](https://groups.google.com/g/hermes-go) and install from [Play](https://play.google.com/apps/testing/com.shilp26.hermesgo).
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
@@ -79,7 +79,13 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ## Getting Started
 
-### 1. Download the APK
+### 1. Join the Google Play closed beta
+
+1. Join the [Google Group](https://groups.google.com/g/hermes-go) (one click — this whitelists you as a tester)
+2. Install from [Google Play](https://play.google.com/apps/testing/com.shilp26.hermesgo)
+3. Keep the app installed for 14 days — it helps us move to a public Play release
+
+### 2. Or sideload the APK
 
 [Download Hermes Go v2.0.0](https://github.com/shilp26/hermes-go/releases/tag/v2.0.0) (74 MB)
 
@@ -99,16 +105,14 @@ Get-FileHash HermesGo.apk -Algorithm SHA256
 
 If the hash matches, the file is exactly what we published — nothing added, nothing removed.
 
-### 2. Install
+### 3. Install (sideloaded APK)
 
 1. Open the downloaded `HermesGo.apk` on your Android device
 2. If prompted, allow **"Install unknown apps"** for your browser or file manager
 3. Tap **Install**
 4. Open **Hermes Go**
 
-> A Play Store release is planned.
-
-### 3. Connect to your agent
+### 4. Connect to your agent
 
 1. Open Hermes Go
 2. **Self-hosted** — enter your agent's address (`http://<host>:9119` on your LAN, your Tailscale IP, or `https://your-domain` behind a TLS reverse proxy) and your basic-auth credentials (set during `hermes-agent` setup)

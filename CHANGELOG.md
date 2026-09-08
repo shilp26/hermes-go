@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [2.1.0] — 2026-09-07
 
-Native APK release — download the new build from GitHub Releases.
+Now on Google Play — closed beta. Join via the testing link; the GitHub APK stays available for sideloading.
 
 ### Added
 
