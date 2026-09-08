@@ -1173,7 +1173,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .download-card-alt a { color: var(--accent); font-weight: 600; }
 
 /* ── Play Beta Announcement Banner ── */
-.play-banner { background: var(--surface); border-bottom: 1px solid var(--border); position: relative; z-index: 60; }
+.play-banner { margin-top: 64px; background: var(--surface); border-bottom: 1px solid var(--border); position: relative; z-index: 60; }
+.play-banner + .nav + main .hero { padding-top: 24px; }
 .play-banner-inner { max-width: 1200px; margin-inline: auto; padding: 10px 48px 10px 24px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .play-banner-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: playPulse 2s ease-in-out infinite; }
 @keyframes playPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -1299,6 +1300,8 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
 
 /* ══ Mobile Responsive Overrides ══ */
 @media (max-width: 768px) {
+  .play-banner { margin-top: calc(56px + env(safe-area-inset-top, 0px)); }
+  .play-banner + .nav + main .hero { padding-top: 16px; }
   .nav { padding-top: env(safe-area-inset-top); }
   .nav-inner { height: 56px; }
   .hero { padding-top: calc(64px + 16px + env(safe-area-inset-top)); padding-bottom: 56px; }
@@ -1381,9 +1384,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
   <div class="play-banner-inner">
     <span class="play-banner-dot" aria-hidden="true"></span>
     <span class="play-banner-text"><strong>Hermes Go is coming to Google Play.</strong> Closed beta is open now — your testing helps the public launch.</span>
-    <a href="https://play.google.com/apps/testing/com.shilp26.hermesgo" class="play-banner-cta" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
-      Join the beta
+    <a href="https://groups.google.com/g/hermes-go" class="play-banner-cta" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H4z"/><path d="m4 7 8 5 8-5"/><path d="M8 20h8"/></svg>
+      Join the Google Group
     </a>
   </div>
   <button class="play-banner-close" id="playBannerClose" aria-label="Dismiss announcement">
@@ -3223,11 +3226,15 @@ Password: <password></div>
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
           <div class="ver">v2.1.0 · Google Play Closed Beta</div>
-          <a href="https://play.google.com/apps/testing/com.shilp26.hermesgo" class="btn btn-primary" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
-            Join the Beta on Google Play
+          <a href="https://groups.google.com/g/hermes-go" class="btn btn-primary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v12H4z"/><path d="m4 7 8 5 8-5"/><path d="M8 20h8"/></svg>
+            1. Join the Google Group
           </a>
-          <div class="arch-note">Step 1: join the <a href="https://groups.google.com/g/hermes-go" target="_blank" rel="noopener">Google Group</a> · Step 2: install from Play</div>
+          <a href="https://play.google.com/apps/testing/com.shilp26.hermesgo" class="btn btn-secondary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 3 14 9-14 9z"/><path d="M5 3v18"/></svg>
+            2. Install from Google Play
+          </a>
+          <div class="arch-note">Join the group first, then open the Play testing link</div>
           <div class="store-note">Public Play Store release after the beta — GitHub APK stays available</div>
           <div class="download-card-alt">
             <span>Prefer sideloading?</span>
@@ -3292,15 +3299,16 @@ Password: <password></div>
 
 <script src="app-map.js?v=120"></script>
 <script>
-// Play Beta Banner — dismiss per browser (session storage)
+// Play Beta Banner — dismiss per browser session
 const playBanner = document.getElementById('playBanner');
 const playBannerClose = document.getElementById('playBannerClose');
+const playBannerDismissKey = 'playBannerDismissedV2';
 if (playBanner && playBannerClose) {
-  if (sessionStorage.getItem('playBannerDismissed') === '1') {
+  if (sessionStorage.getItem(playBannerDismissKey) === '1') {
     playBanner.remove();
   } else {
     playBannerClose.addEventListener('click', () => {
-      sessionStorage.setItem('playBannerDismissed', '1');
+      sessionStorage.setItem(playBannerDismissKey, '1');
       playBanner.remove();
     });
   }
