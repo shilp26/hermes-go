@@ -233,13 +233,16 @@ const FEATURE_ICONS = {
   // Chat — Live streaming
   'Streaming text': LUCIDE.zap,
   'Reasoning rows': LUCIDE.brain,
+  'Live Reasoning banner': LUCIDE.brain,
   'Markdown': LUCIDE.fileText,
   'Tool timeline': LUCIDE.wrench,
   'Code blocks': LUCIDE.code,
   'Tables': LUCIDE.table ?? LUCIDE.listFilter,
   'Context ring': LUCIDE.cpu,
   'Readable tool cards': LUCIDE.terminalSquare,
+  'Listing embeds': LUCIDE.listFilter,
   'Expanded composer': LUCIDE.maximize,
+  'Full-screen composer': LUCIDE.maximize,
   'Paste collapse': LUCIDE.fileText,
   'Compacted history': LUCIDE.archive,
 
@@ -262,6 +265,8 @@ const FEATURE_ICONS = {
   'Sudo': LUCIDE.terminal,
   'Secret': LUCIDE.lock,
   'Prompt recovery': LUCIDE.rotateCcw,
+  'Side questions': LUCIDE.messageSquareText,
+  'Prompt stack': LUCIDE.layers,
   'Long option lists': LUCIDE.layers,
 
   // Chat — Queue & steer
@@ -277,6 +282,9 @@ const FEATURE_ICONS = {
   'Background keep-alive': LUCIDE.power,
   'Live notifications': LUCIDE.bell,
   'Act from the notification': LUCIDE.checkSquare,
+  'Reply from the shade': LUCIDE.send,
+  'Stop from the shade': LUCIDE.stop,
+  'Notification deep links': LUCIDE.bellRing,
 
   // Chat — Subagents
   'Subagent list': LUCIDE.gitBranch,
@@ -355,6 +363,16 @@ const FEATURE_ICONS = {
   'Shared room & turns': LUCIDE.messageSquareText,
   'Consensus card': LUCIDE.sparkle,
   'Deliverable export': LUCIDE.share2,
+  'Room orchestration': LUCIDE.network,
+
+  // Bots — Build Team
+  'Team canvas': LUCIDE.workflow,
+  'Soul auto-compose': LUCIDE.sparkle,
+  'Plan pipeline': LUCIDE.gitBranch,
+  'Starter templates': LUCIDE.package,
+  'Team routines': LUCIDE.clock,
+  'Deployment monitor': LUCIDE.activity,
+  'Team archive': LUCIDE.archive,
   'Checkpoints toggle': LUCIDE.history,
   'APK update checker': LUCIDE.download,
   'Bots': LUCIDE.bot,
@@ -423,6 +441,11 @@ const FEATURE_ICONS = {
   'Fallback chain': LUCIDE.refreshCw,
   'Effort control': LUCIDE.sliders,
   'Custom endpoints': LUCIDE.server,
+  'Model specs': LUCIDE.cpu,
+  'Capability badges': LUCIDE.tag,
+  'Cost Guard': LUCIDE.shield,
+  'Cost confirm': LUCIDE.checkSquare,
+  'Embedded Hub Picker': LUCIDE.command,
 
   // Brain — Skills
   'Skill list': LUCIDE.sparkle,
@@ -454,6 +477,8 @@ const FEATURE_ICONS = {
   'Job list': LUCIDE.clock,
   'Run now': LUCIDE.play,
   'Status badges': LUCIDE.listChecks,
+  'Trigger history': LUCIDE.history,
+  'Manual dispatch': LUCIDE.zap,
 
   // Work — Kanban
   'Board': LUCIDE.columns3,

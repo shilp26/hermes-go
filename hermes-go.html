@@ -1661,8 +1661,105 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
-    <!-- v2.0.0 -->
+    <!-- v2.1.0 -->
     <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v2.1.0</span>
+            <span class="changelog-date">07 Sep 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
+        </div>
+        <h3>Build Team canvas, Model Specs &amp; Cost Guard, Live Reasoning — now on Google Play (closed beta)</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Bots · Build Team</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Team Builder</strong> — assemble multi-agent teams on a visual canvas with draggable bot nodes and auto-layout; open from Bots → Build Team</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Soul auto-composition</strong> — draft each teammate's identity yourself or let the builder propose one</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Plan pipeline</strong> — draft → verify → execute plans with human-in-the-loop question cards and locked parameters</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Starter templates</strong> — prebuilt team recipes to start from in one tap</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Team routines &amp; schedules</strong> — recurring multi-agent workflows owned by the team</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Live deployment monitor</strong> — progress sheets and an activity feed while a team deploys; archive finished teams</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Brain · Model specs &amp; Cost Guard</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Model specs</strong> — context window, max output, modalities, provider, latency, and pricing visible in the model picker</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Capability badges</strong> — vision, reasoning, and tool badges across every picker</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Cost Guard</strong> — spending budgets, threshold banners, and per-turn token guards</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Cost confirm</strong> — a confirmation dialog before sending to expensive models</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Embedded Hub Picker</strong> — switch Models, Skills, Tools, and Plugins without leaving the page</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Reasoning &amp; prompts</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Live Reasoning banner</strong> — expandable banner during thinking with elapsed time, token metrics, and collapsible thought traces</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Side questions</strong> — answer the agent's tool or subagent questions from chat as cards, without stalling the running turn</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Prompt stack</strong> — collapsible stack of pending prompts with status pills, strictly scoped to their owning session</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Listing embeds</strong> — tool results with lists or directory trees render as interactive sortable, filterable cards</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Full-screen composer</strong> — long-form writing modal with formatting tools, token estimates, and attachment management</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Chat preferences</strong> — composer layout, auto-scroll, and formatting options are remembered</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Notifications · Richer shade actions</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Reply from the shade</strong> — type into the running conversation straight from the notification</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Stop from the shade</strong> — cancel the running turn with a notification action button</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Deep links</strong> — one tap on a notification lands in the right session or group room</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Feature Map · Mosaic redesign</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Interactive mosaic grid with category tiles, inspect modals, real-time fuzzy search, deep-link jumps, and persistent layout</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Cron · History &amp; manual dispatch</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Status indicators, trigger history per job, and on-demand manual dispatch with confirmation</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Navigation polish</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Double-tap back to exit with toast; keyboard-avoidance fixes; faster folder reassignment with inline New Chat</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Reconnect resilience</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Replay-gap detection resyncs messages missed while offline; detached turns recover without losing your draft or scroll position</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--removed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="cl-grouphdr-label">Removed</span></div>
+          <div class="cl-subsection">
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Legacy GitHub APK update checker</strong> — updates now arrive over the Play beta and OTA only</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.0.0 -->
+    <div class="changelog-item reveal">
       <div class="changelog-rail">
         <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
@@ -1805,6 +1902,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v1.0.16 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
@@ -1867,9 +1967,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
         </div>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.15 -->
     <div class="changelog-item reveal">

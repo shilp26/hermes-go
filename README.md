@@ -149,6 +149,11 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Assign with @ from any session** — choose one or several teammates, keep chatting, and receive their replies back in the current conversation
 - **Desktop-style handoff** — assignments travel through the current agent while the specialist keeps its own Bot Chat
 - **Voice & Home assign** — voice dictation and Home sends use the same desktop-style handoff as typed @mentions
+- **Live Reasoning banner** — expandable thinking view with elapsed time, token metrics, and collapsible thought traces
+- **Side questions** — answer tool/subagent questions from chat cards without stalling the turn
+- **Prompt stack** — collapsible pending prompts with status pills, strictly session-scoped
+- **Listing embeds** — list/tree tool results as interactive sortable, filterable cards
+- **Full-screen composer** — long-form writing modal with formatting tools, token estimates, attachments
 
 ### 🤖 Bots Mode
 - **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
@@ -168,6 +173,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Multi-agent discussion room** — structured rounds with turn taking, passes, steering, and token-cost budget caps
 - **Executive consensus cards** — automated distillation of round discussions into takeaways, findings, risks, and next steps
 - **Scoped exports** — export clean executive deliverable summaries or full verbatim transcripts with code block inspection
+- **Build Team** — visual canvas (draggable nodes, auto-layout), soul auto-composition, draft → verify → execute plans, starter templates, team routines, live deployment monitor
 
 ### 🗂️ Sessions
 - **Action sheets** — long-press actions show icons for star, folder, read/unread, rename, archive, and delete
@@ -197,10 +203,13 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Star Map** — interactive learning graph: constellation, clusters, timeline, node editor, curator
 - MCP server connections
 - Plugin toggles
+- **Model specs** — context window, max output, modalities, latency, pricing in the picker + capability badges
+- **Cost Guard** — spending budgets, threshold banners, per-turn guards, confirm before expensive models
+- **Embedded Hub Picker** — switch Models/Skills/Tools/Plugins without leaving the page
 
 ### 📋 Work
 - Artifacts browser (images, audio, files)
-- Cron jobs: list, run-now, status badges, and clear scheduled-fire errors
+- Cron jobs: list, run-now, status badges, trigger history, manual dispatch, and clear scheduled-fire errors
 - Kanban board with live updates — **request review** from ready or running tasks
 - **Host files** — browse the agent filesystem, drop `@file` / `@folder` chips into the composer
 - **Processes** — manage background jobs from live sessions, filter and start/stop with confirmation
@@ -234,8 +243,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Legal & Privacy** — About, architecture diagrams, Privacy Policy, Terms, 82+ license catalog, and contact
 - **Saved servers** — manage multiple gateway/cloud instances with nicknames, 1-tap switch, and clean teardown
 - **Backup preview** — see exactly what a prefs restore brings back before accepting
-- **Feature map** — search every screen, jump by area, tap to go straight to a feature
-- **APK update checker** — in-app GitHub release checker for sideloaded builds with 24h throttling and cooldown
+- **Feature map** — interactive mosaic grid with fuzzy search, deep-link jumps, persistent layout
 
 ---
 
