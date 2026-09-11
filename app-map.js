@@ -133,6 +133,8 @@ const LUCIDE = {
   info: `<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>`,
   at: `<circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>`,
   dot: `<circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>`,
+  flag: `<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/>`,
+  logIn: `<path d="m10 17 5-5-5-5"/><path d="M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>`,
   qr: `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M14 21h3"/><path d="M21 14v3"/><path d="M21 21h.01"/>`,
   table: `<path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/>`,
   share2: `<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>`,
@@ -277,6 +279,14 @@ const FEATURE_ICONS = {
   'Session loops': LUCIDE.refreshCw,
   'Loop controls': LUCIDE.play,
   'Loop wakeups': LUCIDE.bell,
+  // v2.1.1 — session control, vault, sign-in, catalog, alerts
+  'Goal status': LUCIDE.flag,
+  'Heartbeat status': LUCIDE.activity,
+  'Idle heartbeat (/heartbeat)': LUCIDE.clock,
+  'Unlock vault or save a login': LUCIDE.unlock,
+  '/login Nous sign-in': LUCIDE.logIn,
+  'Plugin catalog': LUCIDE.package,
+  'Needs Attention sheet': LUCIDE.bellRing,
 
   // Chat — While the agent runs (Hermes Live)
   'Background keep-alive': LUCIDE.power,
@@ -587,6 +597,7 @@ const HUB_MAP = [
         features: [
           { name: 'Alerts', desc: 'Inline banner for things that need action', where: 'Dashboard · Alerts' },
           { name: 'Agent update modal', desc: 'Quiet notice when the backend moves ahead of mobile', where: 'Dashboard · Alerts' },
+          { name: 'Needs Attention sheet', desc: 'Every alert in one swipeable sheet with one-tap actions and swipe to dismiss', where: 'Dashboard · header bell' },
         ],
       },
       {
@@ -652,7 +663,7 @@ const HUB_MAP = [
         ],
       },
       {
-        label: 'Approvals', desc: 'Approve · clarify · sudo · secret prompts',
+        label: 'Approvals', desc: 'Approve · clarify · sudo · secret · vault prompts',
         features: [
           { name: 'Approve / deny', desc: 'Approve or reject agent actions inline', where: 'Chat · prompt card' },
           { name: 'Clarify', desc: 'Answer single or multiple questions with multi-select, Other, Confirm, or Skip', where: 'Chat · prompt card' },
@@ -662,6 +673,7 @@ const HUB_MAP = [
           { name: 'Side questions', desc: 'Answer the agent\u2019s tool or subagent questions from chat as cards — without stalling the running turn', where: 'Chat · side question card' },
           { name: 'Prompt stack', desc: 'Collapsible stack of pending prompts with status pills and strict session scoping', where: 'Chat · prompt stack' },
           { name: 'Long option lists', desc: 'Options wrap and scroll while Other and Confirm stay reachable', where: 'Chat · prompt card' },
+          { name: 'Unlock vault or save a login', desc: 'Master password, save a site login, or enter a one-time code — secrets stay on the host', where: 'Chat · prompt card' },
         ],
       },
       {
@@ -674,6 +686,8 @@ const HUB_MAP = [
           { name: 'Session loops', desc: 'Keep recurring /loop work pinned with countdown and status', where: 'Composer · loop card' },
           { name: 'Loop controls', desc: 'Pause, resume, or stop a loop from its card', where: 'Composer · loop card' },
           { name: 'Loop wakeups', desc: 'Quiet wakeup markers keep recurring work out of chat bubbles', where: 'Chat · thread' },
+          { name: 'Goal status', desc: 'Pause, resume, or clear a standing /goal on this chat', where: 'Composer · goal card' },
+          { name: 'Heartbeat status', desc: 'Pause, resume, or clear a /heartbeat on this chat', where: 'Composer · heartbeat card' },
         ],
       },
       {
@@ -690,7 +704,7 @@ const HUB_MAP = [
       {
         label: 'Subagents', desc: 'Live delegation & async task cards',
         features: [
-          { name: 'Subagent list', desc: 'Live thoughts and tool calls of delegated workers', where: 'Chat · thread' },
+          { name: 'Subagent list', desc: 'Live roster of delegated workers — status, model, live tail, thoughts, and tool calls', where: 'Chat · thread' },
           { name: 'Async delegation', desc: 'Background tasks keep running, status shown inline', where: 'Chat · thread' },
         ],
       },
@@ -708,6 +722,8 @@ const HUB_MAP = [
         features: [
           { name: 'Attachments', desc: 'Gallery and camera images attach to the message', where: 'Composer · +' },
           { name: 'Slash skills', desc: 'Type / to pick from installed skills', where: 'Composer · /' },
+          { name: 'Idle heartbeat (/heartbeat)', desc: 'Re-prompt this chat on an interval while it is idle', where: 'Composer · /heartbeat' },
+          { name: '/login Nous sign-in', desc: 'Open the existing Nous account sheet from the composer — not sent to the agent', where: 'Composer · /login' },
           { name: '@ mentions', desc: 'Reference files and folders inline', where: 'Composer · @' },
           { name: 'Prompt improve', desc: 'Polish a draft with the auxiliary model', where: 'Composer · ✦' },
           { name: 'YOLO mode', desc: 'Toggle auto-approval for the session', where: 'Composer · toggle' },
@@ -875,6 +891,7 @@ const HUB_MAP = [
         label: 'Plugins', desc: 'Enable or disable runtime plugins',
         features: [
           { name: 'Plugins', desc: 'Enable or disable runtime plugins', where: 'Brain · Plugins' },
+          { name: 'Plugin catalog', desc: 'Browse curated plugins with capability badges and install by catalog name', where: 'Brain · Plugins' },
         ],
       },
     ],
