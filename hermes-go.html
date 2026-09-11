@@ -1661,8 +1661,83 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
-    <!-- v2.1.0 -->
+    <!-- v2.1.1 -->
     <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v2.1.1</span>
+            <span class="changelog-date">11 Sep 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Session control loops, live subagent roster, modernized tool cards, Nous sign-in</h3>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Session control &amp; autonomous loops</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Goal card</strong> — a standing /goal shows above the composer; pause, resume, or clear it from the card</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Heartbeat card</strong> — pause, resume, or clear a /heartbeat from its card</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Idle heartbeat (/heartbeat)</strong> — re-prompt this chat on an interval while it is idle</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Subagents · Live roster</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Subagent roster</strong> — live status, model, and current tool for every child agent and parallel worker</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Inline execution cards</strong> — subagent steps, live statuses, and returned output render inside the thread</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Per-worker controls</strong> — open a worker's live tail, or stop a running child from its row</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Tool cards · Modernized</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Redesigned tool cards</strong> — unified styling, expandable output containers, and one-tap copy</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Refreshed cards for file reads/writes, terminal, web search, file search, and image generation with live preview states</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Vault &amp; sign-in</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Vault prompts</strong> — unlock the vault, save a site login, or enter a one-time code from chat; secrets stay on your host</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>/login</strong> — open the Nous account sheet straight from the composer</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Account state</strong> — Health shows Free tier, Logged in, or Not logged in for the Nous portal</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Brain · Plugin catalog</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Plugin catalog</strong> — browse curated plugins with capability badges and install by catalog name</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Dashboard · Needs Attention hub</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Needs Attention sheet</strong> — every active alert in one swipeable sheet with one-tap actions and swipe to dismiss</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Composer ergonomics</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">The composer grows smoothly with multiline drafts instead of jumping</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text">Large pasted text collapses into a compact pill you can expand when you need it</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.1.0 -->
+    <div class="changelog-item reveal">
       <div class="changelog-rail">
         <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
@@ -1836,6 +1911,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v1.0.17 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
@@ -1901,9 +1979,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
         </div>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.16 -->
     <div class="changelog-item reveal">
@@ -3322,7 +3397,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v2.1.0 · Google Play Closed Beta</div>
+          <div class="ver">v2.1.1 · Google Play Closed Beta</div>
           <a href="https://groups.google.com/g/hermes-go" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v12H4z"/><path d="m4 7 8 5 8-5"/><path d="M8 20h8"/></svg>
             1. Join the Google Group
@@ -3378,7 +3453,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v2.1.0</span></span>
+    <span>Hermes Go <span class="ver">v2.1.1</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Get the App</a>
 </div>
@@ -3394,7 +3469,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=120"></script>
+<script src="app-map.js?v=121"></script>
 <script>
 // Play Beta Banner — dismiss per browser session
 const playBanner = document.getElementById('playBanner');

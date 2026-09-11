@@ -6,6 +6,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.1] — 2026-09-11
+
+OTA update — the installed app self-updates.
+
+### Added
+
+#### 🔁 Chat — session control & autonomous loops
+- **Goal card**: a standing `/goal` shows above the composer — pause, resume, or clear it from the card.
+- **Heartbeat card**: pause, resume, or clear a `/heartbeat` from its card.
+- **Idle heartbeat (`/heartbeat`)**: re-prompt this chat on an interval while it is idle.
+
+#### 🤝 Subagents — live roster
+- **Subagent roster**: live status, model, and current tool for every child agent and parallel worker.
+- **Inline execution cards**: subagent steps, live statuses, and returned output render inside the conversation thread.
+- **Per-worker controls**: open a worker's live tail, or stop a running child from its row.
+
+#### 🧰 Tool cards — modernized
+- **Redesigned tool cards** with unified styling, expandable output containers, and one-tap copy.
+- Refreshed cards for file reads/writes, terminal, web search, file search, and image generation with live preview states.
+
+#### 🔐 Vault & sign-in
+- **Vault prompts**: unlock the vault, save a site login, or enter a one-time code from chat — secrets stay on your host.
+- **`/login`**: open the Nous account sheet straight from the composer.
+- **Account state**: Health shows Free tier, Logged in, or Not logged in for the Nous portal.
+
+#### 🧩 Brain — plugin catalog
+- **Plugin catalog**: browse curated plugins with capability badges and install by catalog name.
+
+#### 🏠 Dashboard — Needs Attention hub
+- **Needs Attention sheet**: every active alert in one swipeable sheet with one-tap actions and swipe to dismiss.
+
+### Changed
+
+#### ✍️ Composer ergonomics
+- The composer grows smoothly with multiline drafts instead of jumping.
+- Large pasted text collapses into a compact pill you can expand when you need it.
+
 ## [2.1.0] — 2026-09-07
 
 Now on Google Play — closed beta. Join via the testing link; the GitHub APK stays available for sideloading.

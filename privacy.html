@@ -608,7 +608,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <img src="assets/splash-icon.png" alt="Hermes Go Icon">
       <span>Hermes Go</span>
     </a>
-    <span class="header-badge">v2.1.0</span>
+    <span class="header-badge">v2.1.1</span>
     <div class="header-spacer"></div>
     <nav class="header-nav" aria-label="Main Navigation">
       <a href="hermes-go.html" class="header-link">Home</a>
@@ -922,10 +922,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                   <td>On app launch &amp; manual refresh</td>
                 </tr>
                 <tr>
-                  <td><b>GitHub Releases API</b><br><code>api.github.com</code></td>
+                  <td><b>GitHub API</b><br><code>api.github.com</code></td>
                   <td>Anonymous request — no account, token, or device data sent</td>
-                  <td>Checks the public latest release so the app can tell you when a new APK is available (throttled: at most once per 24 h automatically, 5-minute minimum gap between manual checks)</td>
-                  <td>Automatic daily check &amp; explicit "Check for updates" taps</td>
+                  <td>Anonymous commit-distance check for the hermes-agent pin — how far the app's tested build trails latest main (cached for 6 hours)</td>
+                  <td>When the agent-update notice is opened</td>
                 </tr>
                 <tr>
                   <td><b>Supabase Edge Functions</b><br><code>*.supabase.co/functions/v1/</code></td>
