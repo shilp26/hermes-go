@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.1.1` · Android APK · Closed Source · Zero Telemetry
+`v2.1.2` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 

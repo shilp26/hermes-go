@@ -1661,8 +1661,66 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
-    <!-- v2.1.1 -->
+    <!-- v2.1.2 -->
     <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v2.1.2</span>
+            <span class="changelog-date">12 Sep 2026</span>
+          </div>
+          <span class="cl-typechip ota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>OTA</span>
+        </div>
+        <h3>Faster session resume, live dashboard metrics, and Channels filtering</h3>
+        <p class="cl-summary">OTA update for installs from Google Play (closed testing) — the installed app self-updates.</p>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Dashboard · Metrics &amp; health</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Refresh on demand</strong> — pull fresh performance and host metrics with animated feedback</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Health visuals</strong> — memory progress bars, tuned CPU health thresholds, and session sparklines</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Connect · Channels filtering</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Filter chips and search</strong> — pinpoint active, broken, or configured integrations fast</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Connect · Integration setup</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Telegram and WhatsApp setup</strong> now open in dedicated configuration sheets</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat · Resume speed &amp; reconnect stability</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Faster session resume</strong> — streamlined resume payloads stop long conversations timing out when you open them</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>No double-sends</strong> — messages aren't submitted twice when the connection drops while history is still loading</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Heartbeat grace periods</strong> — the connection stays alive while your host works through sync tasks</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Server switches refresh once</strong> — rapid host changes coalesce into a single refresh instead of background churn</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>No roster poll floods</strong> — background subagent status checks are deduplicated before they hit the server</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.1.1 -->
+    <div class="changelog-item reveal">
       <div class="changelog-rail">
         <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
@@ -1834,6 +1892,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v2.0.0 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
@@ -1911,9 +1972,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
         </div>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v1.0.17 -->
     <div class="changelog-item reveal">
@@ -3398,7 +3456,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v2.1.1 · Google Play Closed Beta</div>
+          <div class="ver">v2.1.2 · Google Play Closed Beta</div>
           <a href="https://groups.google.com/g/hermes-go" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v12H4z"/><path d="m4 7 8 5 8-5"/><path d="M8 20h8"/></svg>
             1. Join the Google Group
@@ -3454,7 +3512,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v2.1.1</span></span>
+    <span>Hermes Go <span class="ver">v2.1.2</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Get the App</a>
 </div>

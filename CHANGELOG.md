@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.2] — 2026-09-12
+
+OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+
+### Added
+
+#### 📊 Dashboard — metrics & health
+- **Refresh on demand** — pull fresh performance and host metrics with animated feedback.
+- **Health visuals** — memory progress bars, tuned CPU health thresholds, and session sparklines.
+
+#### 🔌 Connect — Channels filtering
+- **Filter chips and search** — pinpoint active, broken, or configured integrations fast.
+
+### Changed
+
+#### 🔌 Connect — integration setup
+- **Telegram and WhatsApp setup** now open in dedicated configuration sheets.
+
+### Fixed
+
+#### 🔁 Chat — resume speed & reconnect stability
+- **Faster session resume** — streamlined resume payloads stop long conversations timing out when you open them.
+- **No double-sends** — messages aren't submitted twice when the connection drops while history is still loading.
+- **Heartbeat grace periods** — the connection stays alive while your host works through sync tasks.
+- **Server switches refresh once** — rapid host changes coalesce into a single refresh instead of background churn.
+- **No roster poll floods** — background subagent status checks are deduplicated before they hit the server.
+
 ## [2.1.1] — 2026-09-11
 
 OTA update for installs from Google Play (closed testing) — the installed app self-updates.
