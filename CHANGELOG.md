@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [2.1.1] — 2026-09-11
 
-OTA update — the installed app self-updates.
+OTA update for installs from Google Play (closed testing) — the installed app self-updates.
 
 ### Added
 
