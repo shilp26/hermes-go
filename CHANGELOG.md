@@ -6,6 +6,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.3] — 2026-09-14
+
+OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+
+### Added
+
+#### 🔔 Settings — notification preferences
+- **Delivery modes**: choose "All updates" or "Approvals only" inside the app.
+- **Per-category toggles** for turns, bot chats, and live status.
+- **Alerts-off banner**: when system notifications are disabled, a banner explains it and opens the system settings.
+
+#### ⏰ Work — delivery rails & run history
+- **Deliver to rail** on cron jobs and bot routines — Local or any connected platform, with clear badges.
+- **Run history jump**: tap any past execution to open its chat session.
+
+#### 🧠 Brain — auxiliary reasoning effort
+- **Reasoning effort per auxiliary task** (Auto, off, low, medium, high) in the Auxiliary Models modal.
+
+#### 🔌 Connect — channel details
+- **Webhook and callback URLs** shown directly on channel cards.
+
+### Changed
+
+#### 💬 Chat — system event cards
+- **Colored verb badges and structured change summaries** for file and memory updates, with middle-truncated paths and one-tap copy.
+
+#### 📊 Dashboard — token breakdown
+- The token usage card now shows the full **in / out / cache breakdown**.
+
+#### 🔌 Connect — live channel updates
+- **Credential and toggle changes apply live** on shared gateways — no host restart.
+
+#### ⚙️ Settings — consistent controls
+- **Unified On/Off segmented styling** across safety, voice, and system settings.
+
+#### 💬 Chat — deleted-profile handling
+- Opening or messaging a session whose profile was deleted on the host now shows a clear notice.
+
+### Fixed
+
+#### 🔁 Chat — loop card collapse
+- **Loop status cards collapse properly** — tap to fold, with the prompt preview inline in the header instead of a permanently expanded card.
+
 ## [2.1.2] — 2026-09-12
 
 OTA update for installs from Google Play (closed testing) — the installed app self-updates.

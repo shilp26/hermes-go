@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.1.2` · Android APK · Closed Source · Zero Telemetry
+`v2.1.3` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -156,6 +156,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Prompt stack** — collapsible pending prompts with status pills, strictly session-scoped
 - **Listing embeds** — list/tree tool results as interactive sortable, filterable cards
 - **Full-screen composer** — long-form writing modal with formatting tools, token estimates, attachments
+- **System event cards** — colored verb badges and structured summaries for skill, memory, and file updates, with middle-truncated paths and one-tap copy
+- **Deleted-profile notice** — a clear message when a session’s host profile no longer exists
 
 ### 🤖 Bots Mode
 - **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
@@ -170,7 +172,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Forever /new** — compact the canonical Bot Chat instead of resetting it; use New chat for throwaways
 - **Bot-scoped Star Map** — open the selected teammate’s learning graph from Details
 - **@-assign** — ask a teammate from any chat or Home; multi-agent chips, live Asking/Waiting/Replied receipts, and returned markdown in place
-- **Routines** — schedule agent-owned work daily, at intervals, or once; pause, resume, run, inspect history, or delete
+- **Routines** — schedule agent-owned work daily, at intervals, or once; pause, resume, run, inspect history, or delete; **Deliver to rail** picks Local or a connected platform per routine
 - **Bot Groups & shared rooms** — organize teammates into named teams with server-synced memberships
 - **Multi-agent discussion room** — structured rounds with turn taking, passes, steering, and token-cost budget caps
 - **Executive consensus cards** — automated distillation of round discussions into takeaways, findings, risks, and next steps
@@ -209,10 +211,11 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Model specs** — context window, max output, modalities, latency, pricing in the picker + capability badges
 - **Cost Guard** — spending budgets, threshold banners, per-turn guards, confirm before expensive models
 - **Embedded Hub Picker** — switch Models/Skills/Tools/Plugins without leaving the page
+- **Auxiliary reasoning effort** — Auto, off, low, medium, or high per auxiliary task in the Auxiliary Models modal
 
 ### 📋 Work
 - Artifacts browser (images, audio, files)
-- Cron jobs: list, run-now, status badges, trigger history, manual dispatch, and clear scheduled-fire errors
+- Cron jobs: list, run-now, status badges, trigger history, manual dispatch, clear scheduled-fire errors, and a **Deliver to rail** (Local or a connected platform) — **tap any past execution to open its run session**
 - Kanban board with live updates — **request review** from ready or running tasks
 - **Host files** — browse the agent filesystem, drop `@file` / `@folder` chips into the composer
 - **Processes** — manage background jobs from live sessions, filter and start/stop with confirmation
@@ -222,11 +225,12 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - Webhook routes
 - Pairing requests + QR provisioning
 - **Hermes Cloud** — portal sign-in, org and agent pick, cookie-based reconnect
+- **Channel details** — webhook and callback URLs on channel cards; credential and toggle changes apply live on shared gateways
 
 ### 🖥️ System
 - Health: host gauges, gateway status, **host battery badge** for laptop hosts
 - **Memory and disk pressure alerts** — advisory notices on Home and Health when the host reports elevated pressure
-- Analytics: usage trends
+- Analytics: usage trends; the dashboard token card breaks down **in / out / cache**
 - Setup: app features, voice, thinking depth, safety, UI
 - **Checkpoints toggle** — enable or disable workspace shadow snapshots with live gateway synchronization
 - **Onboarding setup prompt** — collapse or expand the full prompt, then copy it
@@ -247,6 +251,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Saved servers** — manage multiple gateway/cloud instances with nicknames, 1-tap switch, and clean teardown
 - **Backup preview** — see exactly what a prefs restore brings back before accepting
 - **Feature map** — interactive mosaic grid with fuzzy search, deep-link jumps, persistent layout
+- **Notifications** — delivery modes (All updates / Approvals only), per-category toggles for turns, bot chats, and live status, and a system-settings shortcut when alerts are off
 
 ---
 
