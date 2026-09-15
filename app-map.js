@@ -76,6 +76,7 @@ const LUCIDE = {
   listChecks: `<path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>`,
   alertCircle: `<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>`,
   bell: `<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>`,
+  bookmark: `<path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/>`,
   sliders: `<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>`,
   command: `<path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>`,
   mic: `<rect x="9" y="2" width="6" height="13" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>`,
@@ -287,6 +288,8 @@ const FEATURE_ICONS = {
   '/login Nous sign-in': LUCIDE.logIn,
   'Plugin catalog': LUCIDE.package,
   'Needs Attention sheet': LUCIDE.bellRing,
+  'Needs Attention bell': LUCIDE.bell,
+  'Saved prompts from Home': LUCIDE.bookmark,
 
   // Chat — While the agent runs (Hermes Live)
   'Background keep-alive': LUCIDE.power,
@@ -362,8 +365,13 @@ const FEATURE_ICONS = {
   'Point Checkpoints at a folder': LUCIDE.folder,
   'Stage or discard a file': LUCIDE.gitPullRequest,
   'Commit from Review': LUCIDE.gitCommit,
+  'Insert a saved prompt': LUCIDE.bookmark,
+  'Saved prompts from the / picker': LUCIDE.bookmark,
+  'Save as snippet': LUCIDE.bookmark,
   'Host battery indicator': LUCIDE.batteryCharging,
   'Legal & Privacy': LUCIDE.scrollText,
+  'Saved prompts': LUCIDE.bookmark,
+  'Request details': LUCIDE.fileText,
   'Switch saved server': LUCIDE.arrowLeftRight,
   'Add another server': LUCIDE.plus,
   'Remove saved server': LUCIDE.trash2,
@@ -598,6 +606,7 @@ const HUB_MAP = [
           { name: 'Alerts', desc: 'Inline banner for things that need action', where: 'Dashboard · Alerts' },
           { name: 'Agent update modal', desc: 'Quiet notice when the backend moves ahead of mobile', where: 'Dashboard · Alerts' },
           { name: 'Needs Attention sheet', desc: 'Every alert in one swipeable sheet with one-tap actions and swipe to dismiss', where: 'Dashboard · header bell' },
+          { name: 'Needs Attention bell', desc: 'Cron, pairing, updates, and replies to your feedback — one tap opens the sheet', where: 'Home · top right' },
         ],
       },
       {
@@ -609,6 +618,7 @@ const HUB_MAP = [
           { name: 'Update banner', desc: 'In-app "update available" / "update ready" with Update, Restart, or Retry', where: 'Home · top' },
           { name: 'Dictate from Home', desc: 'Speech becomes draft text in the Home composer', where: 'Home · mic button' },
           { name: 'Voice chat from Home', desc: 'Hands-free talk opens Chat when the Home session starts', where: 'Home · mic button' },
+          { name: 'Saved prompts from Home', desc: 'Snippets from the / picker or All snippets… fill the new-chat draft with the saved text and chips — never auto-sends', where: 'Home · composer' },
         ],
       },
       {
@@ -738,6 +748,9 @@ const HUB_MAP = [
           { name: 'Point Checkpoints at a folder', desc: 'Retarget the active chat workspace to any project folder', where: 'Chat · Checkpoints → folder' },
           { name: 'Stage or discard a file', desc: 'Stage, unstage, or discard uncommitted modifications with confirmation', where: 'Chat · Review sheet' },
           { name: 'Commit from Review', desc: 'Type a commit message, commit staged files, or commit and push in one tap', where: 'Chat · Review → Commit bar' },
+          { name: 'Insert a saved prompt', desc: 'All snippets… re-selects the saved skills, commands, and file chips — never auto-sends', where: 'Composer · + menu' },
+          { name: 'Saved prompts from the / picker', desc: 'Snippets section inserts a saved prompt for review; the footer saves the current input', where: 'Composer · / picker' },
+          { name: 'Save as snippet', desc: 'Bookmark on your own message; a filled tick means the prompt is already saved', where: 'Chat · message bubble' },
         ],
       },
     ],
@@ -1058,9 +1071,16 @@ const HUB_MAP = [
         ],
       },
       {
+        label: 'App features', desc: 'Saved prompts & phone-first toggles',
+        features: [
+          { name: 'Saved prompts', desc: 'Search, view, edit, copy, delete, or add reusable prompts — synced through backup', where: 'Settings · Hermes Go Features' },
+        ],
+      },
+      {
         label: 'Feedback & info', desc: 'Feedback · What\u2019s New · backup preview',
         features: [
           { name: 'Feedback', desc: 'Submit bug, feature, improvement, or question with screenshots and status tracking', where: 'Settings · Feedback' },
+          { name: 'Request details', desc: 'Full description, screenshots, and the reply once your feedback is resolved', where: 'Feedback · My requests' },
           { name: 'What\u2019s New', desc: 'Release notes in-app, product version in the footer', where: 'Settings · What\u2019s New' },
           { name: 'Backup preview', desc: 'See what a prefs restore brings back before accepting', where: 'Settings · Backup' },
           { name: 'Feature map', desc: 'Search every screen with fuzzy search on an interactive mosaic grid, jump by area, tap to go straight to a feature', where: 'Settings · Feature map' },

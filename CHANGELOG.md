@@ -6,6 +6,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.4] — 2026-09-15
+
+OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+
+### Added
+
+#### 🔖 Saved prompts
+- **Bookmark a message**: save any prompt straight from your own bubble — a filled tick means it's already saved.
+- **Fire from the composer**: the `/` picker's Snippets section, the `+` attach menu, and Home insert a saved prompt with its skills, commands, and file chips — never auto-sends.
+- **Manager in Settings**: search, view, edit, copy, delete, or add prompts — synced through backup.
+
+#### 🏠 Dashboard — Needs Attention bell & feedback replies
+- **Needs Attention bell**: cron, pairing, updates, and replies to your feedback in one place at the top.
+- **Feedback updates**: when a request you sent gets a reply or a status change, it lands in Needs Attention.
+
+### Changed
+
+#### 🔌 System — profile scoping
+- **Workspace projects and repo discovery** are strictly scoped to the active profile.
+
+### Fixed
+
+#### ✍️ Composer — smoother input
+- **Multiline Enter** no longer interrupts a live turn when Enter-to-send is off.
+- **Input height** expands smoothly while typing wrapped lines — up to four lines instead of collapsing.
+
+#### 🐞 Feedback — screenshot uploads
+- **Screenshot uploads** now use native file-system binary transfers — no more failures on device storage.
+
 ## [2.1.3] — 2026-09-14
 
 OTA update for installs from Google Play (closed testing) — the installed app self-updates.

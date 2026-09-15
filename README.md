@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.1.3` · Android APK · Closed Source · Zero Telemetry
+`v2.1.4` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -54,24 +54,24 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 50 segments, 210 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 217 features" width="100%">
 </p>
 
 ### Surfaces
 
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
-| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 17 | Agent status, performance, capabilities, alerts, Needs Attention sheet, quick compose, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 73 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps, composer tools |
+| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 19 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, quick compose with saved prompts, profile switcher |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 76 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps, composer tools & saved prompts |
 | <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 32 | Agents, Bot Groups, shared rooms, consensus distillation, deliverables export, Build Team visual canvas, Bot Chat, avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 23 | Models with specs & Cost Guard, skills, tools, memory, Star Map, MCP, plugin catalog |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
-| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 5 | 13 | Servers, connection, appearance, profile, feedback & info, feature map |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 15 | Servers, connection, appearance, profile, app features (saved prompts), feedback & info, feature map |
 
-**Total: 9 surfaces · 50 segments · 210 features**
+**Total: 9 surfaces · 51 segments · 217 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -158,6 +158,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Full-screen composer** — long-form writing modal with formatting tools, token estimates, attachments
 - **System event cards** — colored verb badges and structured summaries for skill, memory, and file updates, with middle-truncated paths and one-tap copy
 - **Deleted-profile notice** — a clear message when a session’s host profile no longer exists
+- **Saved prompts** — bookmark a message to save it, then fire it from the `/` picker, the `+` menu, or Home; manage them in Settings
 
 ### 🤖 Bots Mode
 - **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
@@ -245,7 +246,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Theme gallery** — 16 WCAG-minded presets with live preview, System/Dark/Light filters, and separate dark & light defaults
 - **Theme reset** — restore Obsidian Teal / Titanium Frost; choices persist
 - Active profile with a display nickname for the default profile
-- **Feedback** — submit a bug, feature idea, improvement, or question with screenshots and status tracking
+- **Feedback** — submit a bug, feature idea, improvement, or question with screenshots and status tracking; replies land in Needs Attention
+- **Saved prompts** — manage reusable prompts (search, view, edit, copy, delete); syncs through backup
 - **What's New** — release notes in-app, product version in the footer
 - **Legal & Privacy** — About, architecture diagrams, Privacy Policy, Terms, 82+ license catalog, and contact
 - **Saved servers** — manage multiple gateway/cloud instances with nicknames, 1-tap switch, and clean teardown
