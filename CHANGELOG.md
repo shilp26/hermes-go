@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.5] — 2026-09-16
+
+OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+
+### Added
+
+#### 📊 System — storage error banners
+- **Disk-full and database-locked alerts**: clear, actionable banners instead of cryptic failures when the host runs out of space or the database locks.
+
+### Changed
+
+#### 💬 Chat — faster, sturdier prompts
+- **Approval, clarify, sudo, secret, and vault prompts** now run on the v7 request protocol — and replay seamlessly when a session resumes, so they survive reconnects.
+- **Sudo prompts show the exact command** asking for elevation, so you know what you're approving.
+- **Model specs match live sessions**: context limits and capabilities line up with what the session actually uses, across GLM, DeepSeek, Qwen, and custom models.
+
+### Fixed
+
+#### 💬 Chat — no more stale prompts
+- **Expired or interrupted prompts dismiss immediately** instead of lingering on screen.
+
 ## [2.1.4] — 2026-09-15
 
 OTA update for installs from Google Play (closed testing) — the installed app self-updates.
