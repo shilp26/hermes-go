@@ -6,6 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.1.6] — 2026-09-21
+
+OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+
+### Added
+
+#### 📊 Provider quota
+- **Remaining usage on your configured providers** — open Provider quota from Models or the chat model-picker chart icon; Codex and Claude windows also appear in the context sheet when a matching chat is live.
+- **Provider quota cards toggle** — in Hermes Go features → Providers, on by default. Turning it off stops the fetches and clears provider keys from memory; syncs with backup.
+
+#### 🧠 Brain — Skill Hub & Plugin Catalog
+- **Skill Hub shelves** — filter the official catalog by Agents, Dev, Finance, Security, and other bundled categories; community indexes appear in search results only.
+- **Search, preview, and install** — community and official skills, **Get after confirm**, **Update all** for hub-installed skills, and Remove.
+- **Plugin Catalog** — filter by Desktop, Tools, Memory, Platforms, Web, Voice, Automation, Models, or General, and search by name, description, maintainer, tools, or env vars; install, update, and remove.
+- **Discover jumps** — Skill Hub and Plugin Catalog open straight from Brain → Discover in the drawer.
+
+#### 💬 Chat — session id & resilience
+- **Copy session id** from the chat status sheet.
+- **Stay connected when the gateway is degraded** — Health warns on a degraded gateway and a stale heartbeat instead of dropping you.
+- **Capabilities re-advertised after reconnect**, so server prompts keep working.
+
+### Changed
+
+#### 🤖 Bots — API keys
+- **New bots copy API keys from the main profile**; OAuth logins stay on the host.
+
+### Fixed
+
+#### 💬 Chat — edit races & hidden runs
+- **An edit that races a live turn restores the transcript** and asks you to retry, instead of losing the turn.
+- **CLI one-shot runs stay hidden** from conversation lists.
+
 ## [2.1.5] — 2026-09-16
 
 OTA update for installs from Google Play (closed testing) — the installed app self-updates.

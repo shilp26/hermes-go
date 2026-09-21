@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.1.5` · Android APK · Closed Source · Zero Telemetry
+`v2.1.6` · Android APK · Closed Source · Zero Telemetry
 
 [![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
 
@@ -54,7 +54,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 217 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 226 features" width="100%">
 </p>
 
 ### Surfaces
@@ -62,16 +62,16 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 19 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, quick compose with saved prompts, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 76 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps, composer tools & saved prompts |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 78 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps, composer tools & saved prompts, provider quota |
 | <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 32 | Agents, Bot Groups, shared rooms, consensus distillation, deliverables export, Build Team visual canvas, Bot Chat, avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
-| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 23 | Models with specs & Cost Guard, skills, tools, memory, Star Map, MCP, plugin catalog |
+| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 29 | Models with specs, Cost Guard & provider quota, skills with Skill Hub, tools, memory, Star Map, MCP, plugin catalog with search |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
-| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 15 | Servers, connection, appearance, profile, app features (saved prompts), feedback & info, feature map |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 16 | Servers, connection, appearance, profile, app features (saved prompts, provider quota), feedback & info, feature map |
 
-**Total: 9 surfaces · 51 segments · 217 features**
+**Total: 9 surfaces · 51 segments · 226 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -159,6 +159,11 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **System event cards** — colored verb badges and structured summaries for skill, memory, and file updates, with middle-truncated paths and one-tap copy
 - **Deleted-profile notice** — a clear message when a session’s host profile no longer exists
 - **Saved prompts** — bookmark a message to save it, then fire it from the `/` picker, the `+` menu, or Home; manage them in Settings
+- **Provider quota** — remaining usage on your configured providers, from the model-picker chart icon or Brain → Models; turn the cards off in Settings → Hermes Go features to stop fetches
+- **Copy session id** — grab the active session id from the chat status sheet
+- **Degraded-gateway resilience** — the connection holds when the gateway is degraded, with a stale-heartbeat warning in Health
+- **Edit-race recovery** — if an edit races a live turn, the transcript is restored and you're asked to retry
+- **Hidden CLI runs** — one-shot CLI runs stay out of your conversation lists
 
 ### 🤖 Bots Mode
 - **Agents hub** — create or clone named AI teammates with their own chat, memory, skills, toolsets, model, reasoning effort, Fast mode, and SOUL
@@ -179,6 +184,7 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Executive consensus cards** — automated distillation of round discussions into takeaways, findings, risks, and next steps
 - **Scoped exports** — export clean executive deliverable summaries or full verbatim transcripts with code block inspection
 - **Build Team** — visual canvas (draggable nodes, auto-layout), soul auto-composition, draft → verify → execute plans, starter templates, team routines, live deployment monitor
+- **Bot API keys** — new bots copy API keys from the main profile; OAuth logins stay on the host
 
 ### 🗂️ Sessions
 - **Action sheets** — long-press actions show icons for star, folder, read/unread, rename, archive, and delete
@@ -213,6 +219,8 @@ If the hash matches, the file is exactly what we published — nothing added, no
 - **Cost Guard** — spending budgets, threshold banners, per-turn guards, confirm before expensive models
 - **Embedded Hub Picker** — switch Models/Skills/Tools/Plugins without leaving the page
 - **Auxiliary reasoning effort** — Auto, off, low, medium, or high per auxiliary task in the Auxiliary Models modal
+- **Skill Hub shelves & search** — filter official shelves (Agents, Dev, Finance, Security), search community skills, preview, Get after confirm, Update all, or Remove
+- **Plugin Catalog shelves & search** — filter by category or search by name, description, maintainer, tools, or env vars; install, update, or remove
 
 ### 📋 Work
 - Artifacts browser (images, audio, files)

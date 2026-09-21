@@ -608,7 +608,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <img src="assets/splash-icon.png" alt="Hermes Go Icon">
       <span>Hermes Go</span>
     </a>
-    <span class="header-badge">v2.1.5</span>
+    <span class="header-badge">v2.1.6</span>
     <div class="header-spacer"></div>
     <nav class="header-nav" aria-label="Main Navigation">
       <a href="hermes-go.html" class="header-link">Home</a>
@@ -926,6 +926,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                   <td>Anonymous request — no account, token, or device data sent</td>
                   <td>Anonymous commit-distance check for the hermes-agent pin — how far the app's tested build trails latest main (cached for 6 hours)</td>
                   <td>When the agent-update notice is opened</td>
+                </tr>
+                <tr>
+                  <td><b>Your LLM Providers</b><br><code>openrouter.ai · api.deepseek.com · api.z.ai · api.novita.ai · open.bigmodel.cn · api.minimax.io · api.moonshot.cn · api.kimi.com · ollama.com · opencode.ai · api.commandcode.ai</code></td>
+                  <td>The provider API key already stored on your server, revealed to the app for this check only and held in memory — never saved to disk or logs</td>
+                  <td>Reads remaining quota / balance so the Provider quota cards can display it (some windows, such as Codex and Claude, are computed by your own server instead)</td>
+                  <td>Only when you open or refresh a quota sheet; off via Settings → Hermes Go features → Providers, which clears the keys from memory</td>
                 </tr>
                 <tr>
                   <td><b>Supabase Edge Functions</b><br><code>*.supabase.co/functions/v1/</code></td>
