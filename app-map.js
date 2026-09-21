@@ -548,6 +548,15 @@ const FEATURE_ICONS = {
   'Tailscale check': LUCIDE.shieldCheck,
   'Theme': LUCIDE.eye,
   'Active profile': LUCIDE.userRound,
+  // v2.1.6 — provider quota, Skill Hub, plugin catalog
+  'Provider quota': LUCIDE.barChart3,
+  'Copy session id': LUCIDE.hash,
+  'Hub category shelves': LUCIDE.layers,
+  'Search Skill Hub': LUCIDE.search,
+  'Update hub skills': LUCIDE.refreshCw,
+  'Catalog shelves': LUCIDE.layers,
+  'Search the plugin catalog': LUCIDE.search,
+  'Provider quota cards': LUCIDE.barChart3,
 };
 const DEFAULT_FEATURE_ICON = LUCIDE.dot;
 
@@ -748,6 +757,8 @@ const HUB_MAP = [
           { name: 'Point Checkpoints at a folder', desc: 'Retarget the active chat workspace to any project folder', where: 'Chat · Checkpoints → folder' },
           { name: 'Stage or discard a file', desc: 'Stage, unstage, or discard uncommitted modifications with confirmation', where: 'Chat · Review sheet' },
           { name: 'Commit from Review', desc: 'Type a commit message, commit staged files, or commit and push in one tap', where: 'Chat · Review → Commit bar' },
+          { name: 'Provider quota', desc: 'Remaining usage on your configured providers, opened from the model-picker chart icon', where: 'Chat · model picker' },
+          { name: 'Copy session id', desc: 'Copy the active session id straight from the status sheet', where: 'Chat · status sheet' },
           { name: 'Insert a saved prompt', desc: 'All snippets… re-selects the saved skills, commands, and file chips — never auto-sends', where: 'Composer · + menu' },
           { name: 'Saved prompts from the / picker', desc: 'Snippets section inserts a saved prompt for review; the footer saves the current input', where: 'Composer · / picker' },
           { name: 'Save as snippet', desc: 'Bookmark on your own message; a filled tick means the prompt is already saved', where: 'Chat · message bubble' },
@@ -860,7 +871,11 @@ const HUB_MAP = [
           { name: 'Capability badges', desc: 'Vision, reasoning, and tool badges on models across every picker', where: 'Model picker · badges' },
           { name: 'Cost Guard', desc: 'Spending budgets, threshold banners, and per-turn token guards', where: 'Brain · Cost Guard' },
           { name: 'Cost confirm', desc: 'Confirmation dialog before sending to expensive models', where: 'Chat · composer' },
+          { name: 'Provider quota', desc: 'Remaining usage on your configured providers — the same sheet as the chat model-picker quota icon', where: 'Brain · Models' },
           { name: 'Embedded Hub Picker', desc: 'Switch Models, Skills, Tools, and Plugins without leaving the page', where: 'Brain · hub switcher' },
+          { name: 'Hub category shelves', desc: 'Filter the official catalog by Agents, Dev, Finance, Security, and other bundled categories', where: 'Brain · Skills · Hub' },
+          { name: 'Search Skill Hub', desc: 'Find community and official skills — community indexes appear in search results only', where: 'Brain · Skills · Hub' },
+          { name: 'Update hub skills', desc: 'Update every hub-installed skill on this agent in one tap', where: 'Brain · Skills · Hub' },
         ],
       },
       {
@@ -905,6 +920,8 @@ const HUB_MAP = [
         features: [
           { name: 'Plugins', desc: 'Enable or disable runtime plugins', where: 'Brain · Plugins' },
           { name: 'Plugin catalog', desc: 'Browse curated plugins with capability badges and install by catalog name', where: 'Brain · Plugins' },
+          { name: 'Catalog shelves', desc: 'Filter the catalog by Desktop, Tools, Memory, Platforms, Web, Voice, Automation, Models, or General', where: 'Brain · Plugins · Catalog' },
+          { name: 'Search the plugin catalog', desc: 'Filter curated plugins by name, description, maintainer, tools, or env vars', where: 'Brain · Plugins · Catalog' },
         ],
       },
     ],
@@ -1074,6 +1091,7 @@ const HUB_MAP = [
         label: 'App features', desc: 'Saved prompts & phone-first toggles',
         features: [
           { name: 'Saved prompts', desc: 'Search, view, edit, copy, delete, or add reusable prompts — synced through backup', where: 'Settings · Hermes Go Features' },
+          { name: 'Provider quota cards', desc: 'On by default — turn off to stop quota fetches and clear provider keys from memory; syncs with backup', where: 'Settings · Hermes Go features · Providers' },
         ],
       },
       {
