@@ -246,21 +246,21 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   flex-shrink: 0;
 }
 
-/* GitHub icon link — standard octocat mark, always foreground */
-.nav-github {
+/* Google Play icon link in the nav */
+.nav-play {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
   min-width: 36px;
-  color: var(--fg);
   border-radius: 8px;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
-.nav-github:hover { background: var(--surface-soft); }
-.nav-github:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.nav-github svg { width: 18px; height: 18px; fill: currentColor; }
+.nav-play:hover { background: var(--surface-soft); transform: translateY(-1px); }
+.nav-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav-play svg { width: 20px; height: 20px; display: block; }
+
 .nav-cta {
   background: var(--accent);
   color: var(--accent-contrast);
@@ -1166,13 +1166,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .download-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
 .download-card .ver { font-size: 12px; color: var(--subtle); margin-bottom: 18px; }
 .download-card .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
-.download-card .store-note { font-size: 12px; color: var(--subtle); margin-bottom: 16px; }
-.download-card .arch-note { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 10.5px; color: var(--faint); margin: -8px 0 10px; }
-.download-card .arch-note a { color: var(--accent); }
-.download-card-alt { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; color: var(--subtle); margin-bottom: 16px; }
-.download-card-alt a { color: var(--accent); font-weight: 600; }
 
-/* ── Play Beta Announcement Banner ── */
+/* ── Google Play Announcement Banner ── */
 .play-banner { margin-top: 64px; background: var(--surface); border-bottom: 1px solid var(--border); position: relative; z-index: 60; }
 .play-banner + .nav + main .hero { padding-top: 24px; }
 .play-banner-inner { max-width: 1200px; margin-inline: auto; padding: 10px 48px 10px 24px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
@@ -1182,7 +1177,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .play-banner-text strong { color: var(--text); font-weight: 700; }
 .play-banner-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #fff; background: var(--accent); padding: 6px 14px; border-radius: 999px; transition: filter 0.15s, transform 0.15s; flex-shrink: 0; }
 .play-banner-cta:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.play-banner-cta svg { width: 13px; height: 13px; }
+.play-banner-cta svg { width: 14px; height: 14px; }
 .play-banner-close { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--faint); background: transparent; border: none; cursor: pointer; transition: background 0.15s, color 0.15s; }
 .play-banner-close:hover { background: var(--border); color: var(--muted); }
 .play-banner-close svg { width: 14px; height: 14px; }
@@ -1190,11 +1185,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .play-banner-inner { padding: 10px 44px 10px 16px; gap: 8px; }
   .play-banner-text { font-size: 12.5px; text-align: left; }
 }
-.trust-hash { padding: 10px 14px; border-radius: 8px; background: var(--code-bg); border: 1px solid var(--border); font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 11px; color: var(--subtle); display: flex; align-items: center; gap: 8px; cursor: pointer; transition: border-color 0.15s; }
-.trust-hash:hover { border-color: var(--accent); }
-.trust-hash code { color: var(--muted); word-break: break-all; flex: 1; }
-.trust-hash .hash-label { color: var(--accent); font-weight: 700; flex-shrink: 0; }
-.trust-hash .hash-copy { width: 14px; height: 14px; color: var(--subtle); flex-shrink: 0; }
 
 /* ── Changelog Section & What's New Timeline ── */
 .changelog-section { background: var(--surface); border-y: 1px solid var(--border); padding: 80px 0; }
@@ -1333,7 +1323,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
   .prompt-code-body { font-size: 10.5px; max-height: 380px; }
   .trust-badges { gap: 14px; }
   .download-card { padding: 22px 18px; }
-  .trust-hash { font-size: 10.5px; }
   .footer-inner { flex-direction: column; text-align: center; gap: 14px; }
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 18px; }
 }
@@ -1379,14 +1368,14 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
-<!-- Play Beta Announcement Banner -->
-<div class="play-banner" id="playBanner" role="region" aria-label="Google Play beta announcement">
+<!-- Google Play Announcement Banner -->
+<div class="play-banner" id="playBanner" role="region" aria-label="Google Play announcement">
   <div class="play-banner-inner">
     <span class="play-banner-dot" aria-hidden="true"></span>
-    <span class="play-banner-text"><strong>Hermes Go is coming to Google Play.</strong> Closed beta is open now — your testing helps the public launch.</span>
-    <a href="https://groups.google.com/g/hermes-go" class="play-banner-cta" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H4z"/><path d="m4 7 8 5 8-5"/><path d="M8 20h8"/></svg>
-      Join the Google Group
+    <span class="play-banner-text"><strong>Hermes Go is live on Google Play.</strong> Native mobile client for your Hermes agent — install it today.</span>
+    <a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" class="play-banner-cta" target="_blank" rel="noopener">
+      <svg viewBox="30 336.7 120.9 129.2" aria-hidden="true" focusable="false"><path fill="#FFD600" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/><path fill="#FF3D00" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"/><path fill="#00E676" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/><path fill="#00A0FF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/></svg>
+      Get it on Google Play
     </a>
   </div>
   <button class="play-banner-close" id="playBannerClose" aria-label="Dismiss announcement">
@@ -1418,8 +1407,8 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     </div>
 
     <div class="nav-actions">
-      <a href="https://github.com/shilp26/hermes-go" class="nav-github" target="_blank" rel="noopener" aria-label="Hermes Go on GitHub" title="GitHub">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      <a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" class="nav-play" target="_blank" rel="noopener" aria-label="Get Hermes Go on Google Play" title="Get it on Google Play">
+        <svg viewBox="30 336.7 120.9 129.2" aria-hidden="true" focusable="false"><path fill="#FFD600" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/><path fill="#FF3D00" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"/><path fill="#00E676" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/><path fill="#00A0FF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/></svg>
       </a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1460,16 +1449,16 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
 
       <div class="hero-actions hero-enter">
-        <a href="#download" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download APK
+        <a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg viewBox="30 336.7 120.9 129.2" aria-hidden="true" focusable="false"><path fill="#FFD600" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/><path fill="#FF3D00" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"/><path fill="#00E676" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/><path fill="#00A0FF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/></svg>
+          Get it on Google Play
         </a>
         <a href="#connect" class="btn btn-secondary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 14a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2"/><path d="M12 14v7"/><path d="M8 21h8"/><path d="M2 10h20"/></svg>
           1-Click Setup Prompt
         </a>
       </div>
-      <p class="hero-footnote hero-enter">Android APK available now · Coming soon to Play Store</p>
+      <p class="hero-footnote hero-enter">Now live on Google Play · Free · Android</p>
     </div>
 
     <div class="hero-visual hero-enter">
@@ -3705,8 +3694,8 @@ Password: <password></div>
     <div class="trust-grid">
       <div class="trust-left">
         <p class="caption" style="color:var(--accent);margin-bottom:12px">Get Hermes Go</p>
-        <h2 class="h1" style="margin-bottom:14px">Now on Google Play — closed beta.</h2>
-        <p class="body" style="margin-bottom:28px;color:var(--subtle)">The mobile client for your Hermes agent — self-hosted or Hermes Cloud. Join the closed beta on Play, or sideload the APK from GitHub.</p>
+        <h2 class="h1" style="margin-bottom:14px">Now live on Google Play.</h2>
+        <p class="body" style="margin-bottom:28px;color:var(--subtle)">The mobile client for your Hermes agent — self-hosted or Hermes Cloud. Install it from Google Play and connect to your own server.</p>
         <div class="trust-badges">
           <div class="trust-badge">
             <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -3726,26 +3715,11 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v2.1.6 · Google Play Closed Beta</div>
-          <a href="https://groups.google.com/g/hermes-go" class="btn btn-primary" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v12H4z"/><path d="m4 7 8 5 8-5"/><path d="M8 20h8"/></svg>
-            1. Join the Google Group
+          <div class="ver">v2.1.6 · Google Play</div>
+          <a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" class="btn btn-primary" target="_blank" rel="noopener">
+            <svg viewBox="30 336.7 120.9 129.2" aria-hidden="true" focusable="false"><path fill="#FFD600" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/><path fill="#FF3D00" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"/><path fill="#00E676" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/><path fill="#00A0FF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/></svg>
+            Get it on Google Play
           </a>
-          <a href="https://play.google.com/apps/testing/com.shilp26.hermesgo" class="btn btn-secondary" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 3 14 9-14 9z"/><path d="M5 3v18"/></svg>
-            2. Install from Google Play
-          </a>
-          <div class="arch-note">Join the group first, then open the Play testing link</div>
-          <div class="store-note">Public Play Store release after the beta — GitHub APK stays available</div>
-          <div class="download-card-alt">
-            <span>Prefer sideloading?</span>
-            <a href="https://github.com/shilp26/hermes-go/releases/tag/v2.0.0" target="_blank" rel="noopener">Get the APK (v2.0.0)</a>
-          </div>
-          <div class="trust-hash" id="trustHash">
-            <span class="hash-label">SHA-256</span>
-            <code>e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b</code>
-            <svg class="hash-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          </div>
         </div>
       </div>
     </div>
@@ -3768,10 +3742,6 @@ Password: <password></div>
       <a href="#why-hermes">Why Hermes Go</a>
       <a href="#connect">Setup</a>
       <a href="#download">Download</a>
-      <a href="https://github.com/shilp26/hermes-go" target="_blank" rel="noopener" class="footer-github">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        GitHub
-      </a>
     </nav>
     <div class="footer-built">💙 Built on <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">Hermes Agent</a> by <a href="https://nousresearch.com/" target="_blank" rel="noopener">Nous Research</a> — thank you!</div>
     <div class="footer-copy">© 2026 Hermes Go by Shilp · Remote mobile client for your Hermes agent</div>
@@ -3800,7 +3770,7 @@ Password: <password></div>
 
 <script src="app-map.js?v=121"></script>
 <script>
-// Play Beta Banner — dismiss per browser session
+// Google Play banner — dismiss per browser session
 const playBanner = document.getElementById('playBanner');
 const playBannerClose = document.getElementById('playBannerClose');
 const playBannerDismissKey = 'playBannerDismissedV2';
@@ -3932,21 +3902,6 @@ function copyText(text) {
     ok ? resolve() : reject(new Error('copy failed'));
   });
 }
-
-// Copy Trust Hash
-const trustHash = document.getElementById('trustHash');
-trustHash.addEventListener('click', () => {
-  const hashText = trustHash.querySelector('code').textContent;
-  copyText(hashText).then(() => {
-    const copyIcon = trustHash.querySelector('.hash-copy');
-    const orig = copyIcon.outerHTML;
-    copyIcon.outerHTML = '<svg class="hash-copy" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-    setTimeout(() => {
-      const newCheck = trustHash.querySelector('.hash-copy');
-      if (newCheck) newCheck.outerHTML = orig;
-    }, 2000);
-  });
-});
 
 // Copy Canonical Bootstrap Setup Prompt
 const copyBootstrapBtn = document.getElementById('copyBootstrapBtn');
