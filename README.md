@@ -6,13 +6,13 @@
 
 **Your AI agent, in your pocket.**
 
-A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal. Now in **closed beta on Google Play** — join the [testing group](https://groups.google.com/g/hermes-go) and install from [Play](https://play.google.com/apps/testing/com.shilp26.hermesgo).
+A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch.com). For self-hosted setups, one prompt configures basic auth, binds port 9119, detects Tailscale, and hands you your connection details. Hermes Cloud connects through its portal. Now live on **[Google Play](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)**.
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.1.6` · Android APK · Closed Source · Zero Telemetry
+`v2.1.6` · Google Play · Closed Source · Zero Telemetry
 
-[![Downloads](https://img.shields.io/github/downloads/shilp26/hermes-go/total?style=flat-square&label=Downloads&color=0F766E)](https://github.com/shilp26/hermes-go/releases)
+[![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
 </div>
 
@@ -29,7 +29,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 - **Deep visibility** — health, analytics, logs, ops console, config editor
 - **Your server, your data** — connects direct to your server over LAN or Tailscale, or via Hermes Cloud for portal-managed agents
 
-> **Closed source.** The app is distributed as a signed APK. No telemetry, no analytics, no tracking. Self-hosted connections go directly to your server; Hermes Cloud connections use Hermes Cloud.
+> **Closed source.** The app is distributed through Google Play. No telemetry, no analytics, no tracking. Self-hosted connections go directly to your server; Hermes Cloud connections use Hermes Cloud.
 
 > 💙 **Built on [Hermes Agent](https://github.com/NousResearch/hermes-agent) by [Nous Research](https://nousresearch.com/) — thank you for making this possible!**
 
@@ -79,40 +79,13 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 
 ## Getting Started
 
-### 1. Join the Google Play closed beta
+### 1. Install from Google Play
 
-1. Join the [Google Group](https://groups.google.com/g/hermes-go) (one click — this whitelists you as a tester)
-2. Install from [Google Play](https://play.google.com/apps/testing/com.shilp26.hermesgo)
-3. Keep the app installed for 14 days — it helps us move to a public Play release
+**[Get Hermes Go on Google Play →](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)**
 
-### 2. Or sideload the APK
+Google Play handles signing and delivery directly. No sideloading, no manual checksum verification, no unknown-sources toggle — install and open.
 
-[Download Hermes Go v2.0.0](https://github.com/shilp26/hermes-go/releases/tag/v2.0.0) (74 MB)
-
-**Verify the download** — the SHA-256 of the published APK is:
-
-```
-e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b
-```
-
-```bash
-# Linux / macOS
-sha256sum HermesGo.apk
-
-# Windows (PowerShell)
-Get-FileHash HermesGo.apk -Algorithm SHA256
-```
-
-If the hash matches, the file is exactly what we published — nothing added, nothing removed.
-
-### 3. Install (sideloaded APK)
-
-1. Open the downloaded `HermesGo.apk` on your Android device
-2. If prompted, allow **"Install unknown apps"** for your browser or file manager
-3. Tap **Install**
-4. Open **Hermes Go**
-
-### 4. Connect to your agent
+### 2. Connect to your agent
 
 1. Open Hermes Go
 2. **Self-hosted** — enter your agent's address (`http://<host>:9119` on your LAN, your Tailscale IP, or `https://your-domain` behind a TLS reverse proxy) and your basic-auth credentials (set during `hermes-agent` setup)
@@ -269,13 +242,13 @@ If the hash matches, the file is exactly what we published — nothing added, no
 
 | Property | Value |
 |---|---|
-| **Distribution** | Signed APK via GitHub Releases |
+| **Distribution** | Google Play (Play App Signing) |
 | **Telemetry** | **None.** Zero analytics, zero tracking |
 | **Data path** | Direct to your server (LAN / Tailscale) or Hermes Cloud — no telemetry either way |
 | **Auth** | Basic auth (self-hosted) or Hermes Cloud portal sign-in |
 | **Secrets** | Stored in platform secure storage (expo-secure-store) |
-| **Source** | Closed source — the APK is the artifact of record |
-| **Verification** | SHA-256 published with every release |
+| **Source** | Closed source — Google Play is the distribution channel |
+| **Verification** | Android verified boot, Play App Signing, and Play Protect |
 
 ---
 
@@ -329,6 +302,6 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history.
 
 ## License
 
-**This repository (the website) is open source** under the [MIT License](LICENSE). The Hermes Go application itself is **closed source** — distributed as a signed APK with a published SHA-256 for verification. The APK is provided for personal use; redistribution or modification of the binary is not permitted without written consent.
+**This repository (the website) is open source** under the [MIT License](LICENSE). The Hermes Go application itself is **closed source** — distributed exclusively through Google Play, where every release is signed and verified as part of Android verified boot. The app is provided for personal use; redistribution or modification of the binary is not permitted without written consent.
 
 © 2026 Hermes Go by Shilp

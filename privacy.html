@@ -427,46 +427,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .arch-bridge-pill svg { width: 11px; height: 11px; }
 
-/* ── Interactive Terminal Box ── */
-.terminal-box {
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin: 16px 0;
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-.terminal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.terminal-dots { display: flex; align-items: center; gap: 6px; }
-.terminal-dots span {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-}
-.terminal-dots span:nth-child(1) { background: #FF5F56; }
-.terminal-dots span:nth-child(2) { background: #FFBD2E; }
-.terminal-dots span:nth-child(3) { background: #27C93F; }
-.terminal-title {
-  font-family: var(--mono); font-size: 11px; color: var(--subtle); font-weight: 600;
-}
-.terminal-body {
-  padding: 14px 16px;
-  font-family: var(--mono);
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--code-fg);
-  overflow-x: auto;
-}
-.terminal-cmd { color: #A5F3FC; margin-bottom: 6px; }
-.terminal-cmd .prompt { color: var(--accent); font-weight: 700; margin-right: 6px; }
-.terminal-out { color: #94A3B8; word-break: break-all; }
-
 /* Tables */
 .table-wrap {
   width: 100%; overflow-x: auto; margin: 16px 0;
@@ -509,14 +469,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .callout b { color: var(--fg); font-weight: 700; }
 .callout.teal { border-color: rgba(20, 184, 166, 0.3); background: var(--accent-soft); color: var(--accent-ink); }
 .callout.teal b { color: var(--accent-strong); }
-
-/* Hash block */
-.hash-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 12px; border-radius: 6px; background: var(--code-bg);
-  border: 1px solid var(--border); font-family: var(--mono); font-size: 11.5px;
-  color: var(--code-fg); word-break: break-all; margin-top: 8px;
-}
 
 /* Footer */
 .footer {
@@ -673,7 +625,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <a href="#permissions" class="drawer-link drawer-section-link">Permissions</a>
     <a href="#self-hosted" class="drawer-link drawer-section-link">Self-Hosted Model</a>
     <a href="#open-source" class="drawer-link drawer-section-link">Open Source Status</a>
-    <a href="#verification" class="drawer-link drawer-section-link">Binary Verification</a>
+    <a href="#verification" class="drawer-link drawer-section-link">Binary Signing</a>
     <a href="#not-included" class="drawer-link drawer-section-link">Zero Telemetry</a>
   </div>
 </nav>
@@ -716,7 +668,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </a>
     <a href="#verification" class="side-nav-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      Binary Verification
+      Binary Signing
     </a>
     <a href="#not-included" class="side-nav-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
@@ -745,7 +697,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <a href="#permissions" class="mobile-pill-btn">Permissions</a>
       <a href="#self-hosted" class="mobile-pill-btn">Self-Hosted</a>
       <a href="#open-source" class="mobile-pill-btn">Open Source</a>
-      <a href="#verification" class="mobile-pill-btn">Verification</a>
+      <a href="#verification" class="mobile-pill-btn">Signing</a>
       <a href="#not-included" class="mobile-pill-btn">Zero Telemetry</a>
     </div>
 
@@ -909,8 +861,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                 </tr>
                 <tr>
                   <td><b>Expo Update CDN</b><br><code>u.expo.dev</code></td>
-                  <td>APK runtime version string &amp; release channel</td>
-                  <td>Checks if an updated JavaScript bundle is available for the current APK</td>
+                  <td>App runtime version string &amp; release channel</td>
+                  <td>Checks if an updated JavaScript bundle is available for the installed build</td>
                   <td>On app launch &amp; manual refresh</td>
                 </tr>
                 <tr>
@@ -956,7 +908,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <span class="doc-card-badge badge-teal">Runtime-Locked</span>
         </div>
         <div class="doc-card-body">
-          <p>Hermes Go uses Expo's modern EAS Update mechanism to deliver rapid bug fixes and UI enhancements directly without requiring users to reinstall the full Android APK for every patch.</p>
+          <p>Hermes Go uses Expo's modern EAS Update mechanism to deliver rapid bug fixes and UI enhancements directly without requiring users to download a new build from Google Play for every patch.</p>
 
           <ul class="check-list">
             <li class="check-item pos">
@@ -970,7 +922,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           </ul>
 
           <div class="callout teal">
-            <b>Strict Runtime Version Guard:</b> Every OTA bundle is cryptographically tied to the exact native fingerprint of the distributed APK. If a bundle is signed for a different runtime fingerprint, the Android client immediately rejects it and continues running the local bundle. Any native change mandates a brand new signed APK distribution with a new SHA-256 hash.
+            <b>Strict Runtime Version Guard:</b> Every OTA bundle is cryptographically tied to the exact native fingerprint of the distributed APK. If a bundle is signed for a different runtime fingerprint, the Android client immediately rejects it and continues running the local bundle. Any native change mandates a brand new Google Play release.
           </div>
         </div>
       </div>
@@ -1232,7 +1184,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                 </tr>
                 <tr>
                   <td><b>Hermes Go Android App</b></td>
-                  <td>Closed Source · Distributed as signed APK</td>
+                  <td>Closed Source · Distributed via Google Play</td>
                   <td>Independent mobile client compiled for Android arm64</td>
                 </tr>
                 <tr>
@@ -1249,7 +1201,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
     </section>
 
-    <!-- 9. Binary Verification -->
+    <!-- 9. Binary Signing & Distribution -->
     <section class="doc-section" id="verification">
       <div class="doc-card">
         <div class="doc-card-head">
@@ -1258,36 +1210,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <div>
-              <h2>Binary Verification &amp; Checksums</h2>
-              <div class="subtitle">Cryptographic validation for every released APK package</div>
+              <h2>Binary Signing &amp; Distribution</h2>
+              <div class="subtitle">How release integrity is enforced end to end</div>
             </div>
           </div>
-          <span class="doc-card-badge badge-teal">SHA-256 Verified</span>
+          <span class="doc-card-badge badge-teal">Play-Signed</span>
         </div>
         <div class="doc-card-body">
-          <p>Every distributed Hermes Go APK is signed and accompanied by an immutable SHA-256 hash. You can verify the integrity of your download before installing:</p>
+          <p>Hermes Go is distributed exclusively through Google Play, so every release reaches your device through a channel that verifies the publisher signature and the integrity of the package before it installs. There is no third-party download mirror and no APK file to check by hand.</p>
 
-          <div class="callout">
-            <b>v2.0.0 Distribution Release Hash (arm64):</b>
-            <div class="hash-pill">
-              <code>e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b</code>
-            </div>
+          <p>You can confirm the listing yourself:</p>
+
+          <div class="callout teal">
+            <b>Where to verify:</b> Google Play shows the publisher, the current version, and the app's data-safety declarations on the listing page. On device, Play Protect re-checks the installed app and flags anything that no longer matches what was signed.
           </div>
 
-          <p>Verify locally using standard terminal tooling:</p>
-          
-          <div class="terminal-box">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="terminal-title">Verify SHA-256 Checksum</div>
-            </div>
-            <div class="terminal-body">
-              <div class="terminal-cmd"><span class="prompt">$</span>sha256sum HermesGo.apk</div>
-              <div class="terminal-out">e756b3c9a6910eade31bcb5d7b4c1ce30575d40a3d09f4f2d46e2032b4b7b37b  HermesGo.apk</div>
-            </div>
-          </div>
+          <p><a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600;">Open the Google Play listing</a></p>
         </div>
       </div>
     </section>
