@@ -557,6 +557,16 @@ const FEATURE_ICONS = {
   'Catalog shelves': LUCIDE.layers,
   'Search the plugin catalog': LUCIDE.search,
   'Provider quota cards': LUCIDE.barChart3,
+  // v2.2.0 — share destinations, room files, store health, plugin & memory scope
+  'Another install warning': LUCIDE.alertCircle,
+  'Share destinations': LUCIDE.share2,
+  'Notification clearing': LUCIDE.bell,
+  'Stale-session retries': LUCIDE.refreshCw,
+  'Room attachments': LUCIDE.paperclip,
+  'Permission question taps': LUCIDE.hand,
+  'Corrupt-store banner': LUCIDE.database,
+  'Plugin update consent': LUCIDE.shieldCheck,
+  'Memory profile scope': LUCIDE.userRound,
 };
 const DEFAULT_FEATURE_ICON = LUCIDE.dot;
 
@@ -616,6 +626,7 @@ const HUB_MAP = [
           { name: 'Agent update modal', desc: 'Quiet notice when the backend moves ahead of mobile', where: 'Dashboard · Alerts' },
           { name: 'Needs Attention sheet', desc: 'Every alert in one swipeable sheet with one-tap actions and swipe to dismiss', where: 'Dashboard · header bell' },
           { name: 'Needs Attention bell', desc: 'Cron, pairing, updates, and replies to your feedback — one tap opens the sheet', where: 'Home · top right' },
+          { name: 'Another install warning', desc: 'Warns when another Hermes installation is using this profile, until the conflict clears', where: 'Home · below the loops strip' },
         ],
       },
       {
@@ -718,6 +729,7 @@ const HUB_MAP = [
           { name: 'Reply from the shade', desc: 'Type a message into the running conversation straight from the notification', where: 'Notification shade' },
           { name: 'Stop from the shade', desc: 'Cancel the running turn with a notification action button', where: 'Notification shade' },
           { name: 'Notification deep links', desc: 'One tap on a notification lands in the right session or group room', where: 'Notification shade' },
+          { name: 'Notification clearing', desc: 'Finished chat, room, and team notifications clear when you open the app; unanswered prompts stay', where: 'Notification shade' },
         ],
       },
       {
@@ -734,6 +746,7 @@ const HUB_MAP = [
           { name: 'Destination picker', desc: 'Folders, starred sessions, search, or a new chat', where: 'Send to chat · picker' },
           { name: 'Stage in composer', desc: 'Never auto-sends — merges with whatever is already drafted', where: 'Composer · staged' },
           { name: 'Size guard', desc: 'Shares over 25 MB rejected with a clear message before upload', where: 'Send to chat · upload' },
+          { name: 'Share destinations', desc: 'Send a share to Chats, Bots, or Groups — room shares take text and files, and nothing auto-sends', where: 'OS share · destination' },
         ],
       },
       {
@@ -748,6 +761,7 @@ const HUB_MAP = [
           { name: 'YOLO mode', desc: 'Toggle auto-approval for the session', where: 'Composer · toggle' },
           { name: 'Todo status', desc: 'Live task checklist synced with the run', where: 'Composer · panel' },
           { name: 'Model & effort', desc: 'Per-session model and reasoning effort', where: 'Chat · header' },
+          { name: 'Stale-session retries', desc: 'Model, reasoning, and YOLO changes retry when the live session is stale; the badge rolls back if the server never armed it', where: 'Chat · header' },
           { name: 'Fast lane', desc: 'Priority processing on supported models — Use Fast or Standard on pick', where: 'Chat · header' },
           { name: 'Effort Off → Ultra', desc: 'Reasoning effort for the session and as a profile default', where: 'Chat · header' },
           { name: 'Activity stack', desc: 'Todos, subagents, loops, and background status cards share a compact stack above the input', where: 'Composer · activity' },
@@ -799,6 +813,7 @@ const HUB_MAP = [
           { name: 'Consensus card', desc: 'Automated round distillation with takeaways, findings, risks, and next-step actions', where: 'Bots · Room · Consensus' },
           { name: 'Deliverable export', desc: 'Export clean executive summaries or full verbatim transcripts with code block viewer', where: 'Bots · Room · Share' },
           { name: 'Room orchestration', desc: 'Reliable dispatch leasing, turn sequencing, and recovery across instance switches', where: 'Bots · Room' },
+          { name: 'Room attachments', desc: 'Photos, camera shots, and files staged into every responding member\u2019s session — up to 6 a message, with a size guard', where: 'Bots · Room' },
         ],
       },
       {
@@ -811,6 +826,7 @@ const HUB_MAP = [
           { name: 'Team routines', desc: 'Schedule recurring multi-agent work owned by the team', where: 'Bots · Build Team · Routines' },
           { name: 'Deployment monitor', desc: 'Live progress sheets and activity feed while a team deploys', where: 'Bots · Build Team · Deploy' },
           { name: 'Team archive', desc: 'Park finished teams without deleting their setup', where: 'Bots · Build Team · Archive' },
+          { name: 'Permission question taps', desc: 'Permission questions resolve as taps in the app and no longer hold Create; team builds refuse to start when the roster cannot be read', where: 'Bots · Build Team · questions' },
         ],
       },
       {
@@ -832,6 +848,7 @@ const HUB_MAP = [
           { name: 'Session list', desc: 'All sessions, most recent first', where: 'Sessions · Inbox' },
           { name: 'Star', desc: 'Server-side pin — visible across devices', where: 'Session · row' },
           { name: 'Live badges', desc: 'Active sessions marked with a pulse', where: 'Session · row' },
+          { name: 'Corrupt-store banner', desc: 'A clear notice on Sessions if the local cache is damaged; still-running chats survive a failed bulk delete', where: 'Sessions · list' },
         ],
       },
       {
@@ -897,6 +914,7 @@ const HUB_MAP = [
         label: 'Memory', desc: 'Read & edit memory blocks',
         features: [
           { name: 'Memory blocks', desc: 'View and edit the memory sections', where: 'Brain · Memory' },
+          { name: 'Memory profile scope', desc: 'Read and write Memory for the profile you are managing; delete is blocked on profiles Hermes owns', where: 'Brain · Memory' },
         ],
       },
       {
@@ -922,6 +940,7 @@ const HUB_MAP = [
           { name: 'Plugin catalog', desc: 'Browse curated plugins with capability badges and install by catalog name', where: 'Brain · Plugins' },
           { name: 'Catalog shelves', desc: 'Filter the catalog by Desktop, Tools, Memory, Platforms, Web, Voice, Automation, Models, or General', where: 'Brain · Plugins · Catalog' },
           { name: 'Search the plugin catalog', desc: 'Filter curated plugins by name, description, maintainer, tools, or env vars', where: 'Brain · Plugins · Catalog' },
+          { name: 'Plugin update consent', desc: 'Ask before an update widens what a plugin can do, and say when a restart or memory-provider reset is required', where: 'Brain · Plugins' },
         ],
       },
     ],
