@@ -6,6 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.2.0] — 2026-10-01
+
+New build for installs from Google Play (closed testing) — update through the Play Store.
+
+### Added
+
+#### 🔗 Share destinations
+- **Send a share to Chats, Bots, or Groups** — pick the destination and the composer still waits for you to send; room shares take text and files.
+- **Room attachments** — photos, camera shots, and files staged into every responding member's session, up to 6 per message, with a clear error when one is too large.
+
+#### 🩺 Store health & profile conflicts
+- **Corrupt-store banner on Sessions** — a clear notice when the local cache is damaged, and a bulk delete that cannot remove a still-running chat keeps it instead of hiding it.
+- **Another install warning on Home** — shown while another Hermes installation is using this profile, until the conflict clears.
+
+#### 🔔 Notifications
+- **Finished chat, room, and team notifications clear when you open the app** — unanswered prompts stay, so nothing you still owe is lost.
+
+#### 🧠 Memory & profile scope
+- **Memory for the profile you are managing** — read and write it directly, and delete is blocked on profiles Hermes owns.
+- **Routines and templates stay on the profile you picked**, and script-only runs show their result without opening a chat.
+
+### Changed
+
+#### 🧩 Plugins
+- **Plugin updates ask first when they widen what a plugin can do**, and say when a restart or a memory-provider reset is required.
+
+#### 🤖 Teams
+- **Team builds refuse to start when the roster cannot be read**, and permission questions resolve as taps in the app instead of a planner turn.
+
+#### 💬 Chat
+- **Model, reasoning, and YOLO changes retry when the live session is stale**, and the YOLO badge rolls back if the server never armed it.
+
+#### ⚙️ Build
+- **Version 2.2.0** with updated Expo packages, and a release build shrunk and obfuscated for Google Play.
+
 ## [2.1.6] — 2026-09-21
 
 OTA update for installs from Google Play (closed testing) — the installed app self-updates.

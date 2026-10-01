@@ -1650,8 +1650,85 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
-    <!-- v2.1.6 -->
+    <!-- v2.2.0 -->
     <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v2.2.0</span>
+            <span class="changelog-date">01 Oct 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
+        </div>
+        <h3>Share destinations, room files, and release hardening</h3>
+        <p class="cl-summary">New build for installs from Google Play (closed testing) — update through the Play Store.</p>
+        <div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Share destinations</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Send a share to Chats, Bots, or Groups</strong> — pick the destination and the composer still waits for you to send; room shares take text and files</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Room attachments</strong> — photos, camera shots, and files staged into every responding member's session, up to 6 per message, with a clear error when one is too large</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Store health &amp; profile conflicts</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Corrupt-store banner on Sessions</strong> — a clear notice when the local cache is damaged, and a bulk delete that cannot remove a still-running chat keeps it instead of hiding it</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Another install warning on Home</strong> — shown while another Hermes installation is using this profile, until the conflict clears</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Notifications</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Finished chat, room, and team notifications clear when you open the app</strong> — unanswered prompts stay, so nothing you still owe is lost</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Memory &amp; profile scope</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Memory for the profile you are managing</strong> — read and write it directly, and delete is blocked on profiles Hermes owns</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Routines and templates stay on the profile you picked</strong>, and script-only runs show their result without opening a chat</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Plugins</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Plugin updates ask first when they widen what a plugin can do</strong>, and say when a restart or a memory-provider reset is required</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Teams</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Team builds refuse to start when the roster cannot be read</strong>, and permission questions resolve as taps in the app instead of a planner turn</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Chat</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Model, reasoning, and YOLO changes retry when the live session is stale</strong>, and the YOLO badge rolls back if the server never armed it</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Build</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Version 2.2.0</strong> with updated Expo packages, and a release build shrunk and obfuscated for Google Play</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.1.6 -->
+    <div class="changelog-item reveal">
       <div class="changelog-rail">
         <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
@@ -1765,6 +1842,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v2.1.4 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
@@ -1827,9 +1907,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
         </div>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v2.1.3 -->
     <div class="changelog-item reveal">
@@ -3715,7 +3792,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v2.1.6 · Google Play</div>
+          <div class="ver">v2.2.0 · Google Play</div>
           <a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="30 336.7 120.9 129.2" aria-hidden="true" focusable="false"><path fill="#FFD600" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/><path fill="#FF3D00" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"/><path fill="#00E676" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/><path fill="#00A0FF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/></svg>
             Get it on Google Play
@@ -3752,7 +3829,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v2.1.6</span></span>
+    <span>Hermes Go <span class="ver">v2.2.0</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Get the App</a>
 </div>

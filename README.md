@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.1.6` · Google Play · Closed Source · Zero Telemetry
+`v2.2.0` · Google Play · Closed Source · Zero Telemetry
 
 [![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
@@ -54,24 +54,24 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 226 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 235 features" width="100%">
 </p>
 
 ### Surfaces
 
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
-| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 19 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, quick compose with saved prompts, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 78 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps, composer tools & saved prompts, provider quota |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 32 | Agents, Bot Groups, shared rooms, consensus distillation, deliverables export, Build Team visual canvas, Bot Chat, avatars, routines |
-| <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 9 | Inbox, folders & projects, full-text search, bulk management |
-| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 29 | Models with specs, Cost Guard & provider quota, skills with Skill Hub, tools, memory, Star Map, MCP, plugin catalog with search |
+| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 20 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, quick compose with saved prompts, profile switcher |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 81 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 34 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas & permission taps, Bot Chat, avatars, routines |
+| <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 10 | Inbox with store-health banner, folders & projects, full-text search, bulk management |
+| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 31 | Models with specs, Cost Guard & provider quota, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 16 | Servers, connection, appearance, profile, app features (saved prompts, provider quota), feedback & info, feature map |
 
-**Total: 9 surfaces · 51 segments · 226 features**
+**Total: 9 surfaces · 51 segments · 235 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
