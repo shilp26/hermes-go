@@ -54,7 +54,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 235 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 236 features" width="100%">
 </p>
 
 ### Surfaces
@@ -63,7 +63,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 20 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, quick compose with saved prompts, profile switcher |
 | <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 81 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 34 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas & permission taps, Bot Chat, avatars, routines |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 35 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas & permission taps, Bot Chat, avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 10 | Inbox with store-health banner, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 31 | Models with specs, Cost Guard & provider quota, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
@@ -71,7 +71,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 16 | Servers, connection, appearance, profile, app features (saved prompts, provider quota), feedback & info, feature map |
 
-**Total: 9 surfaces · 51 segments · 235 features**
+**Total: 9 surfaces · 51 segments · 236 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -157,6 +157,7 @@ Google Play handles signing and delivery directly. No sideloading, no manual che
 - **Executive consensus cards** — automated distillation of round discussions into takeaways, findings, risks, and next steps
 - **Scoped exports** — export clean executive deliverable summaries or full verbatim transcripts with code block inspection
 - **Build Team** — visual canvas (draggable nodes, auto-layout), soul auto-composition, draft → verify → execute plans, starter templates, team routines, live deployment monitor
+- **Build Team hardening** — permission questions are taps that never hold Create, a skipped `depends_on` branch cannot pin readiness, the six-question cap keeps required/answered questions, roster unreadable refuses the run, and refused edits say why
 - **Bot API keys** — new bots copy API keys from the main profile; OAuth logins stay on the host
 
 ### 🗂️ Sessions

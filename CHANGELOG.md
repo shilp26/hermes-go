@@ -32,14 +32,22 @@ New build for installs from Google Play (closed testing) — update through the 
 #### 🧩 Plugins
 - **Plugin updates ask first when they widen what a plugin can do**, and say when a restart or a memory-provider reset is required.
 
-#### 🤖 Teams
-- **Team builds refuse to start when the roster cannot be read**, and permission questions resolve as taps in the app instead of a planner turn.
-
 #### 💬 Chat
 - **Model, reasoning, and YOLO changes retry when the live session is stale**, and the YOLO badge rolls back if the server never armed it.
 
 #### ⚙️ Build
 - **Version 2.2.0** with updated Expo packages, and a release build shrunk and obfuscated for Google Play.
+
+### Fixed
+
+#### 🤖 Build Team — the question flow cannot strand you
+- **Answered permission questions no longer hold Create** — approval, MCP, and file-write grants are taps inside the app instead of a planner turn, so a failed send cannot strand setup.
+- **Create appears as soon as nothing is open** — a plan that has questions and zero bots renders its question deck instead of the teaching empty state.
+- **A skipped branch cannot pin the flow** — a question whose `depends_on` parent went unanswered no longer blocks readiness.
+- **The six-question cap keeps required and answered questions** — an optional question can no longer evict one you still have to answer, and a permission question is never dropped by the cap.
+- **Refused edits explain themselves** — the reducer's reason is shown instead of a generic failure, and the settled "Working on the plan…" line clears when a turn ends.
+- **Roster safety** — a build refuses to start when the agent roster cannot be read, and file-writing toolsets stay stripped until an answer authorizes them.
+- **Secret scanning hardened** — a second secret in the same SOUL can no longer slip past the scanner, secrets embedded in names are caught, and ordinary words like READ_ONLY are no longer false positives.
 
 ## [2.1.6] — 2026-09-21
 
