@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [2.2.0] — 2026-10-01
 
-New build for installs from Google Play (closed testing) — update through the Play Store.
+New build on Google Play — update through the Play Store.
 
 ### Added
 
@@ -51,7 +51,7 @@ New build for installs from Google Play (closed testing) — update through the 
 
 ## [2.1.6] — 2026-09-21
 
-OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+OTA update for installs from Google Play — the installed app self-updates.
 
 ### Added
 
@@ -83,7 +83,7 @@ OTA update for installs from Google Play (closed testing) — the installed app 
 
 ## [2.1.5] — 2026-09-16
 
-OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+OTA update for installs from Google Play — the installed app self-updates.
 
 ### Added
 
@@ -104,7 +104,7 @@ OTA update for installs from Google Play (closed testing) — the installed app 
 
 ## [2.1.4] — 2026-09-15
 
-OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+OTA update for installs from Google Play — the installed app self-updates.
 
 ### Added
 
@@ -133,7 +133,7 @@ OTA update for installs from Google Play (closed testing) — the installed app 
 
 ## [2.1.3] — 2026-09-14
 
-OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+OTA update for installs from Google Play — the installed app self-updates.
 
 ### Added
 
@@ -176,7 +176,7 @@ OTA update for installs from Google Play (closed testing) — the installed app 
 
 ## [2.1.2] — 2026-09-12
 
-OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+OTA update for installs from Google Play — the installed app self-updates.
 
 ### Added
 
@@ -203,7 +203,7 @@ OTA update for installs from Google Play (closed testing) — the installed app 
 
 ## [2.1.1] — 2026-09-11
 
-OTA update for installs from Google Play (closed testing) — the installed app self-updates.
+OTA update for installs from Google Play — the installed app self-updates.
 
 ### Added
 
@@ -240,7 +240,7 @@ OTA update for installs from Google Play (closed testing) — the installed app 
 
 ## [2.1.0] — 2026-09-07
 
-Now on Google Play — closed beta. Join via the testing link; the GitHub APK stays available for sideloading.
+Now on Google Play.
 
 ### Added
 
