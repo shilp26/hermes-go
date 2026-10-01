@@ -567,6 +567,7 @@ const FEATURE_ICONS = {
   'Corrupt-store banner': LUCIDE.database,
   'Plugin update consent': LUCIDE.shieldCheck,
   'Memory profile scope': LUCIDE.userRound,
+  'Patch feedback': LUCIDE.messageSquareText,
 };
 const DEFAULT_FEATURE_ICON = LUCIDE.dot;
 
@@ -827,6 +828,7 @@ const HUB_MAP = [
           { name: 'Deployment monitor', desc: 'Live progress sheets and activity feed while a team deploys', where: 'Bots · Build Team · Deploy' },
           { name: 'Team archive', desc: 'Park finished teams without deleting their setup', where: 'Bots · Build Team · Archive' },
           { name: 'Permission question taps', desc: 'Permission questions resolve as taps in the app and no longer hold Create; team builds refuse to start when the roster cannot be read', where: 'Bots · Build Team · questions' },
+          { name: 'Patch feedback', desc: 'A refused edit says why, and the settled “Working on the plan…” line clears when a turn ends', where: 'Bots · Build Team' },
         ],
       },
       {
