@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.2.0` · Google Play · Closed Source · Zero Telemetry
+`v2.2.1` · Google Play · Closed Source · Zero Telemetry
 
 [![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
@@ -54,16 +54,16 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 51 segments, 236 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 52 segments, 250 features" width="100%">
 </p>
 
 ### Surfaces
 
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
-| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 6 | 20 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, quick compose with saved prompts, profile switcher |
+| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 7 | 32 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, live Capsules with scheduled refresh, quick compose with saved prompts, profile switcher |
 | <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 81 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 35 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas & permission taps, Bot Chat, avatars, routines |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 37 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas & permission taps, Bot Chat with a live bot screen (floating view), avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 10 | Inbox with store-health banner, folders & projects, full-text search, bulk management |
 | <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 31 | Models with specs, Cost Guard & provider quota, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
@@ -71,7 +71,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 16 | Servers, connection, appearance, profile, app features (saved prompts, provider quota), feedback & info, feature map |
 
-**Total: 9 surfaces · 51 segments · 236 features**
+**Total: 9 surfaces · 52 segments · 250 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -158,6 +158,12 @@ Google Play handles signing and delivery directly. No sideloading, no manual che
 - **Scoped exports** — export clean executive deliverable summaries or full verbatim transcripts with code block inspection
 - **Build Team** — visual canvas (draggable nodes, auto-layout), soul auto-composition, draft → verify → execute plans, starter templates, team routines, live deployment monitor
 - **Build Team hardening** — permission questions are taps that never hold Create, a skipped `depends_on` branch cannot pin readiness, the six-question cap keeps required/answered questions, roster unreadable refuses the run, and refused edits say why
+- **Capsules** — turn a chat into a live card on Home: create from the composer + menu or pin a reply, preview in Capsule Studio, revise by chatting, edit by hand, set an expiry, and recover expired ones for 30 days
+- **Bot screen** — open a bot's Linux desktop from the chat header: install it if missing, watch or take over the pointer and keyboard, and the bot pauses while you hold it
+- **Floating screen** — shrink a bot screen to a draggable picture over the chat (S, M, or L); the small view only watches
+- **Capsule refresh** — each capsule re-checks its facts Daily, Weekly, or on ask, using tools and tokens; pin a check model or leave Auto, and the capsule shows when it was last checked and by which model
+- **In-capsule edits** — tick checklist items and add to notes right inside the capsule; edits survive refreshes and backup, and an examples tab teaches capsules with live demos
+- **Quieter lists** — Home hides scheduled runs and Sessions starts with Hide scheduled jobs on; cron history still lists them
 - **Bot API keys** — new bots copy API keys from the main profile; OAuth logins stay on the host
 
 ### 🗂️ Sessions

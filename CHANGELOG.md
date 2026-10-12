@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.2.1] — 2026-10-05
+
+OTA update for installs from Google Play — the installed app self-updates.
+
+### Added
+
+#### 🧩 Capsules — a chat that becomes a live card on Home
+- **Create a Capsule** from the composer + menu, or pin an assistant reply, and preview it in Capsule Studio before saving — no new conversation starts.
+- **Answer follow-ups or type a change** to revise the same capsule; Hermes asks before replacing one you already have.
+- **Edit details by hand**, collapse, set an expiry, pin or reorder, open the source chat, update from chat, or modify with AI.
+- **Recently expired** keeps expired capsules for 30 days, and backup and restore include them.
+- **Scheduled checks** — set each capsule to Off, Daily, or Weekly, and edit what it tracks; checks run when you open Hermes and the capsule is out of date, using tools and tokens.
+- **Check model** — pin a model or leave Auto; the capsule shows when it was last checked and which model ran.
+- **A failed check says why** — not connected, timed out, needed your input, or nothing new to verify.
+- **In-capsule edits** — tick checklist items and add to notes right inside the capsule; edits survive refreshes and backup.
+- **Capsule examples** — the Capsules tab teaches with live examples of trips, budgets, and plans.
+
+#### 🖥️ Bot screen
+- **Watch a bot's Linux desktop from the chat header** — install if missing, take over or hand back, or shrink it to a floating view that only watches.
+
+### Changed
+
+#### 🗂️ Quieter lists
+- **Home no longer lists scheduled runs**, including starred chats and folder members.
+- **Sessions starts with Hide scheduled jobs on**; cron run history still lists those runs.
+
+#### 💬 Chat & tooling
+- **More host paths open as file chips** in replies, including code files and backtick-wrapped paths.
+- **Auxiliary tasks: Use main** returns one task to the main model; Reset still clears every pin.
+- **Kanban schedule actions** use the same kanban card as the other board tools.
+
+#### 🔧 Small things
+- **Number fields** — config numbers and speaking speed accept a comma or a dot and keep the separator as you type; speed must stay between 0.25 and 4.
+- **Guided-setup profile** — stays out of bot lists and cannot be deleted when the host marks it with a role.
+
+### Fixed
+
+#### 🤖 Bots
+- **Opening Bot routines no longer crashes** before a routine is selected.
+
 ## [2.2.0] — 2026-10-01
 
 New build on Google Play — update through the Play Store.
