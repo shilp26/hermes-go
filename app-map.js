@@ -568,6 +568,22 @@ const FEATURE_ICONS = {
   'Plugin update consent': LUCIDE.shieldCheck,
   'Memory profile scope': LUCIDE.userRound,
   'Patch feedback': LUCIDE.messageSquareText,
+  // v2.2.1 — Capsules and bot screen
+  'Capsule': LUCIDE.layoutDashboard,
+  'Capsule Studio': LUCIDE.sparkle,
+  'Update an existing capsule': LUCIDE.refreshCw,
+  'Edit capsule details': LUCIDE.pencil,
+  'Collapse a capsule': LUCIDE.arrowUpDown,
+  'Capsule actions': LUCIDE.sliders,
+  'Recently expired capsules': LUCIDE.history,
+  'Bot screen': LUCIDE.monitor,
+  // v2.2.1b — capsule refresh, examples, in-capsule edits, floating screen
+  'Refresh settings': LUCIDE.refreshCw,
+  'Check model': LUCIDE.cpu,
+  'Capsule examples': LUCIDE.sparkle,
+  'Tick off checklist items': LUCIDE.checkSquare,
+  'Add to a capsule note': LUCIDE.pencil,
+  'Floating screen': LUCIDE.monitor,
 };
 const DEFAULT_FEATURE_ICON = LUCIDE.dot;
 
@@ -628,6 +644,23 @@ const HUB_MAP = [
           { name: 'Needs Attention sheet', desc: 'Every alert in one swipeable sheet with one-tap actions and swipe to dismiss', where: 'Dashboard · header bell' },
           { name: 'Needs Attention bell', desc: 'Cron, pairing, updates, and replies to your feedback — one tap opens the sheet', where: 'Home · top right' },
           { name: 'Another install warning', desc: 'Warns when another Hermes installation is using this profile, until the conflict clears', where: 'Home · below the loops strip' },
+        ],
+      },
+      {
+        label: 'Capsules', desc: 'Live cards on Home · built from a chat',
+        features: [
+          { name: 'Capsule', desc: 'Hermes reads the whole chat and your current capsules, then designs a live capsule from journeys, timelines, stats, charts, checklists, and more — no new chat', where: 'Chat · + menu' },
+          { name: 'Capsule Studio', desc: 'Live preview with collapsed and full views; answer follow-ups with a tap or type a change, and each reply revises the same capsule', where: 'Capsules · Capsule Studio' },
+          { name: 'Update an existing capsule', desc: 'When a reply matches a capsule you already have, Hermes asks whether to update it or create a new one', where: 'Capsules · Capsule Studio' },
+          { name: 'Edit capsule details', desc: 'Change titles, facts, sections, and list items by hand; show or hide sections when collapsed', where: 'Home · capsule menu' },
+          { name: 'Collapse a capsule', desc: 'Collapsed shows the summary and the key sections Hermes picked; expand for everything', where: 'Home · capsule header' },
+          { name: 'Capsule actions', desc: 'Open chat jumps to the source chat — plus Update from chat, Modify with AI, Edit details, pin or reorder, and expiry', where: 'Home · capsule menu' },
+          { name: 'Recently expired capsules', desc: 'Expired capsules stay for 30 days so you can restore or delete them; backup and restore include them', where: 'Home · Capsules' },
+          { name: 'Refresh settings', desc: 'Each capsule re-checks its facts on a schedule — Daily, Weekly, or only when you ask; see what it tracks, its sources, and the last check', where: 'Home · capsule menu' },
+          { name: 'Check model', desc: 'Which model re-checks this capsule — Auto uses the host default, or pin one to keep checks consistent; the last check shows Checked by …', where: 'Home · Refresh settings' },
+          { name: 'Capsule examples', desc: 'What capsules are, with live examples of trips, budgets, and plans — try the checklists and notes inside', where: 'Home · Capsules' },
+          { name: 'Tick off checklist items', desc: 'Tap an item to tick it off — ticks stay on this device, survive refreshes, and are saved in your backup', where: 'Home · capsule' },
+          { name: 'Add to a capsule note', desc: 'Edit note text right inside the capsule — your version is locked in, survives refreshes, and is saved in your backup', where: 'Home · capsule' },
         ],
       },
       {
@@ -829,6 +862,8 @@ const HUB_MAP = [
           { name: 'Team archive', desc: 'Park finished teams without deleting their setup', where: 'Bots · Build Team · Archive' },
           { name: 'Permission question taps', desc: 'Permission questions resolve as taps in the app and no longer hold Create; team builds refuse to start when the roster cannot be read', where: 'Bots · Build Team · questions' },
           { name: 'Patch feedback', desc: 'A refused edit says why, and the settled “Working on the plan…” line clears when a turn ends', where: 'Bots · Build Team' },
+          { name: 'Bot screen', desc: 'Watch this bot’s Linux desktop and take the pointer and keyboard when you need them — the bot pauses while you hold it', where: 'Bot chat · header' },
+          { name: 'Floating screen', desc: 'Shrink a bot screen to a draggable picture over the chat — resize S, M, or L and expand it again; the small view only watches', where: 'Bot chat · header' },
         ],
       },
       {
