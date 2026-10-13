@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.2.2] — 2026-10-13
+
+OTA update for installs from Google Play — the installed app self-updates.
+
+### Added
+
+#### 📎 Files — open where they belong
+- **Open PDFs, Office files, and archives in another app** — tap Open to hand the file to an app that can show it.
+- **SVG drawings preview inside Hermes** — scripts off, instead of a blank photo view.
+
+#### 🧩 Capsules — watch the check happen
+- **Live check steps in plain language** — while a capsule checks for updates, the last few steps appear as you read them; account-like numbers, shell commands, and code dumps stay off that line.
+
+### Changed
+
+#### ⏱️ Longer checks
+- **Capsule checks can run up to 5 minutes** before timing out.
+
+### Fixed
+
+#### 📎 Files
+- **Closing the file sheet is not an error** — a failed open says why and still shows the file card.
+
 ## [2.2.1] — 2026-10-05
 
 New build on Google Play — update through the Play Store.

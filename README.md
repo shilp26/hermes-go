@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.2.1` · Google Play · Closed Source · Zero Telemetry
+`v2.2.2` · Google Play · Closed Source · Zero Telemetry
 
 [![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
@@ -161,6 +161,8 @@ Google Play handles signing and delivery directly. No sideloading, no manual che
 - **Capsules** — turn a chat into a live card on Home: create from the composer + menu or pin a reply, preview in Capsule Studio, revise by chatting, edit by hand, set an expiry, and recover expired ones for 30 days
 - **Bot screen** — open a bot's Linux desktop from the chat header: install it if missing, watch or take over the pointer and keyboard, and the bot pauses while you hold it
 - **Floating screen** — shrink a bot screen to a draggable picture over the chat (S, M, or L); the small view only watches
+- **File handoff** — tap Open on PDFs, Office files, and archives to hand them to another app; SVGs preview inside Hermes with scripts off
+- **Live capsule checks** — the last few check steps appear in plain language, sensitive content kept off the line, and checks can run up to 5 minutes
 - **Capsule refresh** — each capsule re-checks its facts Daily, Weekly, or on ask, using tools and tokens; pin a check model or leave Auto, and the capsule shows when it was last checked and by which model
 - **In-capsule edits** — tick checklist items and add to notes right inside the capsule; edits survive refreshes and backup, and an examples tab teaches capsules with live demos
 - **Quieter lists** — Home hides scheduled runs and Sessions starts with Hide scheduled jobs on; cron history still lists them
