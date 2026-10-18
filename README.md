@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.2.2` · Google Play · Closed Source · Zero Telemetry
+`v2.2.3` · Google Play · Closed Source · Zero Telemetry
 
 [![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
@@ -54,7 +54,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 52 segments, 250 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 52 segments, 253 features" width="100%">
 </p>
 
 ### Surfaces
@@ -69,9 +69,9 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
 | <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
-| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 16 | Servers, connection, appearance, profile, app features (saved prompts, provider quota), feedback & info, feature map |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 19 | Servers, connection with OIDC sign-in, appearance with 11 languages, profile, app features, feedback & info, feature map |
 
-**Total: 9 surfaces · 52 segments · 250 features**
+**Total: 9 surfaces · 52 segments · 253 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -163,6 +163,8 @@ Google Play handles signing and delivery directly. No sideloading, no manual che
 - **Floating screen** — shrink a bot screen to a draggable picture over the chat (S, M, or L); the small view only watches
 - **File handoff** — tap Open on PDFs, Office files, and archives to hand them to another app; SVGs preview inside Hermes with scripts off
 - **Live capsule checks** — the last few check steps appear in plain language, sensitive content kept off the line, and checks can run up to 5 minutes
+- **11 languages** — match the phone or pick English, Chinese (simplified/traditional), Russian, Spanish, French, German, Japanese, Korean, or Portuguese; chats stay as written
+- **Organization login** — sign in with OIDC on an HTTPS gateway, with a guide to password, organization, and Cloud methods
 - **Capsule refresh** — each capsule re-checks its facts Daily, Weekly, or on ask, using tools and tokens; pin a check model or leave Auto, and the capsule shows when it was last checked and by which model
 - **In-capsule edits** — tick checklist items and add to notes right inside the capsule; edits survive refreshes and backup, and an examples tab teaches capsules with live demos
 - **Quieter lists** — Home hides scheduled runs and Sessions starts with Hide scheduled jobs on; cron history still lists them

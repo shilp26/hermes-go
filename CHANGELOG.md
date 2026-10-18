@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.2.3] — 2026-10-18
+
+New build on Google Play — update through the Play Store.
+
+### Added
+
+#### 🌐 Languages
+- **11 languages in Settings** — match the phone, or English, Simplified and Traditional Chinese, Russian, Spanish, French, German, Japanese, Korean, or Portuguese; chat messages stay as written.
+
+#### 🔑 Organization login
+- **Sign in with OIDC** on an HTTPS gateway; when the host also has a password, use Sign in with OIDC.
+- **Sign-in methods guide** — what password, organization, and Cloud each cover, right on the connect screen.
+
+### Changed
+
+#### 💬 Sessions & context
+- **Renamed or deleted elsewhere?** Refresh and retry instead of a silent miss.
+- **Long chats open on the latest page** — no walking older history on a spinner.
+- **Context sheet shows cache hit and generation speed** for the open session.
+
+#### 🔔 Updates
+- **Hermes update names the stable release** when the host is on that channel.
+
 ## [2.2.2] — 2026-10-13
 
 OTA update for installs from Google Play — the installed app self-updates.
