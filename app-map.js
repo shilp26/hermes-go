@@ -584,6 +584,10 @@ const FEATURE_ICONS = {
   'Tick off checklist items': LUCIDE.checkSquare,
   'Add to a capsule note': LUCIDE.pencil,
   'Floating screen': LUCIDE.monitor,
+  // v2.2.3 — OIDC sign-in, languages
+  'Sign in with OIDC': LUCIDE.keyRound,
+  'Sign-in methods': LUCIDE.info,
+  'Language': LUCIDE.globe,
 };
 const DEFAULT_FEATURE_ICON = LUCIDE.dot;
 
@@ -1129,12 +1133,15 @@ const HUB_MAP = [
         features: [
           { name: 'Connection details', desc: 'Protocol, host, port, and auth state', where: 'Settings · Connection' },
           { name: 'Tailscale check', desc: 'Detects the VPN and offers to open it', where: 'Settings · Connection' },
+          { name: 'Sign in with OIDC', desc: 'When the gateway uses your organization login, Hermes Go opens that page', where: 'Connect screen' },
+          { name: 'Sign-in methods', desc: 'Password, organization login, and Hermes Cloud — and when each one appears', where: 'Connect screen' },
         ],
       },
       {
         label: 'Appearance & Themes', desc: '16 presets · System / Dark / Light',
         features: [
           { name: 'Theme', desc: '16 presets with live previews, System / Dark / Light filters, and separate defaults', where: 'Settings · Appearance & Themes' },
+          { name: 'Language', desc: 'Language for Hermes Go on this phone — match the phone or pick from 11; chat messages stay as written', where: 'Settings · Common' },
         ],
       },
       {
