@@ -147,6 +147,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .theme-toggle .sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .moon { display: none; }
+/* Dark theme: the icon plate is near-black, so give it a hairline rim to stay readable */
+:root[data-theme="dark"] .header-logo img,
+:root[data-theme="dark"] .footer-logo-img {
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 8px rgba(45, 212, 191, 0.10));
+}
 
 .mobile-menu-btn {
   display: none; padding: 8px; border-radius: 8px;
