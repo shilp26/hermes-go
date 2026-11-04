@@ -6,6 +6,55 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.2.4] — 2026-11-04
+
+New build on Google Play — update through the Play Store.
+
+### Added
+
+#### 🧩 Capsules — stay fresh on their own
+- **Four-step builder** — Understand, Shape, Sources, Preview, with a progress bar at the top.
+- **Host fetchers check on a schedule** with no tokens per check; if the host cannot run one, the capsule checks itself. Hermes asks before installing a fetcher, shows the full script, and puts the old script back if a fix fails.
+- **Check timing and alerts** — auto refresh from every 30 minutes to daily, with a time, extra windows, quiet hours, and your own alerts, all in-app. During quiet hours alerts wait and show as "While you were away".
+- **Upgrade older capsules** so they can stay fresh; **ask a capsule** a question without starting a chat; **insight lines and trend chips** when a check finds a change; **forget its memory** after a confirm; **checks slow down** when nothing changes; **view the skill** before teaching an agent; capsule **fetchers get their own Cron group**.
+
+#### 📁 Projects
+- **Create, edit, archive, and delete projects** — icon, color, and host folders you browse to. Set or clear Active, scan for git repos, save an auto-discovered repo, and move a chat into a project. Deleting a project keeps the chats.
+- **The open chat shows a project pill**, and a new chat in that project keeps the folder. Long-press a session to **export the full transcript as JSON** or move it; search **jumps to the matching message**; prune also removes leftover helper sessions.
+
+#### 🖥️ Terminal and vault
+- **Host terminal under System** — a live shell that reconnects after a drop, pauses in the background, and adds Esc, Tab, Ctrl, Alt, and arrows. Open another shell, pick a folder, change text size, copy a selection. Without a live shell each command runs once, must finish in 30 seconds, and risky or interactive commands are blocked.
+- **Credential vault on the server** — save logins, cards, and addresses the agent can fill in. Turn on 1Password or Bitwarden, then unlock with its master password. Passwords stay on the server, never on this phone.
+
+#### 🔔 Notifications
+- **All updates, or approvals only.** Finished turns, bot chats, and the live status bar can each be turned off — turning live status off also drops background protection. Per-channel sound and badges live in Android settings.
+
+#### 🤖 Subagents and models
+- **See helper agents working** under Work, and pause new ones with one switch; running ones keep going. **Message a running helper** — it reads it after the current step. Finished runs show collapsible result cards, and Mixture of Agents shows how many models answered.
+- **Sub-agent routing** — one default model, named routes, or your profiles. **Model details** show context window, price per 1M tokens, and capabilities. A **plugin update that wants more access — or that a security scan flags — asks first**.
+- **Archived team plans** — finished teams stay in an archive, newest first, with Restore; the newest 20 are kept.
+
+### Changed
+
+#### 🔗 Team Gateway and accounts
+- **Link an account to Team Gateway** — Telegram, Discord, Slack, or WhatsApp run through the shared bot, so no bot token is needed: tap Link, send the code, and wait for Account linked. Unlink or add another any time.
+- **Switch server from Home** — with more than one saved server a Servers card lists them; one needing sign-in shows Reconnect.
+
+#### 🎨 New mark and composer
+- **The app wears the new mark** — launcher, splash, and status-bar notification; the Android icon background is black.
+- **The composer keeps what you type after Send** — the next keystroke, paste, or repeated character is preserved; CJK confirm keeps the draft; adding a line no longer jumps the text.
+
+#### 💬 Chat hardening
+- **Editing or regenerating an older message asks first** before later messages are removed; a shield marks tool output Hermes judged unsafe; failed tools stay failed in history; `/review` runs and shows its result.
+- **A turn already running blocks Send** until it ends; an unconfirmed send asks you to check the chat before resending.
+- **A capsule checked on one phone keeps its place** when another phone only reads it; a reply with extra text or cut-off JSON can still become a card.
+
+### Fixed
+
+#### 🐛 Stability
+- **No more crash returning to the app while the keyboard closes**; no crash when a turn ends before the live notification starts.
+- **Events from another chat no longer rename the open chat**; a stale task-list snapshot no longer overwrites a newer one; starring from the share sheet reports errors cleanly.
+
 ## [2.2.3] — 2026-10-18
 
 New build on Google Play — update through the Play Store.

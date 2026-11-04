@@ -565,7 +565,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <img src="assets/splash-icon.png" alt="Hermes Go Icon">
       <span>Hermes Go</span>
     </a>
-    <span class="header-badge">v2.2.3</span>
+    <span class="header-badge">v2.2.4</span>
     <div class="header-spacer"></div>
     <nav class="header-nav" aria-label="Main Navigation">
       <a href="hermes-go.html" class="header-link">Home</a>
@@ -1027,6 +1027,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                   <td><b>Custom Provider API Keys</b></td>
                   <td><b>Never stored on phone.</b> Managed on your server daemon.</td>
                   <td>Client sends tri-state wire directive; server stores the secret</td>
+                </tr>
+                <tr>
+                  <td><b>Credential Vault</b></td>
+                  <td><b>Never stored on phone.</b> Secrets exist only inside the open sheet while you type; an unencrypted server link shows a warning first.</td>
+                  <td>Saved, edited, and deleted through your agent on your own server; master passwords unlock per session and are never stored</td>
                 </tr>
               </tbody>
             </table>

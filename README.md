@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.2.3` · Google Play · Closed Source · Zero Telemetry
+`v2.2.4` · Google Play · Closed Source · Zero Telemetry
 
 [![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
@@ -54,24 +54,24 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 52 segments, 253 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 55 segments, 311 features" width="100%">
 </p>
 
 ### Surfaces
 
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
-| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 7 | 32 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, live Capsules with scheduled refresh, quick compose with saved prompts, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 81 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
-| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 37 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas & permission taps, Bot Chat with a live bot screen (floating view), avatars, routines |
-| <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 10 | Inbox with store-health banner, folders & projects, full-text search, bulk management |
-| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 31 | Models with specs, Cost Guard & provider quota, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
-| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 5 | 17 | Artifacts browser, cron jobs with trigger history, kanban board, host files, processes |
-| <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 7 | Channel status, webhook routes, pairing, Hermes Cloud |
-| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 6 | 19 | Health, analytics, setup, checkpoints toggle, ops console, logs, power tools |
-| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 6 | 19 | Servers, connection with OIDC sign-in, appearance with 11 languages, profile, app features, feedback & info, feature map |
+| <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 7 | 47 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, live Capsules that stay fresh on their own, quick compose, server switching, profile switcher |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 90 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
+| <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 38 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas, permission taps & team archive, Bot Chat with a live bot screen (floating view), avatars, routines |
+| <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 21 | Inbox, full project workspaces with host folders and repo scan, jump-to-match search, export and move, bulk management |
+| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 34 | Models with specs, Cost Guard & provider quota, sub-agent routing, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
+| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 6 | 20 | Artifacts browser, cron jobs with capsule fetchers, kanban board, host files, processes, running sub-agents with pause |
+| <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 9 | Channel status, Team Gateway account linking, webhook routes, pairing, Hermes Cloud |
+| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 7 | 27 | Health, analytics, setup with credential vault, checkpoints toggle, ops console, logs, power tools, host terminal |
+| <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 7 | 25 | Servers, connection with OIDC sign-in, appearance with 11 languages, profile, app features, notifications control, feedback & info, feature map |
 
-**Total: 9 surfaces · 52 segments · 253 features**
+**Total: 9 surfaces · 55 segments · 311 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -165,6 +165,10 @@ Google Play handles signing and delivery directly. No sideloading, no manual che
 - **Live capsule checks** — the last few check steps appear in plain language, sensitive content kept off the line, and checks can run up to 5 minutes
 - **11 languages** — match the phone or pick English, Chinese (simplified/traditional), Russian, Spanish, French, German, Japanese, Korean, or Portuguese; chats stay as written
 - **Organization login** — sign in with OIDC on an HTTPS gateway, with a guide to password, organization, and Cloud methods
+- **Autonomous capsules** — four-step builder, host fetchers on a schedule with no tokens per check, timing/quiet hours, insight lines, ask without chatting, and memory forget
+- **Projects** — full workspaces with host folders, repo scan, Active badge, project pill, JSON export, and jump-to-match search
+- **Terminal & vault** — host shell under System plus quick commands; server-side credential vault with 1Password/Bitwarden unlock
+- **Team Gateway linking** — Telegram, Discord, Slack, WhatsApp through the shared bot via one-time code; new app mark, server switching from Home
 - **Capsule refresh** — each capsule re-checks its facts Daily, Weekly, or on ask, using tools and tokens; pin a check model or leave Auto, and the capsule shows when it was last checked and by which model
 - **In-capsule edits** — tick checklist items and add to notes right inside the capsule; edits survive refreshes and backup, and an examples tab teaches capsules with live demos
 - **Quieter lists** — Home hides scheduled runs and Sessions starts with Hide scheduled jobs on; cron history still lists them
