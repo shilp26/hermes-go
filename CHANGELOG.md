@@ -6,6 +6,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.3.0] — 2026-11-20
+
+New build on Google Play — update through the Play Store.
+
+### Added
+
+#### ✨ Hybrid replies and What changed
+- **Structured hybrid replies** — turn Hybrid replies on for one chat from the + menu, or from Hermes Go features for new chats only or every chat on this server; a two-dot mark on the chat title and session rows shows Hybrid is on.
+- **Charts, plans, steps, picks, and sources** — tap Show as text to swap one reply back to plain words for that view only; suggested follow-ups and Ask on a bar, slice, or row fill the message box without sending; a choice stays marked after you send its exact title; preview every piece from Hermes Go features.
+- **What changed chip** — with file checkpoints on, see files this chat created, removed, or changed; open a file, view exact changes, or jump to Checkpoints to undo; hide until the next change or turn the chip off while checkpoints stay on.
+
+#### 🎙️ Voice interruption and phone dictation
+- **Talk over Hermes or tap Interrupt** — voice chat speaks while the reply is still being written, and you can cut in at any time; Talk over Hermes to interrupt offers Natural, Fast, Private, and Off presets.
+- **Voice check and voice preview** — test whether speaking works, play a sample, and preview a voice before choosing it.
+- **Dictate with this phone (Android)** — turn speech into text as you speak when the host has no speech set up; off by default, with a Phone or Host switcher card above the box.
+
+#### 📱 Big screens and Android home-screen widgets
+- **Tablet and foldable layouts** — tablets and open foldables rotate while phones stay portrait; Activity, Files, Diff, and Artifacts open in a resizable side panel (drag edge, double-tap to reset, drag past edge to close); keep the chats list beside the chat or turn on Focus, with big-screen layout controls in settings.
+- **Android home-screen widgets** — Chats lists what needs you, what is working, and what is unread alongside your host, voice, and New chat (collapses to a single status line at one row tall); New chat starts a conversation in one tap; both follow your app theme.
+
+#### 🧩 Home, sessions, projects, and models
+- **Dashboard and Capsules views on Home** — switch between Dashboard and Capsules while the new-chat box stays on Dashboard; Pause auto-refresh stops scheduled checks for every capsule while Refresh now still runs.
+- **Messaging project group and richer management** — Projects includes Messaging for chats from connected apps not in a project; rename, recolor, reorder, or delete a folder while keeping its chats; filter sessions by active/archived, empty, scheduled jobs, source, and live only; sort by last used or date started; long-press to star, rename, mark read/unread, move, archive, or delete.
+- **Model picker and local models** — see price, free, sale, and rate-limit lines; drag the fallback chain to reorder backup models; auxiliary tasks include voice chat with Use main and Reset; download local models onto the Hermes host for new chats.
+
+#### 🧠 Skill Hub, Plugin Catalog, MCP, and toolsets
+- **Skill Hub store and skill lock** — featured picks, categories, catalog and community search, and a safety check before every Get; inspect instructions and files, toggle, or remove; lock a skill so the agent cannot modify it; most-used skills sort first with quick on/off/agent-made tiles.
+- **Plugin Catalog and health** — dedicated catalog with categories, Official/Verified/Community/Installed tabs, screenshots, known issues, privacy, and what each plugin adds; edit plugin options and keys (stored in Keys); see broken or waiting plugins under Needs attention; update all at once or let the gateway update; Git/repo installs verify the source and ask first.
+- **MCP and toolset pages** — switch MCP servers and toolsets on at once; test connections, view tools, sign in via browser, add HTTP (no auth, bearer, browser sign-in) or stdio servers, browse the categorized MCP catalog, and spot missing keys under Needs attention / Needs setup.
+
+#### 📋 Kanban, Connect, Setup, and Ops
+- **Kanban tiles and task page** — overview tiles, filter by Running, Needs you, Ready, or Done, workers, board settings, and a full task page with one-tap next step, comments, runs, and Move to…
+- **Channels, Telegram bot maker, webhooks, and pairing** — On/Off/Need you tiles, live key validation, setup wizard, and pending gateway restart; create a Telegram bot from the phone via deep link or QR and choose who can use it; webhook detail page (one-time secret on create); approve, revoke, or clear pairing requests.
+- **Keys & logins, live config editor, Vault, Profiles, Ops, and Diagnostics** — unified Keys & logins page with provider key verification; edit host settings by category with instant save, Changed by you, Reset to default + Undo, proxy status, and Edit config.yaml; credential vault filters and detail pages; profile search and pinning; Ops gateway merge, skill curator, checkpoint prune, and shell hooks; prompt size, config migrate, and update hub skills in Diagnostics.
+
+### Changed
+
+#### 💬 Composer, servers, onboarding, and prompts
+- **Floating + menu and message recovery** — Photos, Files, Camera, Hybrid replies, Capsule, paste, and snippets in one sheet on Chat and Home; editing a sent message restores its images and files; Undo returns your message to the box; floating host notices auto-close or stay until dismissed for billing/errors; expired permission requests are called out in chat.
+- **Server test, switching, and fresh-install language** — active server page tests server, sign-in, gateway, and WebSocket and shows host version, profile, address, rename, and disconnect; switching servers confirms first; rename or remove saved servers from row menu or long-press; pick your language in its own name on first install; searchable Hermes Go features; floating confirm/warning cards with spinner while work runs.
+
 ## [2.2.4] — 2026-11-04
 
 New build on Google Play — update through the Play Store.
