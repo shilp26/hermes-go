@@ -6,6 +6,45 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [2.3.1] — 2026-11-23
+
+New build on Google Play — update through the Play Store.
+
+### Added
+
+#### 🖥️ SSH terminals — a real terminal, straight to your server
+- **Sign in once and keep working** — with no server saved, Terminal fills in Your Hermes server from the address this phone already uses; it shows the address, user, whether SSH answered, the server key, and whether tmux is there. New connects the only usable server, or asks which one when there are several. Add, edit, or remove a server, and an empty address, port, or user is refused.
+- **Password now, key next** — a password can be left blank and asked at connect time, and Remember password keeps it on this phone only. After the first password login on Linux or macOS, Use a key makes a key here, adds it with the login you just used, checks it signs in, then deletes the password — and if setup fails, nothing changes. A key can also be pasted or imported (files over 64 KB are refused), with a passphrase asked when the key has one.
+- **Shell, tmux, or herdr** — on Windows you always get a normal shell; anywhere else you pick Shell, tmux (recommended, keeps running if the connection drops), or herdr for coding agents. A missing tool shows the install command with Copy and Check again, and the app never runs it. Join lists up to five tmux sessions not already open here, and joining does not kick anyone else off.
+- **Keeps going when the network does not** — a dropped link retries after 1, 2, 4, 8, then 15 seconds without asking for a password or a new key, and opening the app or the network returning tries again. Disconnect and keep running leaves tmux or herdr alive; End on the server stops it for every device.
+- **Terminals on the phone** — up to 12 at once, and after a restart only tmux and herdr return under Still on the server as Rejoin. Tabs show a green dot while output moves, rename stays on this phone up to 40 characters, and one text size (8 to 28, starting at 13) applies to every terminal.
+- **The key dock** — one swipeable pill with Esc, Ctrl, Tab, arrows, and paste, then the control keys, Home through Del, symbols, and F1–F12. Ctrl and Alt latch once, then lock, then off. The last line can offer yes/no, y/n, numbered choices, or Enter, each with Ctrl-C, and a flood can say some output was skipped.
+- **Terminal in this folder** — the chat workspace menu has Terminal; its count shows how many are live in that folder (9+ past nine), reopening one that is already there and returning to the chat. While any terminal is connecting or open, the dashboard and the Android notification show how many are open and running, named by folder, never by shell title. Opening a terminal no longer signs you out of Hermes.
+- **Without SSH, nothing breaks** — Live shell still appears when the server accepts a host terminal; otherwise Quick commands run one at a time, up to 30 seconds, with risky commands blocked. A 32-bit phone says SSH needs a 64-bit phone, and a build without the SSH library says to update the app.
+
+#### ↩️ Undo that respects what you changed
+- **Restoring keeps your work** — a checkpoint restore puts back the files Hermes wrote with its file tools and rewinds the chat, while files changed by a terminal command or by you are kept; if any were kept, the next step is Undo these too or Keep them.
+- **Undo one file** — What changed can undo a single file back to before this chat first changed it, without rewinding the chat; a file that was not in that snapshot cannot be restored, and undoing it asks to delete it with a warning that the delete is permanent.
+- **Discard stays honest** — Discard in the diff still goes back to the last commit, and now says to use Undo in What changed for that.
+
+### Changed
+
+#### 📋 Tasks, models, and keys
+- **A task marked done keeps its result** — marking done from Ready, Running, or Blocked asks for a completion note and saves it as the result; the button stays off until the note has text, and a task that is not Ready, Running, Blocked, or in Review cannot be marked done.
+- **A smarter model list** — opening it refreshes once the saved copy is older than 10 seconds and asks the server to refresh its own cache; a failed or offline refresh keeps the list you have and shows no error. A new chat or branch sends the model id the way that provider lists it, so a name like openrouter/auto is not split into the wrong model.
+- **A model change made mid-reply is kept** — changing the model while a reply is streaming stays pending until the turn ends, and a cost warning you already accepted is not asked again. After a main-model switch, helper tasks still pinned to another provider are listed and can be reset to auto.
+- **Keys say what happened** — a provider with no live key check says the key is saved as entered, a check the phone could not reach still saves the key and says it was not verified, and a rejected key is not saved. Saving or deleting a custom endpoint refreshes the provider and model lists.
+
+### Fixed
+
+#### 📱 Phone, widgets, and the store build
+- **Huge output no longer freezes the phone** — long tool output, file source, and logs are drawn in pieces, a collapsed block shows about the first 14 lines, and JSON colouring stops above 20,000 characters so selection stays responsive.
+- **A pipe table without its divider now renders as a table**, and fenced code is left alone.
+- **Selecting sessions updates on that tap**, including unread, folder, and search snippet.
+- **The Now widget stopped waking the app** — it no longer wakes a closed app every 30 minutes, while the app still redraws it when something changes and when you leave it.
+- **A backup zip is written in pieces** and then shared, and a failed download is deleted instead of being shared.
+- **More devices can install it** — the store listing no longer requires a portrait screen or Wi-Fi, and the release build turns on code optimization.
+
 ## [2.3.0] — 2026-11-20
 
 New build on Google Play — update through the Play Store.

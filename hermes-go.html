@@ -1657,8 +1657,78 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
     <p class="caption" style="color:var(--accent);margin-bottom:12px;text-align:center;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;">What’s New</p>
     <h2 class="h1" style="text-align:center;margin-bottom:44px;">Changelog</h2>
 
-    <!-- v2.3.0 -->
+    <!-- v2.3.1 -->
     <div class="changelog-item reveal is-latest">
+      <div class="changelog-rail">
+        <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
+        <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
+        <div class="changelog-rail-line changelog-rail-bottom"></div>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-meta">
+          <div class="changelog-meta-left">
+            <span class="changelog-badge">v2.3.1</span>
+            <span class="changelog-date">23 Nov 2026</span>
+          </div>
+          <span class="cl-typechip release"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Release</span>
+        </div>
+        <h3>SSH terminals, undo that respects your edits, and a smoother phone</h3>
+        <p class="cl-summary">New build on Google Play — update through the Play Store.</p>
+<div class="cl-group cl-group--added">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="cl-grouphdr-label">Added</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">SSH terminals · a real terminal, straight to your server</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Sign in once</strong> — Your Hermes server is filled in for you, with the address, user, whether SSH answered, the server key, and whether tmux is there; add, edit, or remove a server</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Password now, key next</strong> — leave the password blank to be asked at connect time; after the first login, Use a key creates and verifies a key, then deletes the password, and a failed setup changes nothing</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Shell, tmux, or herdr</strong> — tmux keeps running if the connection drops, herdr is for coding agents, and a missing tool shows its install command without the app ever running it</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Keeps going when the network does not</strong> — retries after 1, 2, 4, 8, then 15 seconds without asking for a password again; Disconnect and keep running leaves tmux alive</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Terminals on the phone</strong> — up to 12, tabs with a green dot while output moves, rename kept on this phone, and one text size for all</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>The key dock</strong> — Esc, Ctrl, Tab, arrows, control keys, symbols, and F1–F12 in one swipeable pill, with Ctrl and Alt latching once, then locking</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Terminal in this folder</strong> — from the chat workspace menu, with a count of live terminals there; the dashboard and notification show how many are running</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Without SSH nothing breaks</strong> — Quick commands still run one at a time and risky commands stay blocked</span></li>
+            </ul>
+          </div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Undo that respects what you changed</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Restoring keeps your work</strong> — files changed by a terminal command or by you are kept, then Undo these too or Keep them</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Undo one file</strong> — What changed reverts a single file without rewinding the chat, and says so when a file was not in that snapshot</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Discard stays honest</strong> — Discard still goes to the last commit and points you to Undo in What changed</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--changed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span><span class="cl-grouphdr-label">Changed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Tasks, models, and keys</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>A task marked done keeps its result</strong> — completion asks for a note and saves it as the result</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>A smarter model list</strong> — refreshes past 10 seconds and asks the server to refresh; offline keeps your list, and provider ids like openrouter/auto are sent intact</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>A model change made mid-reply is kept</strong> — it waits for the turn to end instead of being lost</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Keys say what happened</strong> — saved as entered, not verified, or rejected and not saved</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-group cl-group--fixed">
+          <div class="cl-grouphdr"><span class="cl-grouphdr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></span><span class="cl-grouphdr-label">Fixed</span></div>
+          <div class="cl-subsection">
+            <div class="cl-subhead">Phone, widgets, and the store build</div>
+            <ul class="cl-list">
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Huge output no longer freezes the phone</strong> — long tool output, file source, and logs are drawn in pieces, and a collapsed block shows about 14 lines</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>A pipe table without its divider renders as a table</strong>, and fenced code is left alone</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Selecting sessions updates on that tap</strong> — unread, folder, and search snippet included</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>The Now widget stopped waking the app</strong> every 30 minutes, while still redrawing on change</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>Backups write in pieces</strong>, and a failed download is deleted instead of shared</span></li>
+              <li><span class="cl-bullet-dot"></span><span class="cl-bullet-text"><strong>More devices can install it</strong> — the store listing no longer requires a portrait screen or Wi-Fi, and the release build turns on code optimization</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.3.0 -->
+    <div class="changelog-item reveal">
       <div class="changelog-rail">
         <div class="changelog-rail-line changelog-rail-top" style="opacity:0;"></div>
         <div class="changelog-rail-node"><div class="changelog-rail-node-dot"></div></div>
@@ -1832,6 +1902,9 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
       </div>
     </div>
 
+    <!-- Older releases (collapsed, fade from 4th) -->
+    <div class="cl-old-wrap collapsed" id="clOldWrap">
+
     <!-- v2.2.3 -->
     <div class="changelog-item reveal">
       <div class="changelog-rail">
@@ -1884,9 +1957,6 @@ ul.cl-list > li { display: flex; align-items: flex-start; gap: 10px; padding: 2p
         </div>
       </div>
     </div>
-
-    <!-- Older releases (collapsed, fade from 4th) -->
-    <div class="cl-old-wrap collapsed" id="clOldWrap">
 
     <!-- v2.2.2 -->
     <div class="changelog-item reveal">
@@ -4166,7 +4236,7 @@ Password: <password></div>
         <div class="download-card">
           <div class="download-card-icon"><img src="assets/splash-icon.png" alt="Hermes Go app icon"></div>
           <h3>Hermes Go</h3>
-          <div class="ver">v2.3.0 · Google Play</div>
+          <div class="ver">v2.3.1 · Google Play</div>
           <a href="https://play.google.com/store/apps/details?id=com.shilp26.hermesgo" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="30 336.7 120.9 129.2" aria-hidden="true" focusable="false"><path fill="#FFD600" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/><path fill="#FF3D00" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"/><path fill="#00E676" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/><path fill="#00A0FF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/></svg>
             Get it on Google Play
@@ -4203,7 +4273,7 @@ Password: <password></div>
 <div class="mobile-sticky-bar" id="stickyMobileBar">
   <div class="sticky-bar-brand">
     <img src="assets/splash-icon.png" alt="Hermes Go">
-    <span>Hermes Go <span class="ver">v2.3.0</span></span>
+    <span>Hermes Go <span class="ver">v2.3.1</span></span>
   </div>
   <a href="#download" class="btn btn-primary sticky-bar-btn">Get the App</a>
 </div>
@@ -4219,7 +4289,7 @@ Password: <password></div>
   <button class="shot-lightbox-nav" id="shotLightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 </div>
 
-<script src="app-map.js?v=130"></script>
+<script src="app-map.js?v=131"></script>
 <script>
 // Google Play banner — dismiss per browser session
 const playBanner = document.getElementById('playBanner');

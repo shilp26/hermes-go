@@ -10,7 +10,7 @@ A native mobile client for your [Hermes Agent](https://hermes-agent.nousresearch
 
 **Bots Mode** brings named AI teammates to your phone — use desktop-style `@` handoff from any chat, keep each teammate’s conversation isolated, hide agents from the roster, schedule routines, choose from 16 themes, and connect custom endpoints.
 
-`v2.3.0` · Google Play · Closed Source · Zero Telemetry
+`v2.3.1` · Google Play · Closed Source · Zero Telemetry
 
 [![Get it on Google Play](https://img.shields.io/badge/Get_it_on-Google_Play-0F766E?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.shilp26.hermesgo)
 
@@ -54,7 +54,7 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 ## App Map
 
 <p align="center">
-  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 55 segments, 359 features" width="100%">
+  <img src="assets/app-map.svg" alt="Hermes Go app map — 9 surfaces, 55 segments, 375 features" width="100%">
 </p>
 
 ### Surfaces
@@ -62,16 +62,16 @@ Hermes Go is a **native Android client** for Hermes Agent — self-hosted or Her
 | | Surface | Segments | Features | What it does |
 |---|---|---|---|---|
 | <img src="assets/icons/dashboard.svg" width="22" alt=""> | **Dashboard** | 7 | 49 | Agent status, performance, capabilities, alerts, Needs Attention bell & sheet, install-conflict warning, live Capsules that stay fresh on their own, quick compose, server switching, profile switcher |
-| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 101 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
+| <img src="assets/icons/chat.svg" width="22" alt=""> | **Chat** | 9 | 105 | Live streaming, live reasoning, voice, media & artifacts, approvals & vault prompts, session control loops, queue & steer, Hermes Live background execution, subagent roster, share from other apps (Chats · Bots · Groups), notification clearing, composer tools & saved prompts, provider quota, stale-session retries |
 | <img src="assets/icons/bots.svg" width="22" alt=""> | **Bots** | 4 | 38 | Agents, Bot Groups, shared rooms with file attachments, consensus distillation, deliverables export, Build Team visual canvas, permission taps & team archive, Bot Chat with a live bot screen (floating view), avatars, routines |
 | <img src="assets/icons/sessions.svg" width="22" alt=""> | **Sessions** | 4 | 22 | Inbox, full project workspaces with host folders and repo scan, jump-to-match search, export and move, bulk management |
-| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 42 | Models with specs, Cost Guard & provider quota, sub-agent routing, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
-| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 6 | 22 | Artifacts browser, cron jobs with capsule fetchers, kanban board, host files, processes, running sub-agents with pause |
+| <img src="assets/icons/brain.svg" width="22" alt=""> | **Brain** | 7 | 44 | Models with specs, Cost Guard & provider quota, sub-agent routing, skills with Skill Hub, tools, profile-scoped memory, Star Map, MCP, plugin catalog with update consent |
+| <img src="assets/icons/work.svg" width="22" alt=""> | **Work** | 6 | 23 | Artifacts browser, cron jobs with capsule fetchers, kanban board, host files, processes, running sub-agents with pause |
 | <img src="assets/icons/connect.svg" width="22" alt=""> | **Connect** | 4 | 11 | Channel status, Team Gateway account linking, webhook routes, pairing, Hermes Cloud |
-| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 7 | 36 | Health, analytics, setup with credential vault, checkpoints toggle, ops console, logs, power tools, host terminal |
+| <img src="assets/icons/system.svg" width="22" alt=""> | **System** | 7 | 45 | Health, analytics, setup with credential vault, checkpoints toggle, ops console, logs, power tools, host terminal |
 | <img src="assets/icons/settings.svg" width="22" alt=""> | **Settings** | 7 | 38 | Servers, connection with OIDC sign-in, appearance with 11 languages, profile, app features, notifications control, feedback & info, feature map |
 
-**Total: 9 surfaces · 55 segments · 359 features**
+**Total: 9 surfaces · 55 segments · 375 features**
 
 > Full interactive map: [App Map — Hermes Go](https://shilp26.github.io/hermes-go/app-map.html)
 
@@ -173,6 +173,8 @@ Google Play handles signing and delivery directly. No sideloading, no manual che
 - **Voice barge-in & phone dictation** — talk over a spoken reply or tap Interrupt to cut in, preview voices, and opt in to on-phone speech recognition on Android
 - **Big screens & home widgets** — rotatable tablet/foldable panes with draggable side panel and Focus mode, plus Android Chats and New chat widgets
 - **Rebuilt hubs** — Skill Hub store with safety checks and skill locking, Plugin Catalog with health & settings, MCP & toolset pages, Kanban tiles, Keys & logins, and live config editor
+- **SSH terminals** — a real terminal to your server with saved servers, key or password sign-in, Shell / tmux / herdr, reconnecting sessions, up to 12 terminals, and a key dock
+- **Undo that respects your edits** — restoring a checkpoint keeps terminal and hand edits, then offers Undo these too or Keep them; What changed can undo a single file
 - **Capsule refresh** — each capsule re-checks its facts Daily, Weekly, or on ask, using tools and tokens; pin a check model or leave Auto, and the capsule shows when it was last checked and by which model
 - **In-capsule edits** — tick checklist items and add to notes right inside the capsule; edits survive refreshes and backup, and an examples tab teaches capsules with live demos
 - **Quieter lists** — Home hides scheduled runs and Sessions starts with Hide scheduled jobs on; cron history still lists them
